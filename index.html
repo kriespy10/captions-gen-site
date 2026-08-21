@@ -202,6 +202,19 @@
   .tile span { position: absolute; left: 8px; bottom: 8px; font-size: 11px; font-weight: 600; padding: 3px 8px; background: rgba(0,0,0,.6); color: #fff; border-radius: 999px; }
   .gallery-note { margin-top: 18px; font-size: 13.5px; color: var(--muted); }
 
+  /* Make it yours: motion loop + three control cards */
+  .mk { display: grid; grid-template-columns: 1.15fr 1fr; gap: 28px; align-items: center; }
+  .mk .strip { margin: 0; max-width: none; }
+  .mk .cards { display: grid; gap: 12px; }
+  .mk .card { padding: 20px 22px; }
+  .mk .card h3 { font-size: 16px; margin-bottom: 6px; }
+  .mk .card p { font-size: 14px; }
+  .mk .card p b { color: var(--text); font-weight: 600; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .chips span { font-size: 12.5px; font-weight: 600; color: var(--muted2); background: var(--card); border: 1px solid var(--hair); padding: 6px 11px; border-radius: 999px; }
+  .chips span.y { color: var(--yellow); border-color: rgba(255,235,59,.3); }
+  @media (max-width: 800px) { .mk { grid-template-columns: 1fr; } }
+
   /* Steps */
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .step { background: var(--card); border: 1px solid var(--hair); border-radius: 18px; padding: 26px; position: relative; overflow: hidden; }
@@ -286,6 +299,7 @@
     </a>
     <div class="links">
       <a href="#styles">Styles</a>
+      <a href="#custom">Build your own</a>
       <a href="#how">How it works</a>
       <a href="#install">Install</a>
       <a href="#faq">FAQ</a>
@@ -377,6 +391,40 @@
       <div class="tile"><img src="img/styles/Smooth.png" alt="Smooth style"><span>Smooth</span></div>
     </div>
     <p class="gallery-note">Previews render in your own font with your own words — what you see in the panel is what lands on the timeline.</p>
+  </div>
+</section>
+
+<section id="custom">
+  <div class="wrap">
+    <h2>Or build <span class="y">your own.</span></h2>
+    <p class="lead">Presets are a starting point. Every part of a caption is a control — how it comes in, how it leaves, how it moves, how it reads.</p>
+    <div class="mk">
+      <div class="strip" aria-label="Six animation presets playing in and out">
+        <span class="tag"><i></i> Live render</span>
+        <video autoplay muted loop playsinline poster="img/styles/Smooth.png">
+          <source src="img/anim.webm" type="video/webm">
+          <source src="img/anim.mp4" type="video/mp4">
+        </video>
+        <span class="name">Spring · Rise · Smooth · Expand · Typewriter · Chips</span>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h3>Motion</h3>
+          <p><b>15 in-animations</b> — pop, fade, blur, slides, float, expand, bounce, typewriter, wipe, word reveal, word rise… and <b>6 outs</b>. Duration, strength, slide time, <b>ease in and ease out</b> — each a slider.</p>
+        </div>
+        <div class="card">
+          <h3>Look</h3>
+          <p>Any font on your computer. Size, position, letter spacing, <b>stroke, shadow</b> (opacity, distance, blur, angle), <b>background box</b>, pill radius, highlight scale and a <b>bounce</b> on the spoken word.</p>
+        </div>
+        <div class="card">
+          <h3>Words</h3>
+          <p>Min and max words per caption, <b>max lines</b>, max duration, upper / lower / sentence case, punctuation on or off. Line width follows your frame — vertical or wide.</p>
+        </div>
+      </div>
+    </div>
+    <div class="chips">
+      <span class="y">Save as preset</span><span>Restyle placed captions</span><span>Live preview of every change</span><span>Plays in your font, with your words</span>
+    </div>
   </div>
 </section>
 
