@@ -147,7 +147,7 @@
     box-shadow: 0 40px 100px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08);
     position: relative; aspect-ratio: 320 / 120;
   }
-  .strip img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .strip video { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; }
   .strip .tag, .strip .name {
     position: absolute; font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
     background: rgba(0,0,0,.5); color: #fff; padding: 4px 9px; border-radius: 999px;
@@ -308,10 +308,13 @@
     <div class="strip-wrap">
       <div class="strip" aria-label="Animated caption preview">
         <span class="tag"><i></i> Live render</span>
-        <img id="stripImg" src="img/anim/Beast/f14.png" alt="Animated karaoke caption, the spoken word highlighted">
+        <video id="stripVid" autoplay muted loop playsinline poster="img/styles/Beast.png" aria-label="Animated karaoke caption, the spoken word highlighted as it is spoken">
+          <source src="img/hero.webm" type="video/webm">
+          <source src="img/hero.mp4" type="video/mp4">
+        </video>
         <span class="name" id="stripName">Beast</span>
       </div>
-      <div class="strip-cap">Actual frames from the plugin's preview engine — not a mockup.</div>
+      <div class="strip-cap">Rendered by the plugin's own preview engine at 60 fps — not a mockup.</div>
     </div>
   </div>
 </header>
@@ -499,31 +502,16 @@
 </footer>
 
 <script>
-  // Hero strip: cycle the plugin's real preset renders (15 frames each,
-  // 100 ms), one preset after another, holding the settled frame between.
+  // Hero video = four presets chained (3 s loop + 1.5 s hold each, 60 fps).
+  // Keep the name badge in sync with the playhead.
   (function () {
-    var sets = ["Beast", "Hormozi", "Neon", "Bubble"];
-    var img = document.getElementById("stripImg");
-    var name = document.getElementById("stripName");
-    var cache = {};
-    sets.forEach(function (s) {
-      cache[s] = [];
-      for (var i = 0; i < 15; i++) {
-        var im = new Image();
-        im.src = "img/anim/" + s + "/f" + (i < 10 ? "0" + i : i) + ".png";
-        cache[s].push(im);
-      }
+    var sets = ["Beast", "Hormozi", "Neon", "Bubble"], per = 4.5;
+    var v = document.getElementById("stripVid"), name = document.getElementById("stripName");
+    if (!v || !name) return;
+    v.addEventListener("timeupdate", function () {
+      var i = Math.min(sets.length - 1, Math.floor(v.currentTime / per));
+      if (name.textContent !== sets[i]) name.textContent = sets[i];
     });
-    var si = 0, fi = 0;
-    function tick() {
-      var s = sets[si];
-      img.src = cache[s][fi].src;
-      name.textContent = s;
-      fi++;
-      if (fi >= 15) { fi = 0; si = (si + 1) % sets.length; setTimeout(tick, 1500); }
-      else setTimeout(tick, 100);
-    }
-    setTimeout(tick, 900);
   })();
 </script>
 </body>
