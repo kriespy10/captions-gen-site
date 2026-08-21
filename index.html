@@ -243,6 +243,19 @@
   .price li::before { content: ""; position: absolute; left: 0; top: 11px; width: 16px; height: 16px; border-radius: 50%; background: var(--green); }
   .price li::after { content: ""; position: absolute; left: 5.5px; top: 14px; width: 3.5px; height: 7px; border: solid #000; border-width: 0 2px 2px 0; transform: rotate(45deg); }
   .price .fine { font-size: 12.5px; color: var(--muted); margin-top: 14px; }
+  /* Launch-discount callout: the price only drops with the code, so it has to
+     be legible even to someone skimming past the button. */
+  .price .promo {
+    margin-top: 16px; padding: 11px 14px; border-radius: 12px;
+    border: 1px dashed rgba(255,235,59,.45); background: rgba(255,235,59,.07);
+    font-size: 13.5px; color: var(--muted2); text-align: center;
+  }
+  .price .promo b {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    color: var(--yellow); letter-spacing: .08em; font-size: 14.5px;
+    padding: 1px 7px; border-radius: 6px; background: rgba(255,235,59,.12);
+  }
+  .price .promo span { display: block; margin-top: 3px; font-size: 12px; color: var(--muted); }
   .price-side h2 { font-size: clamp(36px, 5vw, 56px); }
   .price-side p { color: var(--muted2); font-size: 16px; margin: 0 0 14px; }
   .vs { display: grid; gap: 8px; margin-top: 20px; }
@@ -457,7 +470,11 @@
           <li>Unlimited videos, no watermark</li>
           <li>14-day refund, no questions asked</li>
         </ul>
-        <a class="btn" href="LEMON_SQUEEZY_CHECKOUT_URL">Buy Captions Gen</a>
+        <!-- Keep the ?checkout[discount_code]=LAUNCH query when swapping in the real
+             checkout URL — it pre-fills the code so most buyers never type it. The
+             visible callout below is the fallback for anyone it doesn't reach. -->
+        <a class="btn" href="LEMON_SQUEEZY_CHECKOUT_URL?checkout%5Bdiscount_code%5D=LAUNCH">Buy Captions Gen</a>
+        <div class="promo">Launch price needs code <b>LAUNCH</b> — first 100 orders<span>Added for you at checkout; if you don't see it, paste it in the discount box. After 100 redemptions the price is $25.</span></div>
         <div class="fine">Secure checkout by Lemon Squeezy · VAT handled at checkout · license key by email</div>
       </div>
       <div class="price-side">
@@ -510,6 +527,10 @@
     <details>
       <summary>Is it a subscription?</summary>
       <p>No. One payment, use it forever. All 1.x updates are included.</p>
+    </details>
+    <details>
+      <summary>How do I get the $14.99 launch price?</summary>
+      <p>Use the code <b>LAUNCH</b> at checkout. It's good for the first 100 orders — the buy button adds it for you, but you can type it into the discount box yourself if it isn't already there. After that the price is $25, still one-time.</p>
     </details>
     <details>
       <summary>Can I edit captions after they're placed?</summary>
