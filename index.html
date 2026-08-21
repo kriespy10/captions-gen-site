@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Captions Easy — karaoke captions for Premiere Pro</title>
+<meta name="description" content="Word-synced, animated captions for Adobe Premiere Pro. One click, real editable graphics, runs on your machine. One-time purchase, no subscription.">
+<meta property="og:title" content="Captions Easy — karaoke captions for Premiere Pro">
+<meta property="og:description" content="Word-synced, animated captions in one click. Real editable graphics. Runs offline. One-time purchase.">
+<meta property="og:image" content="img/styles/Beast.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070708;
+    --bg2: #0e0e10;
+    --card: #151517;
+    --card2: #1f1f22;
+    --hair: rgba(255,255,255,.07);
+    --hair2: rgba(255,255,255,.14);
+    --text: #f4f4f5;
+    --muted: #8e8e93;
+    --muted2: #b5b5ba;
+    --blue: #0a84ff;
+    --blue2: #3395ff;
+    --yellow: #ffeb3b;
+    --green: #30d158;
+    --display: "Anton", Impact, "Arial Narrow Bold", sans-serif;
+    --body: "Instrument Sans", -apple-system, "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+  /* film grain */
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { color: var(--blue2); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  .mono { font-variant-numeric: tabular-nums; }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 20;
+    backdrop-filter: saturate(160%) blur(18px);
+    -webkit-backdrop-filter: saturate(160%) blur(18px);
+    background: rgba(7,7,8,.66);
+    border-bottom: 1px solid var(--hair);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 54px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 600; font-size: 15px; letter-spacing: -.01em; }
+  .brand svg { width: 26px; height: 26px; display: block; }
+  nav .links { display: flex; gap: 24px; font-size: 13.5px; align-items: center; }
+  nav .links a { color: var(--muted2); }
+  nav .links a:hover { color: var(--text); }
+  nav .links a.buy { color: #fff; background: var(--blue); padding: 7px 15px; border-radius: 999px; font-weight: 600; }
+  nav .links a.buy:hover { background: var(--blue2); }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 110px 0 40px; text-align: center; position: relative; }
+  .hero::before {
+    content: ""; position: absolute; left: 50%; top: -120px; width: 900px; height: 520px; transform: translateX(-50%);
+    background: radial-gradient(closest-side, rgba(255,235,59,.12), rgba(255,235,59,0) 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted2);
+    border: 1px solid var(--hair2); border-radius: 999px; padding: 6px 12px; margin-bottom: 30px;
+    animation: rise .7s .05s both;
+  }
+  .eyebrow i { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(48,209,88,.18); }
+  /* The headline IS a karaoke caption. */
+  .kara {
+    font-family: var(--display);
+    font-size: clamp(56px, 11vw, 132px);
+    line-height: .92;
+    letter-spacing: .005em;
+    text-transform: uppercase;
+    margin: 0 0 26px;
+    font-weight: 400;
+    display: flex; flex-wrap: wrap; justify-content: center; column-gap: .22em; row-gap: .04em;
+    text-shadow: 0 6px 0 rgba(0,0,0,.55), 0 18px 40px rgba(0,0,0,.6);
+    -webkit-text-stroke: 0;
+  }
+  .kara .w {
+    display: inline-block; color: #fff;
+    animation: rise .6s both;
+  }
+  .kara .w:nth-child(1) { animation-delay: .10s; }
+  .kara .w:nth-child(2) { animation-delay: .18s; }
+  .kara .w:nth-child(3) { animation-delay: .26s; }
+  .kara .w:nth-child(4) { animation-delay: .34s; }
+  /* sweep: each word lights yellow + scales, in order, then loops */
+  .kara .w { animation-name: rise, karaoke; animation-duration: .6s, 4.8s; animation-iteration-count: 1, infinite; animation-timing-function: cubic-bezier(.2,.8,.2,1), ease-in-out; }
+  .kara .w:nth-child(1) { animation-delay: .10s, 1.0s; }
+  .kara .w:nth-child(2) { animation-delay: .18s, 1.9s; }
+  .kara .w:nth-child(3) { animation-delay: .26s, 2.8s; }
+  .kara .w:nth-child(4) { animation-delay: .34s, 3.7s; }
+  @keyframes karaoke {
+    0%, 100% { color: #fff; transform: scale(1); }
+    3%  { color: var(--yellow); transform: scale(1.06); }
+    16% { color: var(--yellow); transform: scale(1.04); }
+    19% { color: #fff; transform: scale(1); }
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+  .hero p.sub {
+    font-size: clamp(17px, 2.2vw, 21px);
+    color: var(--muted2);
+    max-width: 600px;
+    margin: 0 auto 34px;
+    line-height: 1.45;
+    animation: rise .7s .45s both;
+  }
+  .hero p.sub b { color: var(--text); font-weight: 600; }
+  .cta { display: inline-flex; flex-direction: column; align-items: center; gap: 12px; animation: rise .7s .55s both; }
+  .btn {
+    display: inline-flex; align-items: baseline; gap: 8px;
+    background: var(--blue); color: #fff;
+    font-weight: 600; font-size: 17px;
+    padding: 15px 30px; border-radius: 999px;
+    transition: background .15s, transform .15s, box-shadow .15s;
+    box-shadow: 0 10px 30px rgba(10,132,255,.28);
+  }
+  .btn:hover { background: var(--blue2); color: #fff; transform: translateY(-1px); box-shadow: 0 14px 36px rgba(10,132,255,.36); }
+  .btn small { opacity: .78; font-weight: 500; font-size: 14px; }
+  .cta .note { font-size: 13.5px; color: var(--muted); }
+  .cta .note b { color: var(--text); font-weight: 600; }
+
+  /* Live strip — real renders from the plugin */
+  .strip-wrap { margin: 64px auto 0; max-width: 760px; animation: rise .8s .7s both; }
+  .strip {
+    background: #4a5058;
+    border-radius: 18px; overflow: hidden;
+    border: 1px solid var(--hair2);
+    box-shadow: 0 40px 100px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08);
+    position: relative; aspect-ratio: 320 / 120;
+  }
+  .strip img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .strip .tag, .strip .name {
+    position: absolute; font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+    background: rgba(0,0,0,.5); color: #fff; padding: 4px 9px; border-radius: 999px;
+    backdrop-filter: blur(6px);
+  }
+  .strip .tag { left: 12px; top: 10px; display: inline-flex; align-items: center; gap: 6px; }
+  .strip .tag i { width: 6px; height: 6px; border-radius: 50%; background: #ff453a; animation: blink 1.2s infinite; }
+  @keyframes blink { 50% { opacity: .25; } }
+  .strip .name { right: 12px; bottom: 10px; text-transform: none; letter-spacing: 0; font-size: 12px; }
+  .strip-cap { text-align: center; font-size: 12.5px; color: var(--muted); margin-top: 12px; }
+
+  /* ---------- Timeline divider (Premiere motif) ---------- */
+  .tl { margin: 72px auto 0; max-width: 1040px; padding: 0 24px; position: relative; z-index: 1; }
+  .tl .ruler { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; padding-bottom: 6px; border-bottom: 1px solid var(--hair2); }
+  .tl .track { position: relative; height: 34px; border-bottom: 1px solid var(--hair); }
+  .tl .track::before { content: attr(data-name); position: absolute; left: 0; top: 50%; transform: translateY(-50%); font-size: 10.5px; color: var(--muted); width: 34px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .tl .clip { position: absolute; top: 5px; height: 24px; border-radius: 5px; font-size: 10.5px; font-weight: 600; padding: 0 8px; line-height: 24px; white-space: nowrap; overflow: hidden; }
+  .tl .clip.v { background: #2a5a7a; color: #cfe9ff; }
+  .tl .clip.c { background: #7a6a18; color: #fff6b0; border: 1px solid rgba(255,235,59,.35); }
+  .tl .head { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--blue); box-shadow: 0 0 0 1px rgba(10,132,255,.25); animation: scrub 9s linear infinite; }
+  .tl .head::before { content: ""; position: absolute; top: -6px; left: -5px; border: 5.5px solid transparent; border-top: 7px solid var(--blue); }
+  @keyframes scrub { from { left: 34px; } to { left: 100%; } }
+  .tl .tracks { position: relative; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 88px 0; position: relative; }
+  section.alt { background: var(--bg2); border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
+  h2 {
+    font-family: var(--display);
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: .95; letter-spacing: .005em; text-transform: uppercase;
+    margin: 0 0 14px; font-weight: 400;
+  }
+  h2 .y { color: var(--yellow); }
+  .lead { color: var(--muted2); font-size: 17.5px; margin: 0 0 40px; max-width: 620px; line-height: 1.5; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .card {
+    background: var(--card); border: 1px solid var(--hair); border-radius: 18px; padding: 26px;
+    transition: border-color .2s, transform .2s;
+  }
+  .card:hover { border-color: var(--hair2); transform: translateY(-2px); }
+  .card h3 { margin: 0 0 8px; font-size: 17.5px; letter-spacing: -.01em; font-weight: 600; }
+  .card p { margin: 0; color: var(--muted2); font-size: 15px; }
+  .card .ic { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; background: var(--card2); }
+  .card .ic svg { width: 20px; height: 20px; }
+
+  /* Gallery */
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .tile { background: #4a5058; border-radius: 12px; overflow: hidden; border: 1px solid var(--hair); position: relative; transition: transform .2s, border-color .2s; }
+  .tile:hover { transform: translateY(-3px) scale(1.01); border-color: var(--hair2); }
+  .tile img { width: 100%; display: block; }
+  .tile span { position: absolute; left: 8px; bottom: 8px; font-size: 11px; font-weight: 600; padding: 3px 8px; background: rgba(0,0,0,.6); color: #fff; border-radius: 999px; }
+  .gallery-note { margin-top: 18px; font-size: 13.5px; color: var(--muted); }
+
+  /* Steps */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .step { background: var(--card); border: 1px solid var(--hair); border-radius: 18px; padding: 26px; position: relative; overflow: hidden; }
+  .step .n { font-family: var(--display); font-size: 64px; line-height: 1; color: rgba(255,255,255,.06); position: absolute; right: 16px; top: 6px; }
+  .step h3 { margin: 0 0 8px; font-size: 17.5px; font-weight: 600; }
+  .step p { margin: 0; color: var(--muted2); font-size: 15px; }
+  .after { margin-top: 22px; color: var(--muted2); font-size: 15px; }
+  .after b { color: var(--text); font-weight: 600; }
+  .shot { margin-top: 40px; border-radius: 18px; overflow: hidden; border: 1px solid var(--hair2); box-shadow: 0 40px 100px rgba(0,0,0,.7); }
+  .shot img { width: 100%; display: block; }
+
+  /* Pricing */
+  .price-wrap { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; }
+  .price {
+    text-align: left; background: var(--card); border: 1px solid var(--hair2); border-radius: 24px; padding: 34px 32px 30px; position: relative; overflow: hidden;
+  }
+  .price::before { content: ""; position: absolute; right: -80px; top: -80px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,235,59,.16), transparent 70%); }
+  .price .launch { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #111; background: var(--yellow); padding: 5px 10px; border-radius: 999px; margin-bottom: 18px; }
+  .price .amt { font-family: var(--display); font-size: 84px; line-height: .9; letter-spacing: .01em; }
+  .price .amt sup { font-size: 34px; vertical-align: top; position: relative; top: .35em; margin-right: 4px; }
+  .price .amt .c { font-size: 40px; }
+  .price .was { color: var(--muted2); font-size: 15px; margin: 12px 0 24px; }
+  .price .was s { color: var(--muted); }
+  .price ul { list-style: none; padding: 0; margin: 0 0 28px; }
+  .price li { padding: 7px 0 7px 28px; position: relative; font-size: 15px; }
+  .price li::before { content: ""; position: absolute; left: 0; top: 11px; width: 16px; height: 16px; border-radius: 50%; background: var(--green); }
+  .price li::after { content: ""; position: absolute; left: 5.5px; top: 14px; width: 3.5px; height: 7px; border: solid #000; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+  .price .fine { font-size: 12.5px; color: var(--muted); margin-top: 14px; }
+  .price-side h2 { font-size: clamp(36px, 5vw, 56px); }
+  .price-side p { color: var(--muted2); font-size: 16px; margin: 0 0 14px; }
+  .vs { display: grid; gap: 8px; margin-top: 20px; }
+  .vs div { display: flex; justify-content: space-between; font-size: 14px; padding: 10px 14px; background: var(--card); border: 1px solid var(--hair); border-radius: 10px; }
+  .vs div span:last-child { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .vs div.me { border-color: rgba(255,235,59,.4); }
+  .vs div.me span:last-child { color: var(--yellow); font-weight: 600; }
+
+  /* Requirements + install */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .list { margin: 0; padding: 0 0 0 18px; color: var(--muted2); font-size: 15px; }
+  .list li { margin: 7px 0; }
+  .list b { color: var(--text); font-weight: 600; }
+  ol.list { padding-left: 22px; }
+  kbd { font-family: inherit; background: var(--card2); border: 1px solid var(--hair2); border-radius: 6px; padding: 1px 7px; font-size: 13px; color: var(--text); }
+
+  /* FAQ */
+  details { border-bottom: 1px solid var(--hair); padding: 18px 0; }
+  details:first-of-type { border-top: 1px solid var(--hair); }
+  summary { cursor: pointer; font-weight: 600; font-size: 16px; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--muted); font-weight: 400; font-size: 22px; line-height: 1; transition: transform .2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin: 10px 0 0; color: var(--muted2); font-size: 15px; max-width: 720px; }
+
+  /* Footer */
+  footer { padding: 44px 0 64px; color: var(--muted); font-size: 13px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: center; }
+  footer .brand { font-size: 14px; }
+  footer .brand svg { width: 20px; height: 20px; }
+  footer .fl { display: flex; gap: 18px; flex-wrap: wrap; }
+
+  @media (max-width: 800px) {
+    .grid3, .steps, .two, .price-wrap { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    nav .links a:not(.buy) { display: none; }
+    .hero { padding-top: 72px; }
+    section { padding: 64px 0; }
+    .tl .ruler span:nth-child(even) { display: none; }
+    .tl .clip { font-size: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>
+      Captions Easy
+    </a>
+    <div class="links">
+      <a href="#styles">Styles</a>
+      <a href="#how">How it works</a>
+      <a href="#install">Install</a>
+      <a href="#faq">FAQ</a>
+      <a class="buy" href="#buy">Buy · $14.99</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><i></i> Premiere Pro plugin · Windows</div>
+    <h1 class="kara" aria-label="Captions that hit every word">
+      <span class="w">Captions</span><span class="w">that</span><span class="w">hit</span><span class="w">every&nbsp;word.</span>
+    </h1>
+    <p class="sub">Word-synced, animated captions in one click. Placed as <b>real editable graphics</b> on your timeline. Transcribed <b>on your machine</b> — nothing is uploaded.</p>
+    <div class="cta">
+      <a class="btn" href="#buy">Buy for $14.99 <small>launch price</small></a>
+      <div class="note">Then <b>$25</b> · one-time · no subscription · 14-day refund</div>
+    </div>
+    <div class="strip-wrap">
+      <div class="strip" aria-label="Animated caption preview">
+        <span class="tag"><i></i> Live render</span>
+        <img id="stripImg" src="img/anim/Beast/f14.png" alt="Animated karaoke caption, the spoken word highlighted">
+        <span class="name" id="stripName">Beast</span>
+      </div>
+      <div class="strip-cap">Actual frames from the plugin's preview engine — not a mockup.</div>
+    </div>
+  </div>
+</header>
+
+<div class="tl" aria-hidden="true">
+  <div class="ruler"><span>00:00</span><span>00:05</span><span>00:10</span><span>00:15</span><span>00:20</span><span>00:25</span><span>00:30</span></div>
+  <div class="tracks">
+    <div class="track" data-name="V2">
+      <div class="clip c" style="left:6%;width:9%">USE YOUR</div>
+      <div class="clip c" style="left:16%;width:11%">SHIELD</div>
+      <div class="clip c" style="left:29%;width:8%">LIKE THAT</div>
+      <div class="clip c" style="left:39%;width:12%">MAN, COME</div>
+      <div class="clip c" style="left:53%;width:9%">ON</div>
+      <div class="clip c" style="left:64%;width:13%">WE GO AGAIN</div>
+      <div class="clip c" style="left:79%;width:10%">RIGHT NOW</div>
+      <div class="clip c" style="left:91%;width:9%">LET'S GO</div>
+    </div>
+    <div class="track" data-name="V1"><div class="clip v" style="left:5%;width:95%">gameplay_take_03.mp4</div></div>
+    <div class="track" data-name="A1"><div class="clip v" style="left:5%;width:95%;background:#2f5a3a;color:#c9f2d3">gameplay_take_03.mp4</div></div>
+    <div class="head"></div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Not another <span class="y">caption app.</span></h2>
+    <p class="lead">Premiere's built-in captions can't highlight the word being spoken. Most caption tools upload your footage and bill you monthly. This does neither.</p>
+    <div class="grid3">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#ffeb3b" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 17h10"/><rect x="4" y="10" width="6" height="4" rx="1.5" stroke="none" fill="#ffeb3b"/><path d="M12 12h8"/></svg></div>
+        <h3>Word-by-word highlight</h3>
+        <p>Each word lights up exactly when it's spoken — colour, scale or pill. The look that carries short-form video, with zero keyframing.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0a84ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
+        <h3>Real Premiere graphics</h3>
+        <p>Captions land as Motion Graphics clips, not baked images. Fix a typo, nudge timing, change a colour — in Essential Graphics, after the fact.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+        <h3>Offline and private</h3>
+        <p>Speech recognition runs locally with Whisper. Footage never leaves your computer. No account, no upload, no monthly bill.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="styles">
+  <div class="wrap">
+    <h2>Looks editors <span class="y">already use.</span></h2>
+    <p class="lead">17 presets across trend, clean and motion. Every slider is yours: font, size, stroke, shadow, highlight, in and out animation. Save your own.</p>
+    <div class="gallery">
+      <div class="tile"><img src="img/styles/Beast.png" alt="Beast style"><span>Beast</span></div>
+      <div class="tile"><img src="img/styles/Hormozi.png" alt="Hormozi style"><span>Hormozi</span></div>
+      <div class="tile"><img src="img/styles/Neon.png" alt="Neon style"><span>Neon</span></div>
+      <div class="tile"><img src="img/styles/Bubble.png" alt="Bubble style"><span>Bubble</span></div>
+      <div class="tile"><img src="img/styles/Chips.png" alt="Chips style"><span>Chips</span></div>
+      <div class="tile"><img src="img/styles/Studio.png" alt="Studio style"><span>Studio</span></div>
+      <div class="tile"><img src="img/styles/Clean.png" alt="Clean style"><span>Clean</span></div>
+      <div class="tile"><img src="img/styles/Smooth.png" alt="Smooth style"><span>Smooth</span></div>
+    </div>
+    <p class="gallery-note">Previews render in your own font with your own words — what you see in the panel is what lands on the timeline.</p>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <h2>Three <span class="y">steps.</span></h2>
+    <p class="lead">Select clips, pick a look, press Generate. A progress bar shows transcription and placement with an ETA.</p>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Select clips</h3><p>Highlight the clips you want captioned. Captions go on the track above them.</p></div>
+      <div class="step"><div class="n">2</div><h3>Pick a style</h3><p>Choose a preset or tune your own. The live preview plays the animation in your font, with your words.</p></div>
+      <div class="step"><div class="n">3</div><h3>Generate</h3><p>Speech is transcribed locally and word-synced captions are placed as editable graphics.</p></div>
+    </div>
+    <p class="after">Changed your mind? <b>Restyle</b> re-skins the captions already placed. <b>Undo</b> removes them in one step.</p>
+    <!-- Drop a panel screenshot at img/panel.png and remove this comment wrapper:
+    <div class="shot"><img src="img/panel.png" alt="Captions Easy panel inside Premiere Pro"></div>
+    -->
+  </div>
+</section>
+
+<section class="alt" id="buy">
+  <div class="wrap">
+    <div class="price-wrap">
+      <div class="price">
+        <div class="launch">Launch price</div>
+        <div class="amt"><sup>$</sup>14<span class="c">.99</span></div>
+        <div class="was">Regular price <s>$25</s> · one-time, yours forever</div>
+        <ul>
+          <li>All 1.x updates included</li>
+          <li>Use on up to 3 computers</li>
+          <li>Unlimited videos, no watermark</li>
+          <li>14-day refund, no questions asked</li>
+        </ul>
+        <a class="btn" href="LEMON_SQUEEZY_CHECKOUT_URL">Buy Captions Easy</a>
+        <div class="fine">Secure checkout by Lemon Squeezy · VAT handled at checkout · license key by email</div>
+      </div>
+      <div class="price-side">
+        <h2>Pay <span class="y">once.</span></h2>
+        <p>Caption subscriptions cost more in two months than this does forever — and they keep your footage on their servers.</p>
+        <div class="vs">
+          <div class="me"><span>Captions Easy</span><span>$14.99 once</span></div>
+          <div><span>Typical caption app</span><span>$20–30 / month</span></div>
+          <div><span>One year of that</span><span>$240–360</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <h2>Requirements <span class="y">&amp; install.</span></h2>
+    <div class="two">
+      <div class="card">
+        <h3>Requirements</h3>
+        <ul class="list">
+          <li><b>Adobe Premiere Pro 25.0</b> or newer</li>
+          <li><b>Windows 10 / 11</b>, 64-bit</li>
+          <li><b>8 GB RAM</b>; a GPU speeds up transcription but isn't required</li>
+          <li>About <b>1 GB</b> free for the speech model, downloaded once on first run</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Install</h3>
+        <ol class="list">
+          <li>Buy — your <b>license key</b> and download link arrive by email.</li>
+          <li>Run the installer, then double-click <b>Captions Easy.ccx</b>. Creative Cloud installs the panel.</li>
+          <li>In Premiere: <kbd>Window</kbd> › <kbd>Extensions (UXP)</kbd> › <kbd>Captions Easy</kbd>.</li>
+          <li>Paste your key in <b>Settings</b>. Done.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="faq">
+  <div class="wrap">
+    <h2>Questions.</h2>
+    <p class="lead"></p>
+    <details open>
+      <summary>Does my audio or video leave my computer?</summary>
+      <p>No. Transcription runs locally with OpenAI's Whisper model. The only network request is the license check. No accounts, no analytics.</p>
+    </details>
+    <details>
+      <summary>Is it a subscription?</summary>
+      <p>No. One payment, use it forever. All 1.x updates are included.</p>
+    </details>
+    <details>
+      <summary>Can I edit captions after they're placed?</summary>
+      <p>Yes. Each caption is a real Motion Graphics clip. Text, timing, colours and animation are editable in Premiere's Essential Graphics panel. Restyle in the panel re-skins all of them at once.</p>
+    </details>
+    <details>
+      <summary>Which languages work?</summary>
+      <p>Whisper supports about 100 languages with auto-detect. English gives the tightest word timing. You can pin a language in Settings.</p>
+    </details>
+    <details>
+      <summary>Why does timeline playback get heavier with many captions?</summary>
+      <p>Each caption is a live animated graphic with expressions, which Premiere evaluates every frame. Finish the edit first, then use <em>Render &amp; Replace</em> on the caption track, or just export — the final render is unaffected.</p>
+    </details>
+    <details>
+      <summary>Mac?</summary>
+      <p>Windows at launch. Mac is planned; buyers get it as a free 1.x update when it ships.</p>
+    </details>
+    <details>
+      <summary>Refunds?</summary>
+      <p>14 days, no questions. Email support with your order number.</p>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="brand">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>
+      Captions Easy
+    </span>
+    <div class="fl">
+      <a href="mailto:SUPPORT_EMAIL">Support</a>
+      <a href="#faq">Refund policy</a>
+      <span>No accounts · no tracking · footage stays on your machine</span>
+    </div>
+    <span>© 2026 Captions Easy. Not affiliated with Adobe. Adobe and Premiere Pro are trademarks of Adobe Inc.</span>
+  </div>
+</footer>
+
+<script>
+  // Hero strip: cycle the plugin's real preset renders (15 frames each,
+  // 100 ms), one preset after another, holding the settled frame between.
+  (function () {
+    var sets = ["Beast", "Hormozi", "Neon", "Bubble"];
+    var img = document.getElementById("stripImg");
+    var name = document.getElementById("stripName");
+    var cache = {};
+    sets.forEach(function (s) {
+      cache[s] = [];
+      for (var i = 0; i < 15; i++) {
+        var im = new Image();
+        im.src = "img/anim/" + s + "/f" + (i < 10 ? "0" + i : i) + ".png";
+        cache[s].push(im);
+      }
+    });
+    var si = 0, fi = 0;
+    function tick() {
+      var s = sets[si];
+      img.src = cache[s][fi].src;
+      name.textContent = s;
+      fi++;
+      if (fi >= 15) { fi = 0; si = (si + 1) % sets.length; setTimeout(tick, 1500); }
+      else setTimeout(tick, 100);
+    }
+    setTimeout(tick, 900);
+  })();
+</script>
+</body>
+</html>
