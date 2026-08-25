@@ -1,9 +1,9 @@
 {
-  "version": "1.0.2",
-  "url": "https://kriespy10.github.io/captions-gen-site/update/CaptionsGen-Update-1.0.2.exe",
-  "sha256": "78ac1771e9ab8e4ad91ab2b505a4dd04dc37b33c94176d4603612db54881970c",
-  "size": 2882388,
-  "notes": "Background box now grows with multi-line captions (karaoke, pill and plain).",
+  "version": "1.0.3",
+  "url": "https://kriespy10.github.io/captions-gen-site/update/CaptionsGen-Update-1.0.3.exe",
+  "sha256": "15d1ef8e2fc4a6d61b2a4eb2630aacf98349f9dec69d91b5dc5e0f4379de5831",
+  "size": 2882673,
+  "notes": "Pill roundness: Round is now a true capsule; the slider hides for Color swap.",
   "full": "",
   "date": "2026-08-25"
 }
