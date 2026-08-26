@@ -137,6 +137,8 @@
     transition: background .15s, transform .15s, box-shadow .15s;
     box-shadow: 0 10px 30px rgba(10,132,255,.28);
   }
+  .btn.ghost { background: transparent; color: #eaeaea; border: 1px solid rgba(255,255,255,0.25); margin-left: 10px; }
+  .btn.ghost:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.06); }
   .btn:hover { background: var(--blue2); color: #fff; transform: translateY(-1px); box-shadow: 0 14px 36px rgba(10,132,255,.36); }
   .btn small { opacity: .78; font-weight: 500; font-size: 14px; }
   .cta .note { font-size: 13.5px; color: var(--muted); }
@@ -334,6 +336,7 @@
     <p class="sub">Word-synced, animated captions in one click. Placed as <b>real editable graphics</b> on your timeline. Transcribed <b>on your machine</b> — nothing is uploaded.</p>
     <div class="cta">
       <a class="btn" href="#buy">Buy for $14.99 <small>launch price</small></a>
+      <a class="btn ghost" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try free <small>15 min included</small></a>
       <div class="note">Then <b>$25</b> · one-time · no subscription · 14-day refund</div>
     </div>
     <div class="strip-wrap">
@@ -477,7 +480,8 @@
         <!-- Keep the ?checkout[discount_code]=LAUNCH query when swapping in the real
              checkout URL — it pre-fills the code so most buyers never type it. The
              visible callout below is the fallback for anyone it doesn't reach. -->
-        <a class="btn" href="https://captionsgen.lemonsqueezy.com?checkout%5Bdiscount_code%5D=LAUNCH">Buy Captions Gen</a>
+        <a class="btn" href="https://captionsgen.lemonsqueezy.com/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63?checkout%5Bdiscount_code%5D=LAUNCH">Buy Captions Gen</a>
+        <a class="btn ghost" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try free first</a>
         <div class="promo">Launch price needs code <b>LAUNCH</b> — first 100 orders<span>Added for you at checkout; if you don't see it, paste it in the discount box. After 100 redemptions the price is $25.</span></div>
         <div class="fine">Secure checkout by Lemon Squeezy · VAT handled at checkout · license key by email</div>
       </div>
