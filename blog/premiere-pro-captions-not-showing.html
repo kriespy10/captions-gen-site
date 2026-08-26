@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Premiere Pro Captions Not Showing? 6 Fixes That Work</title>
+<meta name="description" content="Captions not showing in Premiere Pro? Check the CC toggle, caption track visibility, export burn-in settings and more - six fixes, most take seconds.">
+<link rel="canonical" href="https://captionsgen.com/blog/premiere-pro-captions-not-showing.html">
+<meta property="og:title" content="Premiere Pro Captions Not Showing? 6 Fixes That Work">
+<meta property="og:description" content="Captions not showing in Premiere Pro? Check the CC toggle, caption track visibility, export burn-in settings and more - six fixes, most take seconds.">
+<meta property="og:url" content="https://captionsgen.com/blog/premiere-pro-captions-not-showing.html">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Premiere Pro Captions Not Showing: 6 Fixes", "datePublished": "2026-08-26", "dateModified": "2026-08-26", "author": {"@type": "Person", "name": "Kris"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com"}, "mainEntityOfPage": "https://captionsgen.com/blog/premiere-pro-captions-not-showing.html"}</script>
+<style>
+  :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
+    --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
+    --body:"Instrument Sans",-apple-system,"Segoe UI",system-ui,sans-serif; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:var(--body); background:var(--bg); color:var(--text); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:720px; margin:0 auto; padding:0 20px; }
+  header { padding:22px 0; border-bottom:1px solid var(--hair); }
+  header .wrap { display:flex; justify-content:space-between; align-items:center; }
+  header a { color:var(--text); text-decoration:none; font-weight:700; }
+  header a.cta { color:var(--blue); font-weight:600; font-size:14px; }
+  article { padding:40px 0 20px; }
+  h1 { font-size:34px; line-height:1.2; letter-spacing:-.02em; margin:0 0 10px; }
+  .meta { color:var(--muted); font-size:13px; margin-bottom:28px; }
+  h2 { font-size:22px; margin:36px 0 10px; letter-spacing:-.01em; }
+  h3 { font-size:17px; margin:24px 0 8px; }
+  p, li { color:var(--muted2); font-size:16px; }
+  li { margin-bottom:6px; }
+  strong { color:var(--text); }
+  a { color:var(--blue); }
+  a:hover { color:var(--blue2); }
+  ol li::marker { color:var(--yellow); font-weight:700; }
+  .box { background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px; margin:32px 0; }
+  .box p { margin:6px 0; }
+  .box .t { color:var(--text); font-weight:700; }
+  kbd { background:var(--card); border:1px solid var(--hair2); border-radius:5px; padding:1px 6px; font-size:13px; color:var(--text); }
+  footer { border-top:1px solid var(--hair); margin-top:48px; padding:24px 0 48px; color:var(--muted); font-size:13px; }
+  footer a { color:var(--muted); }
+</style>
+</head>
+<body>
+<header><div class="wrap"><a href="https://captionsgen.com/">Captions Gen</a><a class="cta" href="https://captionsgen.com/#buy">Get the plugin</a></div></header>
+<article><div class="wrap">
+<h1>Premiere Pro Captions Not Showing: 6 Fixes</h1>
+<div class="meta">Updated 2026-08-26 · by Kris, maker of Captions Gen</div>
+
+<p>Captions exist on the timeline but the Program Monitor shows nothing — or they show while editing and vanish from the export. Both are almost always one hidden toggle. Work down this list; most people are done at fix 1 or 2.</p>
+
+<h2>1. The CC toggle in the Program Monitor</h2>
+<p>The Program Monitor has its own captions display switch: the <strong>CC button</strong> under the preview (wrench menu on older versions). If it's off, captions never render in preview no matter what the timeline says. Click it, choose your caption track, done. This is the number-one cause.</p>
+
+<h2>2. Caption track visibility</h2>
+<p>Caption tracks have an output toggle like video tracks, in the caption track header on the left of the timeline. Bumped off, everything disappears. Also check the track isn't collapsed so far you're not seeing the caption blocks at all.</p>
+
+<h2>3. You have a transcript, not captions</h2>
+<p>The Text panel's Transcript tab showing text does <em>not</em> mean captions exist. Transcript and captions are separate things — if the Captions tab is empty and there's no caption track on the timeline, you still need to click <strong>Create captions</strong>.</p>
+
+<h2>4. Captions missing from the export</h2>
+<p>Preview fine, export blank: open the export dialog's <strong>Captions</strong> tab. If it says <em>None</em>, nothing goes out. Pick <strong>Burn captions into video</strong> for social (text becomes part of the image) or <strong>Create sidecar file</strong> for a separate .srt. This tab resets more often than you'd think between exports.</p>
+
+<h2>5. Closed captions on a player that hides them</h2>
+<p>If the track format is CEA-608/708 closed captions, the text only shows when the player's CC feature is on — that's the format working as designed. For always-visible captions on social, use Subtitle format and burn in.</p>
+
+<h2>6. Overlapping or zero-length captions</h2>
+<p>Imported .srt files sometimes carry overlapping timecodes or zero-duration entries, which render as flicker or nothing. Scrub the caption track for suspiciously thin blocks; retiming or deleting them fixes it.</p>
+
+<div class="box">
+<p class="t">While you're fixing captions…</p>
+<p>If the reason you're deep in caption settings is chasing a better look than the static native track, <a href="https://captionsgen.com/">Captions Gen</a> places animated word-by-word captions as normal graphics — no CC toggles, no format traps, visible in every preview and every export. <a href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Free version here</a>.</p>
+</div>
+
+<h2>Still nothing?</h2>
+<p>Restart Premiere with the caption track visible and CC on — the Program Monitor occasionally needs the nudge after toggling. And if captions show in preview but not in your upload, re-check fix 4: nine times out of ten, the export tab quietly said None.</p>
+
+<div class="box"><p class="t">Related guides</p><ul><li><a href="how-to-add-captions-in-premiere-pro.html">How to Add Captions in Premiere Pro</a></li>
+<li><a href="auto-captions-premiere-pro.html">Auto Captions in Premiere Pro, the Fast Way</a></li>
+<li><a href="animated-captions-premiere-pro.html">Animated Captions in Premiere Pro: the 3 Real Options</a></li></ul></div>
+</div></article>
+<footer><div class="wrap">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/#faq">FAQ</a></div></footer>
+</body>
+</html>
