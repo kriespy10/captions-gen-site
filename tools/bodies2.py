@@ -195,7 +195,7 @@ body="""
 """)
 
 P["closed-captions-premiere-pro"] = dict(
-title="Closed Captions in Premiere Pro: 608, 708 and Broadcast Delivery",
+title="Closed Captions in Premiere Pro: 608, 708 and Broadcast",
 desc="How to create CEA-608 and 708 closed captions in Premiere Pro, style within the standard, and export them for broadcast or streaming delivery.",
 h1="Closed captions in Premiere Pro",
 rel=["subtitles-vs-captions-premiere-pro","premiere-pro-captions-not-exporting","how-to-add-captions-in-premiere-pro"],
@@ -219,7 +219,7 @@ body="""
 """)
 
 P["how-to-add-text-in-premiere-pro"] = dict(
-title="How to Add Text in Premiere Pro (Titles, Lower Thirds, Captions)",
+title="How to Add Text in Premiere Pro (Titles and Lower Thirds)",
 desc="Add text to a video in Premiere Pro with the Type tool, style it in Essential Graphics, and know when to use captions instead of titles.",
 h1="How to add text in Premiere Pro",
 rel=["how-to-add-captions-in-premiere-pro","best-fonts-for-captions","premiere-pro-captions-to-graphics"],
@@ -335,6 +335,9 @@ body="""
 <h2>Size and line length</h2>
 <p>Font size between 55 and 75 px on a 1920-tall frame. Max 16 to 20 characters per line, single line. Bold sans fonts with a stroke or background box survive busy footage.</p>
 
+<h2>Timing</h2>
+<p>Short-form viewers read fast but not instantly. Keep each caption on screen for at least 0.8 seconds, and split long sentences at the natural pause rather than at a character count. If Premiere's auto split lands mid-phrase, merge or razor the captions by hand; it takes a minute per clip and reads much better.</p>
+
 <h2>Export</h2>
 <p>Burn the captions in from the export dialog's Captions tab. These platforms don't accept sidecar files.</p>
 
@@ -343,7 +346,7 @@ body="""
 """)
 
 P["import-srt-premiere-pro"] = dict(
-title="Import and Export SRT Files in Premiere Pro",
+title="Import and Export SRT Subtitle Files in Premiere Pro",
 desc="How to import an .srt into Premiere Pro as a caption track, fix timing offsets, style it, and export an .srt sidecar from your captions.",
 h1="Import and export SRT files in Premiere Pro",
 rel=["how-to-add-subtitles-in-premiere-pro","fix-caption-timing-premiere-pro","premiere-pro-captions-not-exporting"],
@@ -400,7 +403,7 @@ body="""
 """)
 
 P["fix-caption-timing-premiere-pro"] = dict(
-title="Fix Caption Timing in Premiere Pro: Early, Late, or Overlapping",
+title="Fix Caption Timing in Premiere Pro: Early, Late, Overlapping",
 desc="Captions out of sync in Premiere Pro? How to shift, retime, split and merge captions, and why auto captions drift after an edit.",
 h1="Fix caption timing in Premiere Pro",
 rel=["premiere-pro-captions-not-showing","import-srt-premiere-pro","how-to-add-captions-in-premiere-pro"],
@@ -445,6 +448,9 @@ body="""
 
 <h2>Time per revision</h2>
 <p>The round trip costs an export, a caption pass, another export and an import, every time the edit changes. Plugins that generate animated captions inside Premiere cost none of that.</p>
+
+<h2>Cost</h2>
+<p>CapCut's auto captions are free on the app's basic tier, with some templates behind CapCut Pro. Premiere's captions are included in the subscription you already pay. A caption plugin is a one-time purchase on top; whether it pays off depends on how many round trips it saves you per month.</p>
 
 <h2>Getting the CapCut look in Premiere</h2>
 <p>A plugin like <a href="https://captionsgen.com/">Captions Gen</a> generates the highlighted-word style as native graphics on your timeline. Same look, no export loop, and captions you can still edit.</p>
@@ -499,6 +505,9 @@ body="""
 
 <h2>Quality</h2>
 <p>Burned-in text is compressed with the video. Small text with thin strokes turns muddy at low bitrates. Use bold fonts, sizes above 55 px on vertical video, and a bitrate of at least 10 Mbps for 1080p vertical exports.</p>
+
+<h2>Export format</h2>
+<p>H.264 in an MP4 container is what every social platform expects, and burn-in works with it. If you export ProRes or another mezzanine format for a colorist, burn-in still works, but consider leaving captions off that master and burning them into the delivery file instead, so the master stays clean.</p>
 
 <h2>Checking before you post</h2>
 <p>Scrub the exported file at a few points. If captions are missing entirely, the Captions tab was on None; re-export.</p>
