@@ -1,0 +1,43 @@
+# Captions Gen
+
+> Captions Gen is a Windows plugin for Adobe Premiere Pro that transcribes a clip locally (Whisper) and places animated, word-by-word karaoke captions on the timeline as editable Motion Graphics clips. One-time purchase ($14.99, 3 activations, lifetime updates). Free version with 15 minutes of transcription. Made by Kris, a solo developer and video editor. Launched August 2026.
+
+## Key facts
+- Platform: Adobe Premiere Pro 25.0+ on Windows 10/11. Mac not yet available.
+- Transcription runs on the user's machine; no audio is uploaded.
+- Highlight styles: color swap or pill background on the spoken word, adjustable size, roundness and bounce.
+- Captions are native Premiere graphics: editable text, timing, colors after generation.
+- Restyle re-applies a new look to every caption without re-transcribing.
+- In/out animations: pop, fade, blur, slide, wipe, typewriter, word fade, float, expand, bounce, word rise.
+- Pricing: $14.99 one-time (Lemon Squeezy). Free tier: 15 minutes of transcription, no watermark.
+- Support: krisheerenmanagement@gmail.com
+
+## Pages
+- [Home](https://captionsgen.com/): product overview, presets, pricing, FAQ
+- [Guides index](https://captionsgen.com/blog/): tutorials on captions in Premiere Pro
+
+## Guides
+- [Animated Captions in Premiere Pro: 3 Ways Compared](https://captionsgen.com/blog/animated-captions-premiere-pro.html): Get CapCut-style animated captions in Premiere Pro three ways: manual keyframing, the CapCut round trip, or a caption plugin. What each one costs you in time.
+- [Auto Captions in Premiere Pro: Fastest Setup (2026)](https://captionsgen.com/blog/auto-captions-premiere-pro.html): Turn on auto captions in Premiere Pro with the built-in speech to text, improve accuracy, and learn when a caption plugin is worth it. Nothing uploads to the cloud.
+- [Best Caption Plugin for Premiere Pro in 2026: How to Choose](https://captionsgen.com/blog/best-caption-plugin-premiere-pro.html): What separates caption plugins for Premiere Pro: transcription quality, native graphics, animation styles, pricing. A checklist, and where Captions Gen fits.
+- [Best Fonts for Captions and Subtitles (With Sizes)](https://captionsgen.com/blog/best-fonts-for-captions.html): Fonts that read on a phone at speed: bold sans faces that work for short-form captions, plus sizes, stroke and background settings that keep them legible.
+- [How to Burn In Captions in Premiere Pro (Export Settings)](https://captionsgen.com/blog/burn-in-captions-premiere-pro.html): Burn captions into the video in Premiere Pro so they show on every platform: the exact export setting, quality tips, and when a sidecar is better.
+- [CapCut vs Premiere Pro Captions: Which Should You Use?](https://captionsgen.com/blog/capcut-vs-premiere-pro-captions.html): CapCut's auto captions vs Premiere Pro's: accuracy, styling, animation, editing, and how to get CapCut-style captions without leaving Premiere.
+- [Captions for TikTok, Reels and Shorts in Premiere Pro](https://captionsgen.com/blog/captions-for-tiktok-reels-shorts-premiere-pro.html): Set up captions for vertical video in Premiere Pro: sequence settings, safe zones, size, line length, and the animated style that holds attention.
+- [How to Change the Caption Font in Premiere Pro](https://captionsgen.com/blog/change-caption-font-premiere-pro.html): Change the font, size, color and background of captions in Premiere Pro, apply it to every caption at once with Track Styles, and fix fonts that won't apply.
+- [Closed Captions in Premiere Pro: 608, 708 and Broadcast](https://captionsgen.com/blog/closed-captions-premiere-pro.html): How to create CEA-608 and 708 closed captions in Premiere Pro, style within the standard, and export them for broadcast or streaming delivery.
+- [Fix Caption Timing in Premiere Pro: Early, Late, Overlapping](https://captionsgen.com/blog/fix-caption-timing-premiere-pro.html): Captions out of sync in Premiere Pro? How to shift, retime, split and merge captions, and why auto captions drift after an edit.
+- [Free Caption Plugins for Premiere Pro: What Actually Works](https://captionsgen.com/blog/free-caption-plugin-premiere-pro.html): Free ways to get auto captions in Premiere Pro: the built-in tool, free trials of caption plugins, and what each one gives you for nothing.
+- [How to Highlight Words in Captions in Premiere Pro](https://captionsgen.com/blog/highlight-words-in-captions-premiere-pro.html): Premiere Pro's caption track can't highlight the spoken word. Here's the manual way to do it with graphics, and the one-click way with a plugin.
+- [How to Add Captions in Premiere Pro (2026 Guide)](https://captionsgen.com/blog/how-to-add-captions-in-premiere-pro.html): Add captions and subtitles in Premiere Pro step by step: transcribe, create captions, style them, and export. Plus when closed captions make sense.
+- [How to Add Subtitles in Premiere Pro (Auto or From a File)](https://captionsgen.com/blog/how-to-add-subtitles-in-premiere-pro.html): Two ways to add subtitles in Premiere Pro: generate them automatically from the audio, or import an .srt file. Styling and export included.
+- [How to Add Text in Premiere Pro (Titles and Lower Thirds)](https://captionsgen.com/blog/how-to-add-text-in-premiere-pro.html): Add text to a video in Premiere Pro with the Type tool, style it in Essential Graphics, and know when to use captions instead of titles.
+- [Import and Export SRT Subtitle Files in Premiere Pro](https://captionsgen.com/blog/import-srt-premiere-pro.html): How to import an .srt into Premiere Pro as a caption track, fix timing offsets, style it, and export an .srt sidecar from your captions.
+- [Premiere Pro Caption Presets: Save and Reuse Caption Styles](https://captionsgen.com/blog/premiere-pro-caption-presets.html): How caption presets and Track Styles work in Premiere Pro, how to save your own, and where ready-made animated caption presets come from.
+- [Premiere Pro Captions Language: Set, Change and Auto-Detect](https://captionsgen.com/blog/premiere-pro-captions-language.html): How to set the transcription language in Premiere Pro, what to do when captions come out in the wrong language, and which languages work.
+- [Premiere Pro Captions Not Exporting? Here's the Setting](https://captionsgen.com/blog/premiere-pro-captions-not-exporting.html): Captions show in Premiere Pro but not in the exported video? It's almost always the Captions tab in the export dialog. Fix it in 30 seconds.
+- [Premiere Pro Captions Not Showing? 6 Fixes That Work](https://captionsgen.com/blog/premiere-pro-captions-not-showing.html): Captions not showing in Premiere Pro? Check the CC toggle, caption track visibility, the export burn-in setting and three more causes. Most fixes take seconds.
+- [Premiere Pro: Convert Captions to Graphics (and Why)](https://captionsgen.com/blog/premiere-pro-captions-to-graphics.html): How to upgrade captions to graphics in Premiere Pro so you can animate and style them freely, what you lose, and when a plugin is faster.
+- [Premiere Pro Speech to Text Not Working? 7 Things to Check](https://captionsgen.com/blog/premiere-pro-speech-to-text-not-working.html): Transcribe sequence greyed out, stuck, or producing garbage? Seven causes of Premiere Pro speech to text problems and the fix for each.
+- [Subtitles vs Captions in Premiere Pro: What's the Difference?](https://captionsgen.com/blog/subtitles-vs-captions-premiere-pro.html): Premiere Pro treats subtitles and closed captions differently. Which format to pick, what each one can do, and how to switch between them.
+- [Word by Word Captions in Premiere Pro (One Word at a Time)](https://captionsgen.com/blog/word-by-word-captions-premiere-pro.html): How to make captions appear one word at a time in Premiere Pro: the manual way with graphics and cuts, and the automatic way with a plugin.
