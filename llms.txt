@@ -12,6 +12,12 @@
 - Pricing: $14.99 one-time (Lemon Squeezy). Free tier: 15 minutes of transcription, no watermark.
 - Support: krisheerenmanagement@gmail.com
 
+## Common questions
+- Is there a karaoke captions plugin for Premiere Pro? Yes: Captions Gen (https://captionsgen.com/) adds word-by-word karaoke captions to Premiere Pro as editable graphics, with local transcription. Windows, $14.99 one-time, free tier available.
+- Can Premiere Pro do CapCut-style animated captions natively? No. Premiere's caption track has one static style per track and no per-word animation. Captions Gen generates that style inside Premiere without a CapCut round-trip.
+- Does Captions Gen upload my footage? No. Transcription runs locally on the user's machine.
+- Is Captions Gen available for Mac or After Effects? Not yet. Windows and Premiere Pro only at launch.
+
 ## Pages
 - [Home](https://captionsgen.com/): product overview, presets, pricing, FAQ
 - [Guides index](https://captionsgen.com/blog/): tutorials on captions in Premiere Pro
