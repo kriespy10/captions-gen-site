@@ -1,0 +1,193 @@
+# -*- coding: utf-8 -*-
+# Generates the four SEO guide pages for captionsgen.com into blog/.
+import json, os, io
+
+SITE = "https://captionsgen.com"
+FREE = "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece"
+DATE = "2026-08-26"
+
+CSS = """
+  :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
+    --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
+    --body:"Instrument Sans",-apple-system,"Segoe UI",system-ui,sans-serif; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:var(--body); background:var(--bg); color:var(--text); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 24px; }
+  .col { max-width:720px; margin:0 auto; padding:0 20px; }
+  nav { position:sticky; top:0; z-index:20; backdrop-filter:saturate(160%) blur(18px); -webkit-backdrop-filter:saturate(160%) blur(18px); background:rgba(7,7,8,.66); border-bottom:1px solid var(--hair); }
+  nav .wrap { display:flex; align-items:center; justify-content:space-between; height:54px; }
+  nav a { text-decoration:none; }
+  .brand { display:flex; align-items:center; gap:10px; color:var(--text); font-weight:600; font-size:15px; letter-spacing:-.01em; }
+  .brand svg { width:26px; height:26px; display:block; }
+  nav .links { display:flex; gap:24px; font-size:13.5px; align-items:center; }
+  nav .links a { color:var(--muted2); }
+  nav .links a:hover { color:var(--text); }
+  nav .links a.on { color:var(--text); }
+  nav .links a.buy { color:#fff; background:var(--blue); padding:7px 15px; border-radius:999px; font-weight:600; }
+  nav .links a.buy:hover { background:var(--blue2); }
+  @media (max-width:800px) { nav .links a:not(.buy):not(.on) { display:none; } }
+  .idx h1 { margin-bottom:6px; } .idx .sub { color:var(--muted); margin-bottom:26px; }
+  .post { display:block; background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px; margin-bottom:12px; text-decoration:none; }
+  .post:hover { border-color:var(--hair2); }
+  .post .pt { color:var(--text); font-weight:700; font-size:18px; margin-bottom:4px; }
+  .post .pd { color:var(--muted2); font-size:14px; }
+  article { padding:40px 0 20px; }
+  h1 { font-size:34px; line-height:1.2; letter-spacing:-.02em; margin:0 0 10px; }
+  .meta { color:var(--muted); font-size:13px; margin-bottom:28px; }
+  h2 { font-size:22px; margin:36px 0 10px; letter-spacing:-.01em; }
+  h3 { font-size:17px; margin:24px 0 8px; }
+  p, li { color:var(--muted2); font-size:16px; }
+  li { margin-bottom:6px; }
+  strong { color:var(--text); }
+  a { color:var(--blue); }
+  a:hover { color:var(--blue2); }
+  ol li::marker { color:var(--yellow); font-weight:700; }
+  .box { background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px; margin:32px 0; }
+  .box p { margin:6px 0; }
+  .box .t { color:var(--text); font-weight:700; }
+  kbd { background:var(--card); border:1px solid var(--hair2); border-radius:5px; padding:1px 6px; font-size:13px; color:var(--text); }
+  footer { border-top:1px solid var(--hair); margin-top:48px; padding:24px 0 48px; color:var(--muted); font-size:13px; }
+  footer a { color:var(--muted); }
+  .cta-line { background:rgba(10,132,255,.08); border-left:3px solid var(--blue); padding:10px 14px; border-radius:0 10px 10px 0; margin:18px 0 6px; font-size:15px; }
+  .btn { display:inline-block; background:var(--yellow); color:#111; font-weight:700; text-decoration:none; padding:11px 18px; border-radius:10px; margin:10px 10px 0 0; }
+  .btn:hover { color:#111; background:#fff176; }
+  .btn.ghost { background:transparent; color:var(--text); border:1px solid var(--hair2); }
+  .btn.ghost:hover { color:var(--text); background:rgba(255,255,255,.06); }
+  .cmp { width:100%; border-collapse:collapse; margin:14px 0 4px; font-size:15px; }
+  .cmp th, .cmp td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--hair); color:var(--muted2); }
+  .cmp th { color:var(--text); font-size:13px; text-transform:uppercase; letter-spacing:.05em; }
+  .cmp td.no { color:#ff6b6b; } .cmp td.yes { color:var(--green, #30d158); }
+"""
+
+TOP_CTA = '<p class="cta-line">Short on time? <a href="https://captionsgen.com/">Captions Gen</a> does animated karaoke captions in Premiere Pro in one click. <a href="__FREE__">Try it free</a> (15 minutes of transcription included).</p>'
+CLOSING = """
+<div class="box">
+<p class="t">What Premiere Pro's caption track can't do</p>
+<p>These are the limits you run into with native captions, and what the plugin adds.</p>
+<table class="cmp">
+<tr><th>Feature</th><th>Premiere Pro captions</th><th>Captions Gen</th></tr>
+<tr><td>Karaoke highlight on the spoken word</td><td class="no">No</td><td class="yes">Yes</td></tr>
+<tr><td>Per-word animation (pop, bounce, pill)</td><td class="no">No</td><td class="yes">Yes</td></tr>
+<tr><td>More than one style per track</td><td class="no">No</td><td class="yes">Yes</td></tr>
+<tr><td>Ready-made caption presets</td><td class="no">No</td><td class="yes">Yes</td></tr>
+<tr><td>Restyle every caption in one click</td><td class="no">No</td><td class="yes">Yes</td></tr>
+<tr><td>Captions stay editable graphics</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+<tr><td>Transcription runs on your machine</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+</table>
+<p>One-time $14.99, no subscription, 3 activations, updates included.</p>
+<a target="_blank" rel="noopener" class="btn" href="https://captionsgen.lemonsqueezy.com/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63?checkout%5Bdiscount_code%5D=LAUNCH">Get Captions Gen</a>
+<a class="btn ghost" href="__FREE__">Try free first</a>
+</div>
+"""
+
+def page(slug, title, desc, h1, body_html, related):
+    closing = CLOSING.replace("__FREE__", FREE)
+    i = body_html.find("</p>") + 4
+    body_html = body_html[:i] + chr(10) + TOP_CTA.replace("__FREE__", FREE) + body_html[i:]
+    rel = "\n".join(f'<li><a href="{r["slug"]}.html">{r["t"]}</a></li>' for r in related)
+    schema = json.dumps({
+        "@context": "https://schema.org", "@type": "Article", "headline": h1,
+        "datePublished": DATE, "dateModified": DATE,
+        "author": {"@type": "Person", "name": "Kris"},
+        "publisher": {"@type": "Organization", "name": "Captions Gen", "url": SITE},
+        "mainEntityOfPage": f"{SITE}/blog/{slug}.html"
+    }, ensure_ascii=False)
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+<link rel="canonical" href="{SITE}/blog/{slug}.html">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:url" content="{SITE}/blog/{slug}.html">
+<script type="application/ld+json">{schema}</script>
+<style>{CSS}</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
+  <div class="links">
+    <a href="https://captionsgen.com/#styles">Styles</a>
+    <a href="https://captionsgen.com/#custom">Build your own</a>
+    <a href="https://captionsgen.com/#how">How it works</a>
+    <a href="https://captionsgen.com/#install">Install</a>
+    <a href="https://captionsgen.com/#faq">FAQ</a>
+    <a class="on" href="https://captionsgen.com/blog/">Guides</a>
+    <a class="buy" href="https://captionsgen.com/#buy">Buy · $14.99</a>
+  </div>
+</div></nav>
+<article><div class="col">
+<h1>{h1}</h1>
+<div class="meta">Updated {DATE} · by Kris, maker of Captions Gen</div>
+{body_html}
+{closing}
+<div class="box"><p class="t">Related guides</p><ul>{rel}</ul></div>
+</div></article>
+<footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/#faq">FAQ</a> · <a href="{SITE}/blog/">Guides</a></div></footer>
+</body>
+</html>
+"""
+
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from bodies import POSTS
+from bodies2 import P
+REL0 = {
+  "how-to-add-captions-in-premiere-pro": ["auto-captions-premiere-pro","change-caption-font-premiere-pro","burn-in-captions-premiere-pro"],
+  "auto-captions-premiere-pro": ["premiere-pro-captions-language","premiere-pro-speech-to-text-not-working","animated-captions-premiere-pro"],
+  "animated-captions-premiere-pro": ["highlight-words-in-captions-premiere-pro","capcut-vs-premiere-pro-captions","best-caption-plugin-premiere-pro"],
+  "premiere-pro-captions-not-showing": ["premiere-pro-captions-not-exporting","fix-caption-timing-premiere-pro","premiere-pro-speech-to-text-not-working"],
+}
+for k, v in REL0.items(): POSTS[k]["rel"] = v
+POSTS.update(P)
+
+ORDER = list(POSTS.keys())
+
+os.makedirs("blog", exist_ok=True)
+NAV_HTML = """<nav><div class="wrap">
+  <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
+  <div class="links">
+    <a href="https://captionsgen.com/#styles">Styles</a>
+    <a href="https://captionsgen.com/#custom">Build your own</a>
+    <a href="https://captionsgen.com/#how">How it works</a>
+    <a href="https://captionsgen.com/#install">Install</a>
+    <a href="https://captionsgen.com/#faq">FAQ</a>
+    <a class="on" href="https://captionsgen.com/blog/">Guides</a>
+    <a class="buy" href="https://captionsgen.com/#buy">Buy · $14.99</a>
+  </div>
+</div></nav>"""
+cards = "".join(f'<a class="post" href="{k}.html"><div class="pt">{v["h1"]}</div><div class="pd">{v["desc"]}</div></a>' for k, v in POSTS.items())
+idx = f"""<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
+<title>Premiere Pro caption guides · Captions Gen</title>
+<meta name="description" content="Practical guides on captions in Premiere Pro: adding captions, auto captions, animated karaoke captions, and fixing captions that won't show.">
+<link rel="canonical" href="{SITE}/blog/"><meta property="og:title" content="Premiere Pro caption guides"><meta property="og:url" content="{SITE}/blog/">
+<style>{CSS}</style></head><body>
+{NAV_HTML}
+<article><div class="col idx"><h1>Premiere Pro caption guides</h1><p class="sub">Written by the maker of Captions Gen. Native Premiere workflows first, plugin where it earns it.</p>{cards}</div></article>
+<footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/#faq">FAQ</a></div></footer>
+</body></html>
+"""
+with io.open(os.path.join("blog", "index.html"), "w", encoding="utf-8", newline="") as f:
+    f.write(idx)
+print("wrote index")
+for slug, p in POSTS.items():
+    related = [{"slug": s, "t": POSTS[s]["h1"]} for s in p.get("rel", []) if s in POSTS]
+    html = page(slug, p["title"], p["desc"], p["h1"], p["body"].replace("__FREE__", FREE), related)
+    import re as _re
+    html = html.replace('<a target="_blank" rel="noopener" ', "<a ").replace('href="https://captionsgen.lemonsqueezy', 'target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy')
+    with io.open(os.path.join("blog", slug + ".html"), "w", encoding="utf-8", newline="") as f:
+        f.write(html)
+    print("wrote", slug, len(html))
+
+sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+      f'  <url><loc>{SITE}/</loc><lastmod>{DATE}</lastmod></url>', f'  <url><loc>{SITE}/blog/</loc><lastmod>{DATE}</lastmod></url>']
+sm += [f'  <url><loc>{SITE}/blog/{k}.html</loc><lastmod>{DATE}</lastmod></url>' for k in POSTS]
+sm.append('</urlset>')
+io.open("sitemap.xml", "w", encoding="utf-8", newline="").write(chr(10).join(sm) + chr(10))
+print("sitemap", len(POSTS) + 2, "urls")
