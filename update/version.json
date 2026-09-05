@@ -1,9 +1,9 @@
 {
-  "version": "1.0.5",
-  "url": "https://kriespy10.github.io/captions-gen-site/update/CaptionsGen-Update-1.0.5.exe",
-  "sha256": "aca82c02880e06d4adad6227ea79eac329adf156e656aa36fa180913fe8f733a",
-  "size": 2889921,
-  "notes": "Bounce now works with Color-swap karaoke. New option: box bounces with the karaoke highlight (off keeps the box still).",
+  "version": "1.0.6",
+  "url": "https://kriespy10.github.io/captions-gen-site/update/CaptionsGen-Update-1.0.6.exe",
+  "sha256": "35f53f80252492aea70ecc4aa55d73f6590ecf26033b302f513960a729d341fe",
+  "size": 2889600,
+  "notes": "Fixes captions showing as an empty box on non-English Premiere Pro / After Effects installs, Text case now applies on the timeline, and free minutes count each clip only once.",
   "full": "",
-  "date": "2026-08-25"
+  "date": "2026-09-05"
 }
