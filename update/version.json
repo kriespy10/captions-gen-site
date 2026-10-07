@@ -1,9 +1,9 @@
 {
-  "version": "1.0.6",
-  "url": "https://kriespy10.github.io/captions-gen-site/update/CaptionsGen-Update-1.0.6.exe",
-  "sha256": "35f53f80252492aea70ecc4aa55d73f6590ecf26033b302f513960a729d341fe",
-  "size": 2889600,
-  "notes": "Fixes captions showing as an empty box on non-English Premiere Pro / After Effects installs, Text case now applies on the timeline, and free minutes count each clip only once.",
+  "version": "1.0.8",
+  "url": "https://kriespy10.github.io/captions-gen-site/update/CaptionsGen-Update-1.0.8.exe",
+  "sha256": "4b01c38ec7c01e7f86eef6d580b0da0e6f44dd717a73f4802ec4882bc74e5dde",
+  "size": 2890503,
+  "notes": "The panel's offline notice now has a Start engine button that starts the caption engine for you.",
   "full": "",
-  "date": "2026-09-05"
+  "date": "2026-10-07"
 }
