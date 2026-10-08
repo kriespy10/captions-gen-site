@@ -5,6 +5,7 @@ import json, os, io
 SITE = "https://captionsgen.com"
 FREE = "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece"
 DATE = "2026-08-26"
+INDEX_DATE = "2026-10-08"  # bump when the homepage or guide list changes
 
 CSS = """
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
@@ -165,7 +166,7 @@ idx = f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
 <title>Premiere Pro caption guides · Captions Gen</title>
-<meta name="description" content="Practical guides on captions in Premiere Pro: adding captions, auto captions, animated karaoke captions, and fixing captions that won't show.">
+<meta name="description" content="Practical guides on captions in Premiere Pro: auto captions, subtitles, SRT import, fonts and presets, animated word-by-word captions, export and timing fixes.">
 <link rel="canonical" href="{SITE}/blog/"><meta property="og:title" content="Premiere Pro caption guides"><meta property="og:url" content="{SITE}/blog/">
 <style>{CSS}</style></head><body>
 {NAV_HTML}
@@ -186,8 +187,16 @@ for slug, p in POSTS.items():
     print("wrote", slug, len(html))
 
 sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-      f'  <url><loc>{SITE}/</loc><lastmod>{DATE}</lastmod></url>', f'  <url><loc>{SITE}/blog/</loc><lastmod>{DATE}</lastmod></url>']
+      f'  <url><loc>{SITE}/</loc><lastmod>{INDEX_DATE}</lastmod></url>', f'  <url><loc>{SITE}/blog/</loc><lastmod>{INDEX_DATE}</lastmod></url>']
 sm += [f'  <url><loc>{SITE}/blog/{k}.html</loc><lastmod>{DATE}</lastmod></url>' for k in POSTS]
 sm.append('</urlset>')
 io.open("sitemap.xml", "w", encoding="utf-8", newline="").write(chr(10).join(sm) + chr(10))
 print("sitemap", len(POSTS) + 2, "urls")
+
+# Homepage guide list: every post linked from the home page so crawlers find them all.
+links = "\n".join(f'      <a href="blog/{k}.html">{v["h1"]}</a>' for k, v in POSTS.items())
+home = io.open("index.html", encoding="utf-8").read()
+home = _re.sub(r"<!-- guides:start -->.*?<!-- guides:end -->",
+               lambda m: '<!-- guides:start -->\n    <div class="guides">\n' + links + '\n    </div>\n    <!-- guides:end -->', home, count=1, flags=_re.S)
+io.open("index.html", "w", encoding="utf-8", newline="").write(home)
+print("homepage guides", len(POSTS))
