@@ -5,6 +5,8 @@ import json, os, io
 SITE = "https://captionsgen.com"
 FREE = "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece"
 DATE = "2026-08-26"
+ANALYTICS_HEAD = '<link rel="stylesheet" href="/analytics.css">\n<script defer src="/analytics.js"></script>'
+PRIVACY_FOOTER = '<a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button>'
 
 CSS = """
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
@@ -95,6 +97,7 @@ def page(slug, title, desc, h1, body_html, related):
     return f"""<!doctype html>
 <html lang="en">
 <head>
+{ANALYTICS_HEAD}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
@@ -127,7 +130,7 @@ def page(slug, title, desc, h1, body_html, related):
 {closing}
 <div class="box"><p class="t">Related guides</p><ul>{rel}</ul></div>
 </div></article>
-<footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/#faq">FAQ</a> · <a href="{SITE}/blog/">Guides</a></div></footer>
+<footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/#faq">FAQ</a> · <a href="{SITE}/blog/">Guides</a> · {PRIVACY_FOOTER}</div></footer>
 </body>
 </html>
 """
@@ -162,7 +165,9 @@ NAV_HTML = """<nav><div class="wrap">
 </div></nav>"""
 cards = "".join(f'<a class="post" href="{k}.html"><div class="pt">{v["h1"]}</div><div class="pd">{v["desc"]}</div></a>' for k, v in POSTS.items())
 idx = f"""<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head>
+{ANALYTICS_HEAD}
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
 <title>Premiere Pro caption guides · Captions Gen</title>
 <meta name="description" content="Practical guides on captions in Premiere Pro: adding captions, auto captions, animated karaoke captions, and fixing captions that won't show.">
@@ -170,7 +175,7 @@ idx = f"""<!doctype html>
 <style>{CSS}</style></head><body>
 {NAV_HTML}
 <article><div class="col idx"><h1>Premiere Pro caption guides</h1><p class="sub">Written by the maker of Captions Gen. Native Premiere workflows first, plugin where it earns it.</p>{cards}</div></article>
-<footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/#faq">FAQ</a></div></footer>
+<footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/#faq">FAQ</a> · {PRIVACY_FOOTER}</div></footer>
 </body></html>
 """
 with io.open(os.path.join("blog", "index.html"), "w", encoding="utf-8", newline="") as f:
