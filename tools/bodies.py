@@ -1,127 +1,167 @@
 # -*- coding: utf-8 -*-
-# Humanized bodies for the four captionsgen.com guides. Imported by genblog.py.
+# Core captionsgen.com guides. Imported by genblog.py.
 POSTS = {}
 
 POSTS["how-to-add-captions-in-premiere-pro"] = dict(
-title="How to Add Captions in Premiere Pro (2026 Guide)",
-desc="Add captions and subtitles in Premiere Pro step by step: transcribe, create captions, style them, and export. Plus when closed captions make sense.",
-h1="How to add captions in Premiere Pro",
+title="How to Add Captions in Premiere Pro: Create, Style, Export",
+desc="Add captions in Premiere Pro using Speech to Text. Follow the transcript, caption track, Properties styling, and burn-in or SRT export steps in this guide.",
+h1="How to add captions in Premiere Pro, step by step",
+modified="2026-10-13",
 body="""
-<p>Premiere Pro has had captions built in since 2021, and for a plain subtitle track it works well. You don't need a plugin or a template pack, and you don't need to leave the app. This is the whole workflow, including the styling limit you'll hit and what to do about it.</p>
+<p>To add captions in Premiere Pro, <strong>transcribe your sequence, create captions from the transcript, style the caption track, and choose how to export it</strong>. Premiere includes Speech to Text; you do not need a separate plugin for standard subtitles.</p>
+<p>This guide uses the current Text and Properties panels. Older Premiere tutorials may show Essential Graphics for styling.</p>
 
-<h2>Step 1: transcribe your sequence</h2>
-<p>Open <kbd>Window &gt; Text</kbd>, switch to the Transcript tab, and click Transcribe sequence. Premiere's speech to text runs on your machine and usually finishes in less time than the clip is long. Pick the spoken language or leave it on auto detect. If your dialogue sits on its own audio track, point the transcription at that track; it saves cleanup later.</p>
+<h2 id="transcribe">1. Transcribe the sequence</h2>
+<p>Open your edited sequence and choose <kbd>Window &gt; Text</kbd>. In the Transcript tab, transcribe the sequence if a transcript has not already been created during import. Choose the spoken language and the dialogue audio you want to transcribe. A language pack may need to download before local transcription can run.</p>
+<p>Review names, numbers, and technical terms in the transcript before generating captions. If transcription fails or the transcript is empty, use the <a href="premiere-pro-speech-to-text-not-working.html">Speech to Text troubleshooting guide</a>.</p>
 
-<h2>Step 2: create captions from the transcript</h2>
-<p>In the same panel, click Create captions. Three settings in that dialog matter. Format should be Subtitle for normal on-screen captions (closed captions are covered below). Max characters per line defaults to 42, which reads like TV subtitles; for the short-form look with 3 to 5 words per caption, drop it to somewhere between 16 and 20. Lines can be single or double, and short-form is almost always single.</p>
-<p>Premiere then adds a caption track above your video with every caption timed to the transcript. If it misheard a word, double-click the caption text and fix it. The timing stays where it was.</p>
+<h2 id="create">2. Create captions from the transcript</h2>
+<p>In the Text panel's Captions tab, select <strong>Create captions from transcript</strong>. Use the Subtitle format for ordinary on-screen subtitles, or the format specified by your delivery brief for broadcast closed captions.</p>
+<p>Set the line length, duration, gap, and number of lines for the video you are making. Short lines can help a vertical video, but check the result at the intended viewing size rather than forcing every sentence into the same number of characters.</p>
+<p>Create the captions. Premiere adds timed caption clips to a track above the video. Check that the track's eye icon is enabled, then play the sequence to review the text and timing. See <a href="premiere-pro-captions-not-showing.html">what to check when captions are not showing</a> if the preview is blank.</p>
 
-<h2>Step 3: style the track</h2>
-<p>Select a caption and open <kbd>Window &gt; Essential Graphics</kbd>. Set the font, size, color, outline and background box once, then save the result as a Track Style so every caption on the track follows it.</p>
-<p>This is also where native captions stop: one style for the whole track. There is no per-word color, no pop-in, and no karaoke highlight. Every caption looks the same as the one before it.</p>
+<h2 id="style">3. Style the captions in Properties</h2>
+<p>Select a caption clip and open <kbd>Window &gt; Properties</kbd>. Set its font, size, fill, stroke, background, and position as needed. Keep enough contrast for the footage behind it, and check the frame edges on the final aspect ratio.</p>
+<p>Save a reusable Track Style to apply a consistent look across the track. A style helps you avoid correcting the same appearance on every caption. The <a href="change-caption-font-premiere-pro.html">caption font and Track Style guide</a> covers this in more detail.</p>
 
-<h2>Step 4: export</h2>
-<p>In the export dialog, open the Captions tab. Burn captions into video turns the text into pixels, which is what you want for Instagram, TikTok and YouTube Shorts. Create sidecar file writes a separate .srt instead, which is what you want for YouTube's own caption system or a client hand-off.</p>
+<h2 id="review">4. Review timing and line breaks</h2>
+<p>Play the captioned section with sound. Correct spelling in the Captions tab and adjust clip boundaries where a caption appears too early or disappears before the phrase finishes. Keep a readable phrase together when possible.</p>
+<p>For an existing subtitle file, import the SRT and add it to the timeline instead of transcribing again. Follow the <a href="import-srt-premiere-pro.html">SRT import workflow</a> for that route.</p>
 
-<h2>What about closed captions?</h2>
-<p>If a broadcaster or platform asked you for closed captions (CEA-608 or 708), choose that format instead of Subtitle in step 2. Closed captions travel in a data stream the viewer can switch on and off, and their styling is restricted on purpose, so don't fight it. For social video, burned-in subtitles are the norm.</p>
+<h2 id="export">5. Export visible captions or an SRT file</h2>
+<p>In Export mode, expand <strong>Captions</strong> and choose an export option:</p>
+<ul>
+<li><strong>Burn Captions Into Video</strong> makes captions permanently visible in the picture.</li>
+<li><strong>Create Sidecar File</strong> produces a separate caption file for upload or hand-off. Select SRT when that format is available and appropriate.</li>
+<li><strong>Embed In Output File</strong> produces a selectable stream in supported formats.</li>
+<li><strong>None</strong> omits captions.</li>
+</ul>
+<p>Export a short sample and check it in the intended player before rendering the entire project. For visible social-video subtitles, see the <a href="burn-in-captions-premiere-pro.html">burn-in export guide</a>.</p>
 
-<div class="box">
-<p class="t">Want captions that move?</p>
-<p>Native captions are one static style. If you want each word to light up as it's spoken, that is what <a href="https://captionsgen.com/">Captions Gen</a> does: it transcribes locally and places animated karaoke captions on your timeline as editable graphics. <a href="__FREE__">Try it free</a> with 15 minutes of transcription included.</p>
-</div>
-
-<h2>The short version</h2>
-<p>Transcribe sequence, Create captions, set 16 to 20 characters per line for short-form, style the track once, burn in on export. It takes about ten minutes the first time and a couple of minutes once you've done it twice.</p>
+<h2>Can Premiere make word-by-word captions?</h2>
+<p>Current versions include a <strong>Single Word</strong> layout in Captioning Preferences. For a moving highlight across a multi-word line or animated graphics, compare the approaches in the <a href="animated-captions-premiere-pro.html">animated caption guide</a>.</p>
+<p class="sources">References: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-captions.html">caption creation instructions</a>, <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-styles-for-captions.html">Properties and Track Styles</a>, and <a href="https://helpx.adobe.com/ca/premiere/desktop/render-and-export/export-files/overview-of-export-settings.html">export settings</a>.</p>
 """)
 
 POSTS["auto-captions-premiere-pro"] = dict(
-title="Auto Captions in Premiere Pro: Fastest Setup (2026)",
-desc="Turn on auto captions in Premiere Pro with the built-in speech to text, improve accuracy, and learn when a caption plugin is worth it. Nothing uploads to the cloud.",
-h1="Auto captions in Premiere Pro, the fast way",
+title="Premiere Pro Auto Captions: Generate, Style & Export",
+desc="Generate auto captions in Premiere Pro with Speech to Text. Choose the dialogue track, create subtitles, fix mistakes, style the text, and export your video.",
+h1="Auto captions in Premiere Pro with Speech to Text",
+modified="2026-10-13",
 body="""
-<p>You don't have to type captions in Premiere Pro, and you haven't had to for years. Automatic transcription ships with the app, runs offline, and costs nothing. What trips people up is the difference between a transcript and captions, and what the automatic route can't do to the look. The whole thing takes four steps.</p>
+<p>Premiere Pro makes auto captions in two stages: <strong>Speech to Text creates a transcript, then Create captions turns that transcript into timed subtitles</strong>. Automatic transcription is included with Premiere. Creating the transcript does not place visible text on the video by itself.</p>
 
-<h2>The four-step auto caption workflow</h2>
+<h2 id="generate">Generate auto captions in four steps</h2>
 <ol>
-<li>Transcribe. Open <kbd>Window &gt; Text</kbd>, go to the Transcript tab, click Transcribe sequence. The language auto detects, and the audio never leaves your machine.</li>
-<li>Generate captions. Click Create captions with the format set to Subtitle. Use 16 to 20 characters per line for the short-form look, or 32 to 42 for documentary-style lines.</li>
-<li>Proofread. Skim the caption track and fix names, brands and numbers, which are the usual speech-to-text casualties. Double-click a caption to change the text without touching its timing.</li>
-<li>Style and export. Set one Track Style in Essential Graphics, then burn the captions in from the export dialog's Captions tab.</li>
+<li><strong>Transcribe the sequence.</strong> Open <kbd>Window &gt; Text</kbd>, go to Transcript, and transcribe if no transcript exists yet. Choose the spoken language and the dialogue audio. Download the language pack if Premiere asks for it.</li>
+<li><strong>Create the caption track.</strong> Go to Captions and select <strong>Create captions from transcript</strong>. Pick Subtitle for ordinary subtitles, set the line length and timing preferences, and create the captions.</li>
+<li><strong>Proofread and style.</strong> Check names, numbers, and punctuation. Select a caption clip and use <kbd>Window &gt; Properties</kbd> to style it; save a Track Style for a consistent appearance.</li>
+<li><strong>Choose the export.</strong> In Export &gt; Captions, burn the text into the video or create a separate caption file. Leaving the option on None produces video without the caption track.</li>
 </ol>
+<p>For a slower walkthrough with styling and delivery choices, follow <a href="how-to-add-captions-in-premiere-pro.html">how to add captions in Premiere Pro</a>.</p>
 
-<h2>Getting more accurate auto captions</h2>
-<p>Two things change accuracy more than anything else. Transcribe from the cleanest dialogue track you have rather than the full mix with music, and pick the language yourself when you know it. Audio quality matters too: a noisy phone recording transcribes like a noisy phone recording. Expect to fix a handful of words per minute of speech, mostly proper nouns.</p>
+<h2 id="accuracy">Improve automatic caption accuracy</h2>
+<p>Use the cleanest dialogue available. If your project separates speech from music, select the dialogue source instead of relying on a busy mix. Choose the correct spoken language, then review words the model may not recognize, such as people's names and product names.</p>
+<p>Fixing the transcript before creating captions reduces repeated corrections. Still play through the generated caption track: accurate words can have awkward line breaks or timing after an edit. See <a href="fix-caption-timing-premiere-pro.html">how to adjust caption timing</a>.</p>
 
-<h2>Where the built-in auto captions stop</h2>
-<p>Premiere's automatic captions know when a sentence is spoken, but the native caption track can't use word-level timing. You can't highlight the current word or animate words one by one, and the track has a single static style. That isn't a setting you've missed; the caption system doesn't support it.</p>
-<p>If you want that look, you can convert the captions to graphics and keyframe them by hand, which is fine for one clip and painful for thirty, or use a plugin that transcribes with word timestamps and builds the animation for you.</p>
+<h2 id="troubleshoot">Why did auto captions produce no visible text?</h2>
+<ul>
+<li><strong>The transcript exists but no caption clips appear:</strong> create captions from the transcript.</li>
+<li><strong>The caption clips exist but the preview is blank:</strong> enable the caption track's eye icon and check the playhead position.</li>
+<li><strong>The preview works but the export is blank:</strong> check Export &gt; Captions instead of transcribing again.</li>
+<li><strong>Transcription is unavailable or fails:</strong> check the selected audio, language pack, and <a href="premiere-pro-speech-to-text-not-working.html">Speech to Text troubleshooting steps</a>.</li>
+</ul>
+<p>The <a href="premiere-pro-captions-not-showing.html">missing-caption checklist</a> separates preview problems from export problems.</p>
 
-<div class="box">
-<p class="t">Auto captions with word-by-word animation</p>
-<p><a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin that transcribes locally, like Premiere does, and places karaoke-style animated captions as editable graphics. Pick a preset, press Generate, and restyle whenever you like without transcribing again. The <a href="__FREE__">free version</a> includes 15 minutes of transcription.</p>
-</div>
+<h2 id="single-word">Auto captions one word at a time</h2>
+<p>In current versions, expand Captioning Preferences in the Create Captions dialog and select <strong>Layout &gt; Single Word</strong>. If your version lacks that option, check its available layouts. The <a href="word-by-word-captions-premiere-pro.html">word-by-word caption guide</a> explains the difference between showing one word and highlighting it within a line.</p>
 
-<h2>Which route to take</h2>
-<p>For static subtitles, Premiere's own auto captions are enough and they're four clicks away. For animated captions you need word timing, and that comes from a plugin, not from a hidden setting.</p>
+<h2 id="graphics">When an animated caption plugin helps</h2>
+<p>Native captions are a useful choice for subtitles and sidecar files. If you want karaoke highlights, pill backgrounds, bounce animations, and editable graphics from a repeatable preset, consider <a href="https://captionsgen.com/#styles">Captions Gen's animated caption styles</a>. It transcribes locally with Whisper and builds graphics on the Premiere timeline.</p>
+<p>Keep a native caption track as well when your delivery needs an SRT file. Graphics are part of the picture, not a substitute for a selectable caption file. Compare the <a href="animated-captions-premiere-pro.html">native and graphics workflows</a> before choosing.</p>
+<p class="sources">References: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-captions.html">caption workflow</a> and <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-single-word-captions.html">Single Word layout</a>.</p>
 """)
 
 POSTS["animated-captions-premiere-pro"] = dict(
-title="Animated Captions in Premiere Pro: 3 Ways Compared",
-desc="Get CapCut-style animated captions in Premiere Pro three ways: manual keyframing, the CapCut round trip, or a caption plugin. What each one costs you in time.",
-h1="Animated captions in Premiere Pro: the three real options",
+title="Animated Captions in Premiere Pro: Native, Graphics, Plugin",
+desc="Compare native single-word captions, manually animated graphics, and Captions Gen for Premiere Pro. Choose a workflow for subtitles or karaoke highlights.",
+h1="Animated captions in Premiere Pro: choose your workflow",
+modified="2026-10-13",
 body="""
-<p>The word-by-word caption look, where each word pops or lights up as it's spoken, is everywhere in short-form video right now, and Premiere Pro can't do it on its own. The caption track has one static style and that's the end of it. Editors still get the look in Premiere every day, using one of three routes, and each has a real cost.</p>
+<p>To make animated captions in Premiere Pro, start with the look you need: <strong>one word appearing at a time, manually animated text, or a moving highlight within a multi-word line</strong>. These use different workflows. Current Premiere versions include native single-word captions; graphics give you more control over motion and highlighting.</p>
 
-<h2>Option 1: keyframe it by hand</h2>
-<p>Create captions the normal way, then right-click a caption and choose Upgrade caption to graphic. It becomes a Motion Graphics layer you can keyframe: scale pops, per-word color through text styling, position bounces. You get total control and it costs nothing.</p>
-<p>What it costs is time. A 30-second clip has maybe 60 to 80 words, and animating a highlight across them by hand takes an afternoon. Multiply that by a month of content. This route suits the occasional hero clip, not a weekly workflow.</p>
+<h2 id="native">1. Native single-word captions</h2>
+<p>Transcribe the sequence, create captions from the transcript, and select <strong>Layout &gt; Single Word</strong> in Captioning Preferences. Premiere creates timed one-word caption clips. Style them in Properties and choose the caption export format you need.</p>
+<p>This route suits a simple one-word-at-a-time look and keeps the text on a native caption track. For the setup, follow the <a href="word-by-word-captions-premiere-pro.html">word-by-word captions workflow</a>.</p>
 
-<h2>Option 2: the CapCut round trip</h2>
-<p>Export your edit, run it through CapCut for auto captions, export from CapCut, and bring the file back into Premiere. It works, which is why so many editors do it, but you pay in several places. Every revision means another export and import cycle. You either accept a generation loss or manage large intermediate files. The captions are burned in, so they can't be edited once anything changes. And your caption text lives outside your project, so changing one word means doing the loop again.</p>
+<h2 id="manual">2. Animate caption graphics by hand</h2>
+<p>Create ordinary captions first, then use <strong>Upgrade Caption to Graphic</strong> for the clips you want to animate. Once the text is a graphic, use its text appearance and keyframes to build the motion you need.</p>
+<p>A moving highlight across several words takes additional timing work. One method is to split the graphic at each spoken word and change that word's appearance in each segment. It gives you control, but corrections and longer edits mean more clips to maintain. See <a href="highlight-words-in-captions-premiere-pro.html">how to highlight spoken words</a>.</p>
+<p>Graphics render as part of the video. Keep the original caption track if you also need a sidecar file or closed-caption delivery.</p>
 
-<h2>Option 3: a caption plugin inside Premiere</h2>
-<p>Plugins transcribe with word-level timestamps and place animated captions straight onto your timeline. There's no round trip and the captions stay editable. Several exist at different prices. Whichever you pick, check that it gives you captions as native Premiere graphics, so you can still fix a word or nudge timing, rather than as rendered files.</p>
+<h2 id="plugin">3. Generate animated graphics with Captions Gen</h2>
+<p><a href="https://captionsgen.com/">Captions Gen</a> transcribes on your machine with Whisper and places word-synced graphics on the Premiere timeline. Its presets combine karaoke highlights, color swaps or pill backgrounds, bounce, and in/out animations. You can edit the placed graphics or use Restyle to change their appearance without transcribing again.</p>
+<figure class="caption-example"><img src="/img/styles/Beast.png" width="1280" height="480" loading="lazy" alt="Captions Gen preview reading Use Your Shield, with Shield highlighted in yellow"><figcaption>A Captions Gen graphic with the spoken word highlighted. This is a plugin preview, not Premiere's native caption track.</figcaption></figure>
+<p>The plugin runs on Windows 10/11 with Premiere Pro 25.0 or newer. Its free trial includes 15 minutes of transcription. The launch price is US$14.99 with LAUNCH; the regular price is US$24.99, before applicable tax.</p>
 
-<div class="box">
-<p class="t">Where Captions Gen fits</p>
-<p><a href="https://captionsgen.com/">Captions Gen</a> ($14.99, one-time) transcribes on your machine and places karaoke captions as editable Motion Graphics. It has a color-swap or pill highlight, bounce, in and out animations, presets, and a Restyle button that changes the look of the whole sequence in seconds without transcribing again. <a href="__FREE__">Try the free version</a>: same plugin, 15 minutes of transcription included.</p>
-</div>
-
-<h2>Which one should you pick?</h2>
-<p>If you animate one special clip a month, keyframe it by hand. If you're tied to CapCut's specific templates, do the round trip and plan for revisions. If you publish short-form video from Premiere regularly, a plugin pays for itself in the first week. In every case, you no longer have to leave Premiere to get animated captions.</p>
+<h2>Which workflow fits your edit?</h2>
+<ul>
+<li><strong>Readable subtitles or a separate caption file:</strong> start with Premiere's native captions.</li>
+<li><strong>One word at a time:</strong> try the native Single Word layout before adding another tool.</li>
+<li><strong>A few custom animated titles:</strong> manual graphics can give you the control you need.</li>
+<li><strong>Repeatable karaoke highlights and animation presets:</strong> test Captions Gen on a representative clip.</li>
+</ul>
+<p>If your existing workflow goes through another editor, the <a href="capcut-vs-premiere-pro-captions.html">CapCut and Premiere caption comparison</a> covers the export-and-import tradeoff. If captions are missing rather than needing animation, start with the <a href="premiere-pro-captions-not-showing.html">visibility and export checks</a>.</p>
+<p class="sources">Reference: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-single-word-captions.html">native Single Word caption workflow</a>.</p>
 """)
 
 POSTS["premiere-pro-captions-not-showing"] = dict(
-title="Premiere Pro Captions Not Showing? 6 Fixes That Work",
-desc="Captions not showing in Premiere Pro? Check the CC toggle, caption track visibility, the export burn-in setting and three more causes. Most fixes take seconds.",
-h1="Premiere Pro captions not showing: six fixes",
+title="Premiere Pro Captions Not Showing? Fix Preview & Export",
+desc="Fix missing captions in Premiere Pro: enable the caption track, create captions from your transcript, check text styling, and choose the right export option.",
+h1="Premiere Pro captions not showing: preview and export fixes",
+modified="2026-10-13",
 body="""
-<p>The captions exist on the timeline but the Program Monitor shows nothing. Or they show while you edit and are gone from the export. In both cases the cause is almost always a single hidden toggle. Work down this list; most people are done at fix 1 or 2.</p>
-
-<h2>1. The CC toggle in the Program Monitor</h2>
-<p>The Program Monitor has its own caption display switch: the CC button under the preview (it lives in the wrench menu on older versions). When it's off, captions never render in the preview, whatever the timeline says. Click it, choose your caption track, and you're done. This is the most common cause by a wide margin.</p>
-
-<h2>2. Caption track visibility</h2>
-<p>Caption tracks have an output toggle like video tracks, in the track header on the left of the timeline. If it got bumped off, everything disappears. Also check that the track isn't collapsed so far that you can't see the caption blocks.</p>
-
-<h2>3. You have a transcript, not captions</h2>
-<p>Text in the Transcript tab of the Text panel does not mean captions exist. Transcript and captions are separate things. If the Captions tab is empty and there's no caption track on the timeline, you still need to click Create captions.</p>
-
-<h2>4. Captions missing from the export</h2>
-<p>If the preview is fine and the export is blank, open the Captions tab in the export dialog. If it says None, nothing goes out. Choose Burn captions into video for social, where the text becomes part of the image, or Create sidecar file for a separate .srt. This tab resets between exports more often than you'd expect.</p>
-
-<h2>5. Closed captions on a player that hides them</h2>
-<p>If the track format is CEA-608 or 708 closed captions, the text only shows when the player's CC feature is on. That is the format working as designed. For captions that are always visible on social, use the Subtitle format and burn them in.</p>
-
-<h2>6. Overlapping or zero-length captions</h2>
-<p>Imported .srt files sometimes carry overlapping timecodes or entries with no duration, and those render as flicker or as nothing at all. Scrub the caption track for suspiciously thin blocks, then retime or delete them.</p>
-
-<div class="box">
-<p class="t">While you're in the caption settings</p>
-<p>If you ended up here because you wanted a better look than the static native track, <a href="https://captionsgen.com/">Captions Gen</a> places animated word-by-word captions as normal graphics. They don't depend on CC toggles or caption formats, so they show up in every preview and every export. <a href="__FREE__">The free version is here</a>.</p>
+<p>If captions are not showing in Premiere Pro, first enable the <strong>eye icon on the caption track</strong> and move the playhead over a caption clip. If they show in the Program Monitor but disappear from the exported video, set <strong>Captions &gt; Export Options &gt; Burn Captions Into Video</strong>. A transcript alone does not create visible captions.</p>
+<div class="box quick-answer">
+<p class="t">Start with the symptom you see</p>
+<ul>
+<li><a href="#create-track">No caption clips on the timeline</a>: create captions from the transcript.</li>
+<li><a href="#track-visibility">Caption clips exist, but the preview is blank</a>: check track visibility, timing, and text appearance.</li>
+<li><a href="#export-captions">The preview works, but the exported video has no text</a>: check the export option and the player.</li>
+</ul>
 </div>
+<p>These steps use the current Premiere interface. Older tutorials may show Essential Graphics or a Program Monitor CC menu; use the caption track controls and Properties panel in current versions.</p>
 
-<h2>Still nothing?</h2>
-<p>Restart Premiere with the caption track visible and CC switched on; the Program Monitor sometimes needs the nudge after toggling. And if captions show in the preview but not in your upload, go back to fix 4. Nine times out of ten the export tab had quietly reset to None.</p>
+<h2 id="track-visibility">1. Enable the caption track's eye icon</h2>
+<p>Find the caption track above the video tracks in the Timeline. Turn on its eye icon, then park the playhead inside one of its caption clips. If you have several caption tracks, enable the one you want to preview. Expand the track header if the control is hard to see.</p>
+<p>Also confirm that you are looking at the <strong>Program Monitor for the same sequence</strong>, rather than a source clip. Scrub through a few caption clips to see whether the problem affects the whole track or only one caption.</p>
+
+<h2 id="create-track">2. Create captions from the transcript</h2>
+<p>Open <kbd>Window &gt; Text</kbd>. Words in the Transcript tab are transcription data, not a visible caption track. In the Captions tab, choose <strong>Create captions from transcript</strong>, select the appropriate format, and create the captions. For ordinary subtitles, the Subtitle format is a useful starting point.</p>
+<p>If there is no transcript yet, transcribe the sequence first. Follow the <a href="how-to-add-captions-in-premiere-pro.html">complete Premiere Pro caption workflow</a> if you need the setup steps.</p>
+
+<h2 id="appearance">3. Check the caption's timing and appearance</h2>
+<p>Select an affected caption clip and open <kbd>Window &gt; Properties</kbd>. Check the font size, fill color, background, and position: text can be present but hard to see against the footage or positioned outside the frame. Try a readable white fill with a dark background before restoring your preferred style.</p>
+<p>A caption only appears during its clip's duration. Check the in and out points, especially after importing an SRT file or moving the sequence. Use the <a href="fix-caption-timing-premiere-pro.html">caption timing guide</a> for offsets, or the <a href="change-caption-font-premiere-pro.html">caption font guide</a> for styling.</p>
+
+<h2 id="export-captions">4. Choose how captions should leave Premiere</h2>
+<p>Open Export mode and expand <strong>Captions</strong>. The available options depend on the track type and export format:</p>
+<ul>
+<li><strong>None</strong> exports the video without captions.</li>
+<li><strong>Burn Captions Into Video</strong> makes text part of the picture. Use this when you want it visible in the video itself.</li>
+<li><strong>Create Sidecar File</strong> saves a separate caption file, such as SRT. The video does not display that text until a platform or player loads the file.</li>
+<li><strong>Embed In Output File</strong>, where supported, stores a selectable caption stream. The player must support and enable it.</li>
+</ul>
+<p>If the Captions section is disabled, check whether the source sequence actually contains a caption track. See <a href="premiere-pro-captions-not-exporting.html">captions missing after export</a> for the delivery checks.</p>
+
+<h2 id="player">5. Check the file you are playing</h2>
+<p>For a sidecar export, upload or load the caption file alongside the video. For embedded closed captions, enable captions in a compatible player. Opening only the MP4 does not load a separate SRT automatically in every player.</p>
+<p>To isolate the problem, export a short section with captions burned in. If that file displays the text, return to the sidecar or embedded delivery settings rather than changing the caption wording.</p>
+
+<h2 id="graphics">What if the text is a graphic rather than a caption?</h2>
+<p>Text made with the Type tool, upgraded captions, and Captions Gen output lives on video tracks as graphics. Check the video track's output, the graphic clip's duration and appearance, and any layers covering it. The caption export options do not turn those graphics on or off.</p>
+
+<h2>Still missing?</h2>
+<p>Test a new short sequence with one fresh Subtitle caption and default styling. If that works, compare its track, timing, and export settings with the affected sequence. Save a copy of the project before resetting settings or rebuilding a track.</p>
+<p class="sources">References: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/translate-captions.html">caption track visibility controls</a>, <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-captions.html">caption creation workflow</a>, and <a href="https://helpx.adobe.com/ca/premiere/desktop/render-and-export/export-files/overview-of-export-settings.html">caption export options</a>.</p>
 """)

@@ -7,12 +7,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
 <title>Word by Word Captions in Premiere Pro (One Word at a Time)</title>
-<meta name="description" content="How to make captions appear one word at a time in Premiere Pro: the manual way with graphics and cuts, and the automatic way with a plugin.">
+<meta name="description" content="Create word-by-word captions in Premiere Pro with the native Single Word layout, or use graphics for a moving highlight. Styling and export choices explained.">
 <link rel="canonical" href="https://captionsgen.com/blog/word-by-word-captions-premiere-pro.html">
 <meta property="og:title" content="Word by Word Captions in Premiere Pro (One Word at a Time)">
-<meta property="og:description" content="How to make captions appear one word at a time in Premiere Pro: the manual way with graphics and cuts, and the automatic way with a plugin.">
+<meta property="og:description" content="Create word-by-word captions in Premiere Pro with the native Single Word layout, or use graphics for a moving highlight. Styling and export choices explained.">
 <meta property="og:url" content="https://captionsgen.com/blog/word-by-word-captions-premiere-pro.html">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Word by word captions in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-08-26", "author": {"@type": "Person", "name": "Kris"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com"}, "mainEntityOfPage": "https://captionsgen.com/blog/word-by-word-captions-premiere-pro.html"}</script>
+<meta property="og:type" content="article">
+
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Word by word captions in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-10-13", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/word-by-word-captions-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Word by word captions in Premiere Pro", "item": "https://captionsgen.com/blog/word-by-word-captions-premiere-pro.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -41,7 +44,16 @@
   article { padding:40px 0 20px; }
   h1 { font-size:34px; line-height:1.2; letter-spacing:-.02em; margin:0 0 10px; }
   .meta { color:var(--muted); font-size:13px; margin-bottom:28px; }
+  .breadcrumbs { font-size:13px; color:var(--muted); margin:0 0 16px; }
+  .breadcrumbs a { color:var(--muted2); }
+  .sources { font-size:13px; margin-top:28px; }
+  .caption-example { margin:24px 0; }
+  .caption-example img { display:block; width:100%; height:auto; border-radius:12px; }
+  .caption-example figcaption { color:var(--muted); font-size:13px; margin-top:8px; }
+  .quick-answer { margin-top:20px; }
+  .quick-answer ul { margin-bottom:0; }
   h2 { font-size:22px; margin:36px 0 10px; letter-spacing:-.01em; }
+  h2[id] { scroll-margin-top:78px; }
   h3 { font-size:17px; margin:24px 0 8px; }
   p, li { color:var(--muted2); font-size:16px; }
   li { margin-bottom:6px; }
@@ -80,45 +92,38 @@
   </div>
 </div></nav>
 <article><div class="col">
+<p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Word by word captions in Premiere Pro</p>
 <h1>Word by word captions in Premiere Pro</h1>
-<div class="meta">Updated 2026-08-26 · by Kris, maker of Captions Gen</div>
+<div class="meta">Updated <time datetime="2026-10-13">13 October 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 
-<p>Two looks go by this name: one word on screen at a time, or a full line where the spoken word lights up. Premiere's caption track can do a rough version of the first and none of the second. Both are quick with a plugin.</p>
-<p class="cta-line">Short on time? <a href="https://captionsgen.com/">Captions Gen</a> does animated karaoke captions in Premiere Pro in one click. <a target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try it free</a> (15 minutes of transcription included).</p>
-
-<h2>One word at a time, natively</h2>
-<p>In the Create captions dialog, set max characters per line to something tiny, like 8. Premiere splits the transcript into very short captions, often single words. Timing follows the transcript, so it roughly matches speech. Styling is still one Track Style, and long words wrap awkwardly.</p>
-
-<h2>Spoken word highlighted in a full line</h2>
-<p>This is the karaoke look and the caption track can't do it. The manual route is Upgrade Caption to Graphic, then cut the graphic at each word and change that word's color in each piece. Accurate, and about an hour per minute of speech.</p>
-
-<h2>The automatic route</h2>
-<p>A caption plugin transcribes with word timestamps and generates caption graphics where each word activates on time. You choose whether the word changes color, grows, or gets a pill behind it, and whether it bounces. The captions stay editable graphics on the timeline.</p>
-
-<h2>How many words per caption</h2>
-<p>For vertical video, three to five words per caption reads best. One word at a time is punchy but tiring over a minute; a full line with a moving highlight keeps the rhythm without the strain.</p>
+<p>Word-by-word captions can mean a single word on screen or a full line with the spoken word highlighted. In current Premiere versions, use <strong>Layout &gt; Single Word</strong> in Create Captions for the first look. For the moving highlight, use timed graphics or a caption plugin.</p>
+<h2>Use the native Single Word layout</h2>
+<ol>
+<li>Transcribe your sequence in the Text panel.</li>
+<li>Choose Create captions from transcript in the Captions tab.</li>
+<li>Expand Captioning Preferences and select Layout &gt; Single Word.</li>
+<li>Create the captions, style them in Properties, and review their timing.</li>
+</ol>
+<p>If the option is absent, check the layouts available in your installed version. Lowering the character limit is not equivalent to a dedicated single-word layout.</p>
+<h2>Highlight the spoken word inside a line</h2>
+<p>For karaoke highlighting, keep a few words visible and change the active word's appearance as it is spoken. You can upgrade captions to graphics and split or animate them manually, or generate timed graphics with a plugin. See the <a href="highlight-words-in-captions-premiere-pro.html">spoken-word highlighting guide</a>.</p>
+<h2>Choose the delivery format</h2>
+<p>Native caption tracks can produce caption files in supported formats. Animated graphics render into the picture. Keep a native track as well if your client needs SRT or closed captions.</p>
+<p>Compare the <a href="animated-captions-premiere-pro.html">animated caption workflows</a>, or start with <a href="how-to-add-captions-in-premiere-pro.html">the full caption setup guide</a>.</p>
+<p class="sources">Reference: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-single-word-captions.html">Single Word layout instructions</a>.</p>
 
 
 <div class="box">
-<p class="t">What Premiere Pro's caption track can't do</p>
-<p>These are the limits you run into with native captions, and what the plugin adds.</p>
-<table class="cmp">
-<tr><th>Feature</th><th>Premiere Pro captions</th><th>Captions Gen</th></tr>
-<tr><td>Karaoke highlight on the spoken word</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Per-word animation (pop, bounce, pill)</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>More than one style per track</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Ready-made caption presets</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Restyle every caption in one click</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Captions stay editable graphics</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
-<tr><td>Transcription runs on your machine</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
-</table>
-<p>One-time $14.99, no subscription, 3 activations, updates included.</p>
-<a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63?checkout%5Bdiscount_code%5D=LAUNCH">Get Captions Gen</a>
-<a class="btn ghost" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try free first</a>
+<p class="t">Try animated captions on your own edit</p>
+<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and Restyle. Native captions remain useful when you need subtitles or a separate caption file.</p>
+<p><strong>Windows 10/11 · Premiere Pro 25.0+</strong>. Try the same plugin with 15 minutes of transcription included before choosing a license.</p>
+<p>Launch price: <strong>US$14.99 with LAUNCH</strong>, limited to 100 redemptions. Regular price: US$24.99. Applicable tax is added at checkout. One-time purchase, 3 activations, and all 1.x updates included.</p>
+<a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try free · 15 minutes</a>
+<a class="btn ghost" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63?checkout%5Bdiscount_code%5D=LAUNCH">Buy · US$14.99 with LAUNCH</a>
 </div>
 
 <div class="box"><p class="t">Related guides</p><ul><li><a href="highlight-words-in-captions-premiere-pro.html">How to highlight words in captions in Premiere Pro</a></li>
-<li><a href="animated-captions-premiere-pro.html">Animated captions in Premiere Pro: the three real options</a></li>
+<li><a href="animated-captions-premiere-pro.html">Animated captions in Premiere Pro: choose your workflow</a></li>
 <li><a href="captions-for-tiktok-reels-shorts-premiere-pro.html">Captions for TikTok, Reels and Shorts in Premiere Pro</a></li></ul></div>
 </div></article>
 <footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>

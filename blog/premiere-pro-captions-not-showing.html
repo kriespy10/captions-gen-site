@@ -6,13 +6,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
-<title>Premiere Pro Captions Not Showing? 6 Fixes That Work</title>
-<meta name="description" content="Captions not showing in Premiere Pro? Check the CC toggle, caption track visibility, the export burn-in setting and three more causes. Most fixes take seconds.">
+<title>Premiere Pro Captions Not Showing? Fix Preview &amp; Export</title>
+<meta name="description" content="Fix missing captions in Premiere Pro: enable the caption track, create captions from your transcript, check text styling, and choose the right export option.">
 <link rel="canonical" href="https://captionsgen.com/blog/premiere-pro-captions-not-showing.html">
-<meta property="og:title" content="Premiere Pro Captions Not Showing? 6 Fixes That Work">
-<meta property="og:description" content="Captions not showing in Premiere Pro? Check the CC toggle, caption track visibility, the export burn-in setting and three more causes. Most fixes take seconds.">
+<meta property="og:title" content="Premiere Pro Captions Not Showing? Fix Preview &amp; Export">
+<meta property="og:description" content="Fix missing captions in Premiere Pro: enable the caption track, create captions from your transcript, check text styling, and choose the right export option.">
 <meta property="og:url" content="https://captionsgen.com/blog/premiere-pro-captions-not-showing.html">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Premiere Pro captions not showing: six fixes", "datePublished": "2026-08-26", "dateModified": "2026-08-26", "author": {"@type": "Person", "name": "Kris"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com"}, "mainEntityOfPage": "https://captionsgen.com/blog/premiere-pro-captions-not-showing.html"}</script>
+<meta property="og:type" content="article">
+
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Premiere Pro captions not showing: preview and export fixes", "datePublished": "2026-08-26", "dateModified": "2026-10-13", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/premiere-pro-captions-not-showing.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Premiere Pro captions not showing: preview and export fixes", "item": "https://captionsgen.com/blog/premiere-pro-captions-not-showing.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -41,7 +44,16 @@
   article { padding:40px 0 20px; }
   h1 { font-size:34px; line-height:1.2; letter-spacing:-.02em; margin:0 0 10px; }
   .meta { color:var(--muted); font-size:13px; margin-bottom:28px; }
+  .breadcrumbs { font-size:13px; color:var(--muted); margin:0 0 16px; }
+  .breadcrumbs a { color:var(--muted2); }
+  .sources { font-size:13px; margin-top:28px; }
+  .caption-example { margin:24px 0; }
+  .caption-example img { display:block; width:100%; height:auto; border-radius:12px; }
+  .caption-example figcaption { color:var(--muted); font-size:13px; margin-top:8px; }
+  .quick-answer { margin-top:20px; }
+  .quick-answer ul { margin-bottom:0; }
   h2 { font-size:22px; margin:36px 0 10px; letter-spacing:-.01em; }
+  h2[id] { scroll-margin-top:78px; }
   h3 { font-size:17px; margin:24px 0 8px; }
   p, li { color:var(--muted2); font-size:16px; }
   li { margin-bottom:6px; }
@@ -80,59 +92,66 @@
   </div>
 </div></nav>
 <article><div class="col">
-<h1>Premiere Pro captions not showing: six fixes</h1>
-<div class="meta">Updated 2026-08-26 · by Kris, maker of Captions Gen</div>
+<p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Premiere Pro captions not showing: preview and export fixes</p>
+<h1>Premiere Pro captions not showing: preview and export fixes</h1>
+<div class="meta">Updated <time datetime="2026-10-13">13 October 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 
-<p>The captions exist on the timeline but the Program Monitor shows nothing. Or they show while you edit and are gone from the export. In both cases the cause is almost always a single hidden toggle. Work down this list; most people are done at fix 1 or 2.</p>
-<p class="cta-line">Short on time? <a href="https://captionsgen.com/">Captions Gen</a> does animated karaoke captions in Premiere Pro in one click. <a target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try it free</a> (15 minutes of transcription included).</p>
+<p>If captions are not showing in Premiere Pro, first enable the <strong>eye icon on the caption track</strong> and move the playhead over a caption clip. If they show in the Program Monitor but disappear from the exported video, set <strong>Captions &gt; Export Options &gt; Burn Captions Into Video</strong>. A transcript alone does not create visible captions.</p>
+<div class="box quick-answer">
+<p class="t">Start with the symptom you see</p>
+<ul>
+<li><a href="#create-track">No caption clips on the timeline</a>: create captions from the transcript.</li>
+<li><a href="#track-visibility">Caption clips exist, but the preview is blank</a>: check track visibility, timing, and text appearance.</li>
+<li><a href="#export-captions">The preview works, but the exported video has no text</a>: check the export option and the player.</li>
+</ul>
+</div>
+<p>These steps use the current Premiere interface. Older tutorials may show Essential Graphics or a Program Monitor CC menu; use the caption track controls and Properties panel in current versions.</p>
 
-<h2>1. The CC toggle in the Program Monitor</h2>
-<p>The Program Monitor has its own caption display switch: the CC button under the preview (it lives in the wrench menu on older versions). When it's off, captions never render in the preview, whatever the timeline says. Click it, choose your caption track, and you're done. This is the most common cause by a wide margin.</p>
+<h2 id="track-visibility">1. Enable the caption track's eye icon</h2>
+<p>Find the caption track above the video tracks in the Timeline. Turn on its eye icon, then park the playhead inside one of its caption clips. If you have several caption tracks, enable the one you want to preview. Expand the track header if the control is hard to see.</p>
+<p>Also confirm that you are looking at the <strong>Program Monitor for the same sequence</strong>, rather than a source clip. Scrub through a few caption clips to see whether the problem affects the whole track or only one caption.</p>
 
-<h2>2. Caption track visibility</h2>
-<p>Caption tracks have an output toggle like video tracks, in the track header on the left of the timeline. If it got bumped off, everything disappears. Also check that the track isn't collapsed so far that you can't see the caption blocks.</p>
+<h2 id="create-track">2. Create captions from the transcript</h2>
+<p>Open <kbd>Window &gt; Text</kbd>. Words in the Transcript tab are transcription data, not a visible caption track. In the Captions tab, choose <strong>Create captions from transcript</strong>, select the appropriate format, and create the captions. For ordinary subtitles, the Subtitle format is a useful starting point.</p>
+<p>If there is no transcript yet, transcribe the sequence first. Follow the <a href="how-to-add-captions-in-premiere-pro.html">complete Premiere Pro caption workflow</a> if you need the setup steps.</p>
 
-<h2>3. You have a transcript, not captions</h2>
-<p>Text in the Transcript tab of the Text panel does not mean captions exist. Transcript and captions are separate things. If the Captions tab is empty and there's no caption track on the timeline, you still need to click Create captions.</p>
+<h2 id="appearance">3. Check the caption's timing and appearance</h2>
+<p>Select an affected caption clip and open <kbd>Window &gt; Properties</kbd>. Check the font size, fill color, background, and position: text can be present but hard to see against the footage or positioned outside the frame. Try a readable white fill with a dark background before restoring your preferred style.</p>
+<p>A caption only appears during its clip's duration. Check the in and out points, especially after importing an SRT file or moving the sequence. Use the <a href="fix-caption-timing-premiere-pro.html">caption timing guide</a> for offsets, or the <a href="change-caption-font-premiere-pro.html">caption font guide</a> for styling.</p>
 
-<h2>4. Captions missing from the export</h2>
-<p>If the preview is fine and the export is blank, open the Captions tab in the export dialog. If it says None, nothing goes out. Choose Burn captions into video for social, where the text becomes part of the image, or Create sidecar file for a separate .srt. This tab resets between exports more often than you'd expect.</p>
+<h2 id="export-captions">4. Choose how captions should leave Premiere</h2>
+<p>Open Export mode and expand <strong>Captions</strong>. The available options depend on the track type and export format:</p>
+<ul>
+<li><strong>None</strong> exports the video without captions.</li>
+<li><strong>Burn Captions Into Video</strong> makes text part of the picture. Use this when you want it visible in the video itself.</li>
+<li><strong>Create Sidecar File</strong> saves a separate caption file, such as SRT. The video does not display that text until a platform or player loads the file.</li>
+<li><strong>Embed In Output File</strong>, where supported, stores a selectable caption stream. The player must support and enable it.</li>
+</ul>
+<p>If the Captions section is disabled, check whether the source sequence actually contains a caption track. See <a href="premiere-pro-captions-not-exporting.html">captions missing after export</a> for the delivery checks.</p>
 
-<h2>5. Closed captions on a player that hides them</h2>
-<p>If the track format is CEA-608 or 708 closed captions, the text only shows when the player's CC feature is on. That is the format working as designed. For captions that are always visible on social, use the Subtitle format and burn them in.</p>
+<h2 id="player">5. Check the file you are playing</h2>
+<p>For a sidecar export, upload or load the caption file alongside the video. For embedded closed captions, enable captions in a compatible player. Opening only the MP4 does not load a separate SRT automatically in every player.</p>
+<p>To isolate the problem, export a short section with captions burned in. If that file displays the text, return to the sidecar or embedded delivery settings rather than changing the caption wording.</p>
 
-<h2>6. Overlapping or zero-length captions</h2>
-<p>Imported .srt files sometimes carry overlapping timecodes or entries with no duration, and those render as flicker or as nothing at all. Scrub the caption track for suspiciously thin blocks, then retime or delete them.</p>
+<h2 id="graphics">What if the text is a graphic rather than a caption?</h2>
+<p>Text made with the Type tool, upgraded captions, and Captions Gen output lives on video tracks as graphics. Check the video track's output, the graphic clip's duration and appearance, and any layers covering it. The caption export options do not turn those graphics on or off.</p>
+
+<h2>Still missing?</h2>
+<p>Test a new short sequence with one fresh Subtitle caption and default styling. If that works, compare its track, timing, and export settings with the affected sequence. Save a copy of the project before resetting settings or rebuilding a track.</p>
+<p class="sources">References: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/translate-captions.html">caption track visibility controls</a>, <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-captions.html">caption creation workflow</a>, and <a href="https://helpx.adobe.com/ca/premiere/desktop/render-and-export/export-files/overview-of-export-settings.html">caption export options</a>.</p>
+
 
 <div class="box">
-<p class="t">While you're in the caption settings</p>
-<p>If you ended up here because you wanted a better look than the static native track, <a href="https://captionsgen.com/">Captions Gen</a> places animated word-by-word captions as normal graphics. They don't depend on CC toggles or caption formats, so they show up in every preview and every export. <a target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">The free version is here</a>.</p>
+<p class="t">Try animated captions on your own edit</p>
+<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and Restyle. Native captions remain useful when you need subtitles or a separate caption file.</p>
+<p><strong>Windows 10/11 · Premiere Pro 25.0+</strong>. Try the same plugin with 15 minutes of transcription included before choosing a license.</p>
+<p>Launch price: <strong>US$14.99 with LAUNCH</strong>, limited to 100 redemptions. Regular price: US$24.99. Applicable tax is added at checkout. One-time purchase, 3 activations, and all 1.x updates included.</p>
+<a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try free · 15 minutes</a>
+<a class="btn ghost" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63?checkout%5Bdiscount_code%5D=LAUNCH">Buy · US$14.99 with LAUNCH</a>
 </div>
 
-<h2>Still nothing?</h2>
-<p>Restart Premiere with the caption track visible and CC switched on; the Program Monitor sometimes needs the nudge after toggling. And if captions show in the preview but not in your upload, go back to fix 4. Nine times out of ten the export tab had quietly reset to None.</p>
-
-
-<div class="box">
-<p class="t">What Premiere Pro's caption track can't do</p>
-<p>These are the limits you run into with native captions, and what the plugin adds.</p>
-<table class="cmp">
-<tr><th>Feature</th><th>Premiere Pro captions</th><th>Captions Gen</th></tr>
-<tr><td>Karaoke highlight on the spoken word</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Per-word animation (pop, bounce, pill)</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>More than one style per track</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Ready-made caption presets</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Restyle every caption in one click</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Captions stay editable graphics</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
-<tr><td>Transcription runs on your machine</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
-</table>
-<p>One-time $14.99, no subscription, 3 activations, updates included.</p>
-<a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63?checkout%5Bdiscount_code%5D=LAUNCH">Get Captions Gen</a>
-<a class="btn ghost" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try free first</a>
-</div>
-
-<div class="box"><p class="t">Related guides</p><ul><li><a href="premiere-pro-captions-not-exporting.html">Premiere Pro captions not exporting</a></li>
-<li><a href="fix-caption-timing-premiere-pro.html">Fix caption timing in Premiere Pro</a></li>
+<div class="box"><p class="t">Related guides</p><ul><li><a href="how-to-add-captions-in-premiere-pro.html">How to add captions in Premiere Pro, step by step</a></li>
+<li><a href="premiere-pro-captions-not-exporting.html">Premiere Pro captions not exporting</a></li>
 <li><a href="premiere-pro-speech-to-text-not-working.html">Premiere Pro speech to text not working</a></li></ul></div>
 </div></article>
 <footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>

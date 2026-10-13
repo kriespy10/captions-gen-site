@@ -7,12 +7,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
 <title>How to Highlight Words in Captions in Premiere Pro</title>
-<meta name="description" content="Premiere Pro's caption track can't highlight the spoken word. Here's the manual way to do it with graphics, and the one-click way with a plugin.">
+<meta name="description" content="Create a moving highlight across spoken words in Premiere Pro using editable graphics. Compare manual timing with a caption plugin for karaoke-style text.">
 <link rel="canonical" href="https://captionsgen.com/blog/highlight-words-in-captions-premiere-pro.html">
 <meta property="og:title" content="How to Highlight Words in Captions in Premiere Pro">
-<meta property="og:description" content="Premiere Pro's caption track can't highlight the spoken word. Here's the manual way to do it with graphics, and the one-click way with a plugin.">
+<meta property="og:description" content="Create a moving highlight across spoken words in Premiere Pro using editable graphics. Compare manual timing with a caption plugin for karaoke-style text.">
 <meta property="og:url" content="https://captionsgen.com/blog/highlight-words-in-captions-premiere-pro.html">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to highlight words in captions in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-08-26", "author": {"@type": "Person", "name": "Kris"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com"}, "mainEntityOfPage": "https://captionsgen.com/blog/highlight-words-in-captions-premiere-pro.html"}</script>
+<meta property="og:type" content="article">
+
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "How to highlight words in captions in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-10-13", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/highlight-words-in-captions-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "How to highlight words in captions in Premiere Pro", "item": "https://captionsgen.com/blog/highlight-words-in-captions-premiere-pro.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -41,7 +44,16 @@
   article { padding:40px 0 20px; }
   h1 { font-size:34px; line-height:1.2; letter-spacing:-.02em; margin:0 0 10px; }
   .meta { color:var(--muted); font-size:13px; margin-bottom:28px; }
+  .breadcrumbs { font-size:13px; color:var(--muted); margin:0 0 16px; }
+  .breadcrumbs a { color:var(--muted2); }
+  .sources { font-size:13px; margin-top:28px; }
+  .caption-example { margin:24px 0; }
+  .caption-example img { display:block; width:100%; height:auto; border-radius:12px; }
+  .caption-example figcaption { color:var(--muted); font-size:13px; margin-top:8px; }
+  .quick-answer { margin-top:20px; }
+  .quick-answer ul { margin-bottom:0; }
   h2 { font-size:22px; margin:36px 0 10px; letter-spacing:-.01em; }
+  h2[id] { scroll-margin-top:78px; }
   h3 { font-size:17px; margin:24px 0 8px; }
   p, li { color:var(--muted2); font-size:16px; }
   li { margin-bottom:6px; }
@@ -80,19 +92,19 @@
   </div>
 </div></nav>
 <article><div class="col">
+<p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / How to highlight words in captions in Premiere Pro</p>
 <h1>How to highlight words in captions in Premiere Pro</h1>
-<div class="meta">Updated 2026-08-26 · by Kris, maker of Captions Gen</div>
+<div class="meta">Updated <time datetime="2026-10-13">13 October 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 
-<p>Premiere Pro's caption track applies one style to the whole line, so it cannot highlight the word being spoken. To get that look you need caption graphics: either converted and keyframed by hand, or generated by a plugin that knows when each word starts.</p>
-<p class="cta-line">Short on time? <a href="https://captionsgen.com/">Captions Gen</a> does animated karaoke captions in Premiere Pro in one click. <a target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try it free</a> (15 minutes of transcription included).</p>
+<p>To highlight the spoken word while keeping a full line visible, use timed caption graphics: build the changes manually or generate them with a plugin. This karaoke look differs from Premiere's native Single Word layout, which displays one word at a time.</p>
 
 <h2>Why the caption track can't do it</h2>
-<p>Captions in Premiere are timed lines of text with a Track Style. There is no word-level timing stored in them and no per-word styling. That is the format's limit, not a missing setting.</p>
+<p>Captions in Premiere are timed lines of text with a Track Style. Current Premiere versions can create individual word-timed captions with the Single Word layout. A moving highlight within a multi-word line is a different effect; build that with graphics or a caption plugin.</p>
 
 <h2>The manual method</h2>
 <ol>
 <li>Right-click a caption and choose Upgrade Caption to Graphic.</li>
-<li>In Essential Graphics, select the word you want highlighted inside the text box and give it a different fill color or size.</li>
+<li>In Properties, select the word you want highlighted inside the text box and give it a different fill color or size.</li>
 <li>Cut the graphic at the point where the next word is spoken, and move the highlight to that word in the new piece.</li>
 </ol>
 <p>A caption with five words becomes five short graphics. It works and it looks right, but it is slow: expect an hour for a minute of speech.</p>
@@ -105,25 +117,16 @@
 
 
 <div class="box">
-<p class="t">What Premiere Pro's caption track can't do</p>
-<p>These are the limits you run into with native captions, and what the plugin adds.</p>
-<table class="cmp">
-<tr><th>Feature</th><th>Premiere Pro captions</th><th>Captions Gen</th></tr>
-<tr><td>Karaoke highlight on the spoken word</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Per-word animation (pop, bounce, pill)</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>More than one style per track</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Ready-made caption presets</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Restyle every caption in one click</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Captions stay editable graphics</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
-<tr><td>Transcription runs on your machine</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
-</table>
-<p>One-time $14.99, no subscription, 3 activations, updates included.</p>
-<a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63?checkout%5Bdiscount_code%5D=LAUNCH">Get Captions Gen</a>
-<a class="btn ghost" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try free first</a>
+<p class="t">Try animated captions on your own edit</p>
+<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and Restyle. Native captions remain useful when you need subtitles or a separate caption file.</p>
+<p><strong>Windows 10/11 · Premiere Pro 25.0+</strong>. Try the same plugin with 15 minutes of transcription included before choosing a license.</p>
+<p>Launch price: <strong>US$14.99 with LAUNCH</strong>, limited to 100 redemptions. Regular price: US$24.99. Applicable tax is added at checkout. One-time purchase, 3 activations, and all 1.x updates included.</p>
+<a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try free · 15 minutes</a>
+<a class="btn ghost" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63?checkout%5Bdiscount_code%5D=LAUNCH">Buy · US$14.99 with LAUNCH</a>
 </div>
 
 <div class="box"><p class="t">Related guides</p><ul><li><a href="word-by-word-captions-premiere-pro.html">Word by word captions in Premiere Pro</a></li>
-<li><a href="animated-captions-premiere-pro.html">Animated captions in Premiere Pro: the three real options</a></li>
+<li><a href="animated-captions-premiere-pro.html">Animated captions in Premiere Pro: choose your workflow</a></li>
 <li><a href="premiere-pro-captions-to-graphics.html">Converting captions to graphics in Premiere Pro</a></li></ul></div>
 </div></article>
 <footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>

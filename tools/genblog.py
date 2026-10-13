@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
-# Generates the four SEO guide pages for captionsgen.com into blog/.
+# Generates the captionsgen.com guides from their editable source files.
 import json, os, io
+from datetime import date
+from html import escape
 
 SITE = "https://captionsgen.com"
 FREE = "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece"
 DATE = "2026-08-26"
+SITE_UPDATED = "2026-10-13"
 ANALYTICS_HEAD = '<link rel="stylesheet" href="/analytics.css">\n<script defer src="/analytics.js"></script>'
 PRIVACY_FOOTER = '<a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button>'
 
@@ -36,7 +39,16 @@ CSS = """
   article { padding:40px 0 20px; }
   h1 { font-size:34px; line-height:1.2; letter-spacing:-.02em; margin:0 0 10px; }
   .meta { color:var(--muted); font-size:13px; margin-bottom:28px; }
+  .breadcrumbs { font-size:13px; color:var(--muted); margin:0 0 16px; }
+  .breadcrumbs a { color:var(--muted2); }
+  .sources { font-size:13px; margin-top:28px; }
+  .caption-example { margin:24px 0; }
+  .caption-example img { display:block; width:100%; height:auto; border-radius:12px; }
+  .caption-example figcaption { color:var(--muted); font-size:13px; margin-top:8px; }
+  .quick-answer { margin-top:20px; }
+  .quick-answer ul { margin-bottom:0; }
   h2 { font-size:22px; margin:36px 0 10px; letter-spacing:-.01em; }
+  h2[id] { scroll-margin-top:78px; }
   h3 { font-size:17px; margin:24px 0 8px; }
   p, li { color:var(--muted2); font-size:16px; }
   li { margin-bottom:6px; }
@@ -61,39 +73,41 @@ CSS = """
   .cmp td.no { color:#ff6b6b; } .cmp td.yes { color:var(--green, #30d158); }
 """
 
-TOP_CTA = '<p class="cta-line">Short on time? <a href="https://captionsgen.com/">Captions Gen</a> does animated karaoke captions in Premiere Pro in one click. <a href="__FREE__">Try it free</a> (15 minutes of transcription included).</p>'
 CLOSING = """
 <div class="box">
-<p class="t">What Premiere Pro's caption track can't do</p>
-<p>These are the limits you run into with native captions, and what the plugin adds.</p>
-<table class="cmp">
-<tr><th>Feature</th><th>Premiere Pro captions</th><th>Captions Gen</th></tr>
-<tr><td>Karaoke highlight on the spoken word</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Per-word animation (pop, bounce, pill)</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>More than one style per track</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Ready-made caption presets</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Restyle every caption in one click</td><td class="no">No</td><td class="yes">Yes</td></tr>
-<tr><td>Captions stay editable graphics</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
-<tr><td>Transcription runs on your machine</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
-</table>
-<p>One-time $14.99, no subscription, 3 activations, updates included.</p>
-<a target="_blank" rel="noopener" class="btn" href="https://captionsgen.lemonsqueezy.com/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63?checkout%5Bdiscount_code%5D=LAUNCH">Get Captions Gen</a>
-<a class="btn ghost" href="__FREE__">Try free first</a>
+<p class="t">Try animated captions on your own edit</p>
+<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and Restyle. Native captions remain useful when you need subtitles or a separate caption file.</p>
+<p><strong>Windows 10/11 · Premiere Pro 25.0+</strong>. Try the same plugin with 15 minutes of transcription included before choosing a license.</p>
+<p>Launch price: <strong>US$14.99 with LAUNCH</strong>, limited to 100 redemptions. Regular price: US$24.99. Applicable tax is added at checkout. One-time purchase, 3 activations, and all 1.x updates included.</p>
+<a class="btn" href="__FREE__">Try free · 15 minutes</a>
+<a target="_blank" rel="noopener" class="btn ghost" href="https://captionsgen.lemonsqueezy.com/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63?checkout%5Bdiscount_code%5D=LAUNCH">Buy · US$14.99 with LAUNCH</a>
 </div>
 """
 
-def page(slug, title, desc, h1, body_html, related):
+def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None):
     closing = CLOSING.replace("__FREE__", FREE)
-    i = body_html.find("</p>") + 4
-    body_html = body_html[:i] + chr(10) + TOP_CTA.replace("__FREE__", FREE) + body_html[i:]
     rel = "\n".join(f'<li><a href="{r["slug"]}.html">{r["t"]}</a></li>' for r in related)
-    schema = json.dumps({
+    article = {
         "@context": "https://schema.org", "@type": "Article", "headline": h1,
-        "datePublished": DATE, "dateModified": DATE,
-        "author": {"@type": "Person", "name": "Kris"},
-        "publisher": {"@type": "Organization", "name": "Captions Gen", "url": SITE},
+        "datePublished": DATE, "dateModified": modified,
+        "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"},
+        "publisher": {"@type": "Organization", "name": "Captions Gen", "url": SITE,
+                      "logo": {"@type": "ImageObject", "url": f"{SITE}/img/captions-gen-logo.svg"}},
         "mainEntityOfPage": f"{SITE}/blog/{slug}.html"
-    }, ensure_ascii=False)
+    }
+    if image:
+        article["image"] = f"{SITE}{image}"
+    breadcrumb = {
+        "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{SITE}/"},
+            {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": f"{SITE}/blog/"},
+            {"@type": "ListItem", "position": 3, "name": h1, "item": f"{SITE}/blog/{slug}.html"}
+        ]
+    }
+    schema = json.dumps([article, breadcrumb], ensure_ascii=False)
+    image_meta = f'<meta property="og:image" content="{SITE}{image}">' if image else ''
+    display_date = date.fromisoformat(modified).strftime("%d %B %Y").lstrip('0')
+    title, desc, h1 = escape(title), escape(desc), escape(h1)
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -107,6 +121,9 @@ def page(slug, title, desc, h1, body_html, related):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{SITE}/blog/{slug}.html">
+<meta property="og:type" content="article">
+{image_meta}
+<meta name="twitter:card" content="{'summary_large_image' if image else 'summary'}">
 <script type="application/ld+json">{schema}</script>
 <style>{CSS}</style>
 </head>
@@ -124,8 +141,9 @@ def page(slug, title, desc, h1, body_html, related):
   </div>
 </div></nav>
 <article><div class="col">
+<p class="breadcrumbs"><a href="{SITE}/">Home</a> / <a href="{SITE}/blog/">Caption guides</a> / {h1}</p>
 <h1>{h1}</h1>
-<div class="meta">Updated {DATE} · by Kris, maker of Captions Gen</div>
+<div class="meta">Updated <time datetime="{modified}">{display_date}</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 {body_html}
 {closing}
 <div class="box"><p class="t">Related guides</p><ul>{rel}</ul></div>
@@ -140,13 +158,14 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from bodies import POSTS
 from bodies2 import P
 REL0 = {
-  "how-to-add-captions-in-premiere-pro": ["auto-captions-premiere-pro","change-caption-font-premiere-pro","burn-in-captions-premiere-pro"],
-  "auto-captions-premiere-pro": ["premiere-pro-captions-language","premiere-pro-speech-to-text-not-working","animated-captions-premiere-pro"],
-  "animated-captions-premiere-pro": ["highlight-words-in-captions-premiere-pro","capcut-vs-premiere-pro-captions","best-caption-plugin-premiere-pro"],
-  "premiere-pro-captions-not-showing": ["premiere-pro-captions-not-exporting","fix-caption-timing-premiere-pro","premiere-pro-speech-to-text-not-working"],
+  "how-to-add-captions-in-premiere-pro": ["auto-captions-premiere-pro","premiere-pro-captions-not-showing","burn-in-captions-premiere-pro"],
+  "auto-captions-premiere-pro": ["how-to-add-captions-in-premiere-pro","premiere-pro-captions-not-showing","animated-captions-premiere-pro"],
+  "animated-captions-premiere-pro": ["word-by-word-captions-premiere-pro","highlight-words-in-captions-premiere-pro","best-caption-plugin-premiere-pro"],
+  "premiere-pro-captions-not-showing": ["how-to-add-captions-in-premiere-pro","premiere-pro-captions-not-exporting","premiere-pro-speech-to-text-not-working"],
 }
 for k, v in REL0.items(): POSTS[k]["rel"] = v
 POSTS.update(P)
+POSTS["animated-captions-premiere-pro"]["image"] = "/img/styles/Beast.png"
 
 ORDER = list(POSTS.keys())
 
@@ -174,7 +193,13 @@ idx = f"""<!doctype html>
 <link rel="canonical" href="{SITE}/blog/"><meta property="og:title" content="Premiere Pro caption guides"><meta property="og:url" content="{SITE}/blog/">
 <style>{CSS}</style></head><body>
 {NAV_HTML}
-<article><div class="col idx"><h1>Premiere Pro caption guides</h1><p class="sub">Written by the maker of Captions Gen. Native Premiere workflows first, plugin where it earns it.</p>{cards}</div></article>
+<article><div class="col idx"><h1>Premiere Pro caption guides</h1><p class="sub">Practical workflows for native subtitles and animated caption graphics. Written by Kris, maker of Captions Gen.</p>
+<div class="box quick-answer"><p class="t">Start with your task</p><ul>
+<li><a href="how-to-add-captions-in-premiere-pro.html">Add captions: transcription, styling, and export</a></li>
+<li><a href="auto-captions-premiere-pro.html">Generate auto captions with Speech to Text</a></li>
+<li><a href="premiere-pro-captions-not-showing.html">Fix captions missing from the preview or export</a></li>
+<li><a href="animated-captions-premiere-pro.html">Choose an animated or word-by-word workflow</a></li>
+</ul></div>{cards}</div></article>
 <footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/#faq">FAQ</a> · {PRIVACY_FOOTER}</div></footer>
 </body></html>
 """
@@ -183,7 +208,8 @@ with io.open(os.path.join("blog", "index.html"), "w", encoding="utf-8", newline=
 print("wrote index")
 for slug, p in POSTS.items():
     related = [{"slug": s, "t": POSTS[s]["h1"]} for s in p.get("rel", []) if s in POSTS]
-    html = page(slug, p["title"], p["desc"], p["h1"], p["body"].replace("__FREE__", FREE), related)
+    html = page(slug, p["title"], p["desc"], p["h1"], p["body"].replace("__FREE__", FREE), related,
+                p.get("modified", DATE), p.get("image"))
     import re as _re
     html = html.replace('<a target="_blank" rel="noopener" ', "<a ").replace('href="https://captionsgen.lemonsqueezy', 'target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy')
     with io.open(os.path.join("blog", slug + ".html"), "w", encoding="utf-8", newline="") as f:
@@ -191,8 +217,8 @@ for slug, p in POSTS.items():
     print("wrote", slug, len(html))
 
 sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-      f'  <url><loc>{SITE}/</loc><lastmod>{DATE}</lastmod></url>', f'  <url><loc>{SITE}/blog/</loc><lastmod>{DATE}</lastmod></url>']
-sm += [f'  <url><loc>{SITE}/blog/{k}.html</loc><lastmod>{DATE}</lastmod></url>' for k in POSTS]
+      f'  <url><loc>{SITE}/</loc><lastmod>{SITE_UPDATED}</lastmod></url>', f'  <url><loc>{SITE}/blog/</loc><lastmod>{SITE_UPDATED}</lastmod></url>']
+sm += [f'  <url><loc>{SITE}/blog/{k}.html</loc><lastmod>{p.get("modified", DATE)}</lastmod></url>' for k, p in POSTS.items()]
 sm.append('</urlset>')
 io.open("sitemap.xml", "w", encoding="utf-8", newline="").write(chr(10).join(sm) + chr(10))
 print("sitemap", len(POSTS) + 2, "urls")
