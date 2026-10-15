@@ -36,3 +36,23 @@ export const PRESETS = {
   // AE "Fade Up Words" look: words fade in, in place, at their spoken times.
   "Fade In": { gAnimStyle: "14", gAnimDur: 3, gStroke: 0, gShadow: 30, gShadowBlur: 30, gShadowDist: 3, karaoke: true, hlMode: "color", hlColor: "#FFFFFF", gHlScale: 8 },
 };
+
+export const PRESET_META = {
+  "Plain":      { cat: "Clean",  desc: "the template as-is: white Impact, karaoke yellow, pop-in" },
+  "Beast":      { cat: "Trend",  desc: "heavy stroke and shadow, yellow karaoke, no motion" },
+  "Hormozi":    { cat: "Trend",  desc: "hard shadow, hot-yellow karaoke that grows, quick pop" },
+  "Chips":      { cat: "Trend",  desc: "white chip behind the spoken word, springs on every word" },
+  "Neon":       { cat: "Trend",  desc: "green glow shadow, blur-fade entrance, green karaoke" },
+  "Flow":       { cat: "Trend",  desc: "words reveal as spoken, green karaoke" },
+  "Bubble":     { cat: "Trend",  desc: "blue pill behind the spoken word, soft float-in" },
+  "Clean":      { cat: "Clean",  desc: "no stroke, soft shadow, wide spacing, no karaoke" },
+  "Typewriter": { cat: "Clean",  desc: "letters type in, thin stroke, no karaoke" },
+  "Podcast":    { cat: "Clean",  desc: "black box behind the caption, fade-in, no karaoke" },
+  "Studio":     { cat: "Clean",  desc: "black box, yellow karaoke, no motion" },
+  "Float":      { cat: "Motion", desc: "soft scale + fade entrance" },
+  "Expand":     { cat: "Motion", desc: "letters settle in from wide spacing" },
+  "Spring":     { cat: "Motion", desc: "damped bounce entrance" },
+  "Rise":       { cat: "Motion", desc: "words rise and fade in as spoken, lyric-video style" },
+  "Smooth":     { cat: "Motion", desc: "whole caption eases up in and down out" },
+  "Fade In":    { cat: "Motion", desc: "words fade in, in place, as spoken" },
+};

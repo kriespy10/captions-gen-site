@@ -3,8 +3,8 @@
 <head>
 <link rel="stylesheet" href="/analytics.css">
 <script defer src="/analytics.js"></script>
-<link rel="stylesheet" href="/caption-demo.css">
-<script type="module" src="/caption-demo.js"></script>
+<link rel="stylesheet" href="/caption-demo.css?v=panel-20261015">
+<script type="module" src="/caption-demo.js?v=panel-20261015"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Premiere Pro Caption Plugin for Animation | Captions Gen</title>
@@ -460,241 +460,323 @@
     <p class="lead">Style “Captions made for you” with the plugin's presets and design controls. Change a setting and watch the preview.</p>
     <div class="caption-demo" data-caption-demo>
       <div class="demo-topbar">
-        <div class="demo-brand"><span class="demo-logo" aria-hidden="true"><i></i><i></i><i></i></span>Captions Gen <span>Design playground</span></div>
-        <button class="demo-reset" type="button" data-demo-reset>Reset design</button>
+        <div class="demo-brand"><span class="demo-logo" aria-hidden="true"><i></i><i></i><i></i></span><strong>Captions Gen</strong><span class="demo-version">1.0.8</span></div>
+        <span class="demo-ready-label"><i aria-hidden="true"></i>Live demo</span>
       </div>
-      <div class="demo-layout">
-        <div class="demo-preview">
-          <div class="demo-preview-meta"><span class="demo-live">Live preview</span><span class="demo-style" data-demo-style>Beast</span></div>
-          <div class="demo-stage" role="img" aria-label="Animated caption preview: Captions made for you">
-            <div class="demo-scene"><div class="demo-caption-anchor"><div class="demo-caption" aria-hidden="true">Captions made for you</div></div></div>
-          </div>
-          <div class="demo-transport">
-            <button type="button" data-demo-play aria-label="Pause caption preview">Pause</button>
-            <button type="button" data-demo-replay aria-label="Replay caption preview">Replay</button>
-            <label class="demo-sr" for="demo-time">Preview time</label>
-            <input id="demo-time" type="range" min="0" max="3.6" step="0.01" value="0.4">
-            <span class="demo-clock" data-demo-clock aria-hidden="true">0.4 / 3.6s</span>
-          </div>
-          <p class="demo-preview-note">Try a look here. In Premiere Pro, use your own footage and fonts.</p>
-          <noscript><p class="demo-preview-note">Enable JavaScript to use the interactive design controls.</p></noscript>
-        </div>
+      <div class="demo-mode-tabs" role="tablist" aria-label="Captions Gen demo views">
+        <button id="demo-tab-captions" type="button" role="tab" aria-selected="true" aria-controls="demo-view-captions" tabindex="0">Captions</button>
+        <button id="demo-tab-presets" type="button" role="tab" aria-selected="false" aria-controls="demo-view-presets" tabindex="-1">Presets</button>
+      </div>
+      <div id="demo-view-captions" role="tabpanel" aria-labelledby="demo-tab-captions">
         <form class="demo-controls" aria-label="Caption design settings">
-          <label for="demo-preset" class="demo-preset-label">Start with a preset</label>
-          <select id="demo-preset" aria-label="Caption preset"></select>
-          <div class="demo-tabs" role="tablist" aria-label="Caption design controls">
-            <button id="demo-tab-text" type="button" role="tab" aria-selected="true" aria-controls="demo-panel-text" tabindex="0">Text</button>
-            <button id="demo-tab-highlight" type="button" role="tab" aria-selected="false" aria-controls="demo-panel-highlight" tabindex="-1">Highlight</button>
-            <button id="demo-tab-motion" type="button" role="tab" aria-selected="false" aria-controls="demo-panel-motion" tabindex="-1">Motion</button>
-            <button id="demo-tab-finish" type="button" role="tab" aria-selected="false" aria-controls="demo-panel-finish" tabindex="-1">Finish</button>
+          <div class="demo-design-card">
+            <div class="demo-design-head"><span class="card-title">Design</span><div class="demo-design-actions"><span data-design-name>Plain</span><button type="button" class="demo-save" data-demo-save>Save…</button><span class="chev" aria-hidden="true">▾</span></div></div>
+            <div class="demo-preview">
+              <div class="demo-stage" role="group" aria-label="Animated caption preview: Captions made for you">
+                <span class="demo-live">Live preview</span>
+                <div class="demo-scene"><div class="demo-caption-anchor"><div class="demo-caption" aria-hidden="true">Captions made for you</div></div></div>
+                <button type="button" class="demo-play" data-demo-play aria-label="Play caption preview">▶</button>
+              </div>
+            </div>
+          <div class="demo-group" data-group="text">
+            <div class="demo-group-head">
+              <button type="button" class="dg-head" id="demo-toggle-text" aria-expanded="false" aria-controls="demo-group-text"><span class="dg-title">Text</span><span class="dg-sum" data-summary="text">Default</span></button>
+              <button type="button" class="dg-reset" data-reset-group="text" aria-label="Reset Text settings" hidden>Reset</button>
+              <span class="chev" aria-hidden="true">▾</span>
+            </div>
+            <div class="dg-body" id="demo-group-text" hidden>
+<div class="row">
+          <div>
+            <label class="field-label">Font</label>
+            <select id="demo-font" data-setting="font" aria-label="Font"><option value="impact">Impact</option><option value="sans">Instrument Sans</option><option value="serif">Georgia</option><option value="mono">Monospace</option></select>
           </div>
-          <div class="demo-panel" role="tabpanel" id="demo-panel-text" aria-labelledby="demo-tab-text">
-            <div class="demo-row">
-              <div>
-                <label for="demo-font">Font</label>
-                <select id="demo-font" data-setting="font">
-                  <option value="impact">Impact / Anton</option>
-                  <option value="sans">Instrument Sans</option>
-                  <option value="serif">Georgia</option>
-                  <option value="mono">Monospace</option>
-                </select>
-              </div>
-              <div>
-                <label for="demo-textColor">Text color</label>
-                <div class="demo-color">
-                  <input type="color" id="demo-textColor" value="#ffffff" data-setting="textColor">
-                  <span>Choose color</span>
-                </div>
-              </div>
-            </div>
-            <div class="demo-row">
-              <div>
-                <label for="demo-textCase">Letter case</label>
-                <select id="demo-textCase" data-setting="textCase">
-                  <option value="upper">UPPERCASE</option>
-                  <option value="sentence">Sentence case</option>
-                  <option value="lower">lowercase</option>
-                </select>
-              </div>
-            </div>
-            <div class="demo-field">
-              <div class="demo-field-head">
-                <label for="demo-gFontSize">Text size</label>
-                <output for="demo-gFontSize" data-output="gFontSize">5.2%</output>
-              </div>
-              <input id="demo-gFontSize" type="range" min="20" max="100" value="52" data-setting="gFontSize">
-            </div>
-            <div class="demo-field">
-              <div class="demo-field-head">
-                <label for="demo-gPosY">Position from top</label>
-                <output for="demo-gPosY" data-output="gPosY">81%</output>
-              </div>
-              <input id="demo-gPosY" type="range" min="10" max="95" value="81" data-setting="gPosY">
-            </div>
-            <div class="demo-field">
-              <div class="demo-field-head">
-                <label for="demo-gTracking">Letter spacing</label>
-                <output for="demo-gTracking" data-output="gTracking">0</output>
-              </div>
-              <input id="demo-gTracking" type="range" min="-10" max="30" value="0" data-setting="gTracking">
+          <div>
+            <label class="field-label">Text color</label>
+            <div class="color-btn"><input type="color" id="demo-textColor" data-setting="textColor" value="#FFFFFF" aria-label="Text color"><span data-color-name="textColor">Default</span></div>
+          </div>
+        </div>
+        <div class="slider-field" style="margin-top:10px;">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gFontSize">Text size</label>
+            <output class="val" for="demo-gFontSize" data-output="gFontSize">Auto</output>
+          </div>
+          <input type="range" id="demo-gFontSize" data-setting="gFontSize" min="20" max="150" value="52">
+        </div>
+        <div class="slider-field">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gPosY">Position from top</label>
+            <output class="val" for="demo-gPosY" data-output="gPosY">Auto</output>
+          </div>
+          <input type="range" id="demo-gPosY" data-setting="gPosY" min="10" max="95" value="81">
+        </div>
+        <div class="slider-field">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gTracking">Letter spacing</label>
+            <output class="val" for="demo-gTracking" data-output="gTracking">Auto</output>
+          </div>
+          <input type="range" id="demo-gTracking" data-setting="gTracking" min="-10" max="30" value="0">
+        </div>
             </div>
           </div>
-          <div class="demo-panel" role="tabpanel" id="demo-panel-highlight" aria-labelledby="demo-tab-highlight" hidden>
-            <label class="demo-check">
-              <input type="checkbox" checked data-setting="karaoke"> Highlight words as spoken</label>
-            <fieldset data-highlight-fields>
-              <legend class="demo-sr">Karaoke settings</legend>
-              <div class="demo-row">
-                <div>
-                  <label for="demo-hlMode">Highlight style</label>
-                  <select id="demo-hlMode" data-setting="hlMode">
-                    <option value="color">Color swap</option>
-                    <option value="pill">Pill background</option>
-                  </select>
-                </div>
-                <div>
-                  <label for="demo-hlColor">Highlight color</label>
-                  <div class="demo-color">
-                    <input type="color" id="demo-hlColor" value="#ffeb3b" data-setting="hlColor">
-                    <span>Choose color</span>
-                  </div>
-                </div>
-              </div>
-              <div class="demo-field">
-                <div class="demo-field-head">
-                  <label for="demo-gHlScale">Highlight size</label>
-                  <output for="demo-gHlScale" data-output="gHlScale">105%</output>
-                </div>
-                <input id="demo-gHlScale" type="range" min="0" max="50" value="5" data-setting="gHlScale">
-              </div>
-              <div data-pill-field hidden>
-                <div class="demo-field">
-                  <div class="demo-field-head">
-                    <label for="demo-gPillRadius">Pill roundness</label>
-                    <output for="demo-gPillRadius" data-output="gPillRadius">56</output>
-                  </div>
-                  <input id="demo-gPillRadius" type="range" min="0" max="56" value="56" data-setting="gPillRadius">
-                </div>
-              </div>
-              <div class="demo-field">
-                <div class="demo-field-head">
-                  <label for="demo-gHlPop">Word bounce</label>
-                  <output for="demo-gHlPop" data-output="gHlPop">0</output>
-                </div>
-                <input id="demo-gHlPop" type="range" min="0" max="30" value="0" data-setting="gHlPop">
-              </div>
-            </fieldset>
-            <p class="demo-panel-note">The highlight follows the four words as the preview plays.</p>
+          <div class="demo-group" data-group="highlight">
+            <div class="demo-group-head">
+              <button type="button" class="dg-head" id="demo-toggle-highlight" aria-expanded="true" aria-controls="demo-group-highlight"><span class="dg-title">Karaoke</span><span class="dg-sum" data-summary="highlight">Default</span></button>
+              <button type="button" class="dg-reset" data-reset-group="highlight" aria-label="Reset Karaoke settings" hidden>Reset</button>
+              <span class="chev" aria-hidden="true">▾</span>
+            </div>
+            <div class="dg-body" id="demo-group-highlight">
+<label class="check"><input type="checkbox" id="demo-karaoke" data-setting="karaoke" checked> Highlight words as spoken</label><fieldset data-highlight-fields><legend class="demo-sr">Karaoke settings</legend>
+        <div class="row" style="margin-top:10px;">
+          <div id="demo-hlModeField">
+            <label class="field-label" for="demo-hlMode">Style</label>
+            <select id="demo-hlMode" data-setting="hlMode">
+              <option value="color" selected>Color swap</option>
+              <option value="pill">Pill background</option>
+            </select>
           </div>
-          <div class="demo-panel" role="tabpanel" id="demo-panel-motion" aria-labelledby="demo-tab-motion" hidden>
-            <div class="demo-row">
-              <div>
-                <label for="demo-gAnimStyle">In animation</label>
-                <select id="demo-gAnimStyle" data-setting="gAnimStyle">
-                  <option value="0">None</option>
-                  <option value="1">Pop</option>
-                  <option value="2">Fade</option>
-                  <option value="3">Blur fade</option>
-                  <option value="4">Slide up</option>
-                  <option value="5">Slide down</option>
-                  <option value="9">Float</option>
-                  <option value="10">Expand</option>
-                  <option value="11">Bounce</option>
-                  <option value="13">Smooth slide</option>
-                  <option value="7">Typewriter</option>
-                  <option value="6">Wipe</option>
-                  <option value="8">Word reveal</option>
-                  <option value="12">Word rise</option>
-                  <option value="14">Word fade</option>
-                </select>
-              </div>
-              <div>
-                <label for="demo-gAnimOut">Out animation</label>
-                <select id="demo-gAnimOut" data-setting="gAnimOut">
-                  <option value="0">None</option>
-                  <option value="1">Fade</option>
-                  <option value="2">Blur fade</option>
-                  <option value="3">Slide up</option>
-                  <option value="4">Slide down</option>
-                  <option value="5">Scale down</option>
-                </select>
-              </div>
-            </div>
-            <div class="demo-field">
-              <div class="demo-field-head">
-                <label for="demo-gAnimDur">In duration</label>
-                <output for="demo-gAnimDur" data-output="gAnimDur">0.2s</output>
-              </div>
-              <input id="demo-gAnimDur" type="range" min="1" max="15" value="2" data-setting="gAnimDur">
-            </div>
-            <div class="demo-field">
-              <div class="demo-field-head">
-                <label for="demo-gPop">In strength</label>
-                <output for="demo-gPop" data-output="gPop">12</output>
-              </div>
-              <input id="demo-gPop" type="range" min="0" max="50" value="12" data-setting="gPop">
-            </div>
-            <div class="demo-field">
-              <div class="demo-field-head">
-                <label for="demo-gOutDur">Out duration</label>
-                <output for="demo-gOutDur" data-output="gOutDur">0.2s</output>
-              </div>
-              <input id="demo-gOutDur" type="range" min="1" max="15" value="2" data-setting="gOutDur">
-            </div>
-            <p class="demo-panel-note">Replay to see the entrance. The exit plays at the end of the loop.</p>
+          <div id="demo-hlColorField">
+            <label class="field-label">Color</label>
+            <div class="color-btn"><input type="color" id="demo-hlColor" data-setting="hlColor" value="#FFEB3B" aria-label="Karaoke color"><span data-color-name="hlColor">Default</span></div>
           </div>
-          <div class="demo-panel" role="tabpanel" id="demo-panel-finish" aria-labelledby="demo-tab-finish" hidden>
-            <div class="demo-field">
-              <div class="demo-field-head">
-                <label for="demo-gStroke">Stroke width</label>
-                <output for="demo-gStroke" data-output="gStroke">12</output>
-              </div>
-              <input id="demo-gStroke" type="range" min="0" max="17" value="12" data-setting="gStroke">
+        </div>
+        <div class="slider-field" style="margin-top:10px;">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gHlScale">Highlight size</label>
+            <output class="val" for="demo-gHlScale" data-output="gHlScale">Auto</output>
+          </div>
+          <input type="range" id="demo-gHlScale" data-setting="gHlScale" min="0" max="50" value="0">
+        </div>
+        <div class="slider-field" id="demo-pillRadiusField" data-pill-field>
+          <div class="slider-head">
+            <label class="field-label" for="demo-gPillRadius">Pill roundness</label>
+            <output class="val" for="demo-gPillRadius" data-output="gPillRadius">Auto</output>
+          </div>
+          <input type="range" id="demo-gPillRadius" data-setting="gPillRadius" min="0" max="56" value="56">
+        </div>
+        <div class="slider-field">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gHlPop">Bounce</label>
+            <output class="val" for="demo-gHlPop" data-output="gHlPop">Off</output>
+          </div>
+          <input type="range" id="demo-gHlPop" data-setting="gHlPop" min="0" max="30" value="0">
+        </div></fieldset>
             </div>
-            <div class="demo-row">
-              <div>
-                <label for="demo-strokeColor">Stroke color</label>
-                <div class="demo-color">
-                  <input type="color" id="demo-strokeColor" value="#000000" data-setting="strokeColor">
-                  <span>Choose color</span>
-                </div>
-              </div>
-              <div>
-                <label for="demo-shadowColor">Shadow color</label>
-                <div class="demo-color">
-                  <input type="color" id="demo-shadowColor" value="#000000" data-setting="shadowColor">
-                  <span>Choose color</span>
-                </div>
-              </div>
+          </div>
+          <div class="demo-group" data-group="stroke">
+            <div class="demo-group-head">
+              <button type="button" class="dg-head" id="demo-toggle-stroke" aria-expanded="false" aria-controls="demo-group-stroke"><span class="dg-title">Stroke</span><span class="dg-sum" data-summary="stroke">Default</span></button>
+              <button type="button" class="dg-reset" data-reset-group="stroke" aria-label="Reset Stroke settings" hidden>Reset</button>
+              <span class="chev" aria-hidden="true">▾</span>
             </div>
-            <div class="demo-field">
-              <div class="demo-field-head">
-                <label for="demo-gShadow">Shadow intensity</label>
-                <output for="demo-gShadow" data-output="gShadow">80%</output>
-              </div>
-              <input id="demo-gShadow" type="range" min="0" max="100" value="80" data-setting="gShadow">
+            <div class="dg-body" id="demo-group-stroke" hidden>
+<div class="slider-field">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gStroke">Width</label>
+            <output class="val" for="demo-gStroke" data-output="gStroke">Auto</output>
+          </div>
+          <input type="range" id="demo-gStroke" data-setting="gStroke" min="0" max="17" value="8">
+        </div>
+        <div class="row">
+          <div>
+            <label class="field-label">Color</label>
+            <div class="color-btn"><input type="color" id="demo-strokeColor" data-setting="strokeColor" value="#000000" aria-label="Stroke color"><span data-color-name="strokeColor">Default</span></div>
+          </div>
+          <div></div>
+        </div>
             </div>
-            <div class="demo-row">
-              <div>
-                <label for="demo-boxColor">Background color</label>
-                <div class="demo-color">
-                  <input type="color" id="demo-boxColor" value="#000000" data-setting="boxColor">
-                  <span>Choose color</span>
-                </div>
-              </div>
+          </div>
+          <div class="demo-group" data-group="shadow">
+            <div class="demo-group-head">
+              <button type="button" class="dg-head" id="demo-toggle-shadow" aria-expanded="false" aria-controls="demo-group-shadow"><span class="dg-title">Shadow</span><span class="dg-sum" data-summary="shadow">Default</span></button>
+              <button type="button" class="dg-reset" data-reset-group="shadow" aria-label="Reset Shadow settings" hidden>Reset</button>
+              <span class="chev" aria-hidden="true">▾</span>
             </div>
-            <div class="demo-field">
-              <div class="demo-field-head">
-                <label for="demo-gBoxOpacity">Background opacity</label>
-                <output for="demo-gBoxOpacity" data-output="gBoxOpacity">0%</output>
-              </div>
-              <input id="demo-gBoxOpacity" type="range" min="0" max="100" value="0" data-setting="gBoxOpacity">
+            <div class="dg-body" id="demo-group-shadow" hidden>
+<div class="slider-field">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gShadow">Intensity</label>
+            <output class="val" for="demo-gShadow" data-output="gShadow">Auto</output>
+          </div>
+          <input type="range" id="demo-gShadow" data-setting="gShadow" min="0" max="100" value="55">
+        </div>
+        <div class="slider-field">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gShadowDist">Distance</label>
+            <output class="val" for="demo-gShadowDist" data-output="gShadowDist">Auto</output>
+          </div>
+          <input type="range" id="demo-gShadowDist" data-setting="gShadowDist" min="0" max="40" value="10">
+        </div>
+        <div class="slider-field">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gShadowBlur">Blur</label>
+            <output class="val" for="demo-gShadowBlur" data-output="gShadowBlur">Auto</output>
+          </div>
+          <input type="range" id="demo-gShadowBlur" data-setting="gShadowBlur" min="0" max="60" value="25">
+        </div>
+        <div class="slider-field">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gShadowDir">Direction</label>
+            <output class="val" for="demo-gShadowDir" data-output="gShadowDir">Auto</output>
+          </div>
+          <input type="range" id="demo-gShadowDir" data-setting="gShadowDir" min="0" max="360" value="135">
+        </div>
+        <div class="row" style="margin-top:8px;">
+          <div>
+            <label class="field-label">Color</label>
+            <div class="color-btn"><input type="color" id="demo-shadowColor" data-setting="shadowColor" value="#000000" aria-label="Shadow color"><span data-color-name="shadowColor">Default</span></div>
+          </div>
+          <div></div>
+        </div>
             </div>
+          </div>
+          <div class="demo-group" data-group="background">
+            <div class="demo-group-head">
+              <button type="button" class="dg-head" id="demo-toggle-background" aria-expanded="false" aria-controls="demo-group-background"><span class="dg-title">Background</span><span class="dg-sum" data-summary="background">Default</span></button>
+              <button type="button" class="dg-reset" data-reset-group="background" aria-label="Reset Background settings" hidden>Reset</button>
+              <span class="chev" aria-hidden="true">▾</span>
+            </div>
+            <div class="dg-body" id="demo-group-background" hidden>
+<div class="row">
+          <div>
+            <label class="field-label">Color</label>
+            <div class="color-btn"><input type="color" id="demo-boxColor" data-setting="boxColor" value="#000000" aria-label="Background color"><span data-color-name="boxColor">Default</span></div>
+          </div>
+          <div></div>
+        </div>
+        <div class="slider-field" style="margin-top:8px;">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gBoxOpacity">Opacity</label>
+            <output class="val" for="demo-gBoxOpacity" data-output="gBoxOpacity">Auto</output>
+          </div>
+          <input type="range" id="demo-gBoxOpacity" data-setting="gBoxOpacity" min="0" max="100" value="0">
+        </div>
+        <label class="check" id="demo-boxBounceField" style="margin-top:10px;"><input type="checkbox" id="demo-gBoxBounce" data-setting="gBoxBounce"> Box bounces with the karaoke highlight</label>
+            </div>
+          </div>
+          <div class="demo-group" data-group="animation">
+            <div class="demo-group-head">
+              <button type="button" class="dg-head" id="demo-toggle-animation" aria-expanded="false" aria-controls="demo-group-animation"><span class="dg-title">Animation</span><span class="dg-sum" data-summary="animation">Default</span></button>
+              <button type="button" class="dg-reset" data-reset-group="animation" aria-label="Reset Animation settings" hidden>Reset</button>
+              <span class="chev" aria-hidden="true">▾</span>
+            </div>
+            <div class="dg-body" id="demo-group-animation" hidden>
+
+        <div class="row anim-cols">
+          <div class="anim-col">
+            <label class="field-label" for="demo-gAnimStyle">In</label>
+            <select id="demo-gAnimStyle" data-setting="gAnimStyle">
+              <option value="0" data-group="Whole caption">None</option>
+              <option value="1" data-group="Whole caption" selected>Pop</option>
+              <option value="2" data-group="Whole caption">Fade</option>
+              <option value="3" data-group="Whole caption">Blur fade</option>
+              <option value="4" data-group="Whole caption">Slide up</option>
+              <option value="5" data-group="Whole caption">Slide down</option>
+              <option value="9" data-group="Whole caption">Float</option>
+              <option value="10" data-group="Whole caption">Expand</option>
+              <option value="11" data-group="Whole caption">Bounce</option>
+              <option value="13" data-group="Whole caption">Smooth slide</option>
+              <option value="7" data-group="Word by word">Typewriter</option>
+              <option value="6" data-group="Word by word">Wipe</option>
+              <option value="8" data-group="Word by word">Word reveal</option>
+              <option value="12" data-group="Word by word">Word rise</option>
+              <option value="14" data-group="Word by word">Word fade</option>
+            </select>
+            <div class="slider-field" id="demo-durField">
+              <div class="slider-head">
+                <label class="field-label" for="demo-gAnimDur">Duration</label>
+                <output class="val" for="demo-gAnimDur" data-output="gAnimDur">0.2s</output>
+              </div>
+              <input type="range" id="demo-gAnimDur" data-setting="gAnimDur" min="1" max="30" value="2">
+            </div>
+            <div class="slider-field" id="demo-popField">
+              <div class="slider-head">
+                <label class="field-label" id="demo-gPopLabel" for="demo-gPop">Overshoot</label>
+                <output class="val" for="demo-gPop" data-output="gPop">12</output>
+              </div>
+              <input type="range" id="demo-gPop" data-setting="gPop" min="0" max="50" value="12">
+            </div>
+            <div class="slider-field" id="demo-slideTimeField">
+              <div class="slider-head">
+                <label class="field-label" for="demo-gSlideTime">Slide time</label>
+                <output class="val" for="demo-gSlideTime" data-output="gSlideTime">Auto</output>
+              </div>
+              <input type="range" id="demo-gSlideTime" data-setting="gSlideTime" min="1" max="30" value="4">
+            </div>
+            <div class="slider-field" id="demo-easeInField">
+              <div class="slider-head">
+                <label class="field-label" for="demo-gEaseIn">Ease in</label>
+                <output class="val" for="demo-gEaseIn" data-output="gEaseIn">Auto</output>
+              </div>
+              <input type="range" id="demo-gEaseIn" data-setting="gEaseIn" min="0" max="100" value="0">
+            </div>
+            <div class="slider-field" id="demo-easeOutField">
+              <div class="slider-head">
+                <label class="field-label" for="demo-gEaseOut">Ease out</label>
+                <output class="val" for="demo-gEaseOut" data-output="gEaseOut">Auto</output>
+              </div>
+              <input type="range" id="demo-gEaseOut" data-setting="gEaseOut" min="0" max="100" value="60">
+            </div>
+          </div>
+          <div class="anim-col">
+            <label class="field-label" for="demo-gAnimOut">Out</label>
+            <select id="demo-gAnimOut" data-setting="gAnimOut">
+              <option value="0" selected>None</option>
+              <option value="1">Fade</option>
+              <option value="2">Blur fade</option>
+              <option value="3">Slide up</option>
+              <option value="4">Slide down</option>
+              <option value="5">Scale down</option>
+            </select>
+            <div class="slider-field" id="demo-outDurField">
+              <div class="slider-head">
+                <label class="field-label" for="demo-gOutDur">Duration</label>
+                <output class="val" for="demo-gOutDur" data-output="gOutDur">0.2s</output>
+              </div>
+              <input type="range" id="demo-gOutDur" data-setting="gOutDur" min="1" max="30" value="2">
+            </div>
+            <div class="slider-field" id="demo-outPopField">
+              <div class="slider-head">
+                <label class="field-label" id="demo-gOutPopLabel" for="demo-gOutPop">Distance</label>
+                <output class="val" for="demo-gOutPop" data-output="gOutPop">12</output>
+              </div>
+              <input type="range" id="demo-gOutPop" data-setting="gOutPop" min="0" max="50" value="12">
+            </div>
+            <div class="slider-field" id="demo-outEaseInField">
+              <div class="slider-head">
+                <label class="field-label" for="demo-gOutEaseIn">Ease in</label>
+                <output class="val" for="demo-gOutEaseIn" data-output="gOutEaseIn">0%</output>
+              </div>
+              <input type="range" id="demo-gOutEaseIn" data-setting="gOutEaseIn" min="0" max="100" value="0">
+            </div>
+            <div class="slider-field" id="demo-outEaseOutField">
+              <div class="slider-head">
+                <label class="field-label" for="demo-gOutEaseOut">Ease out</label>
+                <output class="val" for="demo-gOutEaseOut" data-output="gOutEaseOut">60%</output>
+              </div>
+              <input type="range" id="demo-gOutEaseOut" data-setting="gOutEaseOut" min="0" max="100" value="60">
+            </div>
+          </div>
+        </div>
+            </div>
+          </div>
           </div>
         </form>
       </div>
-      <div class="demo-bottom"><span>Like your look? Try it on your next edit.</span><a target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try the plugin free · 15 minutes →</a></div>
+      <div id="demo-view-presets" role="tabpanel" aria-labelledby="demo-tab-presets" hidden>
+        <div class="demo-preset-card">
+          <div class="card-title">Presets</div>
+          <div class="demo-categories" role="group" aria-label="Preset categories"></div>
+          <div class="demo-preset-grid" aria-label="Caption presets"></div>
+          <p class="demo-preset-description" data-preset-description>Click a preset to preview it · Use puts it on the Captions tab</p>
+          <p class="demo-preset-empty" hidden>No saved designs yet. Adjust the controls, then choose Save.</p>
+          <button type="button" class="demo-save-current" data-demo-save>Save current design…</button>
+        </div>
+      </div>
+      <div class="demo-bottom"><span>Design demo · use your own footage in Premiere Pro.</span><button type="button" class="demo-reset" data-demo-reset>Reset demo</button><a target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try the plugin free →</a></div>
       <p class="demo-sr" role="status" aria-live="polite" data-demo-status></p>
+      <dialog class="demo-save-dialog" aria-labelledby="demo-save-title">
+        <form method="dialog"><div class="demo-dialog-head"><h3 id="demo-save-title">Save preset</h3><button type="button" data-save-close aria-label="Close save preset">×</button></div><label for="demo-preset-name">Preset name</label><input id="demo-preset-name" name="preset-name" type="text" maxlength="40" placeholder="My caption style" required><p>Saved in this browser.</p><p class="demo-save-error" role="alert" hidden></p><button type="submit" class="demo-save-confirm">Save</button></form>
+      </dialog>
     </div>
   </div>
 </section>

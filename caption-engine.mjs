@@ -1,6 +1,6 @@
 // Browser adaptation of src/service.mjs buildPreviewHtml / animTickJs /
 // exitTickJs. Four fixed words use the plugin's 0.7-second mock word spacing.
-export { DEFAULTS, PRESETS } from './caption-presets.mjs';
+export { DEFAULTS, PRESETS } from './caption-presets.mjs?v=panel-20261015';
 export const WORDS = ['Captions', 'made', 'for', 'you'];
 export const WORD_TIMES = [0.1, 0.8, 1.5, 2.2];
 export const LOOP = 3.6;
