@@ -3,6 +3,8 @@
 <head>
 <link rel="stylesheet" href="/analytics.css">
 <script defer src="/analytics.js"></script>
+<link rel="stylesheet" href="/caption-demo.css">
+<script type="module" src="/caption-demo.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Premiere Pro Caption Plugin for Animation | Captions Gen</title>
@@ -337,7 +339,7 @@
       Captions Gen
     </a>
     <div class="links">
-      <a href="#styles">Styles</a>
+      <a href="#custom">Try it</a>
       <a href="#about-kris">Meet Kris</a>
       <a href="#how">How it works</a>
       <a href="#install">Install</a>
@@ -360,6 +362,7 @@
       <a target="_blank" rel="noopener" class="btn" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try free <small>15 min included</small></a>
       <a class="btn ghost" href="#buy">Buy for US$14.99 <small>with LAUNCH</small></a>
       <div class="note">Launch US$14.99 · regular <b>US$24.99</b> · before applicable tax<br>One-time purchase · all 1.x updates · 14-day refund</div>
+      <a class="demo-jump" href="#custom">Try the caption designer ↓</a>
     </div>
     <div class="strip-wrap">
       <div class="strip" aria-label="Animated caption preview">
@@ -451,36 +454,247 @@
   </div>
 </section>
 
-<section id="custom">
+<section id="custom" aria-labelledby="demo-heading">
   <div class="wrap">
-    <h2>Or build <span class="y">your own.</span></h2>
-    <p class="lead">Presets are a starting point. Every part of a caption is a control — how it comes in, how it leaves, how it moves, how it reads.</p>
-    <div class="mk">
-      <div class="strip" aria-label="Six animation presets playing in and out">
-        <span class="tag"><i></i> Live render</span>
-        <video autoplay muted loop playsinline poster="img/styles/Smooth.png">
-          <source src="img/anim.webm" type="video/webm">
-          <source src="img/anim.mp4" type="video/mp4">
-        </video>
-        <span class="name">Spring · Rise · Smooth · Expand · Typewriter · Chips</span>
+    <h2 id="demo-heading">Make it <span class="y">yours.</span></h2>
+    <p class="lead">Style “Captions made for you” with the plugin's presets and design controls. Change a setting and watch the preview.</p>
+    <div class="caption-demo" data-caption-demo>
+      <div class="demo-topbar">
+        <div class="demo-brand"><span class="demo-logo" aria-hidden="true"><i></i><i></i><i></i></span>Captions Gen <span>Design playground</span></div>
+        <button class="demo-reset" type="button" data-demo-reset>Reset design</button>
       </div>
-      <div class="cards">
-        <div class="card">
-          <h3>Motion</h3>
-          <p><b>15 in-animations</b> — pop, fade, blur, slides, float, expand, bounce, typewriter, wipe, word reveal, word rise… and <b>6 outs</b>. Duration, strength, slide time, <b>ease in and ease out</b> — each a slider.</p>
+      <div class="demo-layout">
+        <div class="demo-preview">
+          <div class="demo-preview-meta"><span class="demo-live">Live preview</span><span class="demo-style" data-demo-style>Beast</span></div>
+          <div class="demo-stage" role="img" aria-label="Animated caption preview: Captions made for you">
+            <div class="demo-scene"><div class="demo-caption-anchor"><div class="demo-caption" aria-hidden="true">Captions made for you</div></div></div>
+          </div>
+          <div class="demo-transport">
+            <button type="button" data-demo-play aria-label="Pause caption preview">Pause</button>
+            <button type="button" data-demo-replay aria-label="Replay caption preview">Replay</button>
+            <label class="demo-sr" for="demo-time">Preview time</label>
+            <input id="demo-time" type="range" min="0" max="3.6" step="0.01" value="0.4">
+            <span class="demo-clock" data-demo-clock aria-hidden="true">0.4 / 3.6s</span>
+          </div>
+          <p class="demo-preview-note">Try a look here. In Premiere Pro, use your own footage and fonts.</p>
+          <noscript><p class="demo-preview-note">Enable JavaScript to use the interactive design controls.</p></noscript>
         </div>
-        <div class="card">
-          <h3>Look</h3>
-          <p>Any font on your computer. Size, position, letter spacing, <b>stroke, shadow</b> (opacity, distance, blur, angle), <b>background box</b>, pill radius, highlight scale and a <b>bounce</b> on the spoken word.</p>
-        </div>
-        <div class="card">
-          <h3>Words</h3>
-          <p>Min and max words per caption, <b>max lines</b>, max duration, upper / lower / sentence case, punctuation on or off. Line width follows your frame — vertical or wide.</p>
-        </div>
+        <form class="demo-controls" aria-label="Caption design settings">
+          <label for="demo-preset" class="demo-preset-label">Start with a preset</label>
+          <select id="demo-preset" aria-label="Caption preset"></select>
+          <div class="demo-tabs" role="tablist" aria-label="Caption design controls">
+            <button id="demo-tab-text" type="button" role="tab" aria-selected="true" aria-controls="demo-panel-text" tabindex="0">Text</button>
+            <button id="demo-tab-highlight" type="button" role="tab" aria-selected="false" aria-controls="demo-panel-highlight" tabindex="-1">Highlight</button>
+            <button id="demo-tab-motion" type="button" role="tab" aria-selected="false" aria-controls="demo-panel-motion" tabindex="-1">Motion</button>
+            <button id="demo-tab-finish" type="button" role="tab" aria-selected="false" aria-controls="demo-panel-finish" tabindex="-1">Finish</button>
+          </div>
+          <div class="demo-panel" role="tabpanel" id="demo-panel-text" aria-labelledby="demo-tab-text">
+            <div class="demo-row">
+              <div>
+                <label for="demo-font">Font</label>
+                <select id="demo-font" data-setting="font">
+                  <option value="impact">Impact / Anton</option>
+                  <option value="sans">Instrument Sans</option>
+                  <option value="serif">Georgia</option>
+                  <option value="mono">Monospace</option>
+                </select>
+              </div>
+              <div>
+                <label for="demo-textColor">Text color</label>
+                <div class="demo-color">
+                  <input type="color" id="demo-textColor" value="#ffffff" data-setting="textColor">
+                  <span>Choose color</span>
+                </div>
+              </div>
+            </div>
+            <div class="demo-row">
+              <div>
+                <label for="demo-textCase">Letter case</label>
+                <select id="demo-textCase" data-setting="textCase">
+                  <option value="upper">UPPERCASE</option>
+                  <option value="sentence">Sentence case</option>
+                  <option value="lower">lowercase</option>
+                </select>
+              </div>
+            </div>
+            <div class="demo-field">
+              <div class="demo-field-head">
+                <label for="demo-gFontSize">Text size</label>
+                <output for="demo-gFontSize" data-output="gFontSize">5.2%</output>
+              </div>
+              <input id="demo-gFontSize" type="range" min="20" max="100" value="52" data-setting="gFontSize">
+            </div>
+            <div class="demo-field">
+              <div class="demo-field-head">
+                <label for="demo-gPosY">Position from top</label>
+                <output for="demo-gPosY" data-output="gPosY">81%</output>
+              </div>
+              <input id="demo-gPosY" type="range" min="10" max="95" value="81" data-setting="gPosY">
+            </div>
+            <div class="demo-field">
+              <div class="demo-field-head">
+                <label for="demo-gTracking">Letter spacing</label>
+                <output for="demo-gTracking" data-output="gTracking">0</output>
+              </div>
+              <input id="demo-gTracking" type="range" min="-10" max="30" value="0" data-setting="gTracking">
+            </div>
+          </div>
+          <div class="demo-panel" role="tabpanel" id="demo-panel-highlight" aria-labelledby="demo-tab-highlight" hidden>
+            <label class="demo-check">
+              <input type="checkbox" checked data-setting="karaoke"> Highlight words as spoken</label>
+            <fieldset data-highlight-fields>
+              <legend class="demo-sr">Karaoke settings</legend>
+              <div class="demo-row">
+                <div>
+                  <label for="demo-hlMode">Highlight style</label>
+                  <select id="demo-hlMode" data-setting="hlMode">
+                    <option value="color">Color swap</option>
+                    <option value="pill">Pill background</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="demo-hlColor">Highlight color</label>
+                  <div class="demo-color">
+                    <input type="color" id="demo-hlColor" value="#ffeb3b" data-setting="hlColor">
+                    <span>Choose color</span>
+                  </div>
+                </div>
+              </div>
+              <div class="demo-field">
+                <div class="demo-field-head">
+                  <label for="demo-gHlScale">Highlight size</label>
+                  <output for="demo-gHlScale" data-output="gHlScale">105%</output>
+                </div>
+                <input id="demo-gHlScale" type="range" min="0" max="50" value="5" data-setting="gHlScale">
+              </div>
+              <div data-pill-field hidden>
+                <div class="demo-field">
+                  <div class="demo-field-head">
+                    <label for="demo-gPillRadius">Pill roundness</label>
+                    <output for="demo-gPillRadius" data-output="gPillRadius">56</output>
+                  </div>
+                  <input id="demo-gPillRadius" type="range" min="0" max="56" value="56" data-setting="gPillRadius">
+                </div>
+              </div>
+              <div class="demo-field">
+                <div class="demo-field-head">
+                  <label for="demo-gHlPop">Word bounce</label>
+                  <output for="demo-gHlPop" data-output="gHlPop">0</output>
+                </div>
+                <input id="demo-gHlPop" type="range" min="0" max="30" value="0" data-setting="gHlPop">
+              </div>
+            </fieldset>
+            <p class="demo-panel-note">The highlight follows the four words as the preview plays.</p>
+          </div>
+          <div class="demo-panel" role="tabpanel" id="demo-panel-motion" aria-labelledby="demo-tab-motion" hidden>
+            <div class="demo-row">
+              <div>
+                <label for="demo-gAnimStyle">In animation</label>
+                <select id="demo-gAnimStyle" data-setting="gAnimStyle">
+                  <option value="0">None</option>
+                  <option value="1">Pop</option>
+                  <option value="2">Fade</option>
+                  <option value="3">Blur fade</option>
+                  <option value="4">Slide up</option>
+                  <option value="5">Slide down</option>
+                  <option value="9">Float</option>
+                  <option value="10">Expand</option>
+                  <option value="11">Bounce</option>
+                  <option value="13">Smooth slide</option>
+                  <option value="7">Typewriter</option>
+                  <option value="6">Wipe</option>
+                  <option value="8">Word reveal</option>
+                  <option value="12">Word rise</option>
+                  <option value="14">Word fade</option>
+                </select>
+              </div>
+              <div>
+                <label for="demo-gAnimOut">Out animation</label>
+                <select id="demo-gAnimOut" data-setting="gAnimOut">
+                  <option value="0">None</option>
+                  <option value="1">Fade</option>
+                  <option value="2">Blur fade</option>
+                  <option value="3">Slide up</option>
+                  <option value="4">Slide down</option>
+                  <option value="5">Scale down</option>
+                </select>
+              </div>
+            </div>
+            <div class="demo-field">
+              <div class="demo-field-head">
+                <label for="demo-gAnimDur">In duration</label>
+                <output for="demo-gAnimDur" data-output="gAnimDur">0.2s</output>
+              </div>
+              <input id="demo-gAnimDur" type="range" min="1" max="15" value="2" data-setting="gAnimDur">
+            </div>
+            <div class="demo-field">
+              <div class="demo-field-head">
+                <label for="demo-gPop">In strength</label>
+                <output for="demo-gPop" data-output="gPop">12</output>
+              </div>
+              <input id="demo-gPop" type="range" min="0" max="50" value="12" data-setting="gPop">
+            </div>
+            <div class="demo-field">
+              <div class="demo-field-head">
+                <label for="demo-gOutDur">Out duration</label>
+                <output for="demo-gOutDur" data-output="gOutDur">0.2s</output>
+              </div>
+              <input id="demo-gOutDur" type="range" min="1" max="15" value="2" data-setting="gOutDur">
+            </div>
+            <p class="demo-panel-note">Replay to see the entrance. The exit plays at the end of the loop.</p>
+          </div>
+          <div class="demo-panel" role="tabpanel" id="demo-panel-finish" aria-labelledby="demo-tab-finish" hidden>
+            <div class="demo-field">
+              <div class="demo-field-head">
+                <label for="demo-gStroke">Stroke width</label>
+                <output for="demo-gStroke" data-output="gStroke">12</output>
+              </div>
+              <input id="demo-gStroke" type="range" min="0" max="17" value="12" data-setting="gStroke">
+            </div>
+            <div class="demo-row">
+              <div>
+                <label for="demo-strokeColor">Stroke color</label>
+                <div class="demo-color">
+                  <input type="color" id="demo-strokeColor" value="#000000" data-setting="strokeColor">
+                  <span>Choose color</span>
+                </div>
+              </div>
+              <div>
+                <label for="demo-shadowColor">Shadow color</label>
+                <div class="demo-color">
+                  <input type="color" id="demo-shadowColor" value="#000000" data-setting="shadowColor">
+                  <span>Choose color</span>
+                </div>
+              </div>
+            </div>
+            <div class="demo-field">
+              <div class="demo-field-head">
+                <label for="demo-gShadow">Shadow intensity</label>
+                <output for="demo-gShadow" data-output="gShadow">80%</output>
+              </div>
+              <input id="demo-gShadow" type="range" min="0" max="100" value="80" data-setting="gShadow">
+            </div>
+            <div class="demo-row">
+              <div>
+                <label for="demo-boxColor">Background color</label>
+                <div class="demo-color">
+                  <input type="color" id="demo-boxColor" value="#000000" data-setting="boxColor">
+                  <span>Choose color</span>
+                </div>
+              </div>
+            </div>
+            <div class="demo-field">
+              <div class="demo-field-head">
+                <label for="demo-gBoxOpacity">Background opacity</label>
+                <output for="demo-gBoxOpacity" data-output="gBoxOpacity">0%</output>
+              </div>
+              <input id="demo-gBoxOpacity" type="range" min="0" max="100" value="0" data-setting="gBoxOpacity">
+            </div>
+          </div>
+        </form>
       </div>
-    </div>
-    <div class="chips">
-      <span class="y">Save as preset</span><span>Restyle placed captions</span><span>Live preview of every change</span><span>Plays in your font, with your words</span>
+      <div class="demo-bottom"><span>Like your look? Try it on your next edit.</span><a target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try the plugin free · 15 minutes →</a></div>
+      <p class="demo-sr" role="status" aria-live="polite" data-demo-status></p>
     </div>
   </div>
 </section>
