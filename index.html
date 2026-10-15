@@ -6,15 +6,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Premiere Pro Caption Plugin for Animation | Captions Gen</title>
-<meta name="description" content="Create animated, word-by-word captions in Premiere Pro. Local transcription, editable graphics, and a free 15-minute trial. Windows; one-time purchase.">
+<meta name="description" content="Animated, editable captions for Premiere Pro, built by video editor Kris. Local transcription, a free 15-minute trial, and one-time pricing. Windows.">
 <meta property="og:title" content="Premiere Pro Caption Plugin for Animation | Captions Gen">
-<meta property="og:description" content="Create animated, word-by-word captions in Premiere Pro. Local transcription, editable graphics, and a free 15-minute trial. Windows; one-time purchase.">
+<meta property="og:description" content="Animated, editable captions for Premiere Pro, built by video editor Kris. Local transcription, a free 15-minute trial, and one-time pricing. Windows.">
 <meta property="og:image" content="https://captionsgen.com/img/styles/Beast.png">
 <meta property="og:url" content="https://captionsgen.com/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://captionsgen.com/">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com/", "logo": "https://captionsgen.com/img/captions-gen-logo.svg", "founder": {"@type": "Person", "name": "Kris", "sameAs": ["https://github.com/Kriespy10"]}, "sameAs": ["https://github.com/Kriespy10", "https://captionsgen.lemonsqueezy.com/"], "contactPoint": {"@type": "ContactPoint", "contactType": "customer support", "email": "krisheerenmanagement@gmail.com"}}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Captions Gen", "operatingSystem": "Windows", "applicationCategory": "MultimediaApplication", "description": "Automatic animated karaoke captions for Adobe Premiere Pro. Local transcription, editable Motion Graphics, one-time purchase.", "offers": {"@type": "Offer", "price": "14.99", "priceCurrency": "USD", "url": "https://captionsgen.lemonsqueezy.com/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63?checkout%5Bdiscount_code%5D=LAUNCH"}, "url": "https://captionsgen.com/", "softwareRequirements": "Adobe Premiere Pro 25.0 or newer; Windows 10/11 64-bit"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com/", "logo": "https://captionsgen.com/img/captions-gen-logo.svg", "founder": {"@type": "Person", "@id": "https://captionsgen.com/#kris", "name": "Kris", "jobTitle": "Video editor", "url": "https://captionsgen.com/#about-kris", "sameAs": ["https://github.com/Kriespy10"]}, "sameAs": ["https://github.com/Kriespy10", "https://captionsgen.lemonsqueezy.com/"], "contactPoint": {"@type": "ContactPoint", "contactType": "customer support", "email": "krisheerenmanagement@gmail.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Captions Gen", "operatingSystem": "Windows", "applicationCategory": "MultimediaApplication", "description": "Automatic animated karaoke captions for Adobe Premiere Pro. Local transcription, editable Motion Graphics, one-time purchase.", "offers": {"@type": "Offer", "price": "14.99", "priceCurrency": "USD", "url": "https://captionsgen.lemonsqueezy.com/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63?checkout%5Bdiscount_code%5D=LAUNCH"}, "url": "https://captionsgen.com/", "softwareRequirements": "Adobe Premiere Pro 25.0 or newer; Windows 10/11 64-bit", "creator": {"@type": "Person", "@id": "https://captionsgen.com/#kris", "name": "Kris", "jobTitle": "Video editor", "url": "https://captionsgen.com/#about-kris", "sameAs": ["https://github.com/Kriespy10"]}}</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,6 +55,8 @@
   }
   a { color: var(--blue); text-decoration: none; }
   a:hover { color: var(--blue2); }
+  a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--yellow); outline-offset: 4px; }
+  section[id] { scroll-margin-top: 74px; }
   .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
   .mono { font-variant-numeric: tabular-nums; }
 
@@ -76,9 +78,9 @@
   nav .links a.buy:hover { background: var(--blue2); }
 
   /* ---------- Hero ---------- */
-  .hero { padding: 110px 0 40px; text-align: center; position: relative; }
+  .hero { padding: 76px 0 40px; text-align: center; position: relative; }
   .hero::before {
-    content: ""; position: absolute; left: 50%; top: -120px; width: 900px; height: 520px; transform: translateX(-50%);
+    content: ""; position: absolute; left: 50%; top: -120px; width: min(900px, 100%); height: 520px; transform: translateX(-50%);
     background: radial-gradient(closest-side, rgba(255,235,59,.12), rgba(255,235,59,0) 70%);
     pointer-events: none; z-index: 0;
   }
@@ -92,13 +94,13 @@
   /* The headline IS a karaoke caption. */
   .kara {
     font-family: var(--display);
-    font-size: clamp(56px, 11vw, 132px);
+    font-size: clamp(48px, 10vw, 112px);
     line-height: .92;
     letter-spacing: .005em;
     text-transform: uppercase;
     margin: 0 0 26px;
     font-weight: 400;
-    display: flex; flex-wrap: wrap; justify-content: center; column-gap: .22em; row-gap: .04em;
+    display: flex; flex-wrap: wrap; justify-content: center; column-gap: .35em; row-gap: .04em;
     text-shadow: 0 6px 0 rgba(0,0,0,.55), 0 18px 40px rgba(0,0,0,.6);
     -webkit-text-stroke: 0;
   }
@@ -107,19 +109,19 @@
      One word lit at a time, hard cut (no crossfade) — like the plugin. */
   .kara .w {
     animation-name: rise, karaoke;
-    animation-duration: .6s, 5.5s;
+    animation-duration: .6s, 4.8s;
     animation-iteration-count: 1, infinite;
     animation-timing-function: cubic-bezier(.2,.8,.2,1), steps(1, end);
     animation-fill-mode: both, none;
   }
-  .kara .w:nth-child(1) { animation-delay: .10s, 1.0s; }
-  .kara .w:nth-child(2) { animation-delay: .18s, 1.9s; }
-  .kara .w:nth-child(3) { animation-delay: .26s, 2.8s; }
-  .kara .w:nth-child(4) { animation-delay: .34s, 3.7s; }
-  .kara .w:nth-child(5) { animation-delay: .42s, 4.6s; }
+  .kara .w1 { animation-delay: .10s, 1.0s; }
+  .kara .w2 { animation-delay: .18s, 2.2s; }
+  .kara .w3 { animation-delay: .26s, 3.4s; }
+  .kara .w4 { animation-delay: .34s, 4.6s; }
+  .kara .line-break { flex-basis: 100%; height: 0; }
   @keyframes karaoke {
-    0%, 16.3% { color: var(--yellow); transform: scale(1.05); }
-    16.4%, 100% { color: #fff; transform: scale(1); }
+    0%, 24.9% { color: var(--yellow); transform: scale(1.05); }
+    25%, 100% { color: #fff; transform: scale(1); }
   }
   @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
   .hero p.sub {
@@ -131,6 +133,8 @@
     animation: rise .7s .45s both;
   }
   .hero p.sub b { color: var(--text); font-weight: 600; }
+  .hero .maker-byline { display: inline-block; color: var(--yellow); font-weight: 600; font-size: 16px; margin: 0 0 16px; }
+  .hero .maker-byline:hover { color: var(--text); }
   .cta { display: inline-flex; flex-direction: column; align-items: center; gap: 12px; animation: rise .7s .55s both; }
   .btn {
     display: inline-flex; align-items: baseline; gap: 8px;
@@ -140,7 +144,7 @@
     transition: background .15s, transform .15s, box-shadow .15s;
     box-shadow: 0 10px 30px rgba(10,132,255,.28);
   }
-  .btn.ghost { background: transparent; color: #eaeaea; border: 1px solid rgba(255,255,255,0.25); margin-left: 10px; }
+  .btn.ghost { background: transparent; color: #eaeaea; border: 1px solid rgba(255,255,255,0.25); }
   .btn.ghost:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.06); }
   .btn:hover { background: var(--blue2); color: #fff; transform: translateY(-1px); box-shadow: 0 14px 36px rgba(10,132,255,.36); }
   .btn small { opacity: .78; font-weight: 500; font-size: 14px; }
@@ -192,6 +196,15 @@
   }
   h2 .y { color: var(--yellow); }
   .lead { color: var(--muted2); font-size: 17.5px; margin: 0 0 40px; max-width: 620px; line-height: 1.5; }
+  /* A note from the editor behind the plugin. */
+  .maker-note { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; padding-top: 36px; border-top: 1px solid var(--hair2); }
+  .maker-label { color: var(--yellow); font-size: 13px; font-weight: 600; margin: 0 0 18px; }
+  .maker-note h2 { font-size: clamp(44px, 6vw, 72px); }
+  .maker-copy p { color: var(--muted2); font-size: 17px; line-height: 1.65; max-width: 60ch; margin: 0 0 18px; }
+  .maker-copy p:first-child { color: var(--text); }
+  .maker-signoff { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 18px; padding-top: 8px; }
+  .maker-signoff strong { color: var(--text); font-weight: 600; }
+  .maker-signoff a { font-size: 15px; }
   .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .card {
     background: var(--card); border: 1px solid var(--hair); border-radius: 18px; padding: 26px;
@@ -242,7 +255,7 @@
   }
   .price::before { content: ""; position: absolute; right: -80px; top: -80px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,235,59,.16), transparent 70%); }
   .price .launch { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #111; background: var(--yellow); padding: 5px 10px; border-radius: 999px; margin-bottom: 18px; }
-  .price .amt { font-family: var(--display); font-size: 84px; line-height: .9; letter-spacing: .01em; }
+  .price .amt { font-family: var(--display); font-size: clamp(64px, 10vw, 84px); line-height: .9; letter-spacing: .01em; }
   .price .amt sup { font-size: 34px; vertical-align: top; position: relative; top: .35em; margin-right: 4px; }
   .price .amt .c { font-size: 40px; }
   .price .was { color: var(--muted2); font-size: 15px; margin: 12px 0 24px; }
@@ -252,6 +265,8 @@
   .price li::before { content: ""; position: absolute; left: 0; top: 11px; width: 16px; height: 16px; border-radius: 50%; background: var(--green); }
   .price li::after { content: ""; position: absolute; left: 5.5px; top: 14px; width: 3.5px; height: 7px; border: solid #000; border-width: 0 2px 2px 0; transform: rotate(45deg); }
   .price .fine { font-size: 12.5px; color: var(--muted); margin-top: 14px; }
+  .price-actions { display: grid; gap: 12px; }
+  .price-actions .btn { justify-content: center; padding-left: 16px; padding-right: 16px; }
   /* Launch-discount callout: the price only drops with the code, so it has to
      be legible even to someone skimming past the button. */
   .price .promo {
@@ -267,11 +282,10 @@
   .price .promo span { display: block; margin-top: 3px; font-size: 12px; color: var(--muted); }
   .price-side h2 { font-size: clamp(36px, 5vw, 56px); }
   .price-side p { color: var(--muted2); font-size: 16px; margin: 0 0 14px; }
-  .vs { display: grid; gap: 8px; margin-top: 20px; }
-  .vs div { display: flex; justify-content: space-between; font-size: 14px; padding: 10px 14px; background: var(--card); border: 1px solid var(--hair); border-radius: 10px; }
-  .vs div span:last-child { color: var(--muted); font-variant-numeric: tabular-nums; }
-  .vs div.me { border-color: rgba(255,235,59,.4); }
-  .vs div.me span:last-child { color: var(--yellow); font-weight: 600; }
+  .license-facts { margin: 24px 0 0; }
+  .license-facts div { display: grid; grid-template-columns: 1fr 1.5fr; gap: 16px; border-top: 1px solid var(--hair2); padding: 14px 0; font-size: 14px; }
+  .license-facts dt { color: var(--muted2); }
+  .license-facts dd { margin: 0; color: var(--text); text-align: right; }
 
   /* Requirements + install */
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -302,6 +316,8 @@
     .gallery { grid-template-columns: repeat(2, 1fr); }
     nav .links a:not(.buy) { display: none; }
     .hero { padding-top: 72px; }
+    .maker-note { grid-template-columns: 1fr; gap: 20px; padding-top: 28px; }
+    .price { padding: 30px 24px; }
     section { padding: 64px 0; }
     .tl .ruler span:nth-child(even) { display: none; }
     .tl .clip { font-size: 0; }
@@ -310,7 +326,7 @@
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is there a karaoke captions plugin for Premiere Pro?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Captions Gen is a Premiere Pro plugin that adds karaoke-style captions: it transcribes the clip on your computer and places word-by-word highlighted, animated captions on the timeline as editable graphics. Windows, one-time purchase, free version with 15 minutes of transcription."}}, {"@type": "Question", "name": "Does my audio or video leave my computer?", "acceptedAnswer": {"@type": "Answer", "text": "No. Captions Gen transcribes your audio locally with Whisper. The speech model downloads on first run, and license checks use the internet. Your footage is not uploaded for transcription."}}, {"@type": "Question", "name": "Can it do CapCut-style captions?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — that look is the whole point. Word-by-word karaoke highlights, pill backgrounds, pop and bounce animations, placed as editable graphics on your Premiere Pro timeline. No round-trip through CapCut, no burned-in video."}}, {"@type": "Question", "name": "Is it a subscription?", "acceptedAnswer": {"@type": "Answer", "text": "No. One payment, use it forever. All 1.x updates are included."}}, {"@type": "Question", "name": "How do I get the $14.99 launch price?", "acceptedAnswer": {"@type": "Answer", "text": "Use the code LAUNCH at checkout for US$14.99, before applicable tax. It's limited to 100 redemptions — the buy button adds it for you. After that the regular price is US$24.99, still one-time."}}, {"@type": "Question", "name": "Can I edit captions after they're placed?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Each caption is an editable Motion Graphics clip. Select it to adjust its text and appearance in Premiere's Properties panel, or change its timing on the timeline. Restyle in Captions Gen updates the look without transcribing again."}}, {"@type": "Question", "name": "Which languages work?", "acceptedAnswer": {"@type": "Answer", "text": "Whisper supports about 100 languages with auto-detect. English gives the tightest word timing. You can pin a language in Settings."}}, {"@type": "Question", "name": "Why does timeline playback get heavier with many captions?", "acceptedAnswer": {"@type": "Answer", "text": "Each caption is a live animated graphic with expressions, which Premiere evaluates every frame. Finish the edit first, then use Render & Replace on the caption track, or just export — the final render is unaffected."}}, {"@type": "Question", "name": "Mac?", "acceptedAnswer": {"@type": "Answer", "text": "Windows at launch. Mac is planned; buyers get it as a free 1.x update when it ships."}}, {"@type": "Question", "name": "Refunds?", "acceptedAnswer": {"@type": "Answer", "text": "Try the free version first — it's the same plugin. If you bought and it's not for you, email support within 14 days with your order number — request a refund."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Who makes Captions Gen?", "acceptedAnswer": {"@type": "Answer", "text": "I'm Kris, a video editor and the creator of Captions Gen. I built this Premiere Pro plugin to make animated captions affordable for other editors. You can email me with questions or feedback."}}, {"@type": "Question", "name": "Is there a karaoke captions plugin for Premiere Pro?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Captions Gen is a Premiere Pro plugin that adds karaoke-style captions: it transcribes the clip on your computer and places word-by-word highlighted, animated captions on the timeline as editable graphics. Windows, one-time purchase, free version with 15 minutes of transcription."}}, {"@type": "Question", "name": "Does my audio or video leave my computer?", "acceptedAnswer": {"@type": "Answer", "text": "No. Captions Gen transcribes your audio locally with Whisper. The speech model downloads on first run, and license checks use the internet. Your footage is not uploaded for transcription."}}, {"@type": "Question", "name": "Can it do CapCut-style captions?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — that look is the whole point. Word-by-word karaoke highlights, pill backgrounds, pop and bounce animations, placed as editable graphics on your Premiere Pro timeline. No round-trip through CapCut, no burned-in video."}}, {"@type": "Question", "name": "Is it a subscription?", "acceptedAnswer": {"@type": "Answer", "text": "No. One payment, use it forever. All 1.x updates are included."}}, {"@type": "Question", "name": "How do I get the US$14.99 launch price?", "acceptedAnswer": {"@type": "Answer", "text": "Use the code LAUNCH at checkout for US$14.99, before applicable tax. It's limited to 100 redemptions — the buy button adds it for you. After that the regular price is US$24.99, still one-time."}}, {"@type": "Question", "name": "Can I edit captions after they're placed?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Each caption is an editable Motion Graphics clip. Select it to adjust its text and appearance in Premiere's Properties panel, or change its timing on the timeline. Restyle in Captions Gen updates the look without transcribing again."}}, {"@type": "Question", "name": "Which languages work?", "acceptedAnswer": {"@type": "Answer", "text": "Whisper supports about 100 languages with auto-detect. English gives the tightest word timing. You can pin a language in Settings."}}, {"@type": "Question", "name": "Why does timeline playback get heavier with many captions?", "acceptedAnswer": {"@type": "Answer", "text": "Each caption is a live animated graphic with expressions, which Premiere evaluates every frame. Finish the edit first, then use Render & Replace on the caption track, or just export — the final render is unaffected."}}, {"@type": "Question", "name": "Mac?", "acceptedAnswer": {"@type": "Answer", "text": "Windows at launch. Mac is planned; buyers get it as a free 1.x update when it ships."}}, {"@type": "Question", "name": "Refunds?", "acceptedAnswer": {"@type": "Answer", "text": "Try the free version first — it's the same plugin. If you bought and it's not for you, email me within 14 days with your order number — request a refund."}}]}</script>
 </head>
 <body>
 
@@ -322,12 +338,12 @@
     </a>
     <div class="links">
       <a href="#styles">Styles</a>
-      <a href="#custom">Build your own</a>
+      <a href="#about-kris">Meet Kris</a>
       <a href="#how">How it works</a>
       <a href="#install">Install</a>
       <a href="#faq">FAQ</a>
       <a href="blog/">Guides</a>
-      <a class="buy" href="#buy">Buy · $14.99</a>
+      <a class="buy" href="#buy">Buy · US$14.99</a>
     </div>
   </div>
 </nav>
@@ -335,14 +351,15 @@
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow"><i></i> Premiere Pro plugin · Windows</div>
-    <h1 class="kara" aria-label="Captions that hit every word">
-      <span class="w">Captions</span><span class="w">that</span><span class="w">hit</span><span class="w">every</span><span class="w">word.</span>
+    <h1 class="kara" aria-label="Animated captions. One payment.">
+      <span class="w w1">Animated</span><span class="w w2">captions.</span><span class="line-break" aria-hidden="true"></span><span class="w w3">One</span><span class="w w4">payment.</span>
     </h1>
-    <p class="sub">Captions Gen is a <b>Premiere Pro caption plugin</b> for animated, word-by-word text. Placed as <b>real editable graphics</b> on your timeline. Transcribed <b>on your machine</b> — nothing is uploaded.</p>
+    <a class="maker-byline" href="#about-kris">Built by a video editor, for video editors.</a>
+    <p class="sub">I'm Kris, the video editor behind Captions Gen. I built this <b>Premiere Pro plugin</b> to make animated captions affordable, with <b>editable graphics</b> and transcription that runs on your computer.</p>
     <div class="cta">
-      <a class="btn" href="#buy">Buy for $14.99 <small>launch price</small></a>
-      <a target="_blank" rel="noopener" class="btn ghost" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try free <small>15 min included</small></a>
-      <div class="note">US$14.99 with LAUNCH · then <b>US$24.99</b> · before tax<br>One-time · no subscription · 14-day refund</div>
+      <a target="_blank" rel="noopener" class="btn" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try free <small>15 min included</small></a>
+      <a class="btn ghost" href="#buy">Buy for US$14.99 <small>with LAUNCH</small></a>
+      <div class="note">Launch US$14.99 · regular <b>US$24.99</b> · before applicable tax<br>One-time purchase · all 1.x updates · 14-day refund</div>
     </div>
     <div class="strip-wrap">
       <div class="strip" aria-label="Animated caption preview">
@@ -377,10 +394,25 @@
   </div>
 </div>
 
+<section id="about-kris" aria-labelledby="maker-heading">
+  <div class="wrap maker-note">
+    <div>
+      <p class="maker-label">The editor behind Captions Gen</p>
+      <h2 id="maker-heading">Hi, I'm <span class="y">Kris.</span></h2>
+    </div>
+    <div class="maker-copy">
+      <p>I'm a video editor, and Captions Gen is the plugin I've built for other editors who need captions in Premiere Pro.</p>
+      <p>I want animated captions to be a practical, affordable part of your edit. That's why I've chosen a one-time purchase, with local transcription, editable graphics and styles you can make your own.</p>
+      <p>Try it on your own footage with 15 minutes of transcription included. If you have a question or feedback, you can email me.</p>
+      <p class="maker-signoff"><strong>Kris</strong><a href="mailto:krisheerenmanagement@gmail.com">Email me</a><a href="#how">See how the plugin works</a></p>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
-    <h2>Not another <span class="y">caption app.</span></h2>
-    <p class="lead">Turn speech into animated captions with word highlights, editable graphics and reusable styles. Captions Gen processes your audio locally and costs one payment.</p>
+    <h2>Made for <span class="y">the edit.</span></h2>
+    <p class="lead">Word highlights, reusable styles and graphics you can keep editing. Here's what Captions Gen adds to your Premiere Pro workflow.</p>
     <div class="grid3">
       <div class="card">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#ffeb3b" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 17h10"/><rect x="4" y="10" width="6" height="4" rx="1.5" stroke="none" fill="#ffeb3b"/><path d="M12 12h8"/></svg></div>
@@ -394,8 +426,8 @@
       </div>
       <div class="card">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
-        <h3>Offline and private</h3>
-        <p>Speech recognition runs locally with Whisper. Footage never leaves your computer. No account, no upload, no monthly bill.</p>
+        <h3>Local transcription</h3>
+        <p>Whisper transcribes your audio on your computer. The speech model downloads on first use, and license checks use the internet. Your footage isn't uploaded for transcription.</p>
       </div>
     </div>
   </div>
@@ -473,9 +505,9 @@
   <div class="wrap">
     <div class="price-wrap">
       <div class="price">
-        <div class="launch">Launch price</div>
-        <div class="amt"><sup>$</sup>14<span class="c">.99</span></div>
-        <div class="was">Regular price <s>$25</s> · one-time, yours forever</div>
+        <div class="launch">Launch price with LAUNCH</div>
+        <div class="amt"><sup>US$</sup>14<span class="c">.99</span></div>
+        <div class="was">Regular price <s>US$24.99</s> · one-time purchase<br>Before applicable tax</div>
         <ul>
           <li>All 1.x updates included</li>
           <li>Use on up to 3 computers</li>
@@ -485,19 +517,22 @@
         <!-- Keep the ?checkout[discount_code]=LAUNCH query when swapping in the real
              checkout URL — it pre-fills the code so most buyers never type it. The
              visible callout below is the fallback for anyone it doesn't reach. -->
-        <a target="_blank" rel="noopener" class="btn" href="https://captionsgen.lemonsqueezy.com/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63?checkout%5Bdiscount_code%5D=LAUNCH">Buy Captions Gen</a>
-        <a target="_blank" rel="noopener" class="btn ghost" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try free first</a>
-        <div class="promo">Launch price needs code <b>LAUNCH</b> — first 100 orders<span>Added for you at checkout; if you don't see it, paste it in the discount box. After 100 redemptions the price is $25.</span></div>
-        <div class="fine">Secure checkout by Lemon Squeezy · VAT handled at checkout · license key by email</div>
+        <div class="price-actions">
+          <a target="_blank" rel="noopener" class="btn" href="https://captionsgen.lemonsqueezy.com/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63?checkout%5Bdiscount_code%5D=LAUNCH">Buy · US$14.99 with LAUNCH</a>
+          <a target="_blank" rel="noopener" class="btn ghost" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try free · 15 minutes</a>
+        </div>
+        <div class="promo">Use code <b>LAUNCH</b> — limited to 100 redemptions<span>The buy button adds it for you. If it isn't applied, enter the code at checkout. After the offer ends, the regular price is US$24.99.</span></div>
+        <div class="fine">Secure checkout by Lemon Squeezy · applicable tax added at checkout · license key by email</div>
       </div>
       <div class="price-side">
-        <h2>Pay <span class="y">once.</span></h2>
-        <p>Caption subscriptions cost more in two months than this does forever — and they keep your footage on their servers.</p>
-        <div class="vs">
-          <div class="me"><span>Captions Gen</span><span>$14.99 once</span></div>
-          <div><span>Typical caption app</span><span>$20–30 / month</span></div>
-          <div><span>One year of that</span><span>$240–360</span></div>
-        </div>
+        <h2>Why I chose <span class="y">one payment.</span></h2>
+        <p>I want other editors to be able to add animated captions without taking on another recurring bill. Captions Gen is a focused Premiere Pro tool with a one-time license.</p>
+        <p>You can try the same plugin before buying. The paid license includes all 1.x updates and activation on up to three computers.</p>
+        <dl class="license-facts">
+          <div><dt>Payment</dt><dd>One-time purchase</dd></div>
+          <div><dt>Updates</dt><dd>All 1.x updates included</dd></div>
+          <div><dt>Trial</dt><dd>15 minutes of transcription</dd></div>
+        </dl>
       </div>
     </div>
   </div>
@@ -545,7 +580,11 @@
 <section class="alt" id="faq">
   <div class="wrap">
     <h2>Questions.</h2>
-    <p class="lead"></p>
+    <p class="lead">A few practical details before you try it.</p>
+    <details>
+      <summary>Who makes Captions Gen?</summary>
+      <p>I'm Kris, a video editor and the creator of Captions Gen. I built this Premiere Pro plugin to make animated captions affordable for other editors. You can <a href="mailto:krisheerenmanagement@gmail.com">email me</a> with questions or feedback.</p>
+    </details>
     <details>
       <summary>Is there a karaoke captions plugin for Premiere Pro?</summary>
       <p>Yes. Captions Gen is a Premiere Pro plugin that adds karaoke-style captions: it transcribes the clip on your computer and places word-by-word highlighted, animated captions on the timeline as editable graphics. Windows, one-time purchase, free version with 15 minutes of transcription.</p>
@@ -563,7 +602,7 @@
       <p>No. One payment, use it forever. All 1.x updates are included.</p>
     </details>
     <details>
-      <summary>How do I get the $14.99 launch price?</summary>
+      <summary>How do I get the US$14.99 launch price?</summary>
       <p>Use the code <b>LAUNCH</b> at checkout for US$14.99, before applicable tax. It's limited to 100 redemptions — the buy button adds it for you. After that the regular price is US$24.99, still one-time.</p>
     </details>
     <details>
@@ -584,7 +623,7 @@
     </details>
     <details>
       <summary>Refunds?</summary>
-      <p>Try the free version first — it's the same plugin. If you bought and it's not for you, email support within 14 days with your order number — <a href="mailto:krisheerenmanagement@gmail.com?subject=Refund%20request&body=Order%20number%3A%20%0AWhat%20didn%27t%20work%20for%20you%3F%20(one%20line%20helps%20us%20improve)%3A%20">request a refund</a>.</p>
+      <p>Try the free version first — it's the same plugin. If you bought and it's not for you, email me within 14 days with your order number — <a href="mailto:krisheerenmanagement@gmail.com?subject=Refund%20request&body=Order%20number%3A%20">request a refund</a>.</p>
     </details>
   </div>
 </section>
@@ -596,7 +635,7 @@
       Captions Gen
     </span>
     <div class="fl">
-      <a href="mailto:krisheerenmanagement@gmail.com">Support</a> <a href="blog/how-to-add-captions-in-premiere-pro.html">Add captions guide</a> <a href="blog/animated-captions-premiere-pro.html">Animated captions</a> <a href="blog/auto-captions-premiere-pro.html">Auto captions</a> <a href="blog/premiere-pro-captions-not-showing.html">Captions not showing</a>
+      <a href="#about-kris">Made by Kris, video editor</a> <a href="mailto:krisheerenmanagement@gmail.com">Email Kris for support</a> <a href="blog/how-to-add-captions-in-premiere-pro.html">Add captions guide</a> <a href="blog/animated-captions-premiere-pro.html">Animated captions</a> <a href="blog/auto-captions-premiere-pro.html">Auto captions</a> <a href="blog/premiere-pro-captions-not-showing.html">Captions not showing</a>
       <a href="#faq">Refund policy</a>
       <a href="/privacy.html">Website privacy</a>
       <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button>

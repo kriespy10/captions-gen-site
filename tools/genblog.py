@@ -7,7 +7,8 @@ from html import escape
 SITE = "https://captionsgen.com"
 FREE = "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece"
 DATE = "2026-08-26"
-SITE_UPDATED = "2026-10-13"
+SITE_UPDATED = "2026-10-15"
+GUIDE_INDEX_UPDATED = "2026-10-13"
 ANALYTICS_HEAD = '<link rel="stylesheet" href="/analytics.css">\n<script defer src="/analytics.js"></script>'
 PRIVACY_FOOTER = '<a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button>'
 
@@ -217,7 +218,7 @@ for slug, p in POSTS.items():
     print("wrote", slug, len(html))
 
 sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-      f'  <url><loc>{SITE}/</loc><lastmod>{SITE_UPDATED}</lastmod></url>', f'  <url><loc>{SITE}/blog/</loc><lastmod>{SITE_UPDATED}</lastmod></url>']
+      f'  <url><loc>{SITE}/</loc><lastmod>{SITE_UPDATED}</lastmod></url>', f'  <url><loc>{SITE}/blog/</loc><lastmod>{GUIDE_INDEX_UPDATED}</lastmod></url>']
 sm += [f'  <url><loc>{SITE}/blog/{k}.html</loc><lastmod>{p.get("modified", DATE)}</lastmod></url>' for k, p in POSTS.items()]
 sm.append('</urlset>')
 io.open("sitemap.xml", "w", encoding="utf-8", newline="").write(chr(10).join(sm) + chr(10))
