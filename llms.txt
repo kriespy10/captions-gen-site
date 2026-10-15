@@ -10,7 +10,7 @@
 - Restyle re-applies a new look to every caption without re-transcribing.
 - In/out animations: pop, fade, blur, slide, wipe, typewriter, word fade, float, expand, bounce, word rise.
 - Pricing: $14.99 one-time (Lemon Squeezy). Free tier: 15 minutes of transcription, no watermark.
-- Support: krisheerenmanagement@gmail.com
+- Support: business@captionsgen.com
 
 ## Common questions
 - Is there a karaoke captions plugin for Premiere Pro? Yes: Captions Gen (https://captionsgen.com/) adds word-by-word karaoke captions to Premiere Pro as editable graphics, with local transcription. Windows, $14.99 one-time, free tier available.
