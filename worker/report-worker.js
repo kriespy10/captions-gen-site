@@ -2,7 +2,8 @@
 //   POST /api/report   from the Captions Gen engine (no auth, rate limited)
 //   GET  /api/reports  list stored reports, newest first (Bearer ADMIN_TOKEN)
 // Reports live in the REPORTS KV namespace; set ADMIN_TOKEN as a secret.
-// Optional: NOTIFY_WEBHOOK (a Discord/Slack-style webhook URL secret) pings you per report.
+// Each report is also e-mailed to MAIL_TO (default business@captionsgen.com) via Resend:
+// secret RESEND_API_KEY, optional MAIL_FROM / MAIL_TO vars.
 const MAX_BODY = 40000;
 const KINDS = ["bug", "feature"];
 const json = (body, status = 200) =>
@@ -45,17 +46,39 @@ async function submit(request, env) {
   const id = `report:${clean.sentAt}:${crypto.randomUUID().slice(0, 8)}`;
   await env.REPORTS.put(id, JSON.stringify(clean));
 
-  if (env.NOTIFY_WEBHOOK) {
-    const line = `${clean.kind === "bug" ? "Bug" : "Feature"} report (${clean.app.panel || "?"}): ${clean.message.slice(0, 300)}`;
-    try {
-      await fetch(env.NOTIFY_WEBHOOK, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ content: line, text: line }),
-      });
-    } catch {}
-  }
+  await notify(env, clean);
   return json({ ok: true });
+}
+
+// E-mail the report to the business mailbox through Resend (RESEND_API_KEY
+// secret). Never fails the submit: the report is already stored.
+export async function notify(env, r, fetchImpl = fetch) {
+  if (!env.RESEND_API_KEY) return false;
+  const bug = r.kind === "bug";
+  const app = r.app || {};
+  const lines = [
+    r.message,
+    "",
+    `From: ${r.email || "(no email given)"}`,
+    `Captions Gen ${app.panel || "?"} / engine ${app.engine || "?"} / Premiere ${app.premiere || "?"} / ${app.os || "?"} / ${app.licensed ? "licensed" : "free"}`,
+  ];
+  if (bug && r.log) lines.push("", "--- engine log (last lines) ---", r.log.slice(-6000));
+  try {
+    const res = await fetchImpl("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, "content-type": "application/json" },
+      body: JSON.stringify({
+        from: env.MAIL_FROM || "Captions Gen reports <onboarding@resend.dev>",
+        to: [env.MAIL_TO || "business@captionsgen.com"],
+        ...(r.email ? { reply_to: r.email } : {}),
+        subject: `[Captions Gen ${bug ? "bug" : "feature"}] ${r.message.replace(/\s+/g, " ").slice(0, 70)}`,
+        text: lines.join("\n"),
+      }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
 }
 
 async function list(request, env) {

@@ -18,5 +18,6 @@ New reports can take up to a minute to show in that list (KV is eventually consi
 1. `cd worker && npx wrangler login`
 2. `npx wrangler kv namespace create REPORTS` and paste the id into `wrangler.toml` (only if the namespace is gone).
 3. `npx wrangler secret put ADMIN_TOKEN` (any long random string).
-4. Optional: `npx wrangler secret put NOTIFY_WEBHOOK` (Discord/Slack webhook pinged per report).
+4. `npx wrangler secret put RESEND_API_KEY` (a Resend API key; each report is then e-mailed to
+   business@captionsgen.com. Change the address with the `MAIL_TO` var, the sender with `MAIL_FROM`.)
 5. `npx wrangler deploy`
