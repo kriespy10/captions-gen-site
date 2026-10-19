@@ -24,6 +24,7 @@
 ## Pages
 - [Home](https://captionsgen.com/): product overview, presets, pricing, FAQ
 - [Guides index](https://captionsgen.com/blog/): tutorials on captions in Premiere Pro
+- [News and updates](https://captionsgen.com/news/): release notes for every Captions Gen update (latest: 1.0.9, 2026-10-18)
 
 ## Guides
 - [Animated Captions in Premiere Pro: 3 Ways Compared](https://captionsgen.com/blog/animated-captions-premiere-pro.html): Get CapCut-style animated captions in Premiere Pro three ways: manual keyframing, the CapCut round trip, or a caption plugin. What each one costs you in time.

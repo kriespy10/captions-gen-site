@@ -10,6 +10,8 @@ Run `node --test tools/analytics.test.cjs tools/caption-demo.test.mjs` for analy
 
 Generate the guides with `python -B tools/genblog.py` from the repository root. The generator includes the shared analytics assets and preference controls on every guide.
 
+News posts (one per release) live in `tools/news.py`, newest first. The same command builds `news/`, `news/index.html`, the RSS feed `news/feed.xml` and their sitemap entries.
+
 Guide content lives in tools/bodies.py and tools/bodies2.py. Set an entry's `modified` date only when its article content changes; the generator keeps the original publication date and uses the entry's modification date in the page and sitemap. Update SITE_UPDATED in the generator for homepage changes, and GUIDE_INDEX_UPDATED for guide-index changes. Keep the visible article, metadata, pricing, and linked checkout consistent.
 
 Google Analytics uses measurement ID `G-PR571RC95P` in analytics.js. The Google tag loads only after opt-in, only on captionsgen.com and www.captionsgen.com. Trial and buy links send `trial_click` and `checkout_click`; neither is a completed purchase. Visitors can revoke analytics using the footer control.
