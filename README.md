@@ -17,3 +17,5 @@ Google Analytics uses measurement ID `G-PR571RC95P` in analytics.js. The Google 
 Run `node --test tools/analytics.test.cjs` to check consent behavior and page coverage. Serve locally with `python -m http.server 8765 --bind 127.0.0.1`; local previews do not send analytics.
 
 Completed purchase tracking requires enabling Lemon Squeezy's Google Analytics integration with the same measurement ID. Configure both website and checkout domains in the Google tag's cross-domain settings before relying on attribution.
+
+After publishing changed pages, run `python -B tools/indexnow.py` to notify Bing through IndexNow (ChatGPT search and Copilot read Bing's index). The key file `2a88f6ee9b151c8bffbd34b722a31453.txt` at the site root must stay published and match the key in the script.

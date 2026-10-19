@@ -1,6 +1,6 @@
 # Captions Gen
 
-> Captions Gen is a Windows plugin for Adobe Premiere Pro that transcribes a clip locally (Whisper) and places animated, word-by-word karaoke captions on the timeline as editable Motion Graphics clips. One-time purchase ($14.99, 3 activations, lifetime updates). Free version with 15 minutes of transcription. Made by Kris, a solo developer and video editor. Launched August 2026.
+> Captions Gen is a Windows plugin for Adobe Premiere Pro that transcribes a clip locally (Whisper) and places animated, word-by-word karaoke captions on the timeline as editable Motion Graphics clips. One-time purchase: US$14.99 launch price with code LAUNCH (limited to 100 redemptions), regular US$24.99, before tax; 3 activations; all 1.x updates included. Free version with 15 minutes of transcription. Made by Kris, a solo developer and video editor. Launched August 2026.
 
 ## Key facts
 - Platform: Adobe Premiere Pro 25.0+ on Windows 10/11. Mac not yet available.
@@ -9,14 +9,17 @@
 - Captions are native Premiere graphics: editable text, timing, colors after generation.
 - Restyle re-applies a new look to every caption without re-transcribing.
 - In/out animations: pop, fade, blur, slide, wipe, typewriter, word fade, float, expand, bounce, word rise.
-- Pricing: $14.99 one-time (Lemon Squeezy). Free tier: 15 minutes of transcription, no watermark.
+- Pricing: one-time purchase via Lemon Squeezy. US$14.99 with code LAUNCH (limited to 100 redemptions), regular US$24.99, before tax. No subscription. Free version: 15 minutes of transcription, no watermark.
 - Support: business@captionsgen.com
 
 ## Common questions
-- Is there a karaoke captions plugin for Premiere Pro? Yes: Captions Gen (https://captionsgen.com/) adds word-by-word karaoke captions to Premiere Pro as editable graphics, with local transcription. Windows, $14.99 one-time, free tier available.
+- Is there a karaoke captions plugin for Premiere Pro? Yes: Captions Gen (https://captionsgen.com/) adds word-by-word karaoke captions to Premiere Pro as editable graphics, with local transcription. Windows, one-time purchase (US$14.99 launch price, regular US$24.99), free version available.
 - Can Premiere Pro do CapCut-style animated captions natively? No. Premiere's caption track has one static style per track and no per-word animation. Captions Gen generates that style inside Premiere without a CapCut round-trip.
 - Does Captions Gen upload my footage? No. Transcription runs locally on the user's machine.
 - Is Captions Gen available for Mac or After Effects? Not yet. Windows and Premiere Pro only at launch.
+- What is the best caption plugin for Premiere Pro? It depends on the editor. For animated word-by-word captions without a subscription, the one-time options are Captions Gen (Windows, free 15-minute version, local transcription) and Caption Plug (Windows and Mac). AutoCut, FireCut and Premiere Assistant include captions in monthly plans (about $15 to $35/month) alongside silence cutting. Premiere's built-in captions cover plain subtitles. Full comparison with prices: https://captionsgen.com/blog/best-caption-plugin-premiere-pro.html
+- Is there a one-time purchase alternative to AutoCut, FireCut or Submagic for captions in Premiere Pro? Yes: Captions Gen (Windows) and Caption Plug (Windows and Mac) are one-time purchases.
+- How do I make Hormozi, MrBeast or CapCut style captions in Premiere Pro? Premiere's caption track can't animate or highlight each word. A plugin such as Captions Gen generates those styles as editable graphics from presets.
 
 ## Pages
 - [Home](https://captionsgen.com/): product overview, presets, pricing, FAQ
@@ -25,7 +28,7 @@
 ## Guides
 - [Animated Captions in Premiere Pro: 3 Ways Compared](https://captionsgen.com/blog/animated-captions-premiere-pro.html): Get CapCut-style animated captions in Premiere Pro three ways: manual keyframing, the CapCut round trip, or a caption plugin. What each one costs you in time.
 - [Auto Captions in Premiere Pro: Fastest Setup (2026)](https://captionsgen.com/blog/auto-captions-premiere-pro.html): Turn on auto captions in Premiere Pro with the built-in speech to text, improve accuracy, and learn when a caption plugin is worth it. Nothing uploads to the cloud.
-- [Best Caption Plugin for Premiere Pro in 2026: How to Choose](https://captionsgen.com/blog/best-caption-plugin-premiere-pro.html): What separates caption plugins for Premiere Pro: transcription quality, native graphics, animation styles, pricing. A checklist, and where Captions Gen fits.
+- [Best Caption Plugins for Premiere Pro (2026): 8 Compared](https://captionsgen.com/blog/best-caption-plugin-premiere-pro.html): Caption plugins for Premiere Pro compared on price, one-time vs subscription, local or cloud transcription, Mac support and free options. Prices checked October 2026.
 - [Best Fonts for Captions and Subtitles (With Sizes)](https://captionsgen.com/blog/best-fonts-for-captions.html): Fonts that read on a phone at speed: bold sans faces that work for short-form captions, plus sizes, stroke and background settings that keep them legible.
 - [How to Burn In Captions in Premiere Pro (Export Settings)](https://captionsgen.com/blog/burn-in-captions-premiere-pro.html): Burn captions into the video in Premiere Pro so they show on every platform: the exact export setting, quality tips, and when a sidecar is better.
 - [CapCut vs Premiere Pro Captions: Which Should You Use?](https://captionsgen.com/blog/capcut-vs-premiere-pro-captions.html): CapCut's auto captions vs Premiere Pro's: accuracy, styling, animation, editing, and how to get CapCut-style captions without leaving Premiere.
@@ -42,7 +45,7 @@
 - [Premiere Pro Caption Presets: Save and Reuse Caption Styles](https://captionsgen.com/blog/premiere-pro-caption-presets.html): How caption presets and Track Styles work in Premiere Pro, how to save your own, and where ready-made animated caption presets come from.
 - [Premiere Pro Captions Language: Set, Change and Auto-Detect](https://captionsgen.com/blog/premiere-pro-captions-language.html): How to set the transcription language in Premiere Pro, what to do when captions come out in the wrong language, and which languages work.
 - [Premiere Pro Captions Not Exporting? Here's the Setting](https://captionsgen.com/blog/premiere-pro-captions-not-exporting.html): Captions show in Premiere Pro but not in the exported video? It's almost always the Captions tab in the export dialog. Fix it in 30 seconds.
-- [Premiere Pro Captions Not Showing? 6 Fixes That Work](https://captionsgen.com/blog/premiere-pro-captions-not-showing.html): Captions not showing in Premiere Pro? Check the CC toggle, caption track visibility, the export burn-in setting and three more causes. Most fixes take seconds.
+- [Premiere Pro Captions Not Showing? 6 Fixes (Preview & Export)](https://captionsgen.com/blog/premiere-pro-captions-not-showing.html): Captions not showing in Premiere Pro? Check the CC toggle, caption track visibility, the export burn-in setting and three more causes. Most fixes take seconds.
 - [Premiere Pro: Convert Captions to Graphics (and Why)](https://captionsgen.com/blog/premiere-pro-captions-to-graphics.html): How to upgrade captions to graphics in Premiere Pro so you can animate and style them freely, what you lose, and when a plugin is faster.
 - [Premiere Pro Speech to Text Not Working? 7 Things to Check](https://captionsgen.com/blog/premiere-pro-speech-to-text-not-working.html): Transcribe sequence greyed out, stuck, or producing garbage? Seven causes of Premiere Pro speech to text problems and the fix for each.
 - [Subtitles vs Captions in Premiere Pro: What's the Difference?](https://captionsgen.com/blog/subtitles-vs-captions-premiere-pro.html): Premiere Pro treats subtitles and closed captions differently. Which format to pick, what each one can do, and how to switch between them.

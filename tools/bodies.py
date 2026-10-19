@@ -6,9 +6,10 @@ POSTS["how-to-add-captions-in-premiere-pro"] = dict(
 title="How to Add Captions in Premiere Pro: Create, Style, Export",
 desc="Add captions in Premiere Pro using Speech to Text. Follow the transcript, caption track, Properties styling, and burn-in or SRT export steps in this guide.",
 h1="How to add captions in Premiere Pro, step by step",
-modified="2026-10-13",
+modified="2026-10-19",
 body="""
 <p>To add captions in Premiere Pro, <strong>transcribe your sequence, create captions from the transcript, style the caption track, and choose how to export it</strong>. Premiere includes Speech to Text; you do not need a separate plugin for standard subtitles.</p>
+<p class="cta-line">Premiere's own captions are static: one style per track and no highlight on the spoken word. For animated, word-by-word captions in the same timeline, <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin that generates them in one click. It transcribes on your computer and places editable Motion Graphics captions on the timeline. Windows, one-time purchase, free version with 15 minutes of transcription.</p>
 <p>This guide uses the current Text and Properties panels. Older Premiere tutorials may show Essential Graphics for styling.</p>
 
 <h2 id="transcribe">1. Transcribe the sequence</h2>
@@ -47,9 +48,10 @@ POSTS["auto-captions-premiere-pro"] = dict(
 title="Premiere Pro Auto Captions: Generate, Style & Export",
 desc="Generate auto captions in Premiere Pro with Speech to Text. Choose the dialogue track, create subtitles, fix mistakes, style the text, and export your video.",
 h1="Auto captions in Premiere Pro with Speech to Text",
-modified="2026-10-13",
+modified="2026-10-19",
 body="""
 <p>Premiere Pro makes auto captions in two stages: <strong>Speech to Text creates a transcript, then Create captions turns that transcript into timed subtitles</strong>. Automatic transcription is included with Premiere. Creating the transcript does not place visible text on the video by itself.</p>
+<p class="cta-line">Premiere's auto captions come out as plain subtitles. For auto captions that highlight and animate each spoken word, <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin that does it in one click. It transcribes on your computer and places editable Motion Graphics captions on the timeline. Windows, one-time purchase, free version with 15 minutes of transcription.</p>
 
 <h2 id="generate">Generate auto captions in four steps</h2>
 <ol>
@@ -116,10 +118,10 @@ body="""
 """)
 
 POSTS["premiere-pro-captions-not-showing"] = dict(
-title="Premiere Pro Captions Not Showing? Fix Preview & Export",
-desc="Fix missing captions in Premiere Pro: enable the caption track, create captions from your transcript, check text styling, and choose the right export option.",
+title="Premiere Pro Captions Not Showing? 6 Fixes (Preview & Export)",
+desc="Captions not showing in Premiere Pro, or missing after export? Turn on the caption track, create captions from the transcript, and tick Burn Captions Into Video. 6 quick fixes.",
 h1="Premiere Pro captions not showing: preview and export fixes",
-modified="2026-10-13",
+modified="2026-10-19",
 body="""
 <p>If captions are not showing in Premiere Pro, first enable the <strong>eye icon on the caption track</strong> and move the playhead over a caption clip. If they show in the Program Monitor but disappear from the exported video, set <strong>Captions &gt; Export Options &gt; Burn Captions Into Video</strong>. A transcript alone does not create visible captions.</p>
 <div class="box quick-answer">
