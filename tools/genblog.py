@@ -8,7 +8,7 @@ SITE = "https://captionsgen.com"
 FREE = "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece"
 DATE = "2026-08-26"
 SITE_UPDATED = "2026-10-15"
-GUIDE_INDEX_UPDATED = "2026-10-13"
+GUIDE_INDEX_UPDATED = "2026-10-19"
 ANALYTICS_HEAD = '<link rel="stylesheet" href="/analytics.css">\n<script defer src="/analytics.js"></script>'
 PRIVACY_FOOTER = '<a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button>'
 
