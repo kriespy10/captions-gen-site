@@ -297,20 +297,23 @@ body="""
 
 <h2 id="compare">Caption plugins compared</h2>
 <p>Prices in US dollars, before tax, checked on 19 October 2026. Vendors change prices often, so confirm on their site before buying.</p>
-<div style="overflow-x:auto">
-<table class="cmp">
-<tr><th>Tool</th><th>Price</th><th>Payment</th><th>Transcription</th><th>Mac</th><th>Free option</th></tr>
-<tr><td><strong>Captions Gen</strong></td><td>$14.99 with LAUNCH (regular $24.99)</td><td class="yes">One-time</td><td>Local (Whisper)</td><td class="no">Windows only</td><td>15 min of transcription</td></tr>
-<tr><td><strong>Caption Plug</strong></td><td>$14.99</td><td class="yes">One-time</td><td>Local (Whisper)</td><td class="yes">Yes</td><td>14-day refund</td></tr>
-<tr><td><strong>Premiere Pro built-in</strong></td><td>Included</td><td>Premiere subscription</td><td>Local</td><td class="yes">Yes</td><td>Included</td></tr>
-<tr><td><strong>Premiere Assistant</strong> (Cutback)</td><td>$9 to $35/mo</td><td class="no">Subscription</td><td>Plan hours</td><td>See vendor</td><td>3 transcriptions/mo</td></tr>
-<tr><td><strong>PremiereCopilot</strong></td><td>$7.99/mo (Pro+)</td><td class="no">Subscription</td><td>See vendor</td><td>See vendor</td><td>Limited daily use</td></tr>
-<tr><td><strong>SubMachine</strong></td><td>$8/mo, $80/yr or $150 once</td><td>Either</td><td>Premiere's transcription</td><td>See vendor</td><td>See vendor</td></tr>
-<tr><td><strong>AutoCut</strong></td><td>$19.80/mo, or $14.90/mo yearly (AI plan)</td><td class="no">Subscription</td><td>See vendor</td><td>See vendor</td><td>14-day trial</td></tr>
-<tr><td><strong>FireCut</strong></td><td>$34/mo, or $20/mo yearly (Pro)</td><td class="no">Subscription</td><td>Online (25 h/mo)</td><td>See vendor</td><td>7-day trial</td></tr>
+<div class="ptable-wrap">
+<table class="ptable">
+<thead><tr><th>Tool</th><th>Price</th><th>Payment</th><th>First year</th><th>Transcription</th><th>Mac</th><th>Free option</th></tr></thead>
+<tbody>
+<tr class="pick"><td><div class="tool">Captions Gen <span class="tag">Made by me</span></div><div class="sub">Animated word-by-word captions</div></td><td><div class="price">$14.99</div><div class="sub">with LAUNCH · regular $24.99</div></td><td><span class="pill ok">One-time</span></td><td class="yr"><div class="amt">$14.99</div><div class="bar" aria-hidden="true"><span class="lo" style="width:4.2%"></span></div></td><td>Local (Whisper)</td><td><span class="mark no"><i>✕</i>Windows only</span></td><td>15 min free</td></tr>
+<tr><td><div class="tool">Caption Plug</div><div class="sub">Animated captions plugin</div></td><td><div class="price">$14.99</div></td><td><span class="pill ok">One-time</span></td><td class="yr"><div class="amt">$14.99</div><div class="bar" aria-hidden="true"><span class="lo" style="width:4.2%"></span></div></td><td>Local (Whisper)</td><td><span class="mark yes"><i>✓</i>Yes</span></td><td>14-day refund</td></tr>
+<tr><td><div class="tool">Premiere Pro built-in</div><div class="sub">Native caption track</div></td><td><div class="price">Included</div><div class="sub">with Premiere</div></td><td><span class="pill neutral">Premiere plan</span></td><td class="yr"><div class="amt">Included</div></td><td>Local</td><td><span class="mark yes"><i>✓</i>Yes</span></td><td>Included</td></tr>
+<tr><td><div class="tool">Premiere Assistant</div><div class="sub">by Cutback</div></td><td><div class="price">$9–35</div><div class="sub">per month</div></td><td><span class="pill sub">Subscription</span></td><td class="yr"><div class="amt">$96–360</div><div class="bar" aria-hidden="true"><span class="range" style="width:100.0%"></span><span class="" style="width:26.7%"></span></div></td><td>Hours per plan</td><td><span class="mark na">Not stated</span></td><td>3 a month</td></tr>
+<tr><td><div class="tool">PremiereCopilot</div><div class="sub">Smart Captions</div></td><td><div class="price">$7.99</div><div class="sub">per month (Pro+)</div></td><td><span class="pill sub">Subscription</span></td><td class="yr"><div class="amt">$95.88</div><div class="bar" aria-hidden="true"><span class="" style="width:26.6%"></span></div></td><td>Not stated</td><td><span class="mark na">Not stated</span></td><td>Daily limit</td></tr>
+<tr><td><div class="tool">SubMachine</div><div class="sub">MOGRT captions</div></td><td><div class="price">$8/mo</div><div class="sub">$80/yr or $150 once</div></td><td><span class="pill mix">Either</span></td><td class="yr"><div class="amt">$80</div><div class="bar" aria-hidden="true"><span class="" style="width:22.2%"></span></div></td><td>Premiere's own</td><td><span class="mark na">Not stated</span></td><td>Not stated</td></tr>
+<tr><td><div class="tool">AutoCut</div><div class="sub">AI plan</div></td><td><div class="price">$19.80/mo</div><div class="sub">$14.90/mo billed yearly</div></td><td><span class="pill sub">Subscription</span></td><td class="yr"><div class="amt">$178.80</div><div class="bar" aria-hidden="true"><span class="" style="width:49.7%"></span></div></td><td>Not stated</td><td><span class="mark na">Not stated</span></td><td>14-day trial</td></tr>
+<tr><td><div class="tool">FireCut</div><div class="sub">Pro plan</div></td><td><div class="price">$34/mo</div><div class="sub">$20/mo billed yearly</div></td><td><span class="pill sub">Subscription</span></td><td class="yr"><div class="amt">$240</div><div class="bar" aria-hidden="true"><span class="" style="width:66.7%"></span></div></td><td>Online, 25 h/mo</td><td><span class="mark na">Not stated</span></td><td>7-day trial</td></tr>
+</tbody>
 </table>
 </div>
-<p class="sources">Sources: <a href="https://autocut.com/pricing" rel="nofollow">AutoCut pricing</a>, <a href="https://www.firecut.ai/pricing" rel="nofollow">FireCut pricing</a>, <a href="https://cutback.video/premiere-assistant/pricing" rel="nofollow">Premiere Assistant pricing</a>, <a href="https://www.captionplug.com/" rel="nofollow">Caption Plug</a>. SubMachine and PremiereCopilot prices are from a <a href="https://blackhateditors.com/blog/en/best-caption-plugins-premiere-pro/" rel="nofollow">September 2026 roundup</a>. "See vendor" means the vendor's page doesn't say.</p>
+<div class="ptable-legend"><span>First year = cheapest way to pay for 12 months (yearly billing where offered), bars on one scale up to $360.</span><span>"Not stated" = the vendor's page doesn't say.</span><span>On a phone, swipe the table sideways.</span></div>
+<p class="sources">Sources: <a href="https://autocut.com/pricing" rel="nofollow">AutoCut pricing</a>, <a href="https://www.firecut.ai/pricing" rel="nofollow">FireCut pricing</a>, <a href="https://cutback.video/premiere-assistant/pricing" rel="nofollow">Premiere Assistant pricing</a>, <a href="https://www.captionplug.com/" rel="nofollow">Caption Plug</a>. SubMachine and PremiereCopilot prices are from a <a href="https://blackhateditors.com/blog/en/best-caption-plugins-premiere-pro/" rel="nofollow">September 2026 roundup</a>.</p>
 
 <h2 id="which">Which one to pick</h2>
 <ul>
