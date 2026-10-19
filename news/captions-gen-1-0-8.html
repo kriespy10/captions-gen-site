@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/analytics.css">
+<script defer src="/analytics.js"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="alternate" type="application/rss+xml" title="Captions Gen news" href="https://captionsgen.com/news/feed.xml">
+<title>Captions Gen 1.0.7 and 1.0.8: start the engine from the panel</title>
+<meta name="description" content="When the caption engine isn&#x27;t running, the panel now has a Start engine button, so you no longer need the Start menu.">
+<link rel="canonical" href="https://captionsgen.com/news/captions-gen-1-0-8.html">
+<meta property="og:title" content="Captions Gen 1.0.7 and 1.0.8: start the engine from the panel">
+<meta property="og:description" content="When the caption engine isn&#x27;t running, the panel now has a Start engine button, so you no longer need the Start menu.">
+<meta property="og:url" content="https://captionsgen.com/news/captions-gen-1-0-8.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Captions Gen 1.0.7 and 1.0.8: start the engine from the panel", "description": "When the caption engine isn't running, the panel now has a Start engine button, so you no longer need the Start menu.", "datePublished": "2026-10-07", "dateModified": "2026-10-07", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/news/captions-gen-1-0-8.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "News", "item": "https://captionsgen.com/news/"}, {"@type": "ListItem", "position": 3, "name": "Captions Gen 1.0.7 and 1.0.8: start the engine from the panel", "item": "https://captionsgen.com/news/captions-gen-1-0-8.html"}]}]</script>
+<style>
+  :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
+    --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
+    --green:#30d158; --amber:#ff9f0a; --red:#ff6b6b; --cyan:#64d2ff; --card2:#1b1b1e; --pick:#0d1a2b;
+    --body:"Instrument Sans",-apple-system,"Segoe UI",system-ui,sans-serif; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:var(--body); background:var(--bg); color:var(--text); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 24px; }
+  .col { max-width:720px; margin:0 auto; padding:0 20px; }
+  nav { position:sticky; top:0; z-index:20; backdrop-filter:saturate(160%) blur(18px); -webkit-backdrop-filter:saturate(160%) blur(18px); background:rgba(7,7,8,.66); border-bottom:1px solid var(--hair); }
+  nav .wrap { display:flex; align-items:center; justify-content:space-between; height:54px; }
+  nav a { text-decoration:none; }
+  .brand { display:flex; align-items:center; gap:10px; color:var(--text); font-weight:600; font-size:15px; letter-spacing:-.01em; }
+  .brand svg { width:26px; height:26px; display:block; }
+  nav .links { display:flex; gap:24px; font-size:13.5px; align-items:center; }
+  nav .links a { color:var(--muted2); }
+  nav .links a:hover { color:var(--text); }
+  nav .links a.on { color:var(--text); }
+  nav .links a.buy { color:#fff; background:var(--blue); padding:7px 15px; border-radius:999px; font-weight:600; }
+  nav .links a.buy:hover { background:var(--blue2); }
+  @media (max-width:800px) { nav .links a:not(.buy):not(.on) { display:none; } }
+  .idx h1 { margin-bottom:6px; } .idx .sub { color:var(--muted); margin-bottom:26px; }
+  .post { display:block; background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px; margin-bottom:12px; text-decoration:none; }
+  .post:hover { border-color:var(--hair2); }
+  .post .pt { color:var(--text); font-weight:700; font-size:18px; margin-bottom:4px; }
+  .post .pd { color:var(--muted2); font-size:14px; }
+  article { padding:40px 0 20px; }
+  h1 { font-size:34px; line-height:1.2; letter-spacing:-.02em; margin:0 0 10px; }
+  .meta { color:var(--muted); font-size:13px; margin-bottom:28px; }
+  .breadcrumbs { font-size:13px; color:var(--muted); margin:0 0 16px; }
+  .breadcrumbs a { color:var(--muted2); }
+  .sources { font-size:13px; margin-top:28px; }
+  .caption-example { margin:24px 0; }
+  .caption-example img { display:block; width:100%; height:auto; border-radius:12px; }
+  .caption-example figcaption { color:var(--muted); font-size:13px; margin-top:8px; }
+  .quick-answer { margin-top:20px; }
+  .quick-answer ul { margin-bottom:0; }
+  h2 { font-size:22px; margin:36px 0 10px; letter-spacing:-.01em; }
+  h2[id] { scroll-margin-top:78px; }
+  h3 { font-size:17px; margin:24px 0 8px; }
+  p, li { color:var(--muted2); font-size:16px; }
+  li { margin-bottom:6px; }
+  strong { color:var(--text); }
+  a { color:var(--blue); }
+  a:hover { color:var(--blue2); }
+  ol li::marker { color:var(--yellow); font-weight:700; }
+  .box { background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px; margin:32px 0; }
+  .box p { margin:6px 0; }
+  .box .t { color:var(--text); font-weight:700; }
+  kbd { background:var(--card); border:1px solid var(--hair2); border-radius:5px; padding:1px 6px; font-size:13px; color:var(--text); }
+  footer { border-top:1px solid var(--hair); margin-top:48px; padding:24px 0 48px; color:var(--muted); font-size:13px; }
+  footer a { color:var(--muted); }
+  .cta-line { background:rgba(10,132,255,.08); border-left:3px solid var(--blue); padding:10px 14px; border-radius:0 10px 10px 0; margin:18px 0 6px; font-size:15px; }
+  .btn { display:inline-block; background:var(--yellow); color:#111; font-weight:700; text-decoration:none; padding:11px 18px; border-radius:10px; margin:10px 10px 0 0; }
+  .btn:hover { color:#111; background:#fff176; }
+  .btn.ghost { background:transparent; color:var(--text); border:1px solid var(--hair2); }
+  .btn.ghost:hover { color:var(--text); background:rgba(255,255,255,.06); }
+  .ptable-wrap { position:relative; left:50%; transform:translateX(-50%); width:min(1100px, calc(100vw - 40px)); margin:18px 0 6px; border:1px solid var(--hair2); border-radius:16px; overflow-x:auto; background:var(--card); -webkit-overflow-scrolling:touch; }
+  .ptable { width:100%; min-width:1040px; border-collapse:separate; border-spacing:0; font-size:14px; font-variant-numeric:tabular-nums; }
+  .ptable th { background:var(--card2); color:var(--muted); font-size:11.5px; font-weight:600; text-transform:uppercase; letter-spacing:.07em; text-align:left; padding:12px 11px; border-bottom:1px solid var(--hair2); white-space:nowrap; }
+  .ptable td { padding:14px 11px; border-bottom:1px solid var(--hair); color:var(--muted2); vertical-align:middle; line-height:1.4; }
+  .ptable tr:last-child td { border-bottom:0; }
+  .ptable tbody tr:hover td { background:var(--card2); }
+  .ptable td:first-child, .ptable th:first-child { position:sticky; left:0; z-index:1; background:var(--card); border-right:1px solid var(--hair); }
+  .ptable th:first-child { background:var(--card2); }
+  .ptable tbody tr:hover td:first-child { background:var(--card2); }
+  .ptable .tool { color:var(--text); font-weight:700; font-size:15px; white-space:nowrap; }
+  .ptable .sub { color:var(--muted); font-size:12.5px; margin-top:2px; }
+  .ptable .price { color:var(--text); font-weight:600; white-space:nowrap; }
+  .ptable td:nth-child(2) .sub { white-space:nowrap; }
+  .ptable tr.pick td, .ptable tr.pick:hover td { background:var(--pick); }
+  .ptable tr.pick td:first-child { box-shadow:inset 3px 0 0 var(--yellow); }
+  .ptable .tag { display:inline-block; margin-left:6px; padding:2px 8px; border-radius:999px; border:1px solid var(--yellow); color:var(--yellow); font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; vertical-align:2px; }
+  .pill { display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:999px; font-size:12.5px; font-weight:600; white-space:nowrap; border:1px solid currentColor; }
+  .pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+  .pill.ok { color:var(--green); } .pill.sub { color:var(--amber); } .pill.mix { color:var(--cyan); } .pill.neutral { color:var(--muted2); }
+  .mark { display:inline-flex; align-items:center; gap:7px; white-space:nowrap; }
+  .mark i { font-style:normal; display:inline-grid; place-items:center; width:20px; height:20px; border-radius:50%; font-size:12px; font-weight:800; border:1px solid currentColor; }
+  .mark.yes { color:var(--green); } .mark.no { color:var(--red); } .mark.na { color:var(--muted); }
+  .yr { min-width:150px; }
+  .yr .amt { color:var(--text); font-weight:600; white-space:nowrap; }
+  .yr .bar { position:relative; height:6px; margin-top:7px; border-radius:3px; background:var(--hair); overflow:hidden; }
+  .yr .bar span { position:absolute; left:0; top:0; bottom:0; border-radius:3px; background:var(--amber); }
+  .yr .bar span.lo { background:var(--green); }
+  .yr .bar span.range { opacity:.35; }
+  @media (max-width:600px) {
+    .ptable-wrap { left:0; transform:none; width:auto; }
+    .ptable .tool + .sub { display:none; }
+    .ptable td:first-child { max-width:132px; }
+    .ptable .tool { white-space:normal; font-size:14px; }
+    .ptable .tag { display:block; width:max-content; margin:5px 0 0; }
+  }
+  .ver { display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.06em; color:var(--blue); background:rgba(10,132,255,.14); border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .post .pm { color:var(--muted); font-size:13px; margin-bottom:6px; }
+  .ptable-legend { display:flex; flex-wrap:wrap; gap:6px 18px; color:var(--muted); font-size:12.5px; margin:10px 2px 0; }
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
+  <div class="links">
+    <a href="https://captionsgen.com/#styles">Styles</a>
+    <a href="https://captionsgen.com/#custom">Build your own</a>
+    <a href="https://captionsgen.com/#how">How it works</a>
+    <a href="https://captionsgen.com/#install">Install</a>
+    <a href="https://captionsgen.com/#faq">FAQ</a>
+    <a href="https://captionsgen.com/blog/">Guides</a>
+    <a class="on" href="https://captionsgen.com/news/">News</a>
+    <a class="buy" href="https://captionsgen.com/#buy">Buy · $14.99</a>
+  </div>
+</div></nav>
+<article><div class="col">
+<p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/news/">News</a> / Captions Gen 1.0.7 and 1.0.8: start the engine from the panel</p>
+<h1>Captions Gen 1.0.7 and 1.0.8: start the engine from the panel</h1>
+<div class="meta"><span class="ver">v1.0.8</span><time datetime="2026-10-07">7 October 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<p>Captions Gen runs a small engine on your computer for transcription and previews. It starts with Windows, but Windows can switch that off (Task Manager › Startup apps). When that happened, the panel said <em>Caption engine is offline</em> and the only way back was the Start menu.</p>
+<p>The offline card now has a <strong>Start engine</strong> button. Press it, allow it if Premiere asks, and the panel picks the engine up within a few seconds.</p>
+<p>1.0.8 is the same change. It was republished with a new version number because Creative Cloud skips installing a panel whose version hasn't changed.</p>
+<div class="box">
+<p class="t">Get the update</p>
+<p>Already using Captions Gen? Open the panel in Premiere Pro and press <strong>Update</strong> when it shows, then restart Premiere Pro. New here? Try it with 15 minutes of transcription included.</p>
+<a class="btn" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Try free · 15 minutes</a>
+<a class="btn ghost" href="https://captionsgen.com/#buy">See pricing</a>
+</div>
+<div class="box"><p class="t">More updates</p><ul><li><a href="captions-gen-1-0-9.html">Captions Gen 1.0.9: cleaner outlines and timing that follows speech</a></li><li><a href="captions-gen-1-0-6.html">Captions Gen 1.0.6: works in Premiere Pro in any language</a></li><li><a href="captions-gen-launch.html">Captions Gen is out: animated captions inside Premiere Pro</a></li></ul></div>
+</div></article>
+<footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="https://captionsgen.com/news/">News</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>
+</body>
+</html>
