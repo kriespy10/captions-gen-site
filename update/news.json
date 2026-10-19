@@ -1,0 +1,18 @@
+{
+  "whatsNew": {
+    "version": "1.0.9",
+    "title": "Cleaner outlines, real letter spacing",
+    "text": "Outlines no longer cut through neighbouring letters, letter spacing is in px, and captions wait for the next word after a pause.",
+    "media": "https://captionsgen.com/update/media/test.gif"
+  },
+  "promos": [
+    {
+      "id": "test-guides",
+      "title": "Free caption guides",
+      "text": "Step-by-step Premiere Pro caption fixes and styles.",
+      "image": "",
+      "url": "https://captionsgen.com/blog/",
+      "button": "Read the guides"
+    }
+  ]
+}
