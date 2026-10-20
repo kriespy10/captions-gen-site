@@ -1,11 +1,13 @@
 // Backend for in-app bug reports and feature requests.
 //   POST /api/report   from the Captions Gen engine (no auth, rate limited)
 //   GET  /api/reports  list stored reports, newest first (Bearer ADMIN_TOKEN)
-// Opt-in usage stats and the funnel page live in usage.js (same KV namespace).
+// Opt-in usage stats and the funnel page live in usage.js, email sign-ups in
+// subscribe.js (same KV namespace).
 // Reports live in the REPORTS KV namespace; set ADMIN_TOKEN as a secret.
 // Each report is also e-mailed to MAIL_TO (default business@captionsgen.com) via Resend:
 // secret RESEND_API_KEY, optional MAIL_FROM / MAIL_TO vars.
 import { usage } from "./usage.js";
+import { subscribe } from "./subscribe.js";
 
 const MAX_BODY = 40000;
 const KINDS = ["bug", "feature"];
@@ -19,6 +21,8 @@ export default {
     if (url.pathname === "/api/reports" && request.method === "GET") return list(request, env);
     const stats = await usage(request, env, url);
     if (stats) return stats;
+    const emails = await subscribe(request, env, url);
+    if (emails) return emails;
     return json({ ok: false, error: "not found" }, 404);
   },
 };

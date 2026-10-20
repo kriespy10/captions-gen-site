@@ -3,11 +3,12 @@
 //   DELETE /api/usage/<id>  sent when the user turns stats off; removes everything for that id
 //   POST   /api/ping        {event}  no id: bumps a daily counter (first engine boot, engine start once a day)
 //   GET    /api/funnel      totals for the funnel page (Bearer ADMIN_TOKEN)
-//   GET    /funnel          the funnel page itself (asks for the admin token, keeps it in the browser)
+//   GET    /funnel          the funnel page itself (asks for the admin token, keeps it in the browser),
+//                           plus the email sign-up count and a CSV export (subscribe.js)
 // No IP address, file name, transcript or project data is stored. Every key expires after ~13 months.
 const TTL = 400 * 86400;
 // Funnel order: each install is counted once per step it ever reached.
-export const EVENTS = ["consent", "panel_open", "transcribe", "captions_placed", "free_limit", "buy_click", "licensed"];
+export const EVENTS = ["consent", "panel_open", "transcribe", "captions_placed", "buy_click", "licensed"];
 export const PINGS = ["install", "engine_start"];
 const ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 const short = (s, n = 24) => String(s || "").replace(/[^\w .()-]/g, "").slice(0, n);
@@ -120,9 +121,9 @@ h2{font-size:16px;margin:28px 0 8px}.lbl{color:#d4d4d8}input,button{font:inherit
 button{background:#3b82f6;border:0;cursor:pointer}#err{color:#f87171}small{color:#71717a}
 </style><main><h1>Captions Gen funnel</h1><p>Opt-in installs only, plus anonymous daily counts.</p>
 <form id="f" hidden><input id="t" type="password" placeholder="Admin token" size="30"> <button>Show</button></form>
-<div id="err"></div><div id="out"></div></main>
+<div id="err"></div><div id="out"></div><div id="subs"></div></main>
 <script>
-const L={consent:"Said yes to stats",panel_open:"Opened the panel",transcribe:"Transcribed",captions_placed:"Placed captions",free_limit:"Hit the free limit",buy_click:"Clicked Buy",licensed:"Licensed"};
+const L={consent:"Said yes to stats",panel_open:"Opened the panel",transcribe:"Transcribed",captions_placed:"Placed captions",buy_click:"Clicked Buy",licensed:"Licensed"};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function bars(rows,max){return rows.map(([k,n])=>'<div class="row"><span class="lbl">'+esc(k)+'</span><div class="bar" style="width:'+(max?100*n/max:0)+'%"></div><span class="n">'+n+'</span></div>').join("")}
 async function load(tok){
@@ -137,6 +138,23 @@ async function load(tok){
   const days=Object.keys(p.daily).sort().reverse().slice(0,14);
   h+="<h2>Last 14 days</h2>"+days.map(k=>'<div><small>'+k+'</small> new installs '+(p.daily[k].install||0)+', engines running '+(p.daily[k].engine_start||0)+'</div>').join("");
   document.getElementById("out").innerHTML=h;
+  loadSubs(tok);
+}
+async function loadSubs(tok){
+  const r=await fetch("/api/subscribers",{headers:{authorization:"Bearer "+tok}});
+  if(!r.ok)return;
+  const list=(await r.json()).subscribers;
+  const box=document.getElementById("subs");
+  box.innerHTML="<h2>Email sign-ups ("+list.length+")</h2><p>Each row has its own unsubscribe link: put it in every email you send.</p>";
+  if(!list.length)return;
+  const b=document.createElement("button");b.textContent="Download CSV";box.appendChild(b);
+  b.onclick=()=>{
+    const q=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
+    const rows=[["email","subscribed_at","source","plugin_version","consent","unsubscribe_url"]].concat(list.map(s=>[s.email,s.at,s.source,s.v,s.consent,s.unsubscribeUrl]));
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(new Blob([rows.map(r=>r.map(q).join(",")).join("\\n")],{type:"text/csv"}));
+    a.download="captions-gen-subscribers.csv";a.click();
+  };
 }
 const f=document.getElementById("f");f.onsubmit=e=>{e.preventDefault();load(document.getElementById("t").value.trim())};
 let saved=null;try{saved=localStorage.getItem("tok")}catch{}
