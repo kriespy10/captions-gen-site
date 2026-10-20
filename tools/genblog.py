@@ -7,7 +7,7 @@ from html import escape
 SITE = "https://captionsgen.com"
 FREE = "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece"
 DATE = "2026-08-26"
-SITE_UPDATED = "2026-10-19"
+SITE_UPDATED = "2026-10-20"
 GUIDE_INDEX_UPDATED = "2026-10-19"
 ANALYTICS_HEAD = '<link rel="stylesheet" href="/analytics.css">\n<script defer src="/analytics.js"></script>'
 PRIVACY_FOOTER = '<a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button>'
@@ -113,10 +113,9 @@ CLOSING = """
 <div class="box">
 <p class="t">Try animated captions on your own edit</p>
 <p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and Restyle. Native captions remain useful when you need subtitles or a separate caption file.</p>
-<p><strong>Windows 10/11 · Premiere Pro 25.0+</strong>. Try the same plugin with 15 minutes of transcription included before choosing a license.</p>
-<p>Launch price: <strong>US$14.99 with LAUNCH</strong>, limited to 100 redemptions. Regular price: US$24.99. Applicable tax is added at checkout. One-time purchase, 3 activations, and all 1.x updates included.</p>
-<a class="btn" href="__FREE__">Try free · 15 minutes</a>
-<a target="_blank" rel="noopener" class="btn ghost" href="https://captionsgen.lemonsqueezy.com/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63?checkout%5Bdiscount_code%5D=LAUNCH">Buy · US$14.99 with LAUNCH</a>
+<p><strong>Windows 10/11 · Premiere Pro 25.0+</strong>. Free, with no time limit and no watermark.</p>
+<a class="btn" href="__FREE__">Download free</a>
+<a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
 </div>
 """
 
@@ -174,7 +173,7 @@ def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None):
     <a href="https://captionsgen.com/#faq">FAQ</a>
     <a class="on" href="https://captionsgen.com/blog/">Guides</a>
     <a href="https://captionsgen.com/news/">News</a>
-    <a class="buy" href="https://captionsgen.com/#buy">Buy · $14.99</a>
+    <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
   </div>
 </div></nav>
 <article><div class="col">
@@ -217,7 +216,7 @@ NAV_HTML = """<nav><div class="wrap">
     <a href="https://captionsgen.com/#faq">FAQ</a>
     <a class="on" href="https://captionsgen.com/blog/">Guides</a>
     <a href="https://captionsgen.com/news/">News</a>
-    <a class="buy" href="https://captionsgen.com/#buy">Buy · $14.99</a>
+    <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
   </div>
 </div></nav>"""
 cards = "".join(f'<a class="post" href="{k}.html"><div class="pt">{v["h1"]}</div><div class="pd">{v["desc"]}</div></a>' for k, v in POSTS.items())
@@ -266,9 +265,9 @@ NEWS_HEAD = f"""{ANALYTICS_HEAD}
 <link rel="alternate" type="application/rss+xml" title="Captions Gen news" href="{SITE}/news/feed.xml">"""
 NEWS_CLOSING = f"""<div class="box">
 <p class="t">Get the update</p>
-<p>Already using Captions Gen? Open the panel in Premiere Pro and press <strong>Update</strong> when it shows, then restart Premiere Pro. New here? Try it with 15 minutes of transcription included.</p>
-<a class="btn" href="{FREE}">Try free · 15 minutes</a>
-<a class="btn ghost" href="{SITE}/#buy">See pricing</a>
+<p>Already using Captions Gen? Open the panel in Premiere Pro and press <strong>Update</strong> when it shows, then restart Premiere Pro. New here? Captions Gen is free, with no time limit.</p>
+<a class="btn" href="{FREE}">Download free</a>
+<a class="btn ghost" href="{SITE}/#how">See how it works</a>
 </div>"""
 def nice_date(d): return date.fromisoformat(d).strftime("%d %B %Y").lstrip("0")
 def news_meta(n):
