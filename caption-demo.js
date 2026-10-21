@@ -1,5 +1,5 @@
-import { DEFAULTS, PRESETS, WORDS, LOOP, frameAt, hexAlpha, pillTextColor } from './caption-engine.mjs?v=panel-20261015';
-import { PRESET_META } from './caption-presets.mjs?v=panel-20261015';
+import { DEFAULTS, PRESETS, WORDS, LOOP, frameAt, hexAlpha, pillTextColor } from './caption-engine.mjs?v=panel-20261021';
+import { PRESET_META } from './caption-presets.mjs?v=panel-20261021';
 
 const GROUP_KEYS = {
   text: ['font', 'gFontSize', 'gPosY', 'gTracking', 'textColor'],
@@ -28,7 +28,13 @@ function settingLabel(key, value) {
 }
 
 
-const FONTS = { impact: 'Impact, Anton, sans-serif', sans: '"Instrument Sans", sans-serif', serif: 'Georgia, serif', mono: '"Courier New", monospace' };
+const FONTS = { impact: 'Impact, Anton, sans-serif', 'montserrat-black': 'Montserrat, sans-serif', 'montserrat-xbold': 'Montserrat, sans-serif',
+  'montserrat-bold': 'Montserrat, sans-serif', 'montserrat-medium': 'Montserrat, sans-serif', anton: 'Anton, Impact, sans-serif', bangers: 'Bangers, Impact, sans-serif',
+  luckiest: '"Luckiest Guy", Impact, sans-serif', inter: 'Inter, sans-serif', dmserif: '"DM Serif Display", Georgia, serif',
+  sans: '"Instrument Sans", sans-serif', serif: 'Georgia, serif', mono: '"Courier New", monospace' };
+// The free fonts the plugin installs come in one weight each.
+const WEIGHTS = { 'montserrat-black': '900', 'montserrat-xbold': '800', 'montserrat-bold': '700', 'montserrat-medium': '500', inter: '600' };
+const fontWeight = font => WEIGHTS[font] || (['impact', 'anton', 'bangers', 'luckiest', 'dmserif'].includes(font) ? '400' : '700');
 const BASE = { ...DEFAULTS, textColor: '#FFFFFF', hlColor: '#FFEB3B', strokeColor: '#000000', shadowColor: '#000000', boxColor: '#000000', font: 'impact', textCase: 'upper', gBoxBounce: false };
 
 function fillCaption(caption) {
@@ -39,7 +45,7 @@ function fillCaption(caption) {
 function paintCaption(caption, s, seconds) {
   const frame = frameAt(s, seconds), stage = caption.closest('.demo-stage');
   const scale = stage.clientWidth / 640 || 1;
-  caption.style.fontFamily = FONTS[s.font]; caption.style.fontWeight = s.font === 'impact' ? '400' : '700';
+  caption.style.fontFamily = FONTS[s.font]; caption.style.fontWeight = fontWeight(s.font);
   caption.style.fontSize = `${46 * s.gFontSize / 52}px`; caption.style.color = s.textColor;
   caption.style.webkitTextStroke = `${s.gStroke * 0.36}px ${s.strokeColor}`;
   const angle = (s.gShadowDir - 45) * Math.PI / 180, distance = s.gShadowDist * 0.6;
@@ -107,7 +113,10 @@ function initDemo(root) {
     localStorage.setItem('captionsgen-demo-presets', JSON.stringify([...saved].map(([name, settings]) => ({ name, settings }))));
   }
   function stateFor(name) {
-    return saved.has(name) ? { ...saved.get(name) } : { ...base, ...PRESETS[name], font: settings.font, textCase: settings.textCase };
+    // Creator looks bring their own font and case, like the plugin; the
+    // classics keep the font you picked.
+    const preset = PRESETS[name] || {};
+    return saved.has(name) ? { ...saved.get(name) } : { ...base, ...preset, font: preset.font || settings.font, textCase: preset.textCase || 'upper' };
   }
   function playLabel() {
     toggle.textContent = playing ? 'Ⅱ' : '▶';
@@ -123,7 +132,7 @@ function initDemo(root) {
     form.querySelector('[data-highlight-fields]').disabled = !settings.karaoke;
     form.querySelector('[data-pill-field]').hidden = settings.hlMode !== 'pill';
     form.querySelector('[data-design-name]').textContent = selected === 'custom' ? 'Custom' : selected;
-    form.querySelector('#demo-font').style.fontFamily = FONTS[settings.font];
+    form.querySelector('#demo-font').style.fontFamily = FONTS[settings.font]; form.querySelector('#demo-font').style.fontWeight = fontWeight(settings.font);
     form.querySelectorAll('[data-color-name]').forEach(label => { label.textContent = settings[label.dataset.colorName].toUpperCase(); });
     updateGroups(); playLabel();
   }

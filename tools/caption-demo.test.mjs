@@ -2,8 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { DEFAULTS, PRESETS, frameAt, WORDS, WORD_TIMES, LOOP, gain, pillTextColor } from '../caption-engine.mjs';
 
-test('all 17 presets produce finite, bounded frames through a full four-word loop', () => {
-  assert.equal(Object.keys(PRESETS).length, 17);
+test('all 18 presets produce finite, bounded frames through a full four-word loop', () => {
+  assert.equal(Object.keys(PRESETS).length, 18);
   assert.equal(WORDS.join(' '), 'Captions made for you');
   const finite = value => typeof value === 'number' ? assert.ok(Number.isFinite(value)) : Object.values(value).forEach(finite);
   for (const preset of Object.values(PRESETS)) {
