@@ -6,7 +6,7 @@ The homepage's design playground uses four fixed words, “Captions made for you
 
 The Design card follows the six disclosure groups in `uxp-panel/index.html`: Text, Karaoke, Stroke, Shadow, Background, and Animation. Keep their order, labels, grouped controls, In/Out columns, hollow slider knobs, and sentence-case typography aligned with the plugin. PRESET_META in caption-presets.mjs comes from uxp-panel/main.js. The website uses accessible buttons, labeled inputs, and color inputs in place of UXP-only widgets. Group resets restore that part of the active preset.
 
-Run `node --test tools/analytics.test.cjs tools/caption-demo.test.mjs` for analytics and preview checks. Check preset switching, custom controls, playback, keyboard disclosure buttons, group resets, and desktop/mobile layout in the browser before publishing.
+Run `node --test tools/analytics.test.cjs tools/caption-demo.test.mjs worker/worker.test.mjs` for analytics, preview and Worker checks. Check preset switching, custom controls, playback, keyboard disclosure buttons, group resets, and desktop/mobile layout in the browser before publishing.
 
 Generate the guides with `python -B tools/genblog.py` from the repository root. The generator includes the shared analytics assets and preference controls on every guide.
 
