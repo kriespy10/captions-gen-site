@@ -7,7 +7,8 @@
 - Transcription runs on the user's machine; no audio is uploaded.
 - Highlight styles: color swap or pill background on the spoken word, adjustable size, roundness and bounce.
 - Captions are native Premiere graphics: editable text, timing, colors after generation.
-- Restyle re-applies a new look to every caption without re-transcribing.
+- "Apply style to placed captions" re-applies a new look to every caption without re-transcribing.
+- 18 built-in presets, e.g. Bold Impact, Karaoke Pill, Beast Comic, Punch, Gamer, Glow, Podcast, Subtitle Box and Serif Story. The installer adds the free fonts they use (Montserrat, Anton, Bangers, Luckiest Guy, Inter, DM Serif Display).
 - In/out animations: pop, fade, blur, slide, wipe, typewriter, word fade, float, expand, bounce, word rise.
 - Pricing: free, with no time limit or watermark. Download through Lemon Squeezy (email only, no card). No subscription. An optional paid Pro upgrade with extra features is planned; earlier license buyers get Pro.
 - Support: business@captionsgen.com

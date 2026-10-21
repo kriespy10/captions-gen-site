@@ -102,8 +102,8 @@ body="""
 <p>Graphics render as part of the video. Keep the original caption track if you also need a sidecar file or closed-caption delivery.</p>
 
 <h2 id="plugin">3. Generate animated graphics with Captions Gen</h2>
-<p><a href="https://captionsgen.com/">Captions Gen</a> transcribes on your machine with Whisper and places word-synced graphics on the Premiere timeline. Its presets combine karaoke highlights, color swaps or pill backgrounds, bounce, and in/out animations. You can edit the placed graphics or use Restyle to change their appearance without transcribing again.</p>
-<figure class="caption-example"><img src="/img/styles/Beast.png" width="1280" height="480" loading="lazy" alt="Captions Gen preview reading Use Your Shield, with Shield highlighted in yellow"><figcaption>A Captions Gen graphic with the spoken word highlighted. This is a plugin preview, not Premiere's native caption track.</figcaption></figure>
+<p><a href="https://captionsgen.com/">Captions Gen</a> transcribes on your machine with Whisper and places word-synced graphics on the Premiere timeline. Its presets combine karaoke highlights, color swaps or pill backgrounds, bounce, and in/out animations. You can edit the placed graphics or use “Apply style to placed captions” to change their appearance without transcribing again.</p>
+<figure class="caption-example"><img src="/img/styles/Bold-Impact.png" width="1280" height="480" loading="lazy" alt="Captions Gen preview reading Use Your Shield, with Shield highlighted in yellow"><figcaption>A Captions Gen graphic with the spoken word highlighted. This is a plugin preview, not Premiere's native caption track.</figcaption></figure>
 <p>The plugin runs on Windows 10/11 with Premiere Pro 25.0 or newer. It's free, with no time limit or watermark.</p>
 
 <h2>Which workflow fits your edit?</h2>

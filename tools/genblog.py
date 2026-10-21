@@ -112,7 +112,7 @@ CSS = """
 CLOSING = """
 <div class="box">
 <p class="t">Try animated captions on your own edit</p>
-<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and Restyle. Native captions remain useful when you need subtitles or a separate caption file.</p>
+<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and one-click restyling of placed captions. Native captions remain useful when you need subtitles or a separate caption file.</p>
 <p><strong>Windows 10/11 · Premiere Pro 25.0+</strong>. Free, with no time limit and no watermark.</p>
 <a class="btn" href="__FREE__">Download free</a>
 <a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
@@ -201,7 +201,7 @@ REL0 = {
 }
 for k, v in REL0.items(): POSTS[k]["rel"] = v
 POSTS.update(P)
-POSTS["animated-captions-premiere-pro"]["image"] = "/img/styles/Beast.png"
+POSTS["animated-captions-premiere-pro"]["image"] = "/img/styles/Bold-Impact.png"
 
 ORDER = list(POSTS.keys())
 
