@@ -276,7 +276,7 @@ body="""
 <p>Plugins that animate captions usually charge, because word-level transcription and the caption templates are the product. Some offer a trial with a minute cap or a watermark. Read the limit before you build a workflow around it; a watermark on client work is a bad surprise.</p>
 
 <h2>Captions Gen (free, no time limit)</h2>
-<p><a href="https://captionsgen.com/">Captions Gen</a>, the plugin I make, is free with no time limit and no watermark. The free version covers the basics: local transcription, karaoke highlighting, presets, live preview and restyling. It runs on Windows 10/11 with Premiere Pro 25.0 or newer. A paid Pro upgrade with extra features is planned.</p>
+<p><a href="https://captionsgen.com/">Captions Gen</a>, the plugin I make, is free with no time limit and no watermark. It covers local transcription, karaoke highlighting, presets, live preview and restyling. It runs on Windows 10/11 with Premiere Pro 25.0 or newer.</p>
 
 <h2>The CapCut route</h2>
 <p>Check the current CapCut plan and the caption features available in your region. If you export a captioned video and bring it back into Premiere, its burned-in text is no longer editable as a Premiere caption track.</p>
