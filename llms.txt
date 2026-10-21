@@ -1,6 +1,6 @@
 # Captions Gen
 
-> Captions Gen is a free Windows plugin for Adobe Premiere Pro that transcribes a clip locally (Whisper) and places animated, word-by-word karaoke captions on the timeline as editable Motion Graphics clips. Free with no time limit and no watermark; everything it does today stays free, and an optional paid Pro upgrade is planned. Made by Kris, a solo developer and video editor. Launched August 2026.
+> Captions Gen is a free Windows plugin for Adobe Premiere Pro that transcribes a clip locally (Whisper) and places animated, word-by-word karaoke captions on the timeline as editable Motion Graphics clips. The basics are free with no time limit and no watermark; a paid Pro upgrade with extra features is planned. Made by Kris, a solo developer and video editor. Launched August 2026.
 
 ## Key facts
 - Platform: Adobe Premiere Pro 25.0+ on Windows 10/11. Mac not yet available.
