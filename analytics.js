@@ -116,7 +116,7 @@
     banner.setAttribute('aria-labelledby', 'analytics-consent-title');
     banner.hidden = true;
     banner.innerHTML = '<div><h2 id="analytics-consent-title">Help us improve Captions Gen?</h2>' +
-      '<p>With your permission, Google Analytics measures website visits and clicks on our trial and buy buttons. ' +
+      '<p>With your permission, Google Analytics measures website visits and clicks on our download button. ' +
       'You can change your choice anytime in the footer. <a href="/privacy.html">Privacy details</a></p>' +
       '<p id="analytics-current-choice"></p></div><div class="analytics-consent-actions">' +
       '<button type="button" data-analytics-choice="denied">Decline</button>' +

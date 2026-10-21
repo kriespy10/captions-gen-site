@@ -4,6 +4,29 @@
 
 NEWS = [
   {
+    "slug": "captions-gen-1-1-0",
+    "date": "2026-10-21",
+    "version": "1.1.0",
+    "title": "Captions Gen 1.1: now free, with 18 new caption looks",
+    "desc": "The 15-minute limit is gone: Captions Gen is now free. Plus 18 presets with the looks creators use, free fonts, instant previews and a simpler panel.",
+    "body": """
+<p>Captions Gen is free now. The 15-minute limit is gone, with no watermark and no subscription.</p>
+<h2>Free, with no time limit</h2>
+<p>Transcription, word-by-word karaoke captions, the built-in presets and the live preview are free to use, with no time limit, no watermark and no subscription. If you bought a license, it stays active. Thank you for the early support. To hear about new features, use <strong>Get updates by email</strong> in Settings.</p>
+<h2>18 presets with the looks creators use</h2>
+<p>New presets: Bold Impact, Beast Comic, Karaoke Pill, Karaoke, Punch, Gamer, Glow, Podcast, Minimal, Subtitle Box, Clean Fade and Serif Story, next to the classics Clean, Typewriter, Spring, Rise and Smooth. Each preset sets the font, case and how many words show at once. The installer adds the free fonts they use: Montserrat, Anton, Bangers, Luckiest Guy, Inter and DM Serif Display.</p>
+<p><img src="https://captionsgen.com/img/styles/Bold-Impact.png" alt="Bold Impact caption preset" loading="lazy" style="max-width:100%;border-radius:12px"></p>
+<h2>A simpler panel</h2>
+<p>The panel now has three tabs. <strong>Presets</strong> is where you pick a look, <strong>Customize</strong> is where you change it, and Generate stays at the bottom of both. Edits apply right away; <strong>Update preset</strong> or <strong>Save as new</strong> keeps them. Star a preset as your main one and the panel opens on it every time. A preset's ⋯ menu can duplicate it or export it as a file to share, and <strong>Import</strong> adds one. Restyle is now called <strong>Apply style to placed captions</strong>.</p>
+<h2>Instant previews</h2>
+<p>Preset previews are saved on your computer and prepared in the background, so tapping a preset shows it right away instead of after several seconds.</p>
+<h2>A short intro for new users</h2>
+<p>New installs open with a four-step walkthrough of the basics. You can watch it again from Settings › Show the intro again.</p>
+<h2>Optional usage stats</h2>
+<p>The panel asks once whether you want to share anonymous usage stats to help me improve it. No means no: it stops sending anything. The <a href="https://captionsgen.com/privacy.html">privacy page</a> lists exactly what is sent.</p>
+""",
+  },
+  {
     "slug": "captions-gen-1-0-9",
     "date": "2026-10-18",
     "version": "1.0.9",
