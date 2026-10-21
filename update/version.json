@@ -1,9 +1,9 @@
 {
-  "version": "1.0.9",
-  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.0.9.exe",
-  "sha256": "ab9e2e1681a1ba18bc26f8b094cde12f1a42024b7fd92b61127c5513c281c38e",
-  "size": 2894227,
-  "notes": "Outlines no longer cut through neighbouring letters. Letter spacing is now in px (0-16, steps of 1) and the preview follows it. Captions and the karaoke highlight now wait for the next word after a pause. New in Settings: Report a bug and Request a feature. Help & FAQ opens captionsgen.com.",
+  "version": "1.1.0",
+  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.0.exe",
+  "sha256": "815be5d63dfc6b3bc700fc23d66acad9219faeb0692e64ef99d7d9b4f0f42288",
+  "size": 6882312,
+  "notes": "Captions Gen is free now: no time limit. 18 new caption looks, free fonts, instant previews and a simpler panel.",
   "full": "",
-  "date": "2026-10-18"
+  "date": "2026-10-21"
 }
