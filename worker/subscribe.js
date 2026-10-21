@@ -89,7 +89,7 @@ async function unsubscribePage(request, env, url) {
   if (request.method !== "POST")
     return page(
       "Unsubscribe from Captions Gen emails",
-      `<p>${esc(email)} will stop getting emails about Captions Gen updates, new styles and Pro.</p>` +
+      `<p>${esc(email)} will stop getting emails about Captions Gen updates, new features and new styles.</p>` +
         `<form method="post"><input type="hidden" name="e" value="${esc(email)}"><input type="hidden" name="t" value="${esc(token)}"><button>Unsubscribe</button></form>`,
     );
   await env.REPORTS.delete(`sub:${email}`);
