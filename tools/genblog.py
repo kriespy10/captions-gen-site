@@ -119,12 +119,12 @@ CLOSING = """
 </div>
 """
 
-def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None):
+def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, published=DATE):
     closing = CLOSING.replace("__FREE__", FREE)
     rel = "\n".join(f'<li><a href="{r["slug"]}.html">{r["t"]}</a></li>' for r in related)
     article = {
         "@context": "https://schema.org", "@type": "Article", "headline": h1,
-        "datePublished": DATE, "dateModified": modified,
+        "datePublished": published, "dateModified": modified,
         "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"},
         "publisher": {"@type": "Organization", "name": "Captions Gen", "url": SITE,
                       "logo": {"@type": "ImageObject", "url": f"{SITE}/img/captions-gen-logo.svg"}},
@@ -193,6 +193,7 @@ import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from bodies import POSTS
 from bodies2 import P
+from bodies3 import P3
 REL0 = {
   "how-to-add-captions-in-premiere-pro": ["auto-captions-premiere-pro","premiere-pro-captions-not-showing","burn-in-captions-premiere-pro"],
   "auto-captions-premiere-pro": ["how-to-add-captions-in-premiere-pro","premiere-pro-captions-not-showing","animated-captions-premiere-pro"],
@@ -201,6 +202,7 @@ REL0 = {
 }
 for k, v in REL0.items(): POSTS[k]["rel"] = v
 POSTS.update(P)
+POSTS.update(P3)
 POSTS["animated-captions-premiere-pro"]["image"] = "/img/styles/Bold-Impact.png"
 
 ORDER = list(POSTS.keys())
@@ -246,7 +248,7 @@ print("wrote index")
 for slug, p in POSTS.items():
     related = [{"slug": s, "t": POSTS[s]["h1"]} for s in p.get("rel", []) if s in POSTS]
     html = page(slug, p["title"], p["desc"], p["h1"], p["body"].replace("__FREE__", FREE), related,
-                p.get("modified", DATE), p.get("image"))
+                p.get("modified", DATE), p.get("image"), p.get("published", DATE))
     import re as _re
     html = html.replace('<a target="_blank" rel="noopener" ', "<a ").replace('href="https://captionsgen.lemonsqueezy', 'target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy')
     with io.open(os.path.join("blog", slug + ".html"), "w", encoding="utf-8", newline="") as f:

@@ -261,29 +261,54 @@ body="""
 """)
 
 P["free-caption-plugin-premiere-pro"] = dict(
-modified="2026-10-20",
-title="Free Caption Plugins for Premiere Pro: What Actually Works",
-desc="Free ways to get captions in Premiere Pro: the built-in tool, Captions Gen's free animated captions with no time limit, and the limits of other plugins' free tiers.",
+modified="2026-10-22",
+title="Free Caption Plugin for Premiere Pro: Auto Captions, No Watermark",
+desc="Free auto caption plugins for Premiere Pro compared: the built-in tool, Captions Gen (free animated captions, no time limit, no watermark) and other plugins' free tiers.",
 h1="Free caption plugins for Premiere Pro",
-rel=["best-caption-plugin-premiere-pro","auto-captions-premiere-pro","animated-captions-premiere-pro"],
+rel=["best-caption-plugin-premiere-pro","free-caption-templates-premiere-pro","hormozi-style-captions-premiere-pro"],
 body="""
-<p>For plain captions, the most complete free option is already inside Premiere: its own speech-to-text makes static captions at no cost. For animated captions, most plugins are paid, and their free route is a trial or a free tier with a limit. Captions Gen is the exception: it's free with no time limit. Here is what you get for free from each approach.</p>
+<p>Quick answer: for plain captions, Premiere's own Speech to Text is free and unlimited. For animated, word-by-word captions, <a href="https://captionsgen.com/">Captions Gen</a> is a free plugin with no time limit and no watermark: it transcribes on your computer and places karaoke-style captions on your timeline in one click. Most other caption plugins are paid, with a trial or a capped free tier.</p>
+
+<h2>Free options at a glance</h2>
+<div class="ptable-wrap">
+<table class="ptable">
+<thead><tr><th>Option</th><th>Price</th><th>Animated, word by word</th><th>Limit</th><th>Mac</th></tr></thead>
+<tbody>
+<tr class="pick"><td><div class="tool">Captions Gen <span class="tag">Made by me</span></div></td><td>Free</td><td><span class="mark yes"><i>✓</i>Yes, 18 presets</span></td><td>No time limit, no watermark</td><td><span class="mark no"><i>✕</i>Windows only</span></td></tr>
+<tr><td><div class="tool">Premiere Pro built-in</div></td><td>Included</td><td><span class="mark no"><i>✕</i>Static, Single Word layout</span></td><td>None</td><td><span class="mark yes"><i>✓</i>Yes</span></td></tr>
+<tr><td><div class="tool">Paid plugins' free tiers</div></td><td>Free to try</td><td><span class="mark yes"><i>✓</i>Usually</span></td><td>Trial days, minute caps or a watermark</td><td>Varies</td></tr>
+</tbody>
+</table>
+</div>
+<p>For prices of the paid plugins, see the <a href="best-caption-plugin-premiere-pro.html">caption plugin comparison</a>.</p>
 
 <h2>Premiere's built-in captions (free, unlimited)</h2>
-<p>Transcribe sequence, Create captions, done. Speech to Text is included with Premiere and runs locally once the language pack is installed. Current versions offer a Single Word layout; use graphics when you need custom motion or highlights within a line.</p>
+<p>Transcribe the sequence, then Create captions. Speech to Text is included with Premiere and runs locally once the language pack is installed. Current versions offer a Single Word layout and Track Styles for a consistent look. What it can't do is highlight the word being spoken or animate words in.</p>
 
-<h2>Free tiers of caption plugins</h2>
-<p>Plugins that animate captions usually charge, because word-level transcription and the caption templates are the product. Some offer a trial with a minute cap or a watermark. Read the limit before you build a workflow around it; a watermark on client work is a bad surprise.</p>
+<h2>Captions Gen (free, no time limit, no watermark)</h2>
+<p>Captions Gen, the plugin I make, is free. It covers local transcription (Whisper, on your machine), word-by-word karaoke highlighting, 18 animated presets, a live preview, your own saved presets and restyling captions you've already placed. The captions are editable Motion Graphics on your timeline, not a rendered video.</p>
+<ol>
+<li><a href="__FREE__">Download Captions Gen</a>. Checkout is free and only asks for an email address.</li>
+<li>Run the installer. It sets up the engine, the Premiere Pro panel and the free fonts the presets use.</li>
+<li>In Premiere Pro, open Window, UXP Plugins, Captions Gen, select your clip, pick a preset and press Generate.</li>
+</ol>
+<p>Requirements: Windows 10 or 11 and Premiere Pro 25.0 or newer.</p>
 
-<h2>Captions Gen (free, no time limit)</h2>
-<p><a href="https://captionsgen.com/">Captions Gen</a>, the plugin I make, is free with no time limit and no watermark. It covers local transcription, karaoke highlighting, presets, live preview and restyling. It runs on Windows 10/11 with Premiere Pro 25.0 or newer.</p>
+<h2>Free tiers of other caption plugins</h2>
+<p>Plugins that animate captions usually charge, because word-level transcription and the caption templates are the product. Their free route is a trial with a day or minute cap, or exports with a watermark. Read the limit before you build a workflow around it: a watermark on client work is a bad surprise.</p>
 
 <h2>The CapCut route</h2>
-<p>Check the current CapCut plan and the caption features available in your region. If you export a captioned video and bring it back into Premiere, its burned-in text is no longer editable as a Premiere caption track.</p>
+<p>Check the current CapCut plan and the caption features available in your region. If you caption in CapCut and bring the video back into Premiere, the burned-in text can no longer be edited in Premiere.</p>
 
-<h2>Pick by what you're making</h2>
-<p>Documentary-style subtitles: Premiere's own tool. Short-form with animated captions on Windows: Captions Gen, free. On a Mac: a paid plugin, tested through its trial first.</p>
+<h2>Common questions</h2>
+<h3>Is Captions Gen really free?</h3>
+<p>Yes. No time limit, no watermark and no subscription.</p>
+<h3>Does it upload my footage?</h3>
+<p>No. Transcription runs on your computer, so the audio never leaves it.</p>
+<h3>Does it work on a Mac?</h3>
+<p>Not yet. Captions Gen is Windows-only for now. On a Mac, use Premiere's own captions or test a paid plugin's trial.</p>
 """)
+
 
 P["best-caption-plugin-premiere-pro"] = dict(
 modified="2026-10-20",
