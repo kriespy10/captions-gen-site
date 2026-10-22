@@ -119,6 +119,18 @@
   .toc a { color:var(--muted2); text-decoration:none; }
   .toc a:hover { color:var(--text); }
   @media (max-width:600px) { .toc ol { columns:1; } }
+  article .col { position:relative; }
+  .toc-rail { display:none; }
+  @media (min-width:1040px) {
+    article .col.has-toc { margin-left:max(0px, calc(50% - 480px)); }
+    .toc-inline { display:none; }
+    .toc-rail { display:block; position:absolute; top:0; bottom:0; left:calc(100% + 28px); width:212px; }
+    .toc-side { position:sticky; top:84px; margin:0; border:0; border-left:1px solid var(--hair2); border-radius:0; padding:2px 0 2px 18px; }
+    .toc-side ol { columns:1; list-style:none; padding:0; }
+    .toc-side li { font-size:14px; line-height:1.45; margin-bottom:9px; }
+    .toc-side a.on { color:var(--text); }
+    .toc-side a.on::before { content:""; position:absolute; left:-1px; width:2px; height:1.4em; background:var(--yellow); }
+  }
   .tip, .note { border-radius:0 12px 12px 0; padding:10px 16px; margin:18px 0; font-size:15px; color:var(--muted2); }
   .tip { background:rgba(48,209,88,.07); border-left:3px solid var(--green); }
   .note { background:rgba(255,159,10,.07); border-left:3px solid var(--amber); }
@@ -147,14 +159,19 @@
     <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
   </div>
 </div></nav>
-<article><div class="col">
+<article><div class="col has-toc">
+<div class="toc-rail"><aside class="toc toc-side" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#what-it-is">What Hormozi style captions are</a></li><li><a href="#font">The font</a></li><li><a href="#settings">The exact settings</a></li><li><a href="#highlight">How the word highlight works</a></li><li><a href="#by-hand">Method 1: by hand</a></li><li><a href="#plugin">Method 2: free with Captions Gen</a></li><li><a href="#placement">Where to place them</a></li><li><a href="#mistakes">Common mistakes</a></li></ol></aside></div>
+<script>(function(){function f(){var l=[].slice.call(document.querySelectorAll('.toc-side a')),i=0;
+l.forEach(function(a,k){var e=document.getElementById(a.hash.slice(1));if(e&&e.getBoundingClientRect().top<140)i=k});
+l.forEach(function(a,k){a.classList.toggle('on',k===i)})}
+addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',f)})();</script>
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Hormozi style captions in Premiere Pro</p>
 <h1>Hormozi style captions in Premiere Pro</h1>
 <div class="meta">Updated <time datetime="2026-10-22">22 October 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 
 <p>Hormozi style captions are the big, bold captions you see on almost every business and podcast short. Two or three words at a time, heavy white caps with a black outline, and the word being spoken turns yellow.</p>
 <p>This guide shows you what makes the look, the exact settings, and two ways to make it in Premiere Pro: by hand, or free in one click.</p>
-<div class="tldr"><p class="t">In short</p><ul><li>Font: Montserrat Black or ExtraBold, all caps.</li><li>Style: white text, thick black outline, a soft shadow.</li><li>Highlight: the spoken word turns yellow (or green) and pops a little.</li><li>Length: two or three words on screen at a time.</li><li>Premiere can't highlight the spoken word by itself. A plugin like <a href="https://captionsgen.com/">Captions Gen</a> does it for free.</li></ul></div><nav class="toc" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#what-it-is">What Hormozi style captions are</a></li><li><a href="#font">The font</a></li><li><a href="#settings">The exact settings</a></li><li><a href="#highlight">How the word highlight works</a></li><li><a href="#by-hand">Method 1: by hand</a></li><li><a href="#plugin">Method 2: free with Captions Gen</a></li><li><a href="#placement">Where to place them</a></li><li><a href="#mistakes">Common mistakes</a></li></ol></nav>
+<div class="tldr"><p class="t">In short</p><ul><li>Font: Montserrat Black or ExtraBold, all caps.</li><li>Style: white text, thick black outline, a soft shadow.</li><li>Highlight: the spoken word turns yellow (or green) and pops a little.</li><li>Length: two or three words on screen at a time.</li><li>Premiere can't highlight the spoken word by itself. A plugin like <a href="https://captionsgen.com/">Captions Gen</a> does it for free.</li></ul></div><aside class="toc toc-inline" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#what-it-is">What Hormozi style captions are</a></li><li><a href="#font">The font</a></li><li><a href="#settings">The exact settings</a></li><li><a href="#highlight">How the word highlight works</a></li><li><a href="#by-hand">Method 1: by hand</a></li><li><a href="#plugin">Method 2: free with Captions Gen</a></li><li><a href="#placement">Where to place them</a></li><li><a href="#mistakes">Common mistakes</a></li></ol></aside>
 <h2 id="what-it-is">What Hormozi style captions are</h2>
 <p>The style is named after Alex Hormozi, whose short videos made it popular. Today it's one of the most copied caption looks on TikTok, Instagram Reels and YouTube Shorts.</p>
 <p>It works because it's easy to read with the sound off. The eye only has to take in a couple of words, and the color shows exactly where the speaker is.</p>

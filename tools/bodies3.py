@@ -20,8 +20,9 @@ def tldr(*items):
     return '<div class="tldr"><p class="t">In short</p><ul>' + "".join(f"<li>{i}</li>" for i in items) + "</ul></div>"
 
 def toc(*items):
-    return ('<nav class="toc" aria-label="On this page"><p class="t">On this page</p><ol>'
-            + "".join(f'<li><a href="#{i}">{t}</a></li>' for i, t in items) + "</ol></nav>")
+    # genblog.py also shows a copy as a sticky sidebar on wide screens.
+    return ('<aside class="toc toc-inline" aria-label="On this page"><p class="t">On this page</p><ol>'
+            + "".join(f'<li><a href="#{i}">{t}</a></li>' for i, t in items) + "</ol></aside>")
 
 def tip(text):
     return f'<p class="tip"><b>Tip:</b> {text}</p>'
