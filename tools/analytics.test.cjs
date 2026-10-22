@@ -149,7 +149,7 @@ test('blocked storage still allows a page-level choice; preview hosts never coll
 
 test('every published HTML page includes the shared tag once and a preferences control', () => {
   const files = ['index.html', 'privacy.html', ...fs.readdirSync(path.join(root, 'blog')).filter(file => file.endsWith('.html')).map(file => 'blog/' + file)];
-  assert.equal(files.length, 32);
+  assert.equal(files.length, 34);
   for (const file of files) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');
     assert.equal((html.match(/<script defer src="\/analytics.js"><\/script>/g) || []).length, 1, file);
