@@ -300,18 +300,22 @@ body="""
 <h2>The CapCut route</h2>
 <p>Check the current CapCut plan and the caption features available in your region. If you caption in CapCut and bring the video back into Premiere, the burned-in text can no longer be edited in Premiere.</p>
 
-<h2>Common questions</h2>
-<h3>Is Captions Gen really free?</h3>
-<p>Yes. No time limit, no watermark and no subscription.</p>
-<h3>Does it upload my footage?</h3>
-<p>No. Transcription runs on your computer, so the audio never leaves it.</p>
-<h3>Does it work on a Mac?</h3>
-<p>Not yet. Captions Gen is Windows-only for now. On a Mac, use Premiere's own captions or test a paid plugin's trial.</p>
-""")
+<p>Comparing a specific paid tool? See the free alternatives to <a href="autocut-alternative-captions.html">AutoCut</a>, <a href="firecut-alternative-captions.html">FireCut</a>, <a href="premiere-assistant-alternative-captions.html">Premiere Assistant</a> and <a href="submagic-alternative-premiere-pro.html">Submagic</a>.</p>
+""",
+faq=[
+("Is there a free caption plugin for Premiere Pro?",
+ "Yes. Captions Gen is a free Premiere Pro plugin for Windows that makes animated, word-by-word captions with no time limit and no watermark. Premiere's own Speech to Text is also free for plain captions."),
+("Is Captions Gen really free?",
+ "Yes. No time limit, no watermark and no subscription."),
+("Does it upload my footage?",
+ "No. Transcription runs on your computer, so the audio never leaves it."),
+("Does it work on a Mac?",
+ "Not yet. Captions Gen is Windows-only for now. On a Mac, use Premiere's own captions or test a paid plugin's trial."),
+])
 
 
 P["best-caption-plugin-premiere-pro"] = dict(
-modified="2026-10-20",
+modified="2026-10-22",
 title="Best Caption Plugins for Premiere Pro (2026): 8 Compared",
 desc="Caption plugins for Premiere Pro compared on price, one-time vs subscription, local or cloud transcription, Mac support and free options. Prices checked October 2026.",
 h1="Best caption plugins for Premiere Pro in 2026, compared",
@@ -363,7 +367,26 @@ body="""
 
 <h2 id="captions-gen">Where Captions Gen fits</h2>
 <p><a href="https://captionsgen.com/">Captions Gen</a> transcribes locally, places native editable graphics, ships karaoke highlighting with pill and color-swap styles plus bounce and in/out animations, and restyles a sequence in seconds. It is free, with no time limit or watermark, and Windows-only for now.</p>
-""")
+
+<h2 id="alternatives">Free alternatives, one tool at a time</h2>
+<p>Already looking at a specific tool? These guides compare it with Captions Gen in more detail:</p>
+<ul>
+<li><a href="autocut-alternative-captions.html">Free AutoCut alternative for captions</a></li>
+<li><a href="firecut-alternative-captions.html">Free FireCut alternative for captions</a></li>
+<li><a href="premiere-assistant-alternative-captions.html">Free Premiere Assistant alternative for captions</a></li>
+<li><a href="submagic-alternative-premiere-pro.html">Free Submagic alternative for Premiere Pro</a></li>
+</ul>
+""",
+faq=[
+("What is the best caption plugin for Premiere Pro?",
+ "For animated, word-by-word captions without a subscription: Captions Gen (free, Windows) or Caption Plug ($14.99 once, Windows and Mac). If you already pay for AutoCut, FireCut or Premiere Assistant, try their captions first. For plain subtitles, Premiere's built-in captions are enough."),
+("What is the best free caption plugin for Premiere Pro?",
+ "Captions Gen. It's free with no time limit and no watermark, transcribes on your computer, and places animated word-by-word captions on your timeline. It runs on Windows with Premiere Pro 25.0 or newer."),
+("Is there a caption plugin for Premiere Pro without a subscription?",
+ "Yes. Captions Gen is free, and Caption Plug is a one-time $14.99 purchase. AutoCut, FireCut, Premiere Assistant and PremiereCopilot are subscriptions."),
+("Which caption plugins work on Mac?",
+ "Caption Plug and Premiere's built-in captions work on Mac. Captions Gen is Windows only for now."),
+])
 
 P["word-by-word-captions-premiere-pro"] = dict(
 modified="2026-10-20",

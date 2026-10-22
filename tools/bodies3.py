@@ -627,3 +627,173 @@ body="""
 <p>Changed the cut? Generate again. Want a different look? Pick another preset and click <strong>Apply style to placed captions</strong>. You never leave Premiere Pro.</p>
 """ + tip("Captions Gen places captions as separate graphics, not burned into the video. You can fix a typo on the timeline at any time.") + """
 """)
+
+
+SUBCOST = gfig("plugin-subscription-cost", "Bar chart of a year of captions: FireCut Pro monthly $408, Premiere Assistant Pro $360, FireCut Pro yearly $240, AutoCut AI Plan yearly $178.80, Captions Gen $0",
+               "A year of captions with a Premiere Pro plugin, at list prices checked 22 October 2026.")
+
+# ---------------------------------------------------------------- FireCut
+P3["firecut-alternative-captions"] = dict(
+published="2026-10-22", modified="2026-10-22",
+image="/img/guides/plugin-subscription-cost.png",
+title="Free FireCut Alternative for Captions in Premiere Pro (2026)",
+desc="FireCut's captions start on the $34/month Pro plan. Captions Gen makes animated, word-by-word captions in Premiere Pro for free, with local transcription.",
+h1="A free FireCut alternative for captions",
+rel=["autocut-alternative-captions","premiere-assistant-alternative-captions","best-caption-plugin-premiere-pro","free-caption-plugin-premiere-pro"],
+faq=[
+("Is FireCut free?",
+ "No. FireCut has a 7-day free trial. Its Premiere Pro plan with captions (Pro) costs $34 a month, or $20 a month billed yearly (checked 22 October 2026)."),
+("What is a free alternative to FireCut for captions?",
+ "Captions Gen is a free Premiere Pro plugin for Windows. It makes animated, word-by-word captions with no time limit and no watermark. It doesn't cut silences."),
+("Does FireCut upload my audio?",
+ "FireCut's plans list transcription hours per month (25 hours on Pro), which points to online transcription. Captions Gen transcribes on your computer with no hour limit."),
+("Can I use FireCut and Captions Gen together?",
+ "Yes. Cut with FireCut, then add the captions with Captions Gen. They work on the same timeline."),
+],
+body="""
+<p>FireCut is an AI editing plugin for Premiere Pro and DaVinci Resolve. It removes silences, adds zooms and chapters, and makes captions. The captions come with its paid Pro plan.</p>
+<p>If captions are the main thing you use, here's a free way to get them in Premiere Pro, and an honest look at when FireCut is still the better buy.</p>
+""" + tldr(
+"FireCut's Premiere Pro captions are on the Pro plan: $34 a month, or $20 a month billed yearly.",
+"Pro includes 25 hours of transcription a month.",
+"<a href=\"https://captionsgen.com/\">Captions Gen</a> makes animated, word-by-word captions in Premiere Pro for free, with no hour limit.",
+"FireCut does much more than captions. Captions Gen is captions only, on Windows.",
+) + toc(
+("cost", "What FireCut captions cost"),
+("compare", "FireCut vs Captions Gen"),
+("firecut-better", "When FireCut is the better pick"),
+("captionsgen-better", "When Captions Gen is the better pick"),
+("switch", "How to switch"),
+) + note("I make Captions Gen, so read this with that in mind. The FireCut facts come from FireCut's pricing page, checked on 22 October 2026.") + """
+<h2 id="cost">What FireCut captions cost</h2>
+<p>For Premiere Pro, FireCut lists three plans: Starter, Pro and Max. Captions are listed from <strong>Pro</strong>, which costs $34 a month or $20 a month billed yearly. It includes 25 hours of transcription a month and 5 caption presets.</p>
+<p>Every plan starts with a 7-day free trial.</p>
+""" + SUBCOST + """
+<h2 id="compare">FireCut vs Captions Gen</h2>
+<div class="ptable-wrap">
+<table class="ptable">
+<thead><tr><th></th><th>FireCut</th><th>Captions Gen</th></tr></thead>
+<tbody>
+<tr><td>Price for captions</td><td>Pro, $34/month or $20/month billed yearly</td><td>Free</td></tr>
+<tr><td>Free option</td><td>7-day trial</td><td>Free, no time limit, no watermark</td></tr>
+<tr><td>Transcription</td><td>25 hours a month on Pro</td><td>On your computer, no hour limit</td></tr>
+<tr><td>Caption presets</td><td>5 on Pro, unlimited templates on Max</td><td>18 presets, plus your own saved presets</td></tr>
+<tr><td>Animated word-by-word captions</td><td><span class="mark yes"><i>✓</i>Yes</span></td><td><span class="mark yes"><i>✓</i>Yes</span></td></tr>
+<tr><td>Silence cutting, zooms, chapters</td><td><span class="mark yes"><i>✓</i>Yes</span></td><td><span class="mark no"><i>✕</i>No, captions only</span></td></tr>
+<tr><td>DaVinci Resolve</td><td><span class="mark yes"><i>✓</i>Separate plans</span></td><td><span class="mark no"><i>✕</i>No</span></td></tr>
+<tr><td>Mac</td><td><span class="mark na"><i>?</i>Not stated on the pricing page</span></td><td><span class="mark no"><i>✕</i>Windows only</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="ptable-legend"><span>On a phone, swipe the table sideways.</span></div>
+<p class="sources">Source: <a href="https://www.firecut.ai/pricing" rel="nofollow">FireCut pricing</a>. Prices in US dollars before tax; check the vendor's site before buying.</p>
+
+<h2 id="firecut-better">When FireCut is the better pick</h2>
+<ul>
+<li>You want silence removal, zooms and chapters in the same tool.</li>
+<li>You edit in DaVinci Resolve as well as Premiere Pro.</li>
+<li>You already pay for FireCut Pro. Use its captions first.</li>
+</ul>
+
+<h2 id="captionsgen-better">When Captions Gen is the better pick</h2>
+<ul>
+<li><strong>You mostly need captions.</strong> No monthly plan for one feature.</li>
+<li><strong>You caption a lot.</strong> There's no hour limit, because transcription runs on your computer.</li>
+<li><strong>You want more looks.</strong> 18 presets, and you can save your own.</li>
+<li><strong>Your footage is private.</strong> Nothing is uploaded.</li>
+</ul>
+""" + LOOKS + """
+<h2 id="switch">How to switch</h2>
+""" + INSTALL + """
+<ol start="4">
+<li>Pick a look on the <strong>Presets</strong> tab.</li>
+<li>Press <strong>Generate</strong>.</li>
+</ol>
+""" + PANEL + tip("You can keep FireCut for cutting. Add captions with Captions Gen as the last step, once the cut is final.") + """
+""")
+
+
+# ---------------------------------------------------------------- Premiere Assistant
+P3["premiere-assistant-alternative-captions"] = dict(
+published="2026-10-22", modified="2026-10-22",
+image="/img/guides/plugin-subscription-cost.png",
+title="Free Premiere Assistant Alternative for Captions (Cutback, 2026)",
+desc="Premiere Assistant by Cutback limits transcription by hours per plan. Captions Gen makes animated captions in Premiere Pro for free, with no hour limit.",
+h1="A free Premiere Assistant alternative for captions",
+rel=["firecut-alternative-captions","autocut-alternative-captions","best-caption-plugin-premiere-pro","free-caption-plugin-premiere-pro"],
+faq=[
+("Is Premiere Assistant free?",
+ "Premiere Assistant by Cutback has a free Starter plan with up to 3 transcriptions a month. Paid plans add transcription hours: 3 hours on Lite, 20 on Basic and 30 on Pro (checked 22 October 2026)."),
+("What is a free alternative to Premiere Assistant for captions?",
+ "Captions Gen is a free Premiere Pro plugin for Windows. It makes animated, word-by-word captions with no time limit, no hour limit and no watermark."),
+("Can I use both?",
+ "Yes. You can use Premiere Assistant for silence removal or multicam, and Captions Gen for the captions."),
+],
+body="""
+<p>Premiere Assistant by Cutback is an AI plugin for Premiere Pro. It transcribes, removes silences, switches multicam podcasts and adds animated captions. It has a free plan, but transcription is limited by hours on every plan.</p>
+<p>If you caption a lot of videos, here's a free alternative without an hour limit, and when Premiere Assistant is still the better pick.</p>
+""" + tldr(
+"Premiere Assistant's free plan allows up to 3 transcriptions a month.",
+"Paid plans are limited by transcription hours: 3, 20 or 30 hours a month.",
+"<a href=\"https://captionsgen.com/\">Captions Gen</a> makes animated captions in Premiere Pro for free, with no hour limit.",
+"Premiere Assistant also removes silences and switches multicam. Captions Gen is captions only, on Windows.",
+) + toc(
+("plans", "Premiere Assistant plans"),
+("compare", "Premiere Assistant vs Captions Gen"),
+("pa-better", "When Premiere Assistant is the better pick"),
+("captionsgen-better", "When Captions Gen is the better pick"),
+("switch", "How to switch"),
+) + note("I make Captions Gen, so read this with that in mind. The Premiere Assistant facts come from Cutback's pricing page, checked on 22 October 2026.") + """
+<h2 id="plans">Premiere Assistant plans</h2>
+<table class="spec">
+<thead><tr><th>Plan</th><th>Price shown</th><th>Transcription</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>$0</td><td>Up to 3 a month</td></tr>
+<tr><td>Lite</td><td>$8 / $9 a month</td><td>3 hours</td></tr>
+<tr><td>Basic</td><td>$13 / $15 a month</td><td>20 hours</td></tr>
+<tr><td>Pro</td><td>$30 / $35 a month</td><td>30 hours</td></tr>
+</tbody>
+</table>
+<p>Every plan includes editing captions and animated captions. Cutback shows two prices per plan; the lower one appears to be the yearly rate, but the page doesn't say clearly.</p>
+""" + SUBCOST + """
+<h2 id="compare">Premiere Assistant vs Captions Gen</h2>
+<div class="ptable-wrap">
+<table class="ptable">
+<thead><tr><th></th><th>Premiere Assistant</th><th>Captions Gen</th></tr></thead>
+<tbody>
+<tr><td>Price</td><td>Free Starter; paid from $8 a month</td><td>Free</td></tr>
+<tr><td>Transcription limit</td><td>3 a month free; 3 to 30 hours paid</td><td>No limit, runs on your computer</td></tr>
+<tr><td>Animated captions</td><td><span class="mark yes"><i>✓</i>Yes</span></td><td><span class="mark yes"><i>✓</i>Yes, word by word</span></td></tr>
+<tr><td>Caption translation</td><td><span class="mark yes"><i>✓</i>Basic and Pro</span></td><td><span class="mark no"><i>✕</i>No</span></td></tr>
+<tr><td>Silence removal, multicam</td><td><span class="mark yes"><i>✓</i>Yes</span></td><td><span class="mark no"><i>✕</i>No, captions only</span></td></tr>
+<tr><td>Saved caption presets</td><td><span class="mark na"><i>?</i>Not stated</span></td><td>18 presets, plus your own</td></tr>
+<tr><td>Mac</td><td><span class="mark na"><i>?</i>Not stated on the pricing page</span></td><td><span class="mark no"><i>✕</i>Windows only</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="ptable-legend"><span>On a phone, swipe the table sideways.</span></div>
+<p class="sources">Source: <a href="https://cutback.video/premiere-assistant/pricing" rel="nofollow">Premiere Assistant pricing</a>. Prices in US dollars before tax; check the vendor's site before buying.</p>
+
+<h2 id="pa-better">When Premiere Assistant is the better pick</h2>
+<ul>
+<li>You want silence removal or multicam switching too.</li>
+<li>You need captions translated into other languages.</li>
+<li>You make only a few videos a month and the free plan covers you.</li>
+</ul>
+
+<h2 id="captionsgen-better">When Captions Gen is the better pick</h2>
+<ul>
+<li><strong>You caption a lot.</strong> No monthly count or hour limit.</li>
+<li><strong>You want a fixed look.</strong> Save your style as a preset and star it.</li>
+<li><strong>You want to restyle fast.</strong> Apply a new preset to captions you already placed.</li>
+<li><strong>Your footage is private.</strong> Transcription runs on your computer.</li>
+</ul>
+""" + LOOKS + """
+<h2 id="switch">How to switch</h2>
+""" + INSTALL + """
+<ol start="4">
+<li>Pick a look on the <strong>Presets</strong> tab.</li>
+<li>Press <strong>Generate</strong>.</li>
+</ol>
+""" + PANEL + """
+""")
