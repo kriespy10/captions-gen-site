@@ -29,11 +29,11 @@
 - [News and updates](https://captionsgen.com/news/): release notes for every Captions Gen update (latest: 1.0.9, 2026-10-18)
 
 ## Guides
-- [Hormozi-Style Captions in Premiere Pro (Free Preset)](https://captionsgen.com/blog/hormozi-style-captions-premiere-pro.html): How to make Hormozi-style captions in Premiere Pro, by hand or free with the Bold Impact preset.
-- [MrBeast-Style Captions in Premiere Pro (Free Preset)](https://captionsgen.com/blog/mrbeast-style-captions-premiere-pro.html): Comic-font captions with a bouncing colored word, by hand or free with the Beast Comic preset.
-- [Free Caption Templates for Premiere Pro: 18 Animated Presets](https://captionsgen.com/blog/free-caption-templates-premiere-pro.html): Free animated caption presets vs MOGRT text templates.
-- [Free AutoCut Alternative for Captions in Premiere Pro](https://captionsgen.com/blog/autocut-alternative-captions.html): AutoCut vs Captions Gen for captions, prices checked October 2026.
-- [Free Submagic Alternative Inside Premiere Pro](https://captionsgen.com/blog/submagic-alternative-premiere-pro.html): Submagic (web app) vs Captions Gen (Premiere plugin), prices checked October 2026.
+- [Hormozi Style Captions in Premiere Pro: Font, Settings and Free Preset](https://captionsgen.com/blog/hormozi-style-captions-premiere-pro.html): The font (Montserrat Black), exact settings, how the yellow word highlight works, placement on vertical video, and how to make it by hand or free with the Bold Impact preset.
+- [MrBeast Style Captions in Premiere Pro: Font, Bounce and Free Preset](https://captionsgen.com/blog/mrbeast-style-captions-premiere-pro.html): The comic fonts (Bangers, Luckiest Guy), exact settings, the bounce keyframes, and how to make it by hand or free with the Beast Comic preset.
+- [Free Caption Templates for Premiere Pro: 18 Animated Presets](https://captionsgen.com/blog/free-caption-templates-premiere-pro.html): The three kinds of free caption templates (MOGRT, Track Styles, plugin presets) compared, and all 18 free Captions Gen presets with what each suits.
+- [Free AutoCut Alternative for Captions in Premiere Pro (2026)](https://captionsgen.com/blog/autocut-alternative-captions.html): AutoCut vs Captions Gen for captions, prices checked October 2026.
+- [Free Submagic Alternative for Premiere Pro (No Watermark)](https://captionsgen.com/blog/submagic-alternative-premiere-pro.html): Submagic (web app) vs Captions Gen (Premiere plugin), prices checked October 2026.
 - [Animated Captions in Premiere Pro: 3 Ways Compared](https://captionsgen.com/blog/animated-captions-premiere-pro.html): Get CapCut-style animated captions in Premiere Pro three ways: manual keyframing, the CapCut round trip, or a caption plugin. What each one costs you in time.
 - [Auto Captions in Premiere Pro: Fastest Setup (2026)](https://captionsgen.com/blog/auto-captions-premiere-pro.html): Turn on auto captions in Premiere Pro with the built-in speech to text, improve accuracy, and learn when a caption plugin is worth it. Nothing uploads to the cloud.
 - [Best Caption Plugins for Premiere Pro (2026): 8 Compared](https://captionsgen.com/blog/best-caption-plugin-premiere-pro.html): Caption plugins for Premiere Pro compared on price, one-time vs subscription, local or cloud transcription, Mac support and free options. Prices checked October 2026.

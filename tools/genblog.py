@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Generates the captionsgen.com guides from their editable source files.
-import json, os, io
+import json, os, io, re
 from datetime import date
 from html import escape
 
@@ -106,6 +106,26 @@ CSS = """
   }
   .ver { display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.06em; color:var(--blue); background:rgba(10,132,255,.14); border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
   .post .pm { color:var(--muted); font-size:13px; margin-bottom:6px; }
+  .tldr { background:var(--card); border:1px solid var(--hair); border-left:3px solid var(--yellow); border-radius:0 14px 14px 0; padding:14px 20px 6px; margin:22px 0 26px; }
+  .tldr .t, .toc .t { color:var(--text); font-weight:700; margin:0 0 6px; font-size:15px; }
+  .tldr ul { margin:0; padding-left:20px; }
+  .toc { border:1px solid var(--hair); border-radius:14px; padding:14px 20px; margin:0 0 30px; }
+  .toc ol { margin:0; padding-left:22px; columns:2; column-gap:28px; }
+  .toc li { font-size:14.5px; margin-bottom:4px; break-inside:avoid; }
+  .toc a { color:var(--muted2); text-decoration:none; }
+  .toc a:hover { color:var(--text); }
+  @media (max-width:600px) { .toc ol { columns:1; } }
+  .tip, .note { border-radius:0 12px 12px 0; padding:10px 16px; margin:18px 0; font-size:15px; color:var(--muted2); }
+  .tip { background:rgba(48,209,88,.07); border-left:3px solid var(--green); }
+  .note { background:rgba(255,159,10,.07); border-left:3px solid var(--amber); }
+  .tip b, .note b { color:var(--text); }
+  .spec { width:100%; border-collapse:collapse; margin:14px 0 8px; font-size:15px; border:1px solid var(--hair); border-radius:12px; overflow:hidden; }
+  .spec th, .spec td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--hair); vertical-align:top; }
+  .spec th { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.06em; background:var(--card2); }
+  .spec td { color:var(--muted2); }
+  .spec td:first-child { color:var(--text); font-weight:600; white-space:nowrap; }
+  .spec tr:last-child td { border-bottom:0; }
+  .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; border:1px solid rgba(255,255,255,.35); }
   .ptable-legend { display:flex; flex-wrap:wrap; gap:6px 18px; color:var(--muted); font-size:12.5px; margin:10px 2px 0; }
 """
 
@@ -119,7 +139,7 @@ CLOSING = """
 </div>
 """
 
-def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, published=DATE):
+def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, published=DATE, faq=None):
     closing = CLOSING.replace("__FREE__", FREE)
     rel = "\n".join(f'<li><a href="{r["slug"]}.html">{r["t"]}</a></li>' for r in related)
     article = {
@@ -139,7 +159,13 @@ def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, p
             {"@type": "ListItem", "position": 3, "name": h1, "item": f"{SITE}/blog/{slug}.html"}
         ]
     }
-    schema = json.dumps([article, breadcrumb], ensure_ascii=False)
+    schemas = [article, breadcrumb]
+    if faq:
+        # Optional (question, answer_html) pairs: shown at the end of the guide and as FAQPage data.
+        body_html += "\n<h2>Questions people ask</h2>\n" + "\n".join(f"<h3>{q}</h3>\n<p>{a}</p>" for q, a in faq)
+        schemas.append({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub(r"<[^>]+>", "", a)}} for q, a in faq]})
+    schema = json.dumps(schemas, ensure_ascii=False)
     image_meta = f'<meta property="og:image" content="{SITE}{image}">' if image else ''
     display_date = date.fromisoformat(modified).strftime("%d %B %Y").lstrip('0')
     title, desc, h1 = escape(title), escape(desc), escape(h1)
@@ -248,7 +274,7 @@ print("wrote index")
 for slug, p in POSTS.items():
     related = [{"slug": s, "t": POSTS[s]["h1"]} for s in p.get("rel", []) if s in POSTS]
     html = page(slug, p["title"], p["desc"], p["h1"], p["body"].replace("__FREE__", FREE), related,
-                p.get("modified", DATE), p.get("image"), p.get("published", DATE))
+                p.get("modified", DATE), p.get("image"), p.get("published", DATE), p.get("faq"))
     import re as _re
     html = html.replace('<a target="_blank" rel="noopener" ', "<a ").replace('href="https://captionsgen.lemonsqueezy', 'target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy')
     with io.open(os.path.join("blog", slug + ".html"), "w", encoding="utf-8", newline="") as f:

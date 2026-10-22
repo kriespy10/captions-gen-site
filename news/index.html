@@ -102,6 +102,26 @@
   }
   .ver { display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.06em; color:var(--blue); background:rgba(10,132,255,.14); border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
   .post .pm { color:var(--muted); font-size:13px; margin-bottom:6px; }
+  .tldr { background:var(--card); border:1px solid var(--hair); border-left:3px solid var(--yellow); border-radius:0 14px 14px 0; padding:14px 20px 6px; margin:22px 0 26px; }
+  .tldr .t, .toc .t { color:var(--text); font-weight:700; margin:0 0 6px; font-size:15px; }
+  .tldr ul { margin:0; padding-left:20px; }
+  .toc { border:1px solid var(--hair); border-radius:14px; padding:14px 20px; margin:0 0 30px; }
+  .toc ol { margin:0; padding-left:22px; columns:2; column-gap:28px; }
+  .toc li { font-size:14.5px; margin-bottom:4px; break-inside:avoid; }
+  .toc a { color:var(--muted2); text-decoration:none; }
+  .toc a:hover { color:var(--text); }
+  @media (max-width:600px) { .toc ol { columns:1; } }
+  .tip, .note { border-radius:0 12px 12px 0; padding:10px 16px; margin:18px 0; font-size:15px; color:var(--muted2); }
+  .tip { background:rgba(48,209,88,.07); border-left:3px solid var(--green); }
+  .note { background:rgba(255,159,10,.07); border-left:3px solid var(--amber); }
+  .tip b, .note b { color:var(--text); }
+  .spec { width:100%; border-collapse:collapse; margin:14px 0 8px; font-size:15px; border:1px solid var(--hair); border-radius:12px; overflow:hidden; }
+  .spec th, .spec td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--hair); vertical-align:top; }
+  .spec th { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.06em; background:var(--card2); }
+  .spec td { color:var(--muted2); }
+  .spec td:first-child { color:var(--text); font-weight:600; white-space:nowrap; }
+  .spec tr:last-child td { border-bottom:0; }
+  .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; border:1px solid rgba(255,255,255,.35); }
   .ptable-legend { display:flex; flex-wrap:wrap; gap:6px 18px; color:var(--muted); font-size:12.5px; margin:10px 2px 0; }
 </style></head><body>
 <nav><div class="wrap">
