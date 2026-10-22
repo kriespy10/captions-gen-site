@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/analytics.css">
+<script defer src="/analytics.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
+<title>MrBeast Style Captions in Premiere Pro: Font, Bounce and Free Preset</title>
+<meta name="description" content="How to make MrBeast style captions in Premiere Pro: the comic font, thick outline, bouncing green word and the right settings. By hand, or free in one click.">
+<link rel="canonical" href="https://captionsgen.com/blog/mrbeast-style-captions-premiere-pro.html">
+<meta property="og:title" content="MrBeast Style Captions in Premiere Pro: Font, Bounce and Free Preset">
+<meta property="og:description" content="How to make MrBeast style captions in Premiere Pro: the comic font, thick outline, bouncing green word and the right settings. By hand, or free in one click.">
+<meta property="og:url" content="https://captionsgen.com/blog/mrbeast-style-captions-premiere-pro.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://captionsgen.com/img/guides/mrbeast-anatomy.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "MrBeast style captions in Premiere Pro", "datePublished": "2026-10-22", "dateModified": "2026-10-22", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/mrbeast-style-captions-premiere-pro.html", "image": "https://captionsgen.com/img/guides/mrbeast-anatomy.png"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "MrBeast style captions in Premiere Pro", "item": "https://captionsgen.com/blog/mrbeast-style-captions-premiere-pro.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What font is used for MrBeast captions?", "acceptedAnswer": {"@type": "Answer", "text": "Editors usually recreate the look with a bold comic font such as Bangers or Luckiest Guy. Both are free on Google Fonts."}}, {"@type": "Question", "name": "How do I make words bounce in Premiere Pro?", "acceptedAnswer": {"@type": "Answer", "text": "Keyframe the Scale of each word: about 80% on the first frame, about 110% two or three frames later, then 100%. Captions Gen does this for every word automatically."}}, {"@type": "Question", "name": "Is there a free MrBeast captions preset for Premiere Pro?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Captions Gen is a free plugin for Premiere Pro on Windows. Its Beast Comic preset uses Bangers with a green bouncing word, and Gamer uses Luckiest Guy with a cyan word."}}, {"@type": "Question", "name": "Should I use MrBeast style captions on long YouTube videos?", "acceptedAnswer": {"@type": "Answer", "text": "Use them for the big moments, like the hook, numbers and reveals. For a whole long video, a calmer style such as Podcast or Subtitle Box is easier to watch."}}, {"@type": "Question", "name": "Does it work on Mac?", "acceptedAnswer": {"@type": "Answer", "text": "Captions Gen is Windows only for now. On a Mac you can still build the look by hand with the steps in this guide."}}]}]</script>
+<style>
+  :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
+    --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
+    --green:#30d158; --amber:#ff9f0a; --red:#ff6b6b; --cyan:#64d2ff; --card2:#1b1b1e; --pick:#0d1a2b;
+    --body:"Instrument Sans",-apple-system,"Segoe UI",system-ui,sans-serif; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:var(--body); background:var(--bg); color:var(--text); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 24px; }
+  .col { max-width:720px; margin:0 auto; padding:0 20px; }
+  nav { position:sticky; top:0; z-index:20; backdrop-filter:saturate(160%) blur(18px); -webkit-backdrop-filter:saturate(160%) blur(18px); background:rgba(7,7,8,.66); border-bottom:1px solid var(--hair); }
+  nav .wrap { display:flex; align-items:center; justify-content:space-between; height:54px; }
+  nav a { text-decoration:none; }
+  .brand { display:flex; align-items:center; gap:10px; color:var(--text); font-weight:600; font-size:15px; letter-spacing:-.01em; }
+  .brand svg { width:26px; height:26px; display:block; }
+  nav .links { display:flex; gap:24px; font-size:13.5px; align-items:center; }
+  nav .links a { color:var(--muted2); }
+  nav .links a:hover { color:var(--text); }
+  nav .links a.on { color:var(--text); }
+  nav .links a.buy { color:#fff; background:var(--blue); padding:7px 15px; border-radius:999px; font-weight:600; }
+  nav .links a.buy:hover { background:var(--blue2); }
+  @media (max-width:800px) { nav .links a:not(.buy):not(.on) { display:none; } }
+  .idx h1 { margin-bottom:6px; } .idx .sub { color:var(--muted); margin-bottom:26px; }
+  .post { display:block; background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px; margin-bottom:12px; text-decoration:none; }
+  .post:hover { border-color:var(--hair2); }
+  .post .pt { color:var(--text); font-weight:700; font-size:18px; margin-bottom:4px; }
+  .post .pd { color:var(--muted2); font-size:14px; }
+  article { padding:40px 0 20px; }
+  h1 { font-size:34px; line-height:1.2; letter-spacing:-.02em; margin:0 0 10px; }
+  .meta { color:var(--muted); font-size:13px; margin-bottom:28px; }
+  .breadcrumbs { font-size:13px; color:var(--muted); margin:0 0 16px; }
+  .breadcrumbs a { color:var(--muted2); }
+  .sources { font-size:13px; margin-top:28px; }
+  .caption-example { margin:24px 0; }
+  .caption-example img { display:block; width:100%; height:auto; border-radius:12px; }
+  .caption-example figcaption { color:var(--muted); font-size:13px; margin-top:8px; }
+  .quick-answer { margin-top:20px; }
+  .quick-answer ul { margin-bottom:0; }
+  h2 { font-size:22px; margin:36px 0 10px; letter-spacing:-.01em; }
+  h2[id] { scroll-margin-top:78px; }
+  h3 { font-size:17px; margin:24px 0 8px; }
+  p, li { color:var(--muted2); font-size:16px; }
+  li { margin-bottom:6px; }
+  strong { color:var(--text); }
+  a { color:var(--blue); }
+  a:hover { color:var(--blue2); }
+  ol li::marker { color:var(--yellow); font-weight:700; }
+  .box { background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px; margin:32px 0; }
+  .box p { margin:6px 0; }
+  .box .t { color:var(--text); font-weight:700; }
+  kbd { background:var(--card); border:1px solid var(--hair2); border-radius:5px; padding:1px 6px; font-size:13px; color:var(--text); }
+  footer { border-top:1px solid var(--hair); margin-top:48px; padding:24px 0 48px; color:var(--muted); font-size:13px; }
+  footer a { color:var(--muted); }
+  .cta-line { background:rgba(10,132,255,.08); border-left:3px solid var(--blue); padding:10px 14px; border-radius:0 10px 10px 0; margin:18px 0 6px; font-size:15px; }
+  .btn { display:inline-block; background:var(--yellow); color:#111; font-weight:700; text-decoration:none; padding:11px 18px; border-radius:10px; margin:10px 10px 0 0; }
+  .btn:hover { color:#111; background:#fff176; }
+  .btn.ghost { background:transparent; color:var(--text); border:1px solid var(--hair2); }
+  .btn.ghost:hover { color:var(--text); background:rgba(255,255,255,.06); }
+  .ptable-wrap { position:relative; left:50%; transform:translateX(-50%); width:min(1100px, calc(100vw - 40px)); margin:18px 0 6px; border:1px solid var(--hair2); border-radius:16px; overflow-x:auto; background:var(--card); -webkit-overflow-scrolling:touch; }
+  .ptable { width:100%; min-width:1040px; border-collapse:separate; border-spacing:0; font-size:14px; font-variant-numeric:tabular-nums; }
+  .ptable th { background:var(--card2); color:var(--muted); font-size:11.5px; font-weight:600; text-transform:uppercase; letter-spacing:.07em; text-align:left; padding:12px 11px; border-bottom:1px solid var(--hair2); white-space:nowrap; }
+  .ptable td { padding:14px 11px; border-bottom:1px solid var(--hair); color:var(--muted2); vertical-align:middle; line-height:1.4; }
+  .ptable tr:last-child td { border-bottom:0; }
+  .ptable tbody tr:hover td { background:var(--card2); }
+  .ptable td:first-child, .ptable th:first-child { position:sticky; left:0; z-index:1; background:var(--card); border-right:1px solid var(--hair); }
+  .ptable th:first-child { background:var(--card2); }
+  .ptable tbody tr:hover td:first-child { background:var(--card2); }
+  .ptable .tool { color:var(--text); font-weight:700; font-size:15px; white-space:nowrap; }
+  .ptable .sub { color:var(--muted); font-size:12.5px; margin-top:2px; }
+  .ptable .price { color:var(--text); font-weight:600; white-space:nowrap; }
+  .ptable td:nth-child(2) .sub { white-space:nowrap; }
+  .ptable tr.pick td, .ptable tr.pick:hover td { background:var(--pick); }
+  .ptable tr.pick td:first-child { box-shadow:inset 3px 0 0 var(--yellow); }
+  .ptable .tag { display:inline-block; margin-left:6px; padding:2px 8px; border-radius:999px; border:1px solid var(--yellow); color:var(--yellow); font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; vertical-align:2px; }
+  .pill { display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:999px; font-size:12.5px; font-weight:600; white-space:nowrap; border:1px solid currentColor; }
+  .pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+  .pill.ok { color:var(--green); } .pill.sub { color:var(--amber); } .pill.mix { color:var(--cyan); } .pill.neutral { color:var(--muted2); }
+  .mark { display:inline-flex; align-items:center; gap:7px; white-space:nowrap; }
+  .mark i { font-style:normal; display:inline-grid; place-items:center; width:20px; height:20px; border-radius:50%; font-size:12px; font-weight:800; border:1px solid currentColor; }
+  .mark.yes { color:var(--green); } .mark.no { color:var(--red); } .mark.na { color:var(--muted); }
+  .yr { min-width:150px; }
+  .yr .amt { color:var(--text); font-weight:600; white-space:nowrap; }
+  .yr .bar { position:relative; height:6px; margin-top:7px; border-radius:3px; background:var(--hair); overflow:hidden; }
+  .yr .bar span { position:absolute; left:0; top:0; bottom:0; border-radius:3px; background:var(--amber); }
+  .yr .bar span.lo { background:var(--green); }
+  .yr .bar span.range { opacity:.35; }
+  @media (max-width:600px) {
+    .ptable-wrap { left:0; transform:none; width:auto; }
+    .ptable .tool + .sub { display:none; }
+    .ptable td:first-child { max-width:132px; }
+    .ptable .tool { white-space:normal; font-size:14px; }
+    .ptable .tag { display:block; width:max-content; margin:5px 0 0; }
+  }
+  .ver { display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.06em; color:var(--blue); background:rgba(10,132,255,.14); border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .post .pm { color:var(--muted); font-size:13px; margin-bottom:6px; }
+  .tldr { background:var(--card); border:1px solid var(--hair); border-left:3px solid var(--yellow); border-radius:0 14px 14px 0; padding:14px 20px 6px; margin:22px 0 26px; }
+  .tldr .t, .toc .t { color:var(--text); font-weight:700; margin:0 0 6px; font-size:15px; }
+  .tldr ul { margin:0; padding-left:20px; }
+  .toc { border:1px solid var(--hair); border-radius:14px; padding:14px 20px; margin:0 0 30px; }
+  .toc ol { margin:0; padding-left:22px; columns:2; column-gap:28px; }
+  .toc li { font-size:14.5px; margin-bottom:4px; break-inside:avoid; }
+  .toc a { color:var(--muted2); text-decoration:none; }
+  .toc a:hover { color:var(--text); }
+  @media (max-width:600px) { .toc ol { columns:1; } }
+  .tip, .note { border-radius:0 12px 12px 0; padding:10px 16px; margin:18px 0; font-size:15px; color:var(--muted2); }
+  .tip { background:rgba(48,209,88,.07); border-left:3px solid var(--green); }
+  .note { background:rgba(255,159,10,.07); border-left:3px solid var(--amber); }
+  .tip b, .note b { color:var(--text); }
+  .spec { width:100%; border-collapse:collapse; margin:14px 0 8px; font-size:15px; border:1px solid var(--hair); border-radius:12px; overflow:hidden; }
+  .spec th, .spec td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--hair); vertical-align:top; }
+  .spec th { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.06em; background:var(--card2); }
+  .spec td { color:var(--muted2); }
+  .spec td:first-child { color:var(--text); font-weight:600; white-space:nowrap; }
+  .spec tr:last-child td { border-bottom:0; }
+  .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; border:1px solid rgba(255,255,255,.35); }
+  .ptable-legend { display:flex; flex-wrap:wrap; gap:6px 18px; color:var(--muted); font-size:12.5px; margin:10px 2px 0; }
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
+  <div class="links">
+    <a href="https://captionsgen.com/#styles">Styles</a>
+    <a href="https://captionsgen.com/#custom">Build your own</a>
+    <a href="https://captionsgen.com/#how">How it works</a>
+    <a href="https://captionsgen.com/#install">Install</a>
+    <a href="https://captionsgen.com/#faq">FAQ</a>
+    <a class="on" href="https://captionsgen.com/blog/">Guides</a>
+    <a href="https://captionsgen.com/news/">News</a>
+    <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
+  </div>
+</div></nav>
+<article><div class="col">
+<p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / MrBeast style captions in Premiere Pro</p>
+<h1>MrBeast style captions in Premiere Pro</h1>
+<div class="meta">Updated <time datetime="2026-10-22">22 October 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+
+<p>MrBeast style captions are loud, fun and hard to miss. A comic font, one or two words at a time, a very thick outline, and the spoken word in a bright color that bounces in.</p>
+<p>This guide covers the font, the settings, the bounce, and how to make the look in Premiere Pro: by hand, or free in one click.</p>
+<div class="tldr"><p class="t">In short</p><ul><li>Font: a comic font like Bangers or Luckiest Guy, all caps.</li><li>Style: a very thick black outline and a hard shadow with no blur.</li><li>Highlight: the spoken word in neon green, yellow or cyan.</li><li>Motion: each word bounces in, growing past full size and settling.</li><li>Free option: the Beast Comic preset in <a href="https://captionsgen.com/">Captions Gen</a>.</li></ul></div><nav class="toc" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#what-it-is">What MrBeast style captions are</a></li><li><a href="#font">The font</a></li><li><a href="#settings">The exact settings</a></li><li><a href="#bounce">The bounce</a></li><li><a href="#by-hand">Method 1: by hand</a></li><li><a href="#plugin">Method 2: free with Captions Gen</a></li><li><a href="#tips">Tips for better results</a></li></ol></nav>
+<h2 id="what-it-is">What MrBeast style captions are</h2>
+<p>The look comes from the high-energy style of MrBeast's videos and the shorts cut from them. It feels like a comic book: big letters, bold colors and a lot of movement.</p>
+<p>It's built to grab attention in the first seconds of a short, which is why gaming, challenge and reaction channels use it a lot.</p>
+<figure class="caption-example"><img src="/img/guides/mrbeast-anatomy.png" width="1280" height="720" loading="lazy" alt="A MrBeast style caption with four labels: comic font in all caps, very thick outline and hard shadow, the spoken word in bright green, and one or two words at a time"><figcaption>The four things that make the look.</figcaption></figure>
+<h2 id="font">The font</h2>
+<p>You need a bold, slightly playful font. These two free fonts are the usual picks:</p>
+<ul>
+<li><strong>Bangers</strong>: narrow comic letters with a slant. Closest to the classic look.</li>
+<li><strong>Luckiest Guy</strong>: round and chunky. Feels more like a game.</li>
+</ul>
+<p>Both are on Google Fonts. Restart Premiere Pro after you install them.</p>
+<p class="tip"><b>Tip:</b> The Captions Gen installer adds Bangers and Luckiest Guy for you.</p>
+<h2 id="settings">The exact settings</h2>
+<p>These are the settings of the Beast Comic preset in Captions Gen.</p>
+<table class="spec">
+<thead><tr><th>Setting</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>Font</td><td>Bangers</td></tr>
+<tr><td>Case</td><td>ALL CAPS</td></tr>
+<tr><td>Text color</td><td><span class="swatch" style="background:#ffffff"></span>White #FFFFFF</td></tr>
+<tr><td>Outline</td><td><span class="swatch" style="background:#000000"></span>Black, very thick</td></tr>
+<tr><td>Shadow</td><td>Black, hard edge, almost no blur</td></tr>
+<tr><td>Spoken word</td><td><span class="swatch" style="background:#39FF14"></span>Neon green #39FF14, noticeably bigger</td></tr>
+<tr><td>Words on screen</td><td>1 to 2</td></tr>
+<tr><td>Animation</td><td>A bouncy pop on every word</td></tr>
+</tbody>
+</table>
+<p>Other colors that fit the look: <span class="swatch" style="background:#F7C204"></span>yellow #F7C204 and <span class="swatch" style="background:#00E5FF"></span>cyan #00E5FF.</p>
+
+<h2 id="bounce">The bounce</h2>
+<p>The bounce is what makes the captions feel alive. Each word starts small, grows a little past full size, then settles.</p>
+<figure class="caption-example"><img src="/img/guides/bounce-animation.png" width="1280" height="720" loading="lazy" alt="The word YOUR at 80% size on frame 0, 110% on frame 3 and 100% on frame 5, with a curve showing the scale going past 100% and settling"><figcaption>Small, then a little too big, then normal. All in about five frames.</figcaption></figure>
+<p>That small overshoot is the trick. Without it, the word just grows and looks stiff.</p>
+
+<h2 id="by-hand">Method 1: by hand in Premiere Pro</h2>
+<ol>
+<li><strong>Install the font.</strong> Get Bangers or Luckiest Guy and restart Premiere.</li>
+<li><strong>Transcribe and create captions.</strong> In <kbd>Window</kbd> &gt; <kbd>Text</kbd>, transcribe the sequence and create captions with the shortest line length.</li>
+<li><strong>Turn captions into graphics.</strong> Right-click them and choose <em>Upgrade Caption to Graphic</em>.</li>
+<li><strong>Style one graphic.</strong> Comic font, all caps, thick black stroke, hard shadow. Save it as a Master Style and apply it to the rest.</li>
+<li><strong>Add the bounce.</strong> For each word, keyframe Scale: 80% on the first frame, 110% on frame 3, 100% on frame 5.</li>
+<li><strong>Color the spoken word.</strong> Make it green, and move the color along as the next word starts.</li>
+</ol>
+<p class="note"><b>Note:</b> This looks great but takes a long time. The bounce and color need setting for every word, and a 60-second video has around 150 of them.</p>
+<h2 id="plugin">Method 2: free with Captions Gen</h2>
+<p><a href="https://captionsgen.com/">Captions Gen</a> is a free plugin that does the transcript, timing, color and bounce for you.</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download Captions Gen</a> and run the installer. It needs Windows 10 or 11 and Premiere Pro 25.0 or newer.</li>
+<li>Open Premiere Pro and go to <kbd>Window</kbd> &gt; <kbd>UXP Plugins</kbd> &gt; <kbd>Captions Gen</kbd>.</li>
+<li>Select the clip with the voice in your timeline.</li>
+</ol>
+<p>Then make the captions:</p>
+<ol start="4">
+<li>On the <strong>Presets</strong> tab, tap <strong>Beast Comic</strong>.</li>
+<li>Press <strong>Generate</strong>.</li>
+</ol>
+<p>Every word gets its own timing, color and bounce, as editable graphics on your timeline.</p>
+<figure class="caption-example"><img src="/img/guides/panel-steps.jpg" width="1200" height="399" loading="lazy" alt="The Captions Gen panel: pick a look on the Presets tab, then change the highlight color and size on the Customize tab"><figcaption>Step 1: pick a look on Presets. Step 2: make it yours on Customize. Then press Generate.</figcaption></figure>
+<h3>Make it your own</h3>
+<p>On the <strong>Customize</strong> tab you can:</p>
+<ul>
+<li>Change the highlight color.</li>
+<li>Set <strong>Max words</strong> to 1 for a punchier feel.</li>
+<li>Make the spoken word bigger with <strong>Highlight size</strong>.</li>
+<li>Move the captions with <strong>Position from top</strong>.</li>
+</ul>
+<p>Save it as your own preset and star it, so it's ready for the next video.</p>
+
+<h3>Another option: Gamer</h3>
+<p>The <strong>Gamer</strong> preset uses Luckiest Guy with an even thicker outline and a cyan word. Great for gaming and reaction videos.</p>
+<figure class="caption-example"><img src="/img/styles/Gamer.png" width="1280" height="480" loading="lazy" alt="Gamer caption preset: USE YOUR in a chunky round font with YOUR in cyan"><figcaption>Gamer: chunky letters and a bouncing cyan word.</figcaption></figure>
+<h2 id="tips">Tips for better results</h2>
+<ul>
+<li><strong>Give big words their own screen.</strong> Numbers, money and names hit harder alone.</li>
+<li><strong>Go bigger in the hook.</strong> Raise the text size for the first three seconds, then bring it back down.</li>
+<li><strong>Keep the outline thick.</strong> On a busy background a thick outline reads better than a box behind the text.</li>
+<li><strong>Mind the buttons.</strong> On Shorts, Reels and TikTok, keep captions above the bottom fifth of the frame.</li>
+</ul>
+<figure class="caption-example"><img src="/img/guides/vertical-safe-zone.png" width="1280" height="720" loading="lazy" alt="A 9:16 phone frame with the caption area marked in green, and the bottom and right edge marked in red where TikTok, Reels and Shorts put their buttons"><figcaption>Keep captions out of the red areas on TikTok, Reels and Shorts.</figcaption></figure>
+<p class="sources">"MrBeast style" is the name editors use for this look. Captions Gen isn't affiliated with MrBeast; the preset is named after what it looks like.</p>
+
+<h2>Questions people ask</h2>
+<h3>What font is used for MrBeast captions?</h3>
+<p>Editors usually recreate the look with a bold comic font such as Bangers or Luckiest Guy. Both are free on Google Fonts.</p>
+<h3>How do I make words bounce in Premiere Pro?</h3>
+<p>Keyframe the Scale of each word: about 80% on the first frame, about 110% two or three frames later, then 100%. Captions Gen does this for every word automatically.</p>
+<h3>Is there a free MrBeast captions preset for Premiere Pro?</h3>
+<p>Yes. Captions Gen is a free plugin for Premiere Pro on Windows. Its Beast Comic preset uses Bangers with a green bouncing word, and Gamer uses Luckiest Guy with a cyan word.</p>
+<h3>Should I use MrBeast style captions on long YouTube videos?</h3>
+<p>Use them for the big moments, like the hook, numbers and reveals. For a whole long video, a calmer style such as Podcast or Subtitle Box is easier to watch.</p>
+<h3>Does it work on Mac?</h3>
+<p>Captions Gen is Windows only for now. On a Mac you can still build the look by hand with the steps in this guide.</p>
+
+<div class="box">
+<p class="t">Try animated captions on your own edit</p>
+<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and one-click restyling of placed captions. Native captions remain useful when you need subtitles or a separate caption file.</p>
+<p><strong>Windows 10/11 · Premiere Pro 25.0+</strong>. Free, with no time limit and no watermark.</p>
+<a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download free</a>
+<a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
+</div>
+
+<div class="box"><p class="t">Related guides</p><ul><li><a href="hormozi-style-captions-premiere-pro.html">Hormozi style captions in Premiere Pro</a></li>
+<li><a href="free-caption-templates-premiere-pro.html">Free caption templates for Premiere Pro</a></li>
+<li><a href="captions-for-tiktok-reels-shorts-premiere-pro.html">Captions for TikTok, Reels and Shorts in Premiere Pro</a></li>
+<li><a href="animated-captions-premiere-pro.html">Animated captions in Premiere Pro: choose your workflow</a></li></ul></div>
+</div></article>
+<footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="https://captionsgen.com/news/">News</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/analytics.css">
+<script defer src="/analytics.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
+<title>Hormozi Style Captions in Premiere Pro: Font, Settings and Free Preset</title>
+<meta name="description" content="How to make Hormozi style captions in Premiere Pro: the font, the exact settings, the yellow word highlight and where to place them. By hand, or free in one click.">
+<link rel="canonical" href="https://captionsgen.com/blog/hormozi-style-captions-premiere-pro.html">
+<meta property="og:title" content="Hormozi Style Captions in Premiere Pro: Font, Settings and Free Preset">
+<meta property="og:description" content="How to make Hormozi style captions in Premiere Pro: the font, the exact settings, the yellow word highlight and where to place them. By hand, or free in one click.">
+<meta property="og:url" content="https://captionsgen.com/blog/hormozi-style-captions-premiere-pro.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://captionsgen.com/img/guides/hormozi-anatomy.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Hormozi style captions in Premiere Pro", "datePublished": "2026-10-22", "dateModified": "2026-10-22", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/hormozi-style-captions-premiere-pro.html", "image": "https://captionsgen.com/img/guides/hormozi-anatomy.png"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Hormozi style captions in Premiere Pro", "item": "https://captionsgen.com/blog/hormozi-style-captions-premiere-pro.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What font is used for Hormozi captions?", "acceptedAnswer": {"@type": "Answer", "text": "Editors usually recreate the look with Montserrat Black or Montserrat ExtraBold in all caps. Both are free Google Fonts. Anton is a good choice if you want taller, narrower letters."}}, {"@type": "Question", "name": "Can Premiere Pro make Hormozi captions without a plugin?", "acceptedAnswer": {"@type": "Answer", "text": "Partly. Premiere can transcribe and style a caption track, but it can't color the spoken word. For that you upgrade the captions to graphics and change each word by hand, which takes a long time."}}, {"@type": "Question", "name": "Is there a free Hormozi captions preset for Premiere Pro?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Captions Gen is a free plugin for Premiere Pro on Windows. Its Bold Impact preset gives you heavy caps with the spoken word in yellow, and Punch gives a taller version."}}, {"@type": "Question", "name": "Can I change the yellow to green?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. In Captions Gen, open the Customize tab and pick a different highlight color. Save it as your own preset so every video uses it."}}, {"@type": "Question", "name": "Can I still edit the captions after generating them?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Captions Gen places normal graphic clips on your timeline. You can fix a word, move a clip or delete one like any other graphic."}}, {"@type": "Question", "name": "Does it work on Mac or in CapCut?", "acceptedAnswer": {"@type": "Answer", "text": "Captions Gen is Windows only for now and works inside Premiere Pro. CapCut has its own caption styles, so you don't need a plugin there."}}]}]</script>
+<style>
+  :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
+    --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
+    --green:#30d158; --amber:#ff9f0a; --red:#ff6b6b; --cyan:#64d2ff; --card2:#1b1b1e; --pick:#0d1a2b;
+    --body:"Instrument Sans",-apple-system,"Segoe UI",system-ui,sans-serif; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:var(--body); background:var(--bg); color:var(--text); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 24px; }
+  .col { max-width:720px; margin:0 auto; padding:0 20px; }
+  nav { position:sticky; top:0; z-index:20; backdrop-filter:saturate(160%) blur(18px); -webkit-backdrop-filter:saturate(160%) blur(18px); background:rgba(7,7,8,.66); border-bottom:1px solid var(--hair); }
+  nav .wrap { display:flex; align-items:center; justify-content:space-between; height:54px; }
+  nav a { text-decoration:none; }
+  .brand { display:flex; align-items:center; gap:10px; color:var(--text); font-weight:600; font-size:15px; letter-spacing:-.01em; }
+  .brand svg { width:26px; height:26px; display:block; }
+  nav .links { display:flex; gap:24px; font-size:13.5px; align-items:center; }
+  nav .links a { color:var(--muted2); }
+  nav .links a:hover { color:var(--text); }
+  nav .links a.on { color:var(--text); }
+  nav .links a.buy { color:#fff; background:var(--blue); padding:7px 15px; border-radius:999px; font-weight:600; }
+  nav .links a.buy:hover { background:var(--blue2); }
+  @media (max-width:800px) { nav .links a:not(.buy):not(.on) { display:none; } }
+  .idx h1 { margin-bottom:6px; } .idx .sub { color:var(--muted); margin-bottom:26px; }
+  .post { display:block; background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px; margin-bottom:12px; text-decoration:none; }
+  .post:hover { border-color:var(--hair2); }
+  .post .pt { color:var(--text); font-weight:700; font-size:18px; margin-bottom:4px; }
+  .post .pd { color:var(--muted2); font-size:14px; }
+  article { padding:40px 0 20px; }
+  h1 { font-size:34px; line-height:1.2; letter-spacing:-.02em; margin:0 0 10px; }
+  .meta { color:var(--muted); font-size:13px; margin-bottom:28px; }
+  .breadcrumbs { font-size:13px; color:var(--muted); margin:0 0 16px; }
+  .breadcrumbs a { color:var(--muted2); }
+  .sources { font-size:13px; margin-top:28px; }
+  .caption-example { margin:24px 0; }
+  .caption-example img { display:block; width:100%; height:auto; border-radius:12px; }
+  .caption-example figcaption { color:var(--muted); font-size:13px; margin-top:8px; }
+  .quick-answer { margin-top:20px; }
+  .quick-answer ul { margin-bottom:0; }
+  h2 { font-size:22px; margin:36px 0 10px; letter-spacing:-.01em; }
+  h2[id] { scroll-margin-top:78px; }
+  h3 { font-size:17px; margin:24px 0 8px; }
+  p, li { color:var(--muted2); font-size:16px; }
+  li { margin-bottom:6px; }
+  strong { color:var(--text); }
+  a { color:var(--blue); }
+  a:hover { color:var(--blue2); }
+  ol li::marker { color:var(--yellow); font-weight:700; }
+  .box { background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px; margin:32px 0; }
+  .box p { margin:6px 0; }
+  .box .t { color:var(--text); font-weight:700; }
+  kbd { background:var(--card); border:1px solid var(--hair2); border-radius:5px; padding:1px 6px; font-size:13px; color:var(--text); }
+  footer { border-top:1px solid var(--hair); margin-top:48px; padding:24px 0 48px; color:var(--muted); font-size:13px; }
+  footer a { color:var(--muted); }
+  .cta-line { background:rgba(10,132,255,.08); border-left:3px solid var(--blue); padding:10px 14px; border-radius:0 10px 10px 0; margin:18px 0 6px; font-size:15px; }
+  .btn { display:inline-block; background:var(--yellow); color:#111; font-weight:700; text-decoration:none; padding:11px 18px; border-radius:10px; margin:10px 10px 0 0; }
+  .btn:hover { color:#111; background:#fff176; }
+  .btn.ghost { background:transparent; color:var(--text); border:1px solid var(--hair2); }
+  .btn.ghost:hover { color:var(--text); background:rgba(255,255,255,.06); }
+  .ptable-wrap { position:relative; left:50%; transform:translateX(-50%); width:min(1100px, calc(100vw - 40px)); margin:18px 0 6px; border:1px solid var(--hair2); border-radius:16px; overflow-x:auto; background:var(--card); -webkit-overflow-scrolling:touch; }
+  .ptable { width:100%; min-width:1040px; border-collapse:separate; border-spacing:0; font-size:14px; font-variant-numeric:tabular-nums; }
+  .ptable th { background:var(--card2); color:var(--muted); font-size:11.5px; font-weight:600; text-transform:uppercase; letter-spacing:.07em; text-align:left; padding:12px 11px; border-bottom:1px solid var(--hair2); white-space:nowrap; }
+  .ptable td { padding:14px 11px; border-bottom:1px solid var(--hair); color:var(--muted2); vertical-align:middle; line-height:1.4; }
+  .ptable tr:last-child td { border-bottom:0; }
+  .ptable tbody tr:hover td { background:var(--card2); }
+  .ptable td:first-child, .ptable th:first-child { position:sticky; left:0; z-index:1; background:var(--card); border-right:1px solid var(--hair); }
+  .ptable th:first-child { background:var(--card2); }
+  .ptable tbody tr:hover td:first-child { background:var(--card2); }
+  .ptable .tool { color:var(--text); font-weight:700; font-size:15px; white-space:nowrap; }
+  .ptable .sub { color:var(--muted); font-size:12.5px; margin-top:2px; }
+  .ptable .price { color:var(--text); font-weight:600; white-space:nowrap; }
+  .ptable td:nth-child(2) .sub { white-space:nowrap; }
+  .ptable tr.pick td, .ptable tr.pick:hover td { background:var(--pick); }
+  .ptable tr.pick td:first-child { box-shadow:inset 3px 0 0 var(--yellow); }
+  .ptable .tag { display:inline-block; margin-left:6px; padding:2px 8px; border-radius:999px; border:1px solid var(--yellow); color:var(--yellow); font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; vertical-align:2px; }
+  .pill { display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:999px; font-size:12.5px; font-weight:600; white-space:nowrap; border:1px solid currentColor; }
+  .pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+  .pill.ok { color:var(--green); } .pill.sub { color:var(--amber); } .pill.mix { color:var(--cyan); } .pill.neutral { color:var(--muted2); }
+  .mark { display:inline-flex; align-items:center; gap:7px; white-space:nowrap; }
+  .mark i { font-style:normal; display:inline-grid; place-items:center; width:20px; height:20px; border-radius:50%; font-size:12px; font-weight:800; border:1px solid currentColor; }
+  .mark.yes { color:var(--green); } .mark.no { color:var(--red); } .mark.na { color:var(--muted); }
+  .yr { min-width:150px; }
+  .yr .amt { color:var(--text); font-weight:600; white-space:nowrap; }
+  .yr .bar { position:relative; height:6px; margin-top:7px; border-radius:3px; background:var(--hair); overflow:hidden; }
+  .yr .bar span { position:absolute; left:0; top:0; bottom:0; border-radius:3px; background:var(--amber); }
+  .yr .bar span.lo { background:var(--green); }
+  .yr .bar span.range { opacity:.35; }
+  @media (max-width:600px) {
+    .ptable-wrap { left:0; transform:none; width:auto; }
+    .ptable .tool + .sub { display:none; }
+    .ptable td:first-child { max-width:132px; }
+    .ptable .tool { white-space:normal; font-size:14px; }
+    .ptable .tag { display:block; width:max-content; margin:5px 0 0; }
+  }
+  .ver { display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.06em; color:var(--blue); background:rgba(10,132,255,.14); border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .post .pm { color:var(--muted); font-size:13px; margin-bottom:6px; }
+  .tldr { background:var(--card); border:1px solid var(--hair); border-left:3px solid var(--yellow); border-radius:0 14px 14px 0; padding:14px 20px 6px; margin:22px 0 26px; }
+  .tldr .t, .toc .t { color:var(--text); font-weight:700; margin:0 0 6px; font-size:15px; }
+  .tldr ul { margin:0; padding-left:20px; }
+  .toc { border:1px solid var(--hair); border-radius:14px; padding:14px 20px; margin:0 0 30px; }
+  .toc ol { margin:0; padding-left:22px; columns:2; column-gap:28px; }
+  .toc li { font-size:14.5px; margin-bottom:4px; break-inside:avoid; }
+  .toc a { color:var(--muted2); text-decoration:none; }
+  .toc a:hover { color:var(--text); }
+  @media (max-width:600px) { .toc ol { columns:1; } }
+  .tip, .note { border-radius:0 12px 12px 0; padding:10px 16px; margin:18px 0; font-size:15px; color:var(--muted2); }
+  .tip { background:rgba(48,209,88,.07); border-left:3px solid var(--green); }
+  .note { background:rgba(255,159,10,.07); border-left:3px solid var(--amber); }
+  .tip b, .note b { color:var(--text); }
+  .spec { width:100%; border-collapse:collapse; margin:14px 0 8px; font-size:15px; border:1px solid var(--hair); border-radius:12px; overflow:hidden; }
+  .spec th, .spec td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--hair); vertical-align:top; }
+  .spec th { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.06em; background:var(--card2); }
+  .spec td { color:var(--muted2); }
+  .spec td:first-child { color:var(--text); font-weight:600; white-space:nowrap; }
+  .spec tr:last-child td { border-bottom:0; }
+  .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; border:1px solid rgba(255,255,255,.35); }
+  .ptable-legend { display:flex; flex-wrap:wrap; gap:6px 18px; color:var(--muted); font-size:12.5px; margin:10px 2px 0; }
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
+  <div class="links">
+    <a href="https://captionsgen.com/#styles">Styles</a>
+    <a href="https://captionsgen.com/#custom">Build your own</a>
+    <a href="https://captionsgen.com/#how">How it works</a>
+    <a href="https://captionsgen.com/#install">Install</a>
+    <a href="https://captionsgen.com/#faq">FAQ</a>
+    <a class="on" href="https://captionsgen.com/blog/">Guides</a>
+    <a href="https://captionsgen.com/news/">News</a>
+    <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
+  </div>
+</div></nav>
+<article><div class="col">
+<p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Hormozi style captions in Premiere Pro</p>
+<h1>Hormozi style captions in Premiere Pro</h1>
+<div class="meta">Updated <time datetime="2026-10-22">22 October 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+
+<p>Hormozi style captions are the big, bold captions you see on almost every business and podcast short. Two or three words at a time, heavy white caps with a black outline, and the word being spoken turns yellow.</p>
+<p>This guide shows you what makes the look, the exact settings, and two ways to make it in Premiere Pro: by hand, or free in one click.</p>
+<div class="tldr"><p class="t">In short</p><ul><li>Font: Montserrat Black or ExtraBold, all caps.</li><li>Style: white text, thick black outline, a soft shadow.</li><li>Highlight: the spoken word turns yellow (or green) and pops a little.</li><li>Length: two or three words on screen at a time.</li><li>Premiere can't highlight the spoken word by itself. A plugin like <a href="https://captionsgen.com/">Captions Gen</a> does it for free.</li></ul></div><nav class="toc" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#what-it-is">What Hormozi style captions are</a></li><li><a href="#font">The font</a></li><li><a href="#settings">The exact settings</a></li><li><a href="#highlight">How the word highlight works</a></li><li><a href="#by-hand">Method 1: by hand</a></li><li><a href="#plugin">Method 2: free with Captions Gen</a></li><li><a href="#placement">Where to place them</a></li><li><a href="#mistakes">Common mistakes</a></li></ol></nav>
+<h2 id="what-it-is">What Hormozi style captions are</h2>
+<p>The style is named after Alex Hormozi, whose short videos made it popular. Today it's one of the most copied caption looks on TikTok, Instagram Reels and YouTube Shorts.</p>
+<p>It works because it's easy to read with the sound off. The eye only has to take in a couple of words, and the color shows exactly where the speaker is.</p>
+<figure class="caption-example"><img src="/img/guides/hormozi-anatomy.png" width="1280" height="720" loading="lazy" alt="A Hormozi style caption with four labels: heavy font in all caps, thick black outline and shadow, the spoken word in yellow, and only two or three words on screen"><figcaption>The four things that make the look.</figcaption></figure>
+<h2 id="font">The font</h2>
+<p>The look needs a heavy, wide font in all caps. These free fonts all work:</p>
+<ul>
+<li><strong>Montserrat Black</strong>: the most common pick. Wide, round and very bold.</li>
+<li><strong>Montserrat ExtraBold</strong>: a little lighter if Black feels too heavy.</li>
+<li><strong>Anton</strong>: tall and narrow. Fits more letters on a vertical frame.</li>
+</ul>
+<p>All three are on Google Fonts. Install the font, then restart Premiere Pro so it shows up in the font list.</p>
+<p class="tip"><b>Tip:</b> Captions Gen installs Montserrat and Anton for you, so the presets look the same on your computer as in the preview.</p>
+<h2 id="settings">The exact settings</h2>
+<p>These are the settings of the Bold Impact preset in Captions Gen. Use them as a starting point if you build the look by hand.</p>
+<table class="spec">
+<thead><tr><th>Setting</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>Font</td><td>Montserrat Black</td></tr>
+<tr><td>Case</td><td>ALL CAPS</td></tr>
+<tr><td>Text color</td><td><span class="swatch" style="background:#ffffff"></span>White #FFFFFF</td></tr>
+<tr><td>Outline</td><td><span class="swatch" style="background:#000000"></span>Black, thick</td></tr>
+<tr><td>Shadow</td><td>Black, short distance, a little blur</td></tr>
+<tr><td>Spoken word</td><td><span class="swatch" style="background:#F7C204"></span>Yellow #F7C204, a little bigger</td></tr>
+<tr><td>Words on screen</td><td>2 to 3</td></tr>
+<tr><td>Animation</td><td>A quick pop as each group appears</td></tr>
+</tbody>
+</table>
+<p>Prefer green? Use <span class="swatch" style="background:#00E676"></span>#00E676. It's the green of the Karaoke preset.</p>
+
+<h2 id="highlight">How the word highlight works</h2>
+<p>The highlight is what makes this style hard to do by hand. Every word changes color at the exact moment it's spoken.</p>
+<figure class="caption-example"><img src="/img/guides/word-highlight-timing.png" width="1280" height="720" loading="lazy" alt="Three frames of the caption USE YOUR SHIELD: first USE is yellow, then YOUR, then SHIELD, at 0.00, 0.28 and 0.52 seconds"><figcaption>The yellow moves with the voice, one word at a time.</figcaption></figure>
+<p>So a three-word caption is really three versions of the same caption, one after the other. A 60-second video has around 150 spoken words, so that's 150 color changes.</p>
+
+<h2 id="by-hand">Method 1: by hand in Premiere Pro</h2>
+<p>This works with Premiere alone. It's fine for one short video, but slow if you post often.</p>
+<ol>
+<li><strong>Transcribe.</strong> Open <kbd>Window</kbd> &gt; <kbd>Text</kbd>, then click <em>Transcribe sequence</em>.</li>
+<li><strong>Create short captions.</strong> Click <em>Create captions</em> and set a low maximum length so you get two or three words per caption.</li>
+<li><strong>Style the track.</strong> Select the captions and set the font, caps, white fill, black stroke and shadow from the table above. Save it as a Track Style.</li>
+<li><strong>Turn captions into graphics.</strong> Right-click the captions and choose <em>Upgrade Caption to Graphic</em>.</li>
+<li><strong>Color each word.</strong> In each graphic, make the spoken word yellow. Cut the clip where the next word starts and move the color along.</li>
+<li><strong>Add the pop.</strong> Keyframe the scale from about 100% to 110% and back over a few frames.</li>
+</ol>
+<p class="note"><b>Note:</b> Steps 5 and 6 are the slow part: a few hundred cuts and color changes for one minute of video. A new take means doing them again.</p>
+<h2 id="plugin">Method 2: free with Captions Gen</h2>
+<p><a href="https://captionsgen.com/">Captions Gen</a> is a free plugin that does all six steps for you. It transcribes on your computer and places word-timed captions on your timeline.</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download Captions Gen</a> and run the installer. It needs Windows 10 or 11 and Premiere Pro 25.0 or newer.</li>
+<li>Open Premiere Pro and go to <kbd>Window</kbd> &gt; <kbd>UXP Plugins</kbd> &gt; <kbd>Captions Gen</kbd>.</li>
+<li>Select the clip with the voice in your timeline.</li>
+</ol>
+<p>Then make the captions:</p>
+<ol start="4">
+<li>On the <strong>Presets</strong> tab, tap <strong>Bold Impact</strong>. The preview plays the look.</li>
+<li>Press <strong>Generate</strong>.</li>
+</ol>
+<p>That's it. Each word gets its own timing and color, as editable graphics on the track above your clip.</p>
+<figure class="caption-example"><img src="/img/guides/panel-steps.jpg" width="1200" height="399" loading="lazy" alt="The Captions Gen panel: pick a look on the Presets tab, then change the highlight color and size on the Customize tab"><figcaption>Step 1: pick a look on Presets. Step 2: make it yours on Customize. Then press Generate.</figcaption></figure>
+<h3>Make it your own</h3>
+<p>Open the <strong>Customize</strong> tab to change the look. The changes show in the preview right away.</p>
+<ul>
+<li><strong>Highlight color:</strong> switch yellow to green, red or blue.</li>
+<li><strong>Max words:</strong> how many words show at once. Two or three is the classic look.</li>
+<li><strong>Text size</strong> and <strong>Highlight size:</strong> how big the text is and how much the spoken word grows.</li>
+<li><strong>Position from top:</strong> move the captions up or down.</li>
+<li><strong>Animation:</strong> how each group comes in, such as Pop or Bounce.</li>
+</ul>
+<p>Happy with it? Click <strong>Save as new</strong> and star it. The panel opens on your starred preset next time, so every video gets the same look.</p>
+
+<h3>A taller version</h3>
+<p>The <strong>Punch</strong> preset is the same idea in Anton, a tall and narrow font. It fits longer words on a vertical frame.</p>
+<figure class="caption-example"><img src="/img/styles/Punch.png" width="1280" height="480" loading="lazy" alt="Punch caption preset: tall narrow caps with the spoken word in yellow"><figcaption>Punch: the same look in a tall, narrow font.</figcaption></figure>
+<h2 id="placement">Where to place them</h2>
+<p>On vertical video, the app's buttons cover parts of the frame. Put your captions a little below the middle, away from the bottom and the right edge.</p>
+<figure class="caption-example"><img src="/img/guides/vertical-safe-zone.png" width="1280" height="720" loading="lazy" alt="A 9:16 phone frame with the caption area marked in green, and the bottom and right edge marked in red where TikTok, Reels and Shorts put their buttons"><figcaption>Keep captions out of the red areas on TikTok, Reels and Shorts.</figcaption></figure>
+<h2 id="mistakes">Common mistakes</h2>
+<ul>
+<li><strong>Too many words.</strong> The look falls apart as a full sentence. Keep it to three words or fewer.</li>
+<li><strong>Two highlight colors.</strong> Pick yellow or green for the whole video. Switching looks like a mistake.</li>
+<li><strong>A thin outline.</strong> Over a bright shot the white text disappears. Keep the outline thick.</li>
+<li><strong>Typos in names.</strong> Check the transcript before you style anything. Captions Gen can show you the transcript first: turn on <em>Check transcript before generating</em>.</li>
+</ul>
+<p class="sources">"Hormozi style" is the name editors use for this look. Captions Gen isn't affiliated with Alex Hormozi; the preset is named after what it looks like.</p>
+
+<h2>Questions people ask</h2>
+<h3>What font is used for Hormozi captions?</h3>
+<p>Editors usually recreate the look with Montserrat Black or Montserrat ExtraBold in all caps. Both are free Google Fonts. Anton is a good choice if you want taller, narrower letters.</p>
+<h3>Can Premiere Pro make Hormozi captions without a plugin?</h3>
+<p>Partly. Premiere can transcribe and style a caption track, but it can't color the spoken word. For that you upgrade the captions to graphics and change each word by hand, which takes a long time.</p>
+<h3>Is there a free Hormozi captions preset for Premiere Pro?</h3>
+<p>Yes. Captions Gen is a free plugin for Premiere Pro on Windows. Its Bold Impact preset gives you heavy caps with the spoken word in yellow, and Punch gives a taller version.</p>
+<h3>Can I change the yellow to green?</h3>
+<p>Yes. In Captions Gen, open the Customize tab and pick a different highlight color. Save it as your own preset so every video uses it.</p>
+<h3>Can I still edit the captions after generating them?</h3>
+<p>Yes. Captions Gen places normal graphic clips on your timeline. You can fix a word, move a clip or delete one like any other graphic.</p>
+<h3>Does it work on Mac or in CapCut?</h3>
+<p>Captions Gen is Windows only for now and works inside Premiere Pro. CapCut has its own caption styles, so you don't need a plugin there.</p>
+
+<div class="box">
+<p class="t">Try animated captions on your own edit</p>
+<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and one-click restyling of placed captions. Native captions remain useful when you need subtitles or a separate caption file.</p>
+<p><strong>Windows 10/11 · Premiere Pro 25.0+</strong>. Free, with no time limit and no watermark.</p>
+<a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download free</a>
+<a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
+</div>
+
+<div class="box"><p class="t">Related guides</p><ul><li><a href="mrbeast-style-captions-premiere-pro.html">MrBeast style captions in Premiere Pro</a></li>
+<li><a href="free-caption-templates-premiere-pro.html">Free caption templates for Premiere Pro</a></li>
+<li><a href="word-by-word-captions-premiere-pro.html">Word by word captions in Premiere Pro</a></li>
+<li><a href="highlight-words-in-captions-premiere-pro.html">How to highlight words in captions in Premiere Pro</a></li></ul></div>
+</div></article>
+<footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="https://captionsgen.com/news/">News</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>
+</body>
+</html>
