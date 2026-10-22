@@ -115,6 +115,18 @@ CSS = """
   .toc a { color:var(--muted2); text-decoration:none; }
   .toc a:hover { color:var(--text); }
   @media (max-width:600px) { .toc ol { columns:1; } }
+  article .col { position:relative; }
+  .toc-rail { display:none; }
+  @media (min-width:1040px) {
+    article .col.has-toc { margin-left:max(0px, calc(50% - 480px)); }
+    .toc-inline { display:none; }
+    .toc-rail { display:block; position:absolute; top:0; bottom:0; left:calc(100% + 28px); width:212px; }
+    .toc-side { position:sticky; top:84px; margin:0; border:0; border-left:1px solid var(--hair2); border-radius:0; padding:2px 0 2px 18px; }
+    .toc-side ol { columns:1; list-style:none; padding:0; }
+    .toc-side li { font-size:14px; line-height:1.45; margin-bottom:9px; }
+    .toc-side a.on { color:var(--text); }
+    .toc-side a.on::before { content:""; position:absolute; left:-1px; width:2px; height:1.4em; background:var(--yellow); }
+  }
   .tip, .note { border-radius:0 12px 12px 0; padding:10px 16px; margin:18px 0; font-size:15px; color:var(--muted2); }
   .tip { background:rgba(48,209,88,.07); border-left:3px solid var(--green); }
   .note { background:rgba(255,159,10,.07); border-left:3px solid var(--amber); }
@@ -128,6 +140,12 @@ CSS = """
   .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; border:1px solid rgba(255,255,255,.35); }
   .ptable-legend { display:flex; flex-wrap:wrap; gap:6px 18px; color:var(--muted); font-size:12.5px; margin:10px 2px 0; }
 """
+
+# Marks the sidebar link of the section being read.
+TOC_JS = """(function(){function f(){var l=[].slice.call(document.querySelectorAll('.toc-side a')),i=0;
+l.forEach(function(a,k){var e=document.getElementById(a.hash.slice(1));if(e&&e.getBoundingClientRect().top<140)i=k});
+l.forEach(function(a,k){a.classList.toggle('on',k===i)})}
+addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',f)})();"""
 
 CLOSING = """
 <div class="box">
@@ -159,6 +177,12 @@ def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, p
             {"@type": "ListItem", "position": 3, "name": h1, "item": f"{SITE}/blog/{slug}.html"}
         ]
     }
+    toc_rail = ""
+    m = re.search(r'<aside class="toc toc-inline".*?</aside>', body_html, re.S)
+    if m:
+        # Same list as a sticky sidebar on wide screens; the inline copy shows on smaller ones.
+        side = m.group(0).replace('class="toc toc-inline"', 'class="toc toc-side"', 1)
+        toc_rail = f'<div class="toc-rail">{side}</div>\n<script>{TOC_JS}</script>'
     schemas = [article, breadcrumb]
     if faq:
         # Optional (question, answer_html) pairs: shown at the end of the guide and as FAQPage data.
@@ -202,7 +226,8 @@ def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, p
     <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
   </div>
 </div></nav>
-<article><div class="col">
+<article><div class="col{' has-toc' if toc_rail else ''}">
+{toc_rail}
 <p class="breadcrumbs"><a href="{SITE}/">Home</a> / <a href="{SITE}/blog/">Caption guides</a> / {h1}</p>
 <h1>{h1}</h1>
 <div class="meta">Updated <time datetime="{modified}">{display_date}</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>

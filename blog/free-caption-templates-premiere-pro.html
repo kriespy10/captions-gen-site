@@ -119,6 +119,18 @@
   .toc a { color:var(--muted2); text-decoration:none; }
   .toc a:hover { color:var(--text); }
   @media (max-width:600px) { .toc ol { columns:1; } }
+  article .col { position:relative; }
+  .toc-rail { display:none; }
+  @media (min-width:1040px) {
+    article .col.has-toc { margin-left:max(0px, calc(50% - 480px)); }
+    .toc-inline { display:none; }
+    .toc-rail { display:block; position:absolute; top:0; bottom:0; left:calc(100% + 28px); width:212px; }
+    .toc-side { position:sticky; top:84px; margin:0; border:0; border-left:1px solid var(--hair2); border-radius:0; padding:2px 0 2px 18px; }
+    .toc-side ol { columns:1; list-style:none; padding:0; }
+    .toc-side li { font-size:14px; line-height:1.45; margin-bottom:9px; }
+    .toc-side a.on { color:var(--text); }
+    .toc-side a.on::before { content:""; position:absolute; left:-1px; width:2px; height:1.4em; background:var(--yellow); }
+  }
   .tip, .note { border-radius:0 12px 12px 0; padding:10px 16px; margin:18px 0; font-size:15px; color:var(--muted2); }
   .tip { background:rgba(48,209,88,.07); border-left:3px solid var(--green); }
   .note { background:rgba(255,159,10,.07); border-left:3px solid var(--amber); }
@@ -147,14 +159,19 @@
     <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
   </div>
 </div></nav>
-<article><div class="col">
+<article><div class="col has-toc">
+<div class="toc-rail"><aside class="toc toc-side" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#kinds">The three kinds of caption templates</a></li><li><a href="#compare">Side by side</a></li><li><a href="#presets">The 18 free presets</a></li><li><a href="#use">How to use them</a></li><li><a href="#own">Make your own template</a></li><li><a href="#share">Share it with your team</a></li></ol></aside></div>
+<script>(function(){function f(){var l=[].slice.call(document.querySelectorAll('.toc-side a')),i=0;
+l.forEach(function(a,k){var e=document.getElementById(a.hash.slice(1));if(e&&e.getBoundingClientRect().top<140)i=k});
+l.forEach(function(a,k){a.classList.toggle('on',k===i)})}
+addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',f)})();</script>
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Free caption templates for Premiere Pro</p>
 <h1>Free caption templates for Premiere Pro</h1>
 <div class="meta">Updated <time datetime="2026-10-22">22 October 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 
 <p>Looking for free caption templates for Premiere Pro? Most of what you'll find are MOGRT text templates. They look nice, but you still type and time every caption yourself.</p>
 <p>This guide explains the three kinds of free caption templates, which one saves the most time, and how to use 18 free animated presets in Premiere Pro.</p>
-<div class="tldr"><p class="t">In short</p><ul><li>MOGRT text templates: free and pretty, but one clip per caption, filled in by hand.</li><li>Premiere Track Styles: free and quick, but static. No word highlight or animation.</li><li>Caption presets in a plugin: style and time every word of the transcript in one click.</li><li><a href="https://captionsgen.com/">Captions Gen</a> has 18 free animated presets, with no time limit and no watermark (Windows).</li></ul></div><nav class="toc" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#kinds">The three kinds of caption templates</a></li><li><a href="#compare">Side by side</a></li><li><a href="#presets">The 18 free presets</a></li><li><a href="#use">How to use them</a></li><li><a href="#own">Make your own template</a></li><li><a href="#share">Share it with your team</a></li></ol></nav>
+<div class="tldr"><p class="t">In short</p><ul><li>MOGRT text templates: free and pretty, but one clip per caption, filled in by hand.</li><li>Premiere Track Styles: free and quick, but static. No word highlight or animation.</li><li>Caption presets in a plugin: style and time every word of the transcript in one click.</li><li><a href="https://captionsgen.com/">Captions Gen</a> has 18 free animated presets, with no time limit and no watermark (Windows).</li></ul></div><aside class="toc toc-inline" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#kinds">The three kinds of caption templates</a></li><li><a href="#compare">Side by side</a></li><li><a href="#presets">The 18 free presets</a></li><li><a href="#use">How to use them</a></li><li><a href="#own">Make your own template</a></li><li><a href="#share">Share it with your team</a></li></ol></aside>
 <h2 id="kinds">The three kinds of caption templates</h2>
 <figure class="caption-example"><img src="/img/guides/template-vs-preset.png" width="1280" height="720" loading="lazy" alt="Left: a text template timeline with one purple clip per caption, each to be typed by hand. Right: a caption preset timeline with many blue word clips lined up with the audio"><figcaption>A text template is one clip per caption. A preset styles the whole transcript at once.</figcaption></figure>
 <h3>1. MOGRT text templates</h3>
