@@ -1,9 +1,9 @@
 {
-  "version": "1.1.0",
-  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.0.exe",
-  "sha256": "815be5d63dfc6b3bc700fc23d66acad9219faeb0692e64ef99d7d9b4f0f42288",
-  "size": 6882312,
-  "notes": "Captions Gen is free now: no time limit. 18 new caption looks, free fonts, instant previews and a simpler panel.",
-  "full": "",
-  "date": "2026-10-21"
+  "version": "1.1.2",
+  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.2.exe",
+  "sha256": "2aa9bdf284d2457a9dff95a979db6c218119a0f395322a36824726c5b5d0b0e2",
+  "size": 6926748,
+  "notes": "Read edited caption text automatically in Premiere 26 and update word animations, including added words. Cleaner preset controls, caption grouping and placement fixes, and verified Adobe panel replacement. New word timings are estimates.",
+  "full": "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece",
+  "date": "2026-10-29"
 }

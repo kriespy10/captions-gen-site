@@ -4,6 +4,27 @@
 
 NEWS = [
   {
+    "slug": "captions-gen-1-1-2",
+    "date": "2026-10-29",
+    "version": "1.1.2",
+    "title": "Captions Gen 1.1.2: animate edited words, with cleaner controls",
+    "desc": "Update word animation after editing caption text in Premiere, including added words. Plus a quieter panel and fixes for caption grouping, placement and installation.",
+    "body": """
+<p>Edited a caption after generating it? Captions Gen 1.1.2 can update its word animation to include the revised text and newly added words.</p>
+<h2>Update animation after editing text</h2>
+<p>Select an edited Captions Gen graphic on the timeline. When the panel detects the change, <strong>Caption text changed</strong> appears with <strong>Update animation</strong>. Click it to retime the selected edited graphics. Unchanged captions in the selection keep their existing timing, and the notice disappears after the update.</p>
+<p>On Premiere Pro 26, the installer includes a signed local text reader, so the panel can read your current edits without copying or pasting text. Restart Premiere after installing the update. The CCX panel file alone does not include that reader.</p>
+<p>Each graphic supports up to <strong>eight animated words</strong>. New timings are estimates: play the result against the audio and adjust if needed. This works with Captions Gen graphics, not Premiere's native subtitle tracks or arbitrary titles. An older same-count edit made before the panel first observes a caption cannot always be detected; subsequent edits in that session are detected.</p>
+<h2>Fewer controls in the footer</h2>
+<p><strong>Generate Captions</strong> stays the main action. <strong>Save preset…</strong> now sits beside the preset name, with options to save a new preset, update your own edited preset or revert changes. Saving a preset is optional: your design changes already apply to the next generation.</p>
+<p><strong>Apply style</strong> appears near the preview when the current design differs from the last generated captions. Their ⋯ menu contains <strong>Remove generated captions</strong>. This is separate from Premiere's <strong>Edit &gt; Undo</strong>, which can undo an animation update.</p>
+<h2>Grouping, placement and installation fixes</h2>
+<p>This update also includes fixes for caption grouping and placement, including missing graphics reported on Spanish Premiere, and verifies that Adobe installed the actual new panel files. Local generation tests passed in English and Spanish Premiere. If replacing an earlier test build needs Windows administrator approval, the installer asks for Adobe removal and installation and preserves this panel's settings around the replacement.</p>
+<p>Requires Windows 10/11 and Premiere Pro 25.6 or newer. Install the update, restart Premiere, then try an edit on a short caption.</p>
+<p><strong>Windows 11 installation note:</strong> Smart App Control may still block the currently unsigned Windows installers on some PCs. Windows code-signing verification is in progress; 1.1.2 does not resolve that installation restriction. Please contact us if Windows blocks installation.</p>
+""",
+  },
+  {
     "slug": "captions-gen-1-1-0",
     "date": "2026-10-21",
     "version": "1.1.0",
