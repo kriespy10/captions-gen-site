@@ -3,8 +3,8 @@
 <head>
 <link rel="stylesheet" href="/analytics.css">
 <script defer src="/analytics.js"></script>
-<link rel="stylesheet" href="/caption-demo.css?v=panel-20261015">
-<script type="module" src="/caption-demo.js?v=panel-20261021"></script>
+<link rel="stylesheet" href="/caption-demo.css?v=panel-1.1.2-20261031">
+<script type="module" src="/caption-demo.js?v=panel-1.1.2-20261031"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Free Animated Caption Plugin for Premiere Pro | Captions Gen</title>
@@ -462,25 +462,51 @@
     <p class="lead">Style “Captions made for you” with the plugin's presets and design controls. Change a setting and watch the preview.</p>
     <div class="caption-demo" data-caption-demo>
       <div class="demo-topbar">
-        <div class="demo-brand"><span class="demo-logo" aria-hidden="true"><i></i><i></i><i></i></span><strong>Captions Gen</strong><span class="demo-version">1.1.0</span></div>
+        <div class="demo-brand"><span class="demo-logo" aria-hidden="true"><i></i><i></i><i></i></span><strong>Captions Gen</strong><span class="demo-version">1.1.2</span></div>
         <span class="demo-ready-label"><i aria-hidden="true"></i>Live demo</span>
       </div>
       <div class="demo-mode-tabs" role="tablist" aria-label="Captions Gen demo views">
-        <button id="demo-tab-captions" type="button" role="tab" aria-selected="true" aria-controls="demo-view-captions" tabindex="0">Captions</button>
-        <button id="demo-tab-presets" type="button" role="tab" aria-selected="false" aria-controls="demo-view-presets" tabindex="-1">Presets</button>
+        <button id="demo-tab-presets" type="button" role="tab" aria-selected="true" aria-controls="demo-view-presets" tabindex="0" data-view="presets">Presets</button>
+        <button id="demo-tab-customize" type="button" role="tab" aria-selected="false" aria-controls="demo-view-customize" tabindex="-1" data-view="customize">Customize</button>
+        <button id="demo-tab-settings" type="button" role="tab" aria-selected="false" aria-controls="demo-view-settings" tabindex="-1" data-view="settings">Settings</button>
       </div>
-      <div id="demo-view-captions" role="tabpanel" aria-labelledby="demo-tab-captions">
-        <form class="demo-controls" aria-label="Caption design settings">
-          <div class="demo-design-card">
-            <div class="demo-design-head"><span class="card-title">Design</span><div class="demo-design-actions"><span data-design-name>Plain</span><button type="button" class="demo-save" data-demo-save>Save…</button><span class="chev" aria-hidden="true">▾</span></div></div>
-            <div class="demo-preview">
+      <form class="demo-controls" aria-label="Caption design settings">
+        <div class="demo-look-card demo-design-card" data-demo-look>
+          <div class="demo-look-head"><span data-design-star hidden aria-label="Main preset">★</span><span data-design-name>Bold Impact</span><span class="demo-edited" data-design-edited hidden>· edited</span></div>
+          <div class="demo-look-tools"><button type="button" class="demo-save" data-preset-actions aria-haspopup="dialog" aria-expanded="false">Save preset…</button><button type="button" class="demo-save" data-customize-link>Customize ›</button></div>
+          <div class="demo-preview">
               <div class="demo-stage" role="group" aria-label="Animated caption preview: Captions made for you">
                 <span class="demo-live">Live preview</span>
                 <div class="demo-scene"><div class="demo-caption-anchor"><div class="demo-caption" aria-hidden="true">Captions made for you</div></div></div>
                 <button type="button" class="demo-play" data-demo-play aria-label="Play caption preview">▶</button>
               </div>
             </div>
-          <div class="demo-group" data-group="text">
+        </div>
+        <div id="demo-view-presets" role="tabpanel" aria-labelledby="demo-tab-presets">
+          <div class="demo-preset-card">
+            <div class="demo-design-head"><span class="card-title">Your presets</span><button type="button" class="demo-save" data-demo-import>Import</button><input type="file" accept=".cgpreset,.json" data-import-file hidden></div>
+            <div class="demo-preset-grid demo-user-preset-grid" aria-label="Your caption presets"></div>
+            <p class="demo-preset-empty">Pick a preset, change it under Customize, then save it: it shows up here.</p>
+            <div class="card-title">Built-in</div>
+            <div class="demo-categories" role="group" aria-label="Preset categories"></div>
+            <div class="demo-preset-grid" aria-label="Built-in caption presets"></div>
+            <p class="demo-preset-description" data-preset-description>Heavy caps, yellow spoken word, quick pop.</p>
+          </div>
+        </div>
+        <div id="demo-view-customize" role="tabpanel" aria-labelledby="demo-tab-customize" hidden>
+
+          <div class="demo-caption-text demo-design-card">
+            <div class="demo-design-head"><span class="card-title">Caption text</span><span class="demo-grouping-summary" data-grouping-summary>ABC · 1–3 words · 2 lines</span></div>
+            <span class="field-label">Text case</span><div class="demo-case-tabs" role="group" aria-label="Text case"><button type="button" data-text-case="none" aria-pressed="false">As spoken</button><button type="button" data-text-case="upper" aria-pressed="true">ABC</button><button type="button" data-text-case="lower" aria-pressed="false">abc</button><button type="button" data-text-case="sentence" aria-pressed="false">Abc</button></div>
+            <select id="demo-textCase" data-setting="textCase" aria-label="Text case" hidden><option value="none">As spoken</option><option value="upper" selected>ABC</option><option value="lower">abc</option><option value="sentence">Abc</option></select>
+            <label class="check"><input type="checkbox" data-setting="gStripPunct" checked>Remove punctuation <span class="demo-hint">. , ! ?</span></label>
+            <div class="row demo-grouping-pair"><div><div class="slider-field"><div class="slider-head"><label class="field-label" for="demo-gMinWords">Min words</label><output class="val" for="demo-gMinWords" data-output="gMinWords">1</output></div><input type="range" id="demo-gMinWords" data-setting="gMinWords" min="1" max="10" value="1"></div></div><div><div class="slider-field"><div class="slider-head"><label class="field-label" for="demo-gMaxWords">Max words</label><output class="val" for="demo-gMaxWords" data-output="gMaxWords">3</output></div><input type="range" id="demo-gMaxWords" data-setting="gMaxWords" min="1" max="36" value="3"></div></div></div>
+            <p class="demo-hint">Karaoke highlights up to 8 words per caption</p>
+            <div class="slider-field"><div class="slider-head"><label class="field-label" for="demo-gMaxChars">Max characters</label><output class="val" for="demo-gMaxChars" data-output="gMaxChars">Auto</output></div><input type="range" id="demo-gMaxChars" data-setting="gMaxChars" min="0" max="48" value="0"></div><div class="slider-field"><div class="slider-head"><label class="field-label" for="demo-gMaxDur">Max duration</label><output class="val" for="demo-gMaxDur" data-output="gMaxDur">Auto</output></div><input type="range" id="demo-gMaxDur" data-setting="gMaxDur" min="0" max="8" value="0"></div><div class="demo-line-stepper"><span class="field-label">Max lines</span><div role="group" aria-label="Max lines"><button type="button" class="demo-step-button" data-line-step="-1" aria-label="Fewer caption lines">−</button><span class="demo-step-value" data-line-value aria-live="polite">2</span><button type="button" class="demo-step-button" data-line-step="1" aria-label="More caption lines">+</button></div><input type="range" id="demo-gMaxLines" data-setting="gMaxLines" aria-label="Max lines" min="1" max="3" value="2" hidden></div>
+          </div>
+          <div class="demo-design-card">
+            <div class="demo-design-head"><span class="card-title">Design</span></div>
+            <div class="demo-group" data-group="text">
             <div class="demo-group-head">
               <button type="button" class="dg-head" id="demo-toggle-text" aria-expanded="false" aria-controls="demo-group-text"><span class="dg-title">Text</span><span class="dg-sum" data-summary="text">Default</span></button>
               <button type="button" class="dg-reset" data-reset-group="text" aria-label="Reset Text settings" hidden>Reset</button>
@@ -490,7 +516,7 @@
 <div class="row">
           <div>
             <label class="field-label">Font</label>
-            <select id="demo-font" data-setting="font" aria-label="Font"><option value="impact">Impact</option><option value="montserrat-black">Montserrat Black</option><option value="montserrat-xbold">Montserrat ExtraBold</option><option value="montserrat-bold">Montserrat Bold</option><option value="montserrat-medium">Montserrat Medium</option><option value="anton">Anton</option><option value="bangers">Bangers</option><option value="luckiest">Luckiest Guy</option><option value="inter">Inter SemiBold</option><option value="dmserif">DM Serif Display</option><option value="sans">Instrument Sans</option><option value="serif">Georgia</option><option value="mono">Monospace</option></select>
+            <select id="demo-font" data-setting="font" aria-label="Font"><option value="impact">Impact</option><option value="montserrat-black">Montserrat Black</option><option value="montserrat-xbold">Montserrat ExtraBold</option><option value="montserrat-bold">Montserrat Bold</option><option value="montserrat-medium">Montserrat Medium</option><option value="anton">Anton</option><option value="bangers">Bangers</option><option value="luckiest">Luckiest Guy</option><option value="inter">Inter SemiBold</option><option value="dmserif">DM Serif Display</option><option value="sans">Arial</option><option value="serif">Georgia</option><option value="mono">Monospace</option></select>
           </div>
           <div>
             <label class="field-label">Text color</label>
@@ -516,11 +542,11 @@
             <label class="field-label" for="demo-gTracking">Letter spacing</label>
             <output class="val" for="demo-gTracking" data-output="gTracking">Auto</output>
           </div>
-          <input type="range" id="demo-gTracking" data-setting="gTracking" min="-10" max="30" value="0">
+          <input type="range" id="demo-gTracking" data-setting="gTracking" min="0" max="16" value="0">
         </div>
             </div>
           </div>
-          <div class="demo-group" data-group="highlight">
+<div class="demo-group" data-group="highlight">
             <div class="demo-group-head">
               <button type="button" class="dg-head" id="demo-toggle-highlight" aria-expanded="true" aria-controls="demo-group-highlight"><span class="dg-title">Karaoke</span><span class="dg-sum" data-summary="highlight">Default</span></button>
               <button type="button" class="dg-reset" data-reset-group="highlight" aria-label="Reset Karaoke settings" hidden>Reset</button>
@@ -564,98 +590,7 @@
         </div></fieldset>
             </div>
           </div>
-          <div class="demo-group" data-group="stroke">
-            <div class="demo-group-head">
-              <button type="button" class="dg-head" id="demo-toggle-stroke" aria-expanded="false" aria-controls="demo-group-stroke"><span class="dg-title">Stroke</span><span class="dg-sum" data-summary="stroke">Default</span></button>
-              <button type="button" class="dg-reset" data-reset-group="stroke" aria-label="Reset Stroke settings" hidden>Reset</button>
-              <span class="chev" aria-hidden="true">▾</span>
-            </div>
-            <div class="dg-body" id="demo-group-stroke" hidden>
-<div class="slider-field">
-          <div class="slider-head">
-            <label class="field-label" for="demo-gStroke">Width</label>
-            <output class="val" for="demo-gStroke" data-output="gStroke">Auto</output>
-          </div>
-          <input type="range" id="demo-gStroke" data-setting="gStroke" min="0" max="17" value="8">
-        </div>
-        <div class="row">
-          <div>
-            <label class="field-label">Color</label>
-            <div class="color-btn"><input type="color" id="demo-strokeColor" data-setting="strokeColor" value="#000000" aria-label="Stroke color"><span data-color-name="strokeColor">Default</span></div>
-          </div>
-          <div></div>
-        </div>
-            </div>
-          </div>
-          <div class="demo-group" data-group="shadow">
-            <div class="demo-group-head">
-              <button type="button" class="dg-head" id="demo-toggle-shadow" aria-expanded="false" aria-controls="demo-group-shadow"><span class="dg-title">Shadow</span><span class="dg-sum" data-summary="shadow">Default</span></button>
-              <button type="button" class="dg-reset" data-reset-group="shadow" aria-label="Reset Shadow settings" hidden>Reset</button>
-              <span class="chev" aria-hidden="true">▾</span>
-            </div>
-            <div class="dg-body" id="demo-group-shadow" hidden>
-<div class="slider-field">
-          <div class="slider-head">
-            <label class="field-label" for="demo-gShadow">Intensity</label>
-            <output class="val" for="demo-gShadow" data-output="gShadow">Auto</output>
-          </div>
-          <input type="range" id="demo-gShadow" data-setting="gShadow" min="0" max="100" value="55">
-        </div>
-        <div class="slider-field">
-          <div class="slider-head">
-            <label class="field-label" for="demo-gShadowDist">Distance</label>
-            <output class="val" for="demo-gShadowDist" data-output="gShadowDist">Auto</output>
-          </div>
-          <input type="range" id="demo-gShadowDist" data-setting="gShadowDist" min="0" max="40" value="10">
-        </div>
-        <div class="slider-field">
-          <div class="slider-head">
-            <label class="field-label" for="demo-gShadowBlur">Blur</label>
-            <output class="val" for="demo-gShadowBlur" data-output="gShadowBlur">Auto</output>
-          </div>
-          <input type="range" id="demo-gShadowBlur" data-setting="gShadowBlur" min="0" max="60" value="25">
-        </div>
-        <div class="slider-field">
-          <div class="slider-head">
-            <label class="field-label" for="demo-gShadowDir">Direction</label>
-            <output class="val" for="demo-gShadowDir" data-output="gShadowDir">Auto</output>
-          </div>
-          <input type="range" id="demo-gShadowDir" data-setting="gShadowDir" min="0" max="360" value="135">
-        </div>
-        <div class="row" style="margin-top:8px;">
-          <div>
-            <label class="field-label">Color</label>
-            <div class="color-btn"><input type="color" id="demo-shadowColor" data-setting="shadowColor" value="#000000" aria-label="Shadow color"><span data-color-name="shadowColor">Default</span></div>
-          </div>
-          <div></div>
-        </div>
-            </div>
-          </div>
-          <div class="demo-group" data-group="background">
-            <div class="demo-group-head">
-              <button type="button" class="dg-head" id="demo-toggle-background" aria-expanded="false" aria-controls="demo-group-background"><span class="dg-title">Background</span><span class="dg-sum" data-summary="background">Default</span></button>
-              <button type="button" class="dg-reset" data-reset-group="background" aria-label="Reset Background settings" hidden>Reset</button>
-              <span class="chev" aria-hidden="true">▾</span>
-            </div>
-            <div class="dg-body" id="demo-group-background" hidden>
-<div class="row">
-          <div>
-            <label class="field-label">Color</label>
-            <div class="color-btn"><input type="color" id="demo-boxColor" data-setting="boxColor" value="#000000" aria-label="Background color"><span data-color-name="boxColor">Default</span></div>
-          </div>
-          <div></div>
-        </div>
-        <div class="slider-field" style="margin-top:8px;">
-          <div class="slider-head">
-            <label class="field-label" for="demo-gBoxOpacity">Opacity</label>
-            <output class="val" for="demo-gBoxOpacity" data-output="gBoxOpacity">Auto</output>
-          </div>
-          <input type="range" id="demo-gBoxOpacity" data-setting="gBoxOpacity" min="0" max="100" value="0">
-        </div>
-        <label class="check" id="demo-boxBounceField" style="margin-top:10px;"><input type="checkbox" id="demo-gBoxBounce" data-setting="gBoxBounce"> Box bounces with the karaoke highlight</label>
-            </div>
-          </div>
-          <div class="demo-group" data-group="animation">
+<div class="demo-group" data-group="animation">
             <div class="demo-group-head">
               <button type="button" class="dg-head" id="demo-toggle-animation" aria-expanded="false" aria-controls="demo-group-animation"><span class="dg-title">Animation</span><span class="dg-sum" data-summary="animation">Default</span></button>
               <button type="button" class="dg-reset" data-reset-group="animation" aria-label="Reset Animation settings" hidden>Reset</button>
@@ -761,22 +696,122 @@
         </div>
             </div>
           </div>
+<div class="demo-group" data-group="stroke">
+            <div class="demo-group-head">
+              <button type="button" class="dg-head" id="demo-toggle-stroke" aria-expanded="false" aria-controls="demo-group-stroke"><span class="dg-title">Stroke</span><span class="dg-sum" data-summary="stroke">Default</span></button>
+              <button type="button" class="dg-reset" data-reset-group="stroke" aria-label="Reset Stroke settings" hidden>Reset</button>
+              <span class="chev" aria-hidden="true">▾</span>
+            </div>
+            <div class="dg-body" id="demo-group-stroke" hidden>
+<div class="slider-field">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gStroke">Width</label>
+            <output class="val" for="demo-gStroke" data-output="gStroke">Auto</output>
           </div>
-        </form>
-      </div>
-      <div id="demo-view-presets" role="tabpanel" aria-labelledby="demo-tab-presets" hidden>
-        <div class="demo-preset-card">
-          <div class="card-title">Presets</div>
-          <div class="demo-categories" role="group" aria-label="Preset categories"></div>
-          <div class="demo-preset-grid" aria-label="Caption presets"></div>
-          <p class="demo-preset-description" data-preset-description>Click a preset to preview it · Use puts it on the Captions tab</p>
-          <p class="demo-preset-empty" hidden>No saved designs yet. Adjust the controls, then choose Save.</p>
-          <button type="button" class="demo-save-current" data-demo-save>Save current design…</button>
+          <input type="range" id="demo-gStroke" data-setting="gStroke" min="0" max="17" value="8">
         </div>
-      </div>
-      <div class="demo-bottom"><span>Design demo · use your own footage in Premiere Pro.</span><button type="button" class="demo-reset" data-demo-reset>Reset demo</button><a target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Get the plugin free →</a></div>
-      <p class="demo-sr" role="status" aria-live="polite" data-demo-status></p>
-      <dialog class="demo-save-dialog" aria-labelledby="demo-save-title">
+        <div class="row">
+          <div>
+            <label class="field-label">Color</label>
+            <div class="color-btn"><input type="color" id="demo-strokeColor" data-setting="strokeColor" value="#000000" aria-label="Stroke color"><span data-color-name="strokeColor">Default</span></div>
+          </div>
+          <div></div>
+        </div>
+            </div>
+          </div>
+<div class="demo-group" data-group="shadow">
+            <div class="demo-group-head">
+              <button type="button" class="dg-head" id="demo-toggle-shadow" aria-expanded="false" aria-controls="demo-group-shadow"><span class="dg-title">Shadow</span><span class="dg-sum" data-summary="shadow">Default</span></button>
+              <button type="button" class="dg-reset" data-reset-group="shadow" aria-label="Reset Shadow settings" hidden>Reset</button>
+              <span class="chev" aria-hidden="true">▾</span>
+            </div>
+            <div class="dg-body" id="demo-group-shadow" hidden>
+<div class="slider-field">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gShadow">Intensity</label>
+            <output class="val" for="demo-gShadow" data-output="gShadow">Auto</output>
+          </div>
+          <input type="range" id="demo-gShadow" data-setting="gShadow" min="0" max="100" value="55">
+        </div>
+        <div class="slider-field">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gShadowDist">Distance</label>
+            <output class="val" for="demo-gShadowDist" data-output="gShadowDist">Auto</output>
+          </div>
+          <input type="range" id="demo-gShadowDist" data-setting="gShadowDist" min="0" max="40" value="10">
+        </div>
+        <div class="slider-field">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gShadowBlur">Blur</label>
+            <output class="val" for="demo-gShadowBlur" data-output="gShadowBlur">Auto</output>
+          </div>
+          <input type="range" id="demo-gShadowBlur" data-setting="gShadowBlur" min="0" max="60" value="25">
+        </div>
+        <div class="slider-field">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gShadowDir">Direction</label>
+            <output class="val" for="demo-gShadowDir" data-output="gShadowDir">Auto</output>
+          </div>
+          <input type="range" id="demo-gShadowDir" data-setting="gShadowDir" min="0" max="360" value="135">
+        </div>
+        <div class="row" style="margin-top:8px;">
+          <div>
+            <label class="field-label">Color</label>
+            <div class="color-btn"><input type="color" id="demo-shadowColor" data-setting="shadowColor" value="#000000" aria-label="Shadow color"><span data-color-name="shadowColor">Default</span></div>
+          </div>
+          <div></div>
+        </div>
+            </div>
+          </div>
+<div class="demo-group" data-group="background">
+            <div class="demo-group-head">
+              <button type="button" class="dg-head" id="demo-toggle-background" aria-expanded="false" aria-controls="demo-group-background"><span class="dg-title">Background</span><span class="dg-sum" data-summary="background">Default</span></button>
+              <button type="button" class="dg-reset" data-reset-group="background" aria-label="Reset Background settings" hidden>Reset</button>
+              <span class="chev" aria-hidden="true">▾</span>
+            </div>
+            <div class="dg-body" id="demo-group-background" hidden>
+<div class="row">
+          <div>
+            <label class="field-label">Color</label>
+            <div class="color-btn"><input type="color" id="demo-boxColor" data-setting="boxColor" value="#000000" aria-label="Background color"><span data-color-name="boxColor">Default</span></div>
+          </div>
+          <div></div>
+        </div>
+        <div class="slider-field" style="margin-top:8px;">
+          <div class="slider-head">
+            <label class="field-label" for="demo-gBoxOpacity">Opacity</label>
+            <output class="val" for="demo-gBoxOpacity" data-output="gBoxOpacity">Auto</output>
+          </div>
+          <input type="range" id="demo-gBoxOpacity" data-setting="gBoxOpacity" min="0" max="100" value="0">
+        </div>
+        <label class="check" id="demo-boxBounceField" style="margin-top:10px;"><input type="checkbox" id="demo-gBoxBounce" data-setting="gBoxBounce"> Box bounces with the karaoke highlight</label>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div id="demo-view-settings" role="tabpanel" aria-labelledby="demo-tab-settings" hidden>
+          <div class="demo-design-card demo-settings-card">
+            <div class="demo-design-head"><span class="card-title">Settings</span></div>
+            <p class="demo-hint" id="demo-settings-note">Transcription and timeline settings are available in the Premiere Pro plugin. This browser demo previews the design using four sample words.</p>
+            <fieldset disabled aria-describedby="demo-settings-note">
+              <div class="row"><div><label class="field-label" for="demo-model">Transcription model</label><select id="demo-model"><option>Turbo — best</option></select></div><div><label class="field-label" for="demo-language">Spoken language</label><select id="demo-language"><option>Auto-detect</option></select></div></div>
+              <label class="field-label" for="demo-track">Caption track</label><select id="demo-track"><option>Above the selected clip</option></select>
+              <label class="check"><input type="checkbox">Check transcript before generating</label>
+            </fieldset>
+            <div class="demo-settings-section"><span class="card-title">Help &amp; feedback</span><a href="#faq">Help &amp; FAQ</a><a href="mailto:business@captionsgen.com">Report a bug or request a feature</a><a href="news/captions-gen-1-1-2.html">What's new in 1.1.2 ›</a></div>
+            <p class="demo-hint">Version 1.1.2</p>
+          </div>
+        </div>
+      </form>
+      <div class="demo-footer"><a class="demo-install" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Get the plugin free →</a><div class="demo-bottom"><span>Generate Captions runs in Premiere Pro.</span><button type="button" class="demo-reset" data-demo-reset>Reset demo</button></div></div>
+      <p class="demo-status" role="status" aria-live="polite" data-demo-status></p>
+      <dialog class="demo-save-dialog demo-preset-actions-dialog" aria-labelledby="demo-actions-title">
+        <div class="demo-dialog-head"><h3 id="demo-actions-title" data-actions-title>Bold Impact</h3><button type="button" data-actions-close aria-label="Close preset actions">×</button></div>
+        <button type="button" class="demo-menu-action" data-preset-update hidden>Update this preset</button>
+        <button type="button" class="demo-menu-action" data-demo-save>Save as preset…</button>
+        <button type="button" class="demo-menu-action" data-preset-revert hidden>Revert changes</button>
+      </dialog>
+            <dialog class="demo-save-dialog" aria-labelledby="demo-save-title">
         <form method="dialog"><div class="demo-dialog-head"><h3 id="demo-save-title">Save preset</h3><button type="button" data-save-close aria-label="Close save preset">×</button></div><label for="demo-preset-name">Preset name</label><input id="demo-preset-name" name="preset-name" type="text" maxlength="40" placeholder="My caption style" required><p>Saved in this browser.</p><p class="demo-save-error" role="alert" hidden></p><button type="submit" class="demo-save-confirm">Save</button></form>
       </dialog>
     </div>

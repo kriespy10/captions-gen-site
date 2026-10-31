@@ -1,11 +1,18 @@
 // Browser adaptation of src/service.mjs buildPreviewHtml / animTickJs /
 // exitTickJs. Four fixed words use the plugin's 0.7-second mock word spacing.
-export { DEFAULTS, PRESETS } from './caption-presets.mjs?v=panel-20261021';
+export { PANEL_VERSION, FIRST_PRESET, GROUPING_DEFAULTS, DEFAULTS, PRESETS } from './caption-presets.mjs?v=panel-1.1.2-20261031';
 export const WORDS = ['Captions', 'made', 'for', 'you'];
 export const WORD_TIMES = [0.1, 0.8, 1.5, 2.2];
 export const LOOP = 3.6;
 const clamp = (n, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, n));
 const num = (s, key, fallback) => s[key] == null || s[key] === '' || !Number.isFinite(+s[key]) ? fallback : +s[key];
+// Match the shipped engine's 320px preview: timeline spacing shrinks by
+// 23/90, plus a half-pixel adjustment for browser Impact. The site scene is
+// twice that width, so its default scale is 2. Expand adds preview pixels.
+const PREVIEW_PX = 23 / 90;
+export function previewLetterSpacing(s, frame = {}, scale = 2) {
+  return scale * (0.5 + num(s, 'gTracking', 0) * PREVIEW_PX + num(frame, 'tracking', 0));
+}
 
 export function gain(s, x, exit = false) {
   const p = clamp(x);
@@ -38,7 +45,7 @@ export function frameAt(s, seconds) {
     case 7: frame.clip = (1 - Math.floor(p * 20) / 20) * 100; break;
     case 8: frame.words.forEach((word, i) => { word.opacity = t >= WORD_TIMES[i] ? 1 : 0; }); break;
     case 9: frame.opacity = ease; frame.scale = 0.92 + 0.08 * ease; break;
-    case 10: frame.opacity = ease; frame.tracking = (1 - ease) * 8 * k; break;
+    case 10: frame.opacity = ease; frame.tracking = (1 - ease) * strength * PREVIEW_PX; break;
     case 11: {
       const p2 = clamp(t / (dur * 3));
       const bp = Math.max(0, p2 - 0.12);
