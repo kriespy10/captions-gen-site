@@ -1,9 +1,9 @@
 {
-  "version": "1.1.2",
-  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.2.exe",
-  "sha256": "2aa9bdf284d2457a9dff95a979db6c218119a0f395322a36824726c5b5d0b0e2",
-  "size": 6926748,
-  "notes": "Read edited caption text automatically in Premiere 26 and update word animations, including added words. Cleaner preset controls, caption grouping and placement fixes, and verified Adobe panel replacement. New word timings are estimates.",
+  "version": "1.1.4",
+  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.4.exe",
+  "sha256": "6f54ae07bad3ea6160787c3ac7f3e9fee1dcb796f3d608d935ab16e45682634b",
+  "size": 6930862,
+  "notes": "Improved speech-model reliability: custom Python settings survive updates, model readiness follows your configured cache, and model-loading errors are clearer.",
   "full": "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece",
-  "date": "2026-10-29"
+  "date": "2026-11-05"
 }

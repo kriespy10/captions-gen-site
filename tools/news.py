@@ -4,6 +4,23 @@
 
 NEWS = [
   {
+    "slug": "captions-gen-1-1-4",
+    "date": "2026-11-05",
+    "version": "1.1.4",
+    "title": "Captions Gen 1.1.4: clearer model status and loading errors",
+    "desc": "More accurate model readiness checks for custom caches, clearer model-loading errors, and improved handling of custom Python settings during updates.",
+    "body": """
+<p>Captions Gen 1.1.4 improves speech-model readiness checks and makes model-loading failures easier to understand.</p>
+<h2>Model status follows your cache</h2>
+<p>If you use a custom Hugging Face cache, the panel now checks that location when reporting which models are ready. It checks the required model files rather than relying on a cache folder name.</p>
+<h2>Custom Python settings and clearer errors</h2>
+<p>The updated updater preserves supported custom Python settings. If a model cannot be opened, Captions Gen now reports a model-loading error instead of a misleading audio or clip message.</p>
+<p>If your setup relies on custom Python settings, run this update manually from the environment that already works. Your older updater still controls the first installation handoff.</p>
+<p>Requires Windows 10/11 and Premiere Pro 25.6 or newer. Install the update and restart Premiere. Captions Gen remains free, with no transcription time limit.</p>
+<p><strong>Windows 11 installation note:</strong> Windows installers remain unsigned. This release does not resolve Smart App Control blocking. Contact business@captionsgen.com if Windows blocks installation.</p>
+""",
+  },
+  {
     "slug": "captions-gen-1-1-2",
     "date": "2026-10-29",
     "version": "1.1.2",
