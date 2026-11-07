@@ -39,7 +39,7 @@ COST = gfig("caption-tool-cost", "Bar chart of yearly cost: AutoCut AI Plan mont
 LOOKS = gfig("preset-looks.jpg", "Six caption presets: Bold Impact, Karaoke Pill, Beast Comic, Glow, Punch and Gamer",
              "Six of the 18 free presets, as they look in Premiere Pro.")
 INSTALL = """<ol>
-<li><a href="__FREE__">Download Captions Gen</a> and run the installer. It needs Windows 10 or 11 and Premiere Pro 25.0 or newer.</li>
+<li><a href="__FREE__">Download Captions Gen</a> and run the installer. It needs Windows 10 or 11, 64-bit, and Premiere Pro 25.6 or newer.</li>
 <li>Open Premiere Pro and go to <kbd>Window</kbd> &gt; <kbd>UXP Plugins</kbd> &gt; <kbd>Captions Gen</kbd>.</li>
 <li>Select the clip with the voice in your timeline.</li>
 </ol>"""
@@ -47,7 +47,7 @@ INSTALL = """<ol>
 
 # ---------------------------------------------------------------- Hormozi
 P3["hormozi-style-captions-premiere-pro"] = dict(
-published="2026-10-22", modified="2026-10-22",
+published="2026-10-22", modified="2026-11-07",
 image="/img/guides/hormozi-anatomy.png",
 title="Hormozi Style Captions in Premiere Pro: Font, Settings and Free Preset",
 desc="How to make Hormozi style captions in Premiere Pro: the font, the exact settings, the yellow word highlight and where to place them. By hand, or free in one click.",
@@ -174,7 +174,7 @@ body="""
 
 # ---------------------------------------------------------------- MrBeast
 P3["mrbeast-style-captions-premiere-pro"] = dict(
-published="2026-10-22", modified="2026-10-22",
+published="2026-10-22", modified="2026-11-07",
 image="/img/guides/mrbeast-anatomy.png",
 title="MrBeast Style Captions in Premiere Pro: Font, Bounce and Free Preset",
 desc="How to make MrBeast style captions in Premiere Pro: the comic font, thick outline, bouncing green word and the right settings. By hand, or free in one click.",
@@ -293,7 +293,7 @@ body="""
 
 # ---------------------------------------------------------------- Templates
 P3["free-caption-templates-premiere-pro"] = dict(
-published="2026-10-22", modified="2026-10-22",
+published="2026-10-22", modified="2026-11-07",
 image="/img/guides/template-vs-preset.png",
 title="Free Caption Templates for Premiere Pro: 18 Animated Presets",
 desc="Free animated caption templates for Premiere Pro: karaoke highlights, pill boxes, comic and glow looks. How they differ from MOGRT text templates, and how to use them.",
@@ -421,7 +421,7 @@ body="""
 
 # ---------------------------------------------------------------- AutoCut
 P3["autocut-alternative-captions"] = dict(
-published="2026-10-22", modified="2026-10-22",
+published="2026-10-22", modified="2026-11-07",
 image="/img/guides/caption-tool-cost.png",
 title="Free AutoCut Alternative for Captions in Premiere Pro (2026)",
 desc="Only need AutoCut for captions? AutoCaptions needs the $19.80/month AI Plan. Captions Gen makes animated word-by-word captions in Premiere Pro for free.",
@@ -525,7 +525,7 @@ body="""
 
 # ---------------------------------------------------------------- Submagic
 P3["submagic-alternative-premiere-pro"] = dict(
-published="2026-10-22", modified="2026-10-22",
+published="2026-10-22", modified="2026-11-07",
 image="/img/guides/web-app-round-trip.png",
 title="Free Submagic Alternative for Premiere Pro (No Watermark)",
 desc="Submagic is a web app with plans from $19/month and length limits. Captions Gen adds Submagic-style animated captions inside Premiere Pro for free, without uploading.",

@@ -261,7 +261,7 @@ body="""
 """)
 
 P["free-caption-plugin-premiere-pro"] = dict(
-modified="2026-10-22",
+modified="2026-11-07",
 title="Free Caption Plugin for Premiere Pro: Auto Captions, No Watermark",
 desc="Free auto caption plugins for Premiere Pro compared: the built-in tool, Captions Gen (free animated captions, no time limit, no watermark) and other plugins' free tiers.",
 h1="Free caption plugins for Premiere Pro",
@@ -292,7 +292,8 @@ body="""
 <li>Run the installer. It sets up the engine, the Premiere Pro panel and the free fonts the presets use.</li>
 <li>In Premiere Pro, open Window, UXP Plugins, Captions Gen, select your clip, pick a preset and press Generate.</li>
 </ol>
-<p>Requirements: Windows 10 or 11 and Premiere Pro 25.0 or newer.</p>
+<p>Requirements: Windows 10 or 11, 64-bit, and Premiere Pro 25.6 or newer. The panel uses Adobe's UXP plugin platform, so Premiere Pro 2024 and versions earlier than 25.6 are not supported.</p>
+<p>Transcription runs locally on your CPU; a dedicated GPU is not required for transcription. Choose Base for faster processing, Small for a balance of speed and accuracy, or Turbo for the default model. Processing time depends on your CPU, available memory, clip length and model. The engine downloads the built-in speech models at initial startup and caches them; allow at least 3 GB free for models, plus space for the app and your projects. Your audio is not uploaded for transcription. Follow Adobe's CPU, RAM, GPU and Windows requirements for your Premiere version, with additional memory available for the speech model. See <a href="https://captionsgen.com/#performance">requirements and performance details</a>.</p>
 
 <h2>Free tiers of other caption plugins</h2>
 <p>Plugins that animate captions usually charge, because word-level transcription and the caption templates are the product. Their free route is a trial with a day or minute cap, or exports with a watermark. Read the limit before you build a workflow around it: a watermark on client work is a bad surprise.</p>
@@ -311,7 +312,7 @@ body="""
 
 
 P["best-caption-plugin-premiere-pro"] = dict(
-modified="2026-10-20",
+modified="2026-11-07",
 title="Best Caption Plugins for Premiere Pro (2026): 8 Compared",
 desc="Caption plugins for Premiere Pro compared on price, one-time vs subscription, local or cloud transcription, Mac support and free options. Prices checked October 2026.",
 h1="Best caption plugins for Premiere Pro in 2026, compared",
@@ -351,7 +352,7 @@ body="""
 
 <h2 id="criteria">What actually matters</h2>
 <h3>Local or cloud transcription</h3>
-<p>Cloud transcription uploads your client's footage and is usually metered by hours per month. Local transcription (Whisper on your machine) is private and has no meter.</p>
+<p>Cloud transcription sends audio or other required data to a server; upload behavior and usage limits depend on the tool and plan. Local transcription processes audio on your computer. Local processing does not by itself determine a plugin's price or usage limits.</p>
 <h3>Native graphics or rendered files</h3>
 <p>The good plugins place Motion Graphics clips you can open in Properties to fix a word or nudge timing. Rendered video overlays are dead the moment the edit changes.</p>
 <h3>Animation styles</h3>
@@ -363,6 +364,7 @@ body="""
 
 <h2 id="captions-gen">Where Captions Gen fits</h2>
 <p><a href="https://captionsgen.com/">Captions Gen</a> transcribes locally, places native editable graphics, ships karaoke highlighting with pill and color-swap styles plus bounce and in/out animations, and restyles a sequence in seconds. It is free, with no time limit or watermark, and Windows-only for now.</p>
+<p>It requires Windows 10/11, 64-bit, and Premiere Pro 25.6 or newer for its UXP panel. Transcription uses your CPU; a GPU does not accelerate transcription in the current version. Base is the lighter model for faster processing, Small balances speed and accuracy, and Turbo is the default. Speed depends on your hardware, model and clip length. Animated timeline playback is a separate workload from transcription. See <a href="https://captionsgen.com/#performance">requirements and performance details</a> before choosing a workflow.</p>
 """)
 
 P["word-by-word-captions-premiere-pro"] = dict(

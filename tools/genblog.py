@@ -7,8 +7,11 @@ from html import escape
 SITE = "https://captionsgen.com"
 FREE = "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece"
 DATE = "2026-08-26"
-SITE_UPDATED = "2026-11-05"
+SITE_UPDATED = "2026-11-07"
 GUIDE_INDEX_UPDATED = "2026-10-19"
+# Every guide includes the shared requirements box below. Its factual correction
+# is a content update even when the rest of an article has not changed.
+SHARED_REQUIREMENTS_UPDATED = "2026-11-07"
 ANALYTICS_HEAD = '<link rel="stylesheet" href="/analytics.css">\n<script defer src="/analytics.js"></script>'
 PRIVACY_FOOTER = '<a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button>'
 
@@ -153,7 +156,7 @@ CLOSING = """
 <div class="box">
 <p class="t">Try animated captions on your own edit</p>
 <p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and one-click restyling of placed captions. Native captions remain useful when you need subtitles or a separate caption file.</p>
-<p><strong>Windows 10/11 · Premiere Pro 25.0+</strong>. Free, with no time limit and no watermark.</p>
+<p><strong>Windows 10/11, 64-bit · Premiere Pro 25.6+</strong>. Transcription runs locally on your CPU. Free, with no time limit and no watermark. See <a href="https://captionsgen.com/#performance">requirements, model choices and performance</a>.</p>
 <a class="btn" href="__FREE__">Download free</a>
 <a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
 </div>
@@ -256,6 +259,8 @@ REL0 = {
 for k, v in REL0.items(): POSTS[k]["rel"] = v
 POSTS.update(P)
 POSTS.update(P3)
+for post in POSTS.values():
+    post["modified"] = max(post.get("modified", DATE), SHARED_REQUIREMENTS_UPDATED)
 POSTS["animated-captions-premiere-pro"]["image"] = "/img/styles/Bold-Impact.png"
 
 ORDER = list(POSTS.keys())

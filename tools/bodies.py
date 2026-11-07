@@ -88,7 +88,7 @@ POSTS["animated-captions-premiere-pro"] = dict(
 title="Animated Captions in Premiere Pro: Native, Graphics, Plugin",
 desc="Compare native single-word captions, manually animated graphics, and Captions Gen for Premiere Pro. Choose a workflow for subtitles or karaoke highlights.",
 h1="Animated captions in Premiere Pro: choose your workflow",
-modified="2026-10-20",
+modified="2026-11-07",
 body="""
 <p>To make animated captions in Premiere Pro, start with the look you need: <strong>one word appearing at a time, manually animated text, or a moving highlight within a multi-word line</strong>. These use different workflows. Current Premiere versions include native single-word captions; graphics give you more control over motion and highlighting.</p>
 
@@ -104,7 +104,7 @@ body="""
 <h2 id="plugin">3. Generate animated graphics with Captions Gen</h2>
 <p><a href="https://captionsgen.com/">Captions Gen</a> transcribes on your machine with Whisper and places word-synced graphics on the Premiere timeline. Its presets combine karaoke highlights, color swaps or pill backgrounds, bounce, and in/out animations. You can edit the placed graphics or use “Apply style to placed captions” to change their appearance without transcribing again.</p>
 <figure class="caption-example"><img src="/img/styles/Bold-Impact.png" width="1280" height="480" loading="lazy" alt="Captions Gen preview reading Use Your Shield, with Shield highlighted in yellow"><figcaption>A Captions Gen graphic with the spoken word highlighted. This is a plugin preview, not Premiere's native caption track.</figcaption></figure>
-<p>The plugin runs on Windows 10/11 with Premiere Pro 25.0 or newer. It's free, with no time limit or watermark.</p>
+<p>The plugin runs on Windows 10/11, 64-bit, with Premiere Pro 25.6 or newer. It's free, with no time limit or watermark.</p>
 
 <h2>Which workflow fits your edit?</h2>
 <ul>
