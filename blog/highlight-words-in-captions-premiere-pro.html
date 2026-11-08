@@ -15,7 +15,7 @@
 <meta property="og:type" content="article">
 
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "How to highlight words in captions in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-07", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/highlight-words-in-captions-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "How to highlight words in captions in Premiere Pro", "item": "https://captionsgen.com/blog/highlight-words-in-captions-premiere-pro.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "How to highlight words in captions in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/highlight-words-in-captions-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "How to highlight words in captions in Premiere Pro", "item": "https://captionsgen.com/blog/highlight-words-in-captions-premiere-pro.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -165,33 +165,34 @@
 
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / How to highlight words in captions in Premiere Pro</p>
 <h1>How to highlight words in captions in Premiere Pro</h1>
-<div class="meta">Updated <time datetime="2026-11-07">7 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 
 <p>To highlight the spoken word while keeping a full line visible, use timed caption graphics: build the changes manually or generate them with a plugin. This karaoke look differs from Premiere's native Single Word layout, which displays one word at a time.</p>
-<p class="cta-line">Premiere's caption track cannot highlight the spoken word. <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin that does it in one click, with a color swap or pill behind each word. It transcribes on your computer and places editable Motion Graphics captions on the timeline. Free for Windows, with no time limit or watermark.</p>
+<p class="cta-line">A native caption track does not automatically move a highlight through the words in a line. <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin that generates that timed highlight, with a color swap or pill behind each word. It transcribes locally on your CPU and places editable Motion Graphics clips on the Premiere timeline. The current Windows release is free, without a transcription time cap or watermark; Adobe Premiere Pro is separate.</p>
 
 <h2>Why the caption track can't do it</h2>
 <p>Captions in Premiere are timed lines of text with a Track Style. Current Premiere versions can create individual word-timed captions with the Single Word layout. A moving highlight within a multi-word line is a different effect; build that with graphics or a caption plugin.</p>
 
 <h2>The manual method</h2>
 <ol>
-<li>Right-click a caption and choose Upgrade Caption to Graphic.</li>
+<li>Select the captions and choose Graphics and Titles &gt; Upgrade Caption to Graphic.</li>
 <li>In Properties, select the word you want highlighted inside the text box and give it a different fill color or size.</li>
 <li>Cut the graphic at the point where the next word is spoken, and move the highlight to that word in the new piece.</li>
 </ol>
-<p>A caption with five words becomes five short graphics. It works and it looks right, but it is slow: expect an hour for a minute of speech.</p>
+<p>This split-graphic method needs a timed state for each spoken word. Review the cuts against the audio; the work depends on the number of words and the animation you want.</p>
 
 <h2>The plugin method</h2>
-<p>A caption plugin transcribes with word timestamps and builds the highlight for you. You pick the style (color swap, bigger word, pill background), press Generate, and the graphics land on the timeline timed to every word. Changing the highlight color later is a restyle, not a rebuild.</p>
+<p>A caption plugin transcribes with word timestamps and builds the highlight for you. You pick the style (color swap, bigger word, pill background), press Generate, and the graphics land on the timeline timed to every word. In Captions Gen, use Apply style for appearance changes to a generated batch. If you change the words, use the caption-edit and animation-update workflow described in the <a href="fix-caption-timing-premiere-pro.html">timing guide</a>.</p>
 
 <h2>Which words to highlight</h2>
-<p>Highlight the word as it is spoken, not keywords you choose in advance. Viewers read along with the audio, and the moving highlight is what holds attention on muted autoplay.</p>
+<p>Highlight the word as it is spoken, not keywords you choose in advance. Preview both with sound and muted. Check that the highlighted word matches the voice and that the whole phrase remains readable.</p>
 
 
 <div class="box">
 <p class="t">Try animated captions on your own edit</p>
-<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and one-click restyling of placed captions. Native captions remain useful when you need subtitles or a separate caption file.</p>
-<p><strong>Windows 10/11, 64-bit · Premiere Pro 25.6+</strong>. Transcription runs locally on your CPU. Free, with no time limit and no watermark. See <a href="https://captionsgen.com/#performance">requirements, model choices and performance</a>.</p>
+<p>Captions Gen is a currently free animated captions plugin for Adobe Premiere Pro and After Effects on Windows. It transcribes audio locally on the CPU with Faster Whisper, then places editable Motion Graphics clips in Premiere or native caption layers in After Effects.</p>
+<p>Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications.</p>
+<p>Current release: <a href="https://captionsgen.com/news/captions-gen-1-1-9.html">1.1.9</a>. Check <a href="https://captionsgen.com/product.html">supported Adobe versions, installation requirements and limitations</a>. Keep a native caption track when you need SRT, selectable subtitles or broadcast closed captions.</p>
 <a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download free</a>
 <a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
 </div>

@@ -15,7 +15,7 @@
 <meta property="og:type" content="article">
 
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "How to add subtitles in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-07", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/how-to-add-subtitles-in-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "How to add subtitles in Premiere Pro", "item": "https://captionsgen.com/blog/how-to-add-subtitles-in-premiere-pro.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "How to add subtitles in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/how-to-add-subtitles-in-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "How to add subtitles in Premiere Pro", "item": "https://captionsgen.com/blog/how-to-add-subtitles-in-premiere-pro.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -165,16 +165,16 @@
 
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / How to add subtitles in Premiere Pro</p>
 <h1>How to add subtitles in Premiere Pro</h1>
-<div class="meta">Updated <time datetime="2026-11-07">7 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 
 <p>There are two ways to get subtitles into Premiere Pro: let it generate them from the audio, or import a subtitle file you already have. Both end up on the same caption track, styled and exported the same way.</p>
-<p class="cta-line">Premiere's subtitles are static text. For animated, word-by-word captions like the ones on Reels and Shorts, <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin that generates them in one click. It transcribes on your computer and places editable Motion Graphics captions on the timeline. Free for Windows, with no time limit or watermark.</p>
+<p class="cta-line">Premiere's subtitles are static text. For animated, word-by-word captions like the ones on Reels and Shorts, <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin that generates timed animated graphics. It transcribes locally on your CPU and places editable Motion Graphics clips on the Premiere timeline. The current Windows release is free, without a transcription time cap or watermark; Adobe Premiere Pro is separate.</p>
 
 <h2>Way 1: generate subtitles automatically</h2>
 <p>Open <kbd>Window &gt; Text</kbd>, click Transcribe sequence, wait for the transcript, then click Create captions with the format set to Subtitle. Premiere places a caption track above your video with every line timed to the speech. For the short-form look, set max characters per line to 16 to 20 before you create them.</p>
 
 <h2>Way 2: import an .srt file</h2>
-<p>Go to <kbd>File &gt; Import</kbd>, pick the .srt (or .vtt, .scc), and drag it from the Project panel onto the timeline. Premiere creates a caption track from it. Check that the file's timecodes start where your sequence does; an offset of a few seconds is the usual reason imported subtitles drift.</p>
+<p>Go to <kbd>File &gt; Import</kbd>, pick the .srt (or another supported caption file such as .scc), and drag it from the Project panel onto the timeline. Premiere creates a caption track from it. Check that the file's timecodes start where your sequence does; an offset of a few seconds is the usual reason imported subtitles drift.</p>
 
 <h2>Styling the subtitles</h2>
 <p>Select any subtitle and open Properties. Set font, size, fill, stroke and background, then save it as a Track Style so every subtitle on the track matches. A Track Style keeps the track's appearance consistent.</p>
@@ -183,13 +183,14 @@
 <p>In the export dialog, open the Captions tab. Burn captions into video for social platforms, or Create sidecar file to hand over an .srt. Leaving it on None exports no subtitles at all, which catches people constantly.</p>
 
 <h2>If you want the subtitles to move</h2>
-<p>Native subtitles stay static. For the highlighted-word style, you need a graphics-based approach: either Upgrade caption to graphic and keyframe by hand, or a plugin that generates animated captions with word timing.</p>
+<p>Native subtitles stay static. For the highlighted-word style, you need a graphics-based approach: either use Graphics and Titles &gt; Upgrade Caption to Graphic and animate by hand, or a plugin that generates animated captions with word timing.</p>
 
 
 <div class="box">
 <p class="t">Try animated captions on your own edit</p>
-<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and one-click restyling of placed captions. Native captions remain useful when you need subtitles or a separate caption file.</p>
-<p><strong>Windows 10/11, 64-bit · Premiere Pro 25.6+</strong>. Transcription runs locally on your CPU. Free, with no time limit and no watermark. See <a href="https://captionsgen.com/#performance">requirements, model choices and performance</a>.</p>
+<p>Captions Gen is a currently free animated captions plugin for Adobe Premiere Pro and After Effects on Windows. It transcribes audio locally on the CPU with Faster Whisper, then places editable Motion Graphics clips in Premiere or native caption layers in After Effects.</p>
+<p>Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications.</p>
+<p>Current release: <a href="https://captionsgen.com/news/captions-gen-1-1-9.html">1.1.9</a>. Check <a href="https://captionsgen.com/product.html">supported Adobe versions, installation requirements and limitations</a>. Keep a native caption track when you need SRT, selectable subtitles or broadcast closed captions.</p>
 <a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download free</a>
 <a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
 </div>

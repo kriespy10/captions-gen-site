@@ -15,7 +15,7 @@
 <meta property="og:type" content="article">
 
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Setting the caption language in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-07", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/premiere-pro-captions-language.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Setting the caption language in Premiere Pro", "item": "https://captionsgen.com/blog/premiere-pro-captions-language.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Setting the caption language in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/premiere-pro-captions-language.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Setting the caption language in Premiere Pro", "item": "https://captionsgen.com/blog/premiere-pro-captions-language.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -165,30 +165,35 @@
 
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Setting the caption language in Premiere Pro</p>
 <h1>Setting the caption language in Premiere Pro</h1>
-<div class="meta">Updated <time datetime="2026-11-07">7 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 
-<p>The language is set in the Transcribe sequence dialog, not in the caption track. Pick it there before transcribing. If the transcript came out wrong, transcribe again with the right language; there is no way to fix the language on existing captions.</p>
+<p>Choose the spoken language before transcription in Premiere's Text panel. If recognition used the wrong language, correct or recreate the transcript and captions. Translating correctly recognized captions into another language is a separate workflow.</p>
 
 <h2>Where the setting is</h2>
-<p>Open <kbd>Window &gt; Text</kbd>, click Transcribe sequence, and use the Language dropdown. Auto detect works for clear single-language speech. For accents, mixed languages, or short clips, choosing the language yourself gives a better transcript.</p>
+<p>Open <kbd>Window &gt; Text</kbd> and create a transcript from the Transcript tab. To choose a language manually, first disable <strong>Enable language auto-detection</strong> in <strong>Media Analysis &amp; Transcription</strong> preferences. Select the spoken language, test a short section and review the result.</p>
 
 <h2>Language packs</h2>
-<p>Premiere transcribes locally and downloads a language pack the first time you use each language. If the transcribe button seems stuck, check Preferences under Transcription; the pack may still be downloading or may need a manual download.</p>
+<p>Premiere transcribes locally with installed language packs. In <strong>Text &gt; Transcript &gt; Create transcript</strong>, open Language and use the download icon beside a language that is not installed. English is included with Premiere. Wait for a required pack to finish downloading before trying again.</p>
 
 <h2>Captions came out in the wrong language</h2>
-<p>Delete the caption track, open the Transcript tab, click Transcribe sequence again with the correct language, then create captions again. It takes a minute and is the only clean fix.</p>
+<p>Keep a copy of edited captions before re-transcribing. In the Transcript tab, choose the correct spoken language, create a new transcript and recreate captions as needed. Review names, numbers and timing before replacing an edited delivery track.</p>
 
 <h2>Which languages are supported</h2>
-<p>Premiere's own transcription covers a fixed set of common languages, and Adobe expands it over time. If yours isn't in the dropdown, a plugin built on Whisper handles a much wider range, close to a hundred languages, with the same auto-detect behavior.</p>
+<p>Premiere's own transcription covers a fixed set of common languages, and Adobe expands it over time. If yours is absent, check the language support of an alternative speech model. Captions Gen provides a searchable spoken-language selector and compatible custom models. Auto-detection, recognition quality and language coverage depend on the chosen model.</p>
 
 <h2>Two languages in one video</h2>
-<p>Premiere transcribes in one language per pass. For bilingual clips, transcribe twice with different languages and keep the correct sections from each, or use a Whisper-based tool that detects language per segment.</p>
+<p>For mixed-language footage, test short sections and review each recognized passage. A model that supports several languages does not guarantee reliable code-switching within one clip. Select or separate the relevant sections when a single transcription pass gives poor results.</p>
+
+<h2>Translation is different from spoken-language selection</h2>
+<p>Current Premiere versions offer <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/translate-captions.html">Translate captions</a>, which uses cloud services to create another caption track. Captions Gen 1.1.9 transcribes speech; it does not include a public translation feature. Its Premiere and After Effects panels share the speech engine and Models folder. See <a href="/product.html">current language and platform limits</a>.</p>
+<p class="sources">Adobe references: <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/download-language-packs-from-within-premiere.html">download language packs</a> and <a href="https://helpx.adobe.com/premiere/desktop/get-started/preferences-and-settings/transcription-preferences.html">transcription preferences</a>.</p>
 
 
 <div class="box">
 <p class="t">Try animated captions on your own edit</p>
-<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and one-click restyling of placed captions. Native captions remain useful when you need subtitles or a separate caption file.</p>
-<p><strong>Windows 10/11, 64-bit · Premiere Pro 25.6+</strong>. Transcription runs locally on your CPU. Free, with no time limit and no watermark. See <a href="https://captionsgen.com/#performance">requirements, model choices and performance</a>.</p>
+<p>Captions Gen is a currently free animated captions plugin for Adobe Premiere Pro and After Effects on Windows. It transcribes audio locally on the CPU with Faster Whisper, then places editable Motion Graphics clips in Premiere or native caption layers in After Effects.</p>
+<p>Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications.</p>
+<p>Current release: <a href="https://captionsgen.com/news/captions-gen-1-1-9.html">1.1.9</a>. Check <a href="https://captionsgen.com/product.html">supported Adobe versions, installation requirements and limitations</a>. Keep a native caption track when you need SRT, selectable subtitles or broadcast closed captions.</p>
 <a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download free</a>
 <a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
 </div>

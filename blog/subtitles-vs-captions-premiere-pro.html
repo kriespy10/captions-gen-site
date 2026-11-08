@@ -15,7 +15,7 @@
 <meta property="og:type" content="article">
 
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Subtitles vs captions in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-07", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/subtitles-vs-captions-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Subtitles vs captions in Premiere Pro", "item": "https://captionsgen.com/blog/subtitles-vs-captions-premiere-pro.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Subtitles vs captions in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/subtitles-vs-captions-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Subtitles vs captions in Premiere Pro", "item": "https://captionsgen.com/blog/subtitles-vs-captions-premiere-pro.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -165,22 +165,22 @@
 
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Subtitles vs captions in Premiere Pro</p>
 <h1>Subtitles vs captions in Premiere Pro</h1>
-<div class="meta">Updated <time datetime="2026-11-07">7 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 
-<p>Quick answer: in Premiere Pro, "Subtitle" is the open, styleable text format you burn into the picture, and "closed captions" (CEA-608 and 708) are a data stream the viewer can turn on and off. For social video you want Subtitle. For broadcast delivery you want closed captions.</p>
-<p class="cta-line">Neither format can highlight or animate each word. For that, <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin that generates word-by-word animated captions in one click. It transcribes on your computer and places editable Motion Graphics captions on the timeline. Free for Windows, with no time limit or watermark.</p>
+<p>In Premiere Pro, <strong>Subtitle</strong> is a flexible caption-track format that you can burn into the picture or export as a separate subtitle file. CEA-608 and CEA-708 are closed-caption formats used in specified delivery workflows. Choose the format and export method your client or platform needs; an SRT file can remain selectable in a compatible player.</p>
+<p class="cta-line">Native caption tracks do not automatically move a highlight through a multi-word line. <a href="https://captionsgen.com/">Captions Gen</a> generates timed, animated graphics for that look. It transcribes locally on your CPU and places editable Motion Graphics clips on the Premiere timeline. The current Windows release is free, without a transcription time cap or watermark; Adobe Premiere Pro is separate.</p>
 
 <h2>What Premiere means by subtitles</h2>
-<p>When you click Create captions and pick Subtitle as the format, you get a caption track that you can style freely: any font, size, color, outline and background box. On export you can burn it into the video or save it as a sidecar .srt. This is the format behind almost every captioned Reel, TikTok and Short.</p>
+<p>When you click Create captions and pick Subtitle as the format, you get a caption track that you can style freely: any font, size, color, outline and background box. On export you can burn it into the video or save it as a sidecar .srt. Use burn-in when you want the exported video to retain the chosen appearance.</p>
 
 <h2>What Premiere means by closed captions</h2>
 <p>CEA-608 and CEA-708 are broadcast standards. The text is stored as data alongside the video, and the player decides whether to display it. Styling is limited by the standard, which is why your fancy font disappears when you pick this format. Broadcasters, streaming services and some accessibility requirements ask for it by name.</p>
 
 <h2>Which one should you use?</h2>
-<p>Ask where the video is going. Instagram, TikTok, YouTube Shorts or a website: Subtitle, burned in. A TV network, a streaming platform with a spec sheet, or a client that says "608" or "708": closed captions. YouTube long-form: either a sidecar .srt uploaded as captions, or burned-in subtitles if you want a specific look.</p>
+<p>Ask where the video is going. Use Subtitle with burn-in for a fixed visual treatment, or a supported sidecar such as SRT for selectable text. For broadcast or streaming delivery, follow the supplied specification for format, channel/service and export. Keep a native caption track even when you also make animated graphics.</p>
 
 <h2>Switching formats later</h2>
-<p>Right-click the caption track header and change the track format. Premiere converts the existing captions, but styling that the new format doesn't support gets dropped, so convert before you style, not after.</p>
+<p>Keep a copy of the sequence before changing formats. You can create captions again from the reviewed transcript with the required Format selected in Create captions. Review the result and its export options: styling and supported characters can differ between formats.</p>
 
 <h2>Neither format animates</h2>
 <p>Both formats support reusable Track Styles. Current Premiere versions also include a Single Word layout. Word-by-word highlighting, pop-ins and pill backgrounds need a graphics layer instead of a caption track, either built by hand or generated by a plugin.</p>
@@ -188,8 +188,9 @@
 
 <div class="box">
 <p class="t">Try animated captions on your own edit</p>
-<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and one-click restyling of placed captions. Native captions remain useful when you need subtitles or a separate caption file.</p>
-<p><strong>Windows 10/11, 64-bit · Premiere Pro 25.6+</strong>. Transcription runs locally on your CPU. Free, with no time limit and no watermark. See <a href="https://captionsgen.com/#performance">requirements, model choices and performance</a>.</p>
+<p>Captions Gen is a currently free animated captions plugin for Adobe Premiere Pro and After Effects on Windows. It transcribes audio locally on the CPU with Faster Whisper, then places editable Motion Graphics clips in Premiere or native caption layers in After Effects.</p>
+<p>Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications.</p>
+<p>Current release: <a href="https://captionsgen.com/news/captions-gen-1-1-9.html">1.1.9</a>. Check <a href="https://captionsgen.com/product.html">supported Adobe versions, installation requirements and limitations</a>. Keep a native caption track when you need SRT, selectable subtitles or broadcast closed captions.</p>
 <a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download free</a>
 <a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
 </div>

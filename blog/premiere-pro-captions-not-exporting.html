@@ -6,16 +6,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
-<title>Premiere Pro Captions Not Exporting? Here&#x27;s the Setting</title>
-<meta name="description" content="Captions show in Premiere Pro but not in the exported video? It&#x27;s almost always the Captions tab in the export dialog. Fix it in 30 seconds.">
+<title>Premiere Pro Captions Not Exporting: Settings to Check</title>
+<meta name="description" content="Fix missing Premiere captions by checking burn-in, sidecar or embedded export settings, enabled caption tracks and graphics visibility.">
 <link rel="canonical" href="https://captionsgen.com/blog/premiere-pro-captions-not-exporting.html">
-<meta property="og:title" content="Premiere Pro Captions Not Exporting? Here&#x27;s the Setting">
-<meta property="og:description" content="Captions show in Premiere Pro but not in the exported video? It&#x27;s almost always the Captions tab in the export dialog. Fix it in 30 seconds.">
+<meta property="og:title" content="Premiere Pro Captions Not Exporting: Settings to Check">
+<meta property="og:description" content="Fix missing Premiere captions by checking burn-in, sidecar or embedded export settings, enabled caption tracks and graphics visibility.">
 <meta property="og:url" content="https://captionsgen.com/blog/premiere-pro-captions-not-exporting.html">
 <meta property="og:type" content="article">
 
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Premiere Pro captions not exporting", "datePublished": "2026-08-26", "dateModified": "2026-11-07", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/premiere-pro-captions-not-exporting.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Premiere Pro captions not exporting", "item": "https://captionsgen.com/blog/premiere-pro-captions-not-exporting.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Premiere Pro captions not exporting", "datePublished": "2026-08-26", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/premiere-pro-captions-not-exporting.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Premiere Pro captions not exporting", "item": "https://captionsgen.com/blog/premiere-pro-captions-not-exporting.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -165,30 +165,35 @@
 
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Premiere Pro captions not exporting</p>
 <h1>Premiere Pro captions not exporting</h1>
-<div class="meta">Updated <time datetime="2026-11-07">7 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 
-<p>Open the export dialog, click the Captions tab, and change Export Options from None to Burn Captions Into Video. That fixes it nine times out of ten. The rest of this page covers the tenth.</p>
+<p>If native caption-track text is missing from the exported picture, open the <strong>Captions</strong> section in Export and check Export Options. Choose <strong>Burn Captions Into Video</strong> when you want the words visible in the picture, or a supported sidecar/embedded option when you need selectable captions.</p>
 
 <h2>The Captions tab</h2>
 <p>Premiere does not export captions unless you tell it to, and the setting is on its own tab that many people never open. The choices are None (nothing exported), Create Sidecar File (a separate .srt or similar), and Burn Captions Into Video (text rendered into the picture). For social platforms, burn in.</p>
 
 <h2>Sidecar exported, but the platform shows nothing</h2>
-<p>A sidecar file is a separate upload. Instagram and TikTok don't accept it, so burn in for those. YouTube accepts it under Subtitles in the upload flow.</p>
+<p>A sidecar file needs a supported player or a separate platform upload. Check the destination's current caption-file options. If it does not offer a suitable upload and the text must be visible, burn captions into the picture instead.</p>
 
 <h2>Closed captions and burn-in</h2>
-<p>If your track format is CEA-608 or 708, some export formats only embed the caption data instead of burning it. Convert the track to Subtitle first if you need the text visible in the picture.</p>
+<p>Caption format and output container affect the available embedded and sidecar choices. Burn-in renders enabled caption tracks into the picture; embedded data needs a compatible container and player. Check the delivery specification instead of assuming an embedded stream will appear in every player.</p>
 
 <h2>Caption track disabled</h2>
 <p>Check the output toggle on the caption track header. A disabled track exports nothing even with burn-in selected.</p>
 
 <h2>Media Encoder queue</h2>
-<p>If you send the export to Media Encoder, the caption setting travels with it, but check it there too: reopening the preset in Media Encoder occasionally resets the Captions tab to None.</p>
+<p>If you queue the sequence in Media Encoder, inspect that job's caption settings before starting it. Export a short section and watch the actual file, with an accompanying sidecar loaded when required.</p>
+
+<h2>Animated graphics use video-track output</h2>
+<p>Captions Gen places editable graphics on video tracks, not a native caption track. The Captions export section does not control those graphics. Check that their video track is enabled, the layers are visible and their duration overlaps the export range. If you need SRT too, keep a separate native caption track. See the <a href="burn-in-captions-premiere-pro.html">burn-in workflow</a> and <a href="/product.html">current output limits</a>.</p>
+<p class="sources">Reference: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-caption-tracks.html">caption export instructions</a>.</p>
 
 
 <div class="box">
 <p class="t">Try animated captions on your own edit</p>
-<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and one-click restyling of placed captions. Native captions remain useful when you need subtitles or a separate caption file.</p>
-<p><strong>Windows 10/11, 64-bit · Premiere Pro 25.6+</strong>. Transcription runs locally on your CPU. Free, with no time limit and no watermark. See <a href="https://captionsgen.com/#performance">requirements, model choices and performance</a>.</p>
+<p>Captions Gen is a currently free animated captions plugin for Adobe Premiere Pro and After Effects on Windows. It transcribes audio locally on the CPU with Faster Whisper, then places editable Motion Graphics clips in Premiere or native caption layers in After Effects.</p>
+<p>Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications.</p>
+<p>Current release: <a href="https://captionsgen.com/news/captions-gen-1-1-9.html">1.1.9</a>. Check <a href="https://captionsgen.com/product.html">supported Adobe versions, installation requirements and limitations</a>. Keep a native caption track when you need SRT, selectable subtitles or broadcast closed captions.</p>
 <a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download free</a>
 <a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
 </div>

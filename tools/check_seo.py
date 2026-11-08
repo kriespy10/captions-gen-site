@@ -1,6 +1,7 @@
 """Check the shipped static pages, without network access or third-party packages."""
 import json
 import re
+from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urljoin, urlsplit
@@ -101,6 +102,10 @@ def check():
                 text = " ".join(" ".join(page.text).split())
                 for question in schema.get("mainEntity", []):
                     expect(question["name"] in text, f"FAQ question absent from HTML: {url}")
+                    answer = question.get("acceptedAnswer", {}).get("text", "")
+                    answer = " ".join(unescape(re.sub(r"<[^>]+>", " ", answer)).split())
+                    expect(bool(answer) and re.sub(r"\s+", "", answer) in re.sub(r"\s+", "", text),
+                           f"FAQ answer absent from HTML: {url}: {question['name']}")
 
     for url, page in pages.items():
         for href in page.links:
