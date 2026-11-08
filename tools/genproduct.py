@@ -6,6 +6,7 @@ import json
 import re
 from datetime import date
 from html import escape
+from html.parser import HTMLParser
 from pathlib import Path
 
 from product import PRODUCT, SITE, organization_schema, software_schema
@@ -13,6 +14,53 @@ from product import PRODUCT, SITE, organization_schema, software_schema
 ROOT = Path(__file__).resolve().parents[1]
 TITLE = "Captions Gen: Free Pricing, Compatibility & Product Facts"
 DESCRIPTION = "Current Captions Gen pricing, Premiere Pro and After Effects compatibility on Windows, local transcription, download requirements and limitations."
+
+
+class HomepageFAQs(HTMLParser):
+    """Keep the machine-readable FAQ tied to the answers visitors actually see."""
+
+    def __init__(self, html):
+        super().__init__(convert_charrefs=True)
+        self.section_depth = 0
+        self.question = None
+        self.answer = None
+        self.in_summary = False
+        self.entries = []
+        self.feed(html)
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "section":
+            if self.section_depth:
+                self.section_depth += 1
+            elif attrs.get("id") == "faq":
+                self.section_depth = 1
+        if not self.section_depth:
+            return
+        if tag == "details":
+            self.question, self.answer = [], []
+        elif tag == "summary":
+            self.in_summary = True
+        elif tag in ("p", "li", "br") and self.answer is not None:
+            self.answer.append(" ")
+
+    def handle_endtag(self, tag):
+        if tag == "summary":
+            self.in_summary = False
+        elif tag == "details" and self.question is not None:
+            question = " ".join("".join(self.question).split())
+            answer = " ".join("".join(self.answer).split())
+            if not question or not answer:
+                raise ValueError("Homepage FAQ has an empty question or answer")
+            self.entries.append({"@type": "Question", "name": question,
+                                 "acceptedAnswer": {"@type": "Answer", "text": answer}})
+            self.question = self.answer = None
+        elif tag == "section" and self.section_depth:
+            self.section_depth -= 1
+
+    def handle_data(self, data):
+        if self.section_depth and self.question is not None:
+            (self.question if self.in_summary else self.answer).append(data)
 
 
 def product_page():
@@ -94,16 +142,19 @@ def product_page():
 <p>For setup and model choices, see <a href="/#install">requirements and installation</a> and <a href="/#performance">transcription and performance</a>.</p>
 <h2 id="free">Is there a free animated captions plugin for Premiere Pro?</h2>
 <p>{escape(p['free_answer'])}</p>
-<p>The old 15-minute limit was removed with <a href="{p['free_release_url']}">Captions Gen 1.1.0 on {free_since}</a>. If an older panel still shows that limit, use Update in the panel and restart Premiere Pro.</p>
+<h3>Is there a free animated captions plugin for After Effects?</h3>
+<p>Yes. Captions Gen is currently free for After Effects on Windows, with no watermark, subscription or transcription time cap. The panel has been tested with After Effects 2026 on Windows 11 and creates native editable caption layers with local CPU transcription. Choose After Effects or Both in the same Windows setup. Adobe After Effects is a separate paid application. The <a href="/blog/how-to-add-captions-in-after-effects.html">After Effects setup and first-caption guide</a> explains the workflow.</p>
+<p>The old 15-minute limit was removed with <a href="{p['free_release_url']}">Captions Gen 1.1.0 on {free_since}</a>. If an older panel still shows that limit, use the offered update and restart the Adobe application.</p>
 <h2 id="fit">When Captions Gen fits your edit</h2>
 <p>Use it when you edit in a supported Windows version of Premiere Pro or After Effects and want animated karaoke highlights, reusable styles and graphics you can continue editing. It suits short-form videos, interviews and other spoken footage where the caption design is part of the picture.</p>
 <p class="note">{escape(p['limits'])}</p>
 <p>For subtitle delivery, compare the <a href="/blog/animated-captions-premiere-pro.html">native and animated graphics workflows</a>. The <a href="/blog/free-caption-plugin-premiere-pro.html">free caption plugin guide</a> explains the difference between included Premiere captions and a free animation plugin.</p>
+<p>Start in your Adobe application: <a href="/blog/how-to-add-captions-in-after-effects.html">generate animated captions in After Effects</a>, or <a href="/blog/animated-captions-premiere-pro.html">choose a Premiere Pro caption workflow</a>. After Effects layers and Premiere Motion Graphics clips have different host editing steps.</p>
 <h2 id="release">Public release and support</h2>
-<p>Current public version: <a href="{p['release_url']}">{escape(p['version'])}, released {released}</a>. The <a href="/update/version.json">update manifest</a> reports the published update. Version 1.1.9 includes both Adobe panels in one Windows setup. Mac is not included in this public release.</p>
+<p>Current public version: <a href="{p['release_url']}">{escape(p['version'])}, released {released}</a>. The <a href="/update/version.json">update manifest</a> reports the published update. The current Windows setup offers Premiere Pro, After Effects, or Both, with a shared engine and Models folder. Mac is not included in this public release.</p>
 <p>For product questions or corrections, email <a href="mailto:{p['support']}">{p['support']}</a>. Read the <a href="/privacy.html">website privacy information</a> for optional analytics and checkout details.</p>
 </main>
-<footer><p><a href="/">Product overview and live style preview</a> · <a href="/news/">News and updates</a> · <a href="/llms.txt">Text directory</a> · <a href="/privacy.html">Website privacy</a></p><button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button><p>© 2026 Captions Gen. Not affiliated with Adobe. Adobe and Premiere Pro are trademarks of Adobe Inc.</p></footer>
+<footer><p><a href="/">Product overview and live style preview</a> · <a href="/news/">News and updates</a> · <a href="/llms.txt">Text directory</a> · <a href="/privacy.html">Website privacy</a></p><button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button><p>© 2026 Captions Gen. Not affiliated with Adobe. Adobe, Premiere Pro and After Effects are trademarks of Adobe Inc.</p></footer>
 </body>
 </html>
 '''
@@ -140,6 +191,7 @@ Official website: {SITE}/. Product facts checked {p['checked']}.
 - [Website privacy]({SITE}/privacy.html): optional analytics and checkout information.
 
 ## Caption guides
+- [Add animated captions in After Effects]({SITE}/blog/how-to-add-captions-in-after-effects.html): combined Windows setup, the After Effects panel, caption layers, text edits, styling and rendering.
 - [Free caption plugin for Premiere Pro]({SITE}/blog/free-caption-plugin-premiere-pro.html): free animated plugin versus Premiere's included native caption tools.
 - [Animated captions workflows]({SITE}/blog/animated-captions-premiere-pro.html): native single-word captions, manual graphics and the plugin workflow.
 - [Word-by-word captions]({SITE}/blog/word-by-word-captions-premiere-pro.html): one word at a time versus highlights within a phrase.
@@ -160,14 +212,8 @@ def sync_homepage(path):
         elif data.get("@type") == "Organization":
             data = organization_schema()
         elif data.get("@type") == "FAQPage":
-            questions = data["mainEntity"]
-            existing = next((q for q in questions if q["name"] == PRODUCT["free_question"]), None)
-            if existing:
-                existing["acceptedAnswer"]["text"] = PRODUCT["free_answer"]
-            else:
-                questions.insert(1, {"@type": "Question", "name": PRODUCT["free_question"], "acceptedAnswer": {"@type": "Answer", "text": PRODUCT["free_answer"]}})
+            data["mainEntity"] = faq_entries
         return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>'
-    html = re.sub(r'<script type="application/ld\+json">(.*?)</script>', replace_schema, html, flags=re.S)
     faq = f'''    <details>
       <summary>{PRODUCT['free_question']}</summary>
       <p>{escape(PRODUCT['free_answer'])}</p>
@@ -181,6 +227,10 @@ def sync_homepage(path):
         if marker not in html:
             raise ValueError("Homepage FAQ insertion point not found")
         html = html.replace(marker, faq + marker, 1)
+    faq_entries = HomepageFAQs(html).entries
+    if len(faq_entries) < 3:
+        raise ValueError("Homepage FAQ section was not found or is incomplete")
+    html = re.sub(r'<script type="application/ld\+json">(.*?)</script>', replace_schema, html, flags=re.S)
     price_link = '<p><a href="/product.html">Current pricing, compatibility and product facts</a>. Adobe Premiere Pro and After Effects are separate paid applications. Paid features are planned for the future.</p>'
     if price_link not in html:
         marker = '        <p>Bought a license before? Thank you for the early support. Your key stays active.</p>'

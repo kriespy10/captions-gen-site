@@ -3,17 +3,22 @@
 <head>
 <link rel="stylesheet" href="/analytics.css">
 <script defer src="/analytics.js"></script>
-<link rel="stylesheet" href="/caption-demo.css?v=panel-1.1.2-20261031">
-<script type="module" src="/caption-demo.js?v=panel-1.1.2-20261031"></script>
+<link rel="stylesheet" href="/caption-demo.css?v=shared-styles-20261108">
+<script type="module" src="/caption-demo.js?v=shared-styles-20261108"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Free Captions for Premiere Pro &amp; After Effects | Captions Gen</title>
-<meta name="description" content="Free animated captions for Premiere Pro and After Effects on Windows. Local transcription, editable captions and one installer for either app or both.">
-<meta property="og:title" content="Free Captions for Premiere Pro &amp; After Effects | Captions Gen">
-<meta property="og:description" content="Free animated captions for Premiere Pro and After Effects on Windows. Local transcription, editable captions and one installer for either app or both.">
+<title>Free Caption Plugin: Premiere Pro &amp; After Effects | Captions Gen</title>
+<meta name="description" content="Create animated captions in Premiere Pro or After Effects on Windows. Currently free, with local CPU transcription, editable graphics and one setup for both apps.">
+<meta property="og:title" content="Free Caption Plugin: Premiere Pro &amp; After Effects | Captions Gen">
+<meta property="og:description" content="Create animated captions in Premiere Pro or After Effects on Windows. Currently free, with local CPU transcription, editable graphics and one setup for both apps.">
 <meta property="og:image" content="https://captionsgen.com/img/styles/Bold-Impact.png">
 <meta property="og:url" content="https://captionsgen.com/">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Caption Plugin: Premiere Pro &amp; After Effects | Captions Gen">
+<meta name="twitter:description" content="Animated captions in Premiere Pro and After Effects on Windows. Local CPU transcription, editable graphics or composition layers, and a currently free shared setup.">
+<meta name="twitter:image" content="https://captionsgen.com/img/styles/Bold-Impact.png">
+<meta property="og:image:alt" content="Captions Gen caption design preview with the spoken word highlighted in yellow">
+<meta name="twitter:image:alt" content="Captions Gen caption design preview with the spoken word highlighted in yellow">
 <link rel="canonical" href="https://captionsgen.com/">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "@id": "https://captionsgen.com/#organization", "name": "Captions Gen", "url": "https://captionsgen.com/", "logo": "https://captionsgen.com/img/captions-gen-logo.svg", "founder": {"@type": "Person", "@id": "https://captionsgen.com/#kris", "name": "Kris", "jobTitle": "Video editor", "url": "https://captionsgen.com/#about-kris", "sameAs": ["https://github.com/Kriespy10"]}, "sameAs": ["https://github.com/Kriespy10", "https://captionsgen.lemonsqueezy.com/"], "contactPoint": {"@type": "ContactPoint", "contactType": "customer support", "email": "business@captionsgen.com"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "@id": "https://captionsgen.com/#software", "name": "Captions Gen", "url": "https://captionsgen.com/", "description": "Captions Gen is a currently free animated captions plugin for Adobe Premiere Pro and After Effects on Windows. It transcribes audio locally on the CPU with Faster Whisper, then places editable Motion Graphics clips in Premiere or native caption layers in After Effects.", "applicationCategory": "MultimediaApplication", "operatingSystem": "Windows 10/11, 64-bit; must meet the installed Adobe application requirements", "softwareRequirements": "Premiere Pro 25.6 or newer on supported 64-bit Windows 10 or 11. After Effects has been tested with After Effects 2026 on Windows 11; earlier After Effects versions are not certified for this release. Creative Cloud Desktop and Adobe installation permissions are required. Install either panel or both with the same Windows setup. Premiere versions before 25.6 are not supported. This public release does not include a Mac installer. Meet Adobe's processor, RAM and GPU requirements for the Adobe application you use, with memory available for the speech model. Transcription uses the CPU, without GPU acceleration; a dedicated GPU is not required for transcription itself.", "storageRequirements": "Allow at least 3 GB free for the built-in speech models, in addition to the plugin, Adobe applications and project files. Both panels use the same engine and Models folder. Model sizes can change, and custom models need additional space.", "softwareVersion": "1.1.9", "releaseNotes": "https://captionsgen.com/news/captions-gen-1-1-9.html", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "url": "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece", "description": "Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications."}, "publisher": {"@id": "https://captionsgen.com/#organization"}, "creator": {"@type": "Person", "@id": "https://captionsgen.com/#kris", "name": "Kris", "jobTitle": "Video editor", "url": "https://captionsgen.com/#about-kris", "sameAs": ["https://github.com/Kriespy10"]}, "featureList": "18 built-in caption presets, customizable fonts, colors, highlights and animations, a live style preview, saved presets, Apply style for placed captions, searchable spoken languages, compatible custom speech models and animation updates after caption edits."}</script>
@@ -217,6 +222,11 @@
   .card p { margin: 0; color: var(--muted2); font-size: 15px; }
   .card .ic { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; background: var(--card2); }
   .card .ic svg { width: 20px; height: 20px; }
+  .host-workflows { margin-top: 24px; }
+  .host-card .maker-label { margin-bottom: 10px; }
+  .host-card h3 { font-size: 23px; }
+  .host-card p + p { margin-top: 14px; }
+  .host-card .after { margin-top: 16px; }
 
   /* Gallery */
   .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
@@ -299,6 +309,7 @@
 
   /* FAQ */
   details { border-bottom: 1px solid var(--hair); padding: 18px 0; }
+  details[id] { scroll-margin-top: 74px; }
   details:first-of-type { border-top: 1px solid var(--hair); }
   summary { cursor: pointer; font-weight: 600; font-size: 16px; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
   summary::-webkit-details-marker { display: none; }
@@ -330,7 +341,7 @@
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Who makes Captions Gen?", "acceptedAnswer": {"@type": "Answer", "text": "I'm Kris, a video editor and the creator of Captions Gen. I built Captions Gen to give other editors animated captions for free in Premiere Pro and After Effects. You can email me with questions or feedback."}}, {"@type": "Question", "name": "Is there a free animated captions plugin for Premiere Pro?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Captions Gen is currently free for Premiere Pro 25.6 or newer on 64-bit Windows, with no time limit, watermark or subscription. It creates animated, word-by-word captions as editable graphics using local transcription. The download requires an email address, with no payment card. Adobe Premiere Pro is a separate paid application. Paid features are planned for the future."}}, {"@type": "Question", "name": "Is there a karaoke captions plugin for Premiere Pro?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Captions Gen is a Premiere Pro plugin that adds karaoke-style captions: it transcribes the clip on your computer and places word-by-word highlighted, animated captions on the timeline as editable graphics. Free for Windows, with no time limit or watermark."}}, {"@type": "Question", "name": "Does my audio or video leave my computer?", "acceptedAnswer": {"@type": "Answer", "text": "Your footage is not uploaded for transcription. Captions Gen transcribes locally on your CPU with Faster Whisper. The engine downloads missing speech models when it starts and keeps them for later use. Model downloads, update checks and legacy license checks use the internet."}}, {"@type": "Question", "name": "Which Adobe apps and operating systems are supported?", "acceptedAnswer": {"@type": "Answer", "text": "Premiere Pro 25.6 or newer on supported 64-bit Windows 10 or 11. After Effects has been tested with After Effects 2026 on Windows 11; earlier After Effects versions are not certified for this release. Creative Cloud Desktop and Adobe installation permissions are required. Install either panel or both with the same Windows setup. Premiere versions before 25.6 are not supported. This public release does not include a Mac installer."}}, {"@type": "Question", "name": "Does Captions Gen use my GPU for transcription?", "acceptedAnswer": {"@type": "Answer", "text": "No. The current version uses your CPU for Faster Whisper transcription, without GPU acceleration. A dedicated GPU is not required for transcription. Your computer must still meet Premiere's own processor, memory and GPU requirements, with memory available for the speech model."}}, {"@type": "Question", "name": "How can I improve transcription speed on an older computer?", "acceptedAnswer": {"@type": "Answer", "text": "Choose Base in Settings for the lightest built-in model. Small offers another balance of processing time and quality; Turbo is the default quality setting and the largest built-in model. Try a short clip and review accuracy and word timing. Speed depends on your processor, selected model and audio length."}}, {"@type": "Question", "name": "How much disk space do the speech models need?", "acceptedAnswer": {"@type": "Answer", "text": "Allow at least 3 GB free for the built-in speech models, in addition to the plugin, Premiere and your project files. The engine downloads missing Base, Small and Turbo models when it starts and caches them for later use. Model sizes can change, and custom models need additional space."}}, {"@type": "Question", "name": "Can it do CapCut-style captions?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — that look is the whole point. Word-by-word karaoke highlights, pill backgrounds, pop and bounce animations, placed as editable graphics on your Premiere Pro timeline. No round-trip through CapCut, no burned-in video."}}, {"@type": "Question", "name": "Is it really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Captions Gen is free, with no time limit, no watermark and no subscription: local transcription, word-by-word karaoke captions, the built-in presets and the live preview."}}, {"@type": "Question", "name": "I bought a license. What happens to it?", "acceptedAnswer": {"@type": "Answer", "text": "Thank you for supporting Captions Gen early. Your key stays active."}}, {"@type": "Question", "name": "Can I edit captions after they're placed?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Select an edited Captions Gen caption and use Update animation when it appears. Available word timings are retained, and new words can be timed against the original audio. If timings must be estimated, the panel tells you. Review playback after edits. Premiere 26 reads edited graphics through the signed text reader included in setup; restart Premiere after updating. In After Effects, you can also edit captions from the Captions tab. Apply style changes the existing batch without transcribing again. This does not convert native subtitle tracks."}}, {"@type": "Question", "name": "Which languages work?", "acceptedAnswer": {"@type": "Answer", "text": "Search supported spoken languages in Settings, or use Auto-detect. You can assign a compatible custom speech model to a language. Spoken language describes the audio being transcribed; it does not translate the video."}}, {"@type": "Question", "name": "Why does timeline playback get heavier with many captions?", "acceptedAnswer": {"@type": "Answer", "text": "Each caption is a live animated graphic that Premiere evaluates during playback and export. Many captions or complex styles can make playback heavier. Finish the main edit first, then render sequence previews after timing and styling for smoother review. Export still renders the graphics, so export time depends on the project and your hardware."}}, {"@type": "Question", "name": "Does it work in After Effects?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The same Windows setup installs the Premiere Pro panel, the After Effects panel, or both. After Effects receives native editable caption layers. Both panels share the transcription engine and model downloads."}}, {"@type": "Question", "name": "Mac?", "acceptedAnswer": {"@type": "Answer", "text": "This public release is for Windows. It does not include a Mac installer."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Who makes Captions Gen?", "acceptedAnswer": {"@type": "Answer", "text": "I'm Kris, a video editor and the creator of Captions Gen. I built Captions Gen to give other editors animated captions for free in Premiere Pro and After Effects. You can email me with questions or feedback."}}, {"@type": "Question", "name": "Is there a free animated captions plugin for Premiere Pro?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Captions Gen is currently free for Premiere Pro 25.6 or newer on 64-bit Windows, with no time limit, watermark or subscription. It creates animated, word-by-word captions as editable graphics using local transcription. The download requires an email address, with no payment card. Adobe Premiere Pro is a separate paid application. Paid features are planned for the future."}}, {"@type": "Question", "name": "Is there a free animated captions plugin for After Effects?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The current Captions Gen Windows release includes an After Effects panel, tested with After Effects 2026 on Windows 11. It transcribes locally on the CPU and creates native editable caption layers in your composition. It's currently free without a watermark or transcription time cap. The download needs an email address, with no payment card; After Effects is a separate paid Adobe application. Earlier After Effects versions aren't certified for this release."}}, {"@type": "Question", "name": "Can I use karaoke highlights in both Adobe apps?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Both panels offer word-by-word highlights with color swaps, highlight size and pill backgrounds. Choose a preset, generate from the speech, then review its word timing. Premiere receives editable Motion Graphics clips; After Effects receives native caption layers."}}, {"@type": "Question", "name": "Does my audio or video leave my computer?", "acceptedAnswer": {"@type": "Answer", "text": "Your footage is not uploaded for transcription. Captions Gen transcribes locally on your CPU with Faster Whisper. The engine downloads missing speech models when it starts and keeps them for later use. Model downloads, update checks and legacy license checks use the internet."}}, {"@type": "Question", "name": "Which Adobe apps and operating systems are supported?", "acceptedAnswer": {"@type": "Answer", "text": "Premiere Pro 25.6 or newer on supported 64-bit Windows 10 or 11. After Effects has been tested with After Effects 2026 on Windows 11; earlier After Effects versions are not certified for this release. Creative Cloud Desktop and Adobe installation permissions are required. Install either panel or both with the same Windows setup. Premiere versions before 25.6 are not supported. This public release does not include a Mac installer."}}, {"@type": "Question", "name": "Does Captions Gen use my GPU for transcription?", "acceptedAnswer": {"@type": "Answer", "text": "No. Both panels use the CPU for Faster Whisper transcription, without GPU acceleration. A dedicated GPU isn't required for transcription itself. Your computer must still meet the processor, memory and GPU requirements of the Adobe app you use, with memory available for the speech model."}}, {"@type": "Question", "name": "How can I improve transcription speed on an older computer?", "acceptedAnswer": {"@type": "Answer", "text": "Choose Base in Settings for the lightest built-in model. Small offers another balance of processing time and quality; Turbo is the default quality setting and the largest built-in model. Try a short clip and review accuracy and word timing. Speed depends on your processor, selected model and audio length."}}, {"@type": "Question", "name": "How much disk space do the speech models need?", "acceptedAnswer": {"@type": "Answer", "text": "Allow at least 3 GB free for the built-in speech models, in addition to the plugin, Adobe apps and project files. The engine downloads missing Base, Small and Turbo models and caches them for either panel to use. Installing both panels doesn't require separate copies of the models. Model sizes can change, and custom models need additional space."}}, {"@type": "Question", "name": "Can it do CapCut-style captions?", "acceptedAnswer": {"@type": "Answer", "text": "You can make similar bold highlights, pill backgrounds and pop or bounce animations using Captions Gen's own presets. They remain editable in your Premiere sequence or After Effects composition. The designs aren't exact copies of every CapCut template, and the animation becomes part of the picture when you export the video."}}, {"@type": "Question", "name": "Is it really free?", "acceptedAnswer": {"@type": "Answer", "text": "The current Windows release is free for both panels, with no transcription time cap, watermark or subscription. The email checkout doesn't require a payment card. Premiere Pro and After Effects are separate paid Adobe applications. Paid Captions Gen features are planned for the future."}}, {"@type": "Question", "name": "I bought a license. What happens to it?", "acceptedAnswer": {"@type": "Answer", "text": "Thank you for supporting Captions Gen early. Your key stays active."}}, {"@type": "Question", "name": "Can I edit captions after they're placed?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Edit the Motion Graphics in Premiere's Properties panel, or use the Captions tab in the After Effects panel. Select edited Captions Gen captions and use Update animation when it appears. Available word timings are retained, and new words can be timed against the original audio. If timing must be estimated, the panel tells you. Review playback after edits. Apply style changes the look without transcribing again. This doesn't convert native subtitle tracks."}}, {"@type": "Question", "name": "Which languages work?", "acceptedAnswer": {"@type": "Answer", "text": "Search supported spoken languages in Settings, or use Auto-detect. You can assign a compatible custom speech model to a language. Spoken language describes the audio being transcribed; it does not translate the video."}}, {"@type": "Question", "name": "Why does timeline playback get heavier with many captions?", "acceptedAnswer": {"@type": "Answer", "text": "Premiere evaluates the placed graphics, and After Effects evaluates the caption layers in the composition. Many captions or complex styles can make preview and export heavier. Finish the main edit first, then review a short section after timing and styling. Premiere sequence previews can help with heavier playback. Export time depends on the project and hardware."}}, {"@type": "Question", "name": "Can I install Premiere Pro and After Effects panels together?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Choose Both in the 1.1.9 Windows setup, or choose just the app you need. Both panels share the local transcription engine and Models folder. No plugin account or second set of model downloads is needed. Each Adobe app keeps its own project and generated captions."}}, {"@type": "Question", "name": "Does Captions Gen export SRT or closed captions?", "acceptedAnswer": {"@type": "Answer", "text": "No. Captions Gen creates editable Motion Graphics clips in Premiere and native editable caption layers in After Effects. Highlights, backgrounds and animations render into the picture. For an SRT sidecar, selectable subtitles or broadcast closed captions, use a separate native caption workflow, such as Premiere's caption tracks. Captions Gen doesn't convert those tracks or translate speech in this public release."}}, {"@type": "Question", "name": "Mac?", "acceptedAnswer": {"@type": "Answer", "text": "This public release is for Windows. It does not include a Mac installer."}}]}</script>
 </head>
 <body>
 
@@ -360,27 +371,29 @@
       <span class="w w1">Animated</span><span class="w w2">captions.</span><span class="line-break" aria-hidden="true"></span><span class="w w3">Now</span><span class="w w4">free.</span>
     </h1>
     <a class="maker-byline" href="#about-kris">Built by a video editor, for video editors.</a>
-    <p class="sub">I'm Kris, the video editor behind Captions Gen. I built this plugin for <b>Premiere Pro and After Effects</b> so every editor can add animated captions for free, with <b>editable graphics</b> and transcription that runs on your computer.</p>
+    <p class="sub">Animated captions inside <b>Premiere Pro and After Effects</b>. Transcribe on your computer, choose a style and keep editing the result: <b>graphics on your Premiere timeline</b> or <b>caption layers in your After Effects composition</b>.</p>
     <div class="cta">
       <a target="_blank" rel="noopener" class="btn" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download free <small>Windows setup 1.1.9</small></a>
-      <div class="note"><b>Free</b> · no watermark · no card needed<br>Windows · Premiere Pro 25.6+ or After Effects 2026<br>Choose Premiere Pro, After Effects, or both in setup.</div>
+      <div class="note"><b>Currently free</b> · no watermark · no transcription time cap<br>One Windows setup: Premiere Pro, After Effects, or Both<br>Email checkout · no payment card · <a href="#install">check app requirements</a></div>
       <a class="demo-jump" href="#custom">Try the caption designer ↓</a>
     </div>
     <div class="strip-wrap">
       <div class="strip" aria-label="Animated caption preview">
-        <span class="tag"><i></i> Live render</span>
+        <span class="tag"><i></i> Caption style preview</span>
         <video id="stripVid" autoplay muted loop playsinline poster="img/styles/Bold-Impact.png" aria-label="Animated karaoke caption, the spoken word highlighted as it is spoken">
           <source src="img/hero.webm" type="video/webm">
           <source src="img/hero.mp4" type="video/mp4">
         </video>
         <span class="name" id="stripName">Bold Impact</span>
       </div>
-      <div class="strip-cap">Rendered by the plugin's own preview engine at 60 fps — not a mockup.</div>
+      <div class="strip-cap">A rendered preview of the caption styles available in both Adobe panels.</div>
     </div>
   </div>
 </header>
 
-<div class="tl" aria-hidden="true">
+<div class="tl">
+  <p class="strip-cap">Premiere Pro timeline illustration. In After Effects, captions are layers in your composition.</p>
+  <div aria-hidden="true">
   <div class="ruler"><span>00:00</span><span>00:05</span><span>00:10</span><span>00:15</span><span>00:20</span><span>00:25</span><span>00:30</span></div>
   <div class="tracks">
     <div class="track" data-name="V2">
@@ -397,6 +410,7 @@
     <div class="track" data-name="A1"><div class="clip v" style="left:5%;width:95%;background:#2f5a3a;color:#c9f2d3">gameplay_take_03.mp4</div></div>
     <div class="head"></div>
   </div>
+  </div>
 </div>
 
 <section id="about-kris" aria-labelledby="maker-heading">
@@ -406,33 +420,49 @@
       <h2 id="maker-heading">Hi, I'm <span class="y">Kris.</span></h2>
     </div>
     <div class="maker-copy">
-      <p>I'm a video editor, and Captions Gen is the plugin I've built for other editors who need captions in Premiere Pro.</p>
-      <p>I want animated captions to be a practical part of every edit. That's why Captions Gen is free, with local transcription, editable graphics and styles you can make your own.</p>
-      <p>Try it on your own footage, with no time limit. If you have a question or feedback, you can email me.</p>
+      <p>I'm a video editor, and I built Captions Gen for editors who want animated captions in Premiere Pro and After Effects.</p>
+      <p>Both panels use the same local speech engine and caption styles. You can work in your Premiere sequence or your After Effects composition without sending footage away for transcription.</p>
+      <p>The current release is free, without a watermark or transcription time cap. Try a short clip in the Adobe app you use, and email me if you have a question or feedback.</p>
       <p class="maker-signoff"><strong>Kris</strong><a href="mailto:business@captionsgen.com">Email me</a><a href="#how">See how the plugin works</a></p>
     </div>
   </div>
 </section>
 
-<section>
+<section id="apps" aria-labelledby="apps-heading">
   <div class="wrap">
-    <h2>Made for <span class="y">the edit.</span></h2>
-    <p class="lead">Word highlights, reusable styles and graphics you can keep editing. Here's what Captions Gen adds to your Premiere Pro workflow.</p>
+    <h2 id="apps-heading">Two apps. <span class="y">Editable captions.</span></h2>
+    <p class="lead">The same caption tools in Premiere Pro and After Effects, with output that belongs in each app. Install one panel or both.</p>
     <div class="grid3">
       <div class="card">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#ffeb3b" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 17h10"/><rect x="4" y="10" width="6" height="4" rx="1.5" stroke="none" fill="#ffeb3b"/><path d="M12 12h8"/></svg></div>
         <h3>Word-by-word highlight</h3>
-        <p>Each word lights up exactly when it's spoken — colour, scale or pill. The CapCut-style look that carries short-form video, without leaving Premiere Pro and with zero keyframing.</p>
+        <p>Use a color swap, a larger spoken word or a moving pill background. The local transcript supplies word timing; review the words and highlights before exporting.</p>
       </div>
       <div class="card">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0a84ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
-        <h3>Real Premiere graphics</h3>
-        <p>Captions land as editable Motion Graphics clips. Fix a typo, nudge timing, or change a colour in Premiere's Properties panel after placing them.</p>
+        <h3>Editable in your Adobe app</h3>
+        <p>Premiere gets Motion Graphics clips. After Effects gets native caption layers in your composition. Correct text, adjust timing and use Apply style to change the look.</p>
       </div>
       <div class="card">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
         <h3>Local transcription</h3>
-        <p>Faster Whisper transcribes your audio locally on your CPU. The engine downloads missing speech models when it starts and keeps them for later use. Your footage isn't uploaded for transcription.</p>
+        <p>Both panels use Faster Whisper on your CPU. They share one engine and Models folder, so missing speech models download once and are cached. Audio and video aren't uploaded for transcription.</p>
+      </div>
+    </div>
+    <div class="two host-workflows">
+      <div class="card host-card">
+        <p class="maker-label">Edit on the timeline</p>
+        <h3>Premiere Pro</h3>
+        <p>Select a clip with speech, choose a preset and generate editable Motion Graphics clips above it. Use Premiere's Properties panel to edit the placed graphics.</p>
+        <p>Open <b>Window &gt; UXP Plugins &gt; Captions Gen</b>. Requires Premiere Pro 25.6 or newer on supported 64-bit Windows 10 or 11.</p>
+        <p class="after"><a href="blog/free-caption-plugin-premiere-pro.html">Premiere panel and first captions guide</a></p>
+      </div>
+      <div class="card host-card">
+        <p class="maker-label">Work in your composition</p>
+        <h3>After Effects</h3>
+        <p>Select an audio or video layer with speech, choose a preset and generate native editable caption layers in the composition. The panel's Captions tab lets you edit the caption text.</p>
+        <p>Open <b>Window &gt; Extensions &gt; Captions Gen</b>. Tested with After Effects 2026 on Windows 11; earlier After Effects versions aren't certified for this release.</p>
+        <p class="after"><a href="blog/how-to-add-captions-in-after-effects.html">After Effects installation and first captions guide</a></p>
       </div>
     </div>
   </div>
@@ -441,7 +471,7 @@
 <section class="alt" id="styles">
   <div class="wrap">
     <h2>Looks editors <span class="y">already use.</span></h2>
-    <p class="lead">18 presets, from bold karaoke and comic looks to podcast and clean subtitle styles, with free fonts included. Every slider is yours: font, size, stroke, shadow, highlight, in and out animation. Save your own.</p>
+    <p class="lead">18 built-in presets for both panels, from bold karaoke and comic looks to calmer podcast and subtitle designs. Change the font, size, stroke, shadow, highlight and animation, then save your own preset.</p>
     <div class="gallery">
       <div class="tile"><img src="img/styles/Bold-Impact.png" alt="Bold Impact style" loading="lazy"><span>Bold Impact</span></div>
       <div class="tile"><img src="img/styles/Karaoke-Pill.png" alt="Karaoke Pill style" loading="lazy"><span>Karaoke Pill</span></div>
@@ -452,18 +482,18 @@
       <div class="tile"><img src="img/styles/Podcast.png" alt="Podcast style" loading="lazy"><span>Podcast</span></div>
       <div class="tile"><img src="img/styles/Serif-Story.png" alt="Serif Story style" loading="lazy"><span>Serif Story</span></div>
     </div>
-    <p class="gallery-note">Previews render in your own font with your own words — what you see in the panel is what lands on the timeline.</p>
+    <p class="gallery-note">Caption design examples, rather than screenshots of either Adobe app. Bundled fonts provide the preset fallbacks; installed fonts can affect the final look. Review it in your sequence or composition.</p>
   </div>
 </section>
 
 <section id="custom" aria-labelledby="demo-heading">
   <div class="wrap">
     <h2 id="demo-heading">Make it <span class="y">yours.</span></h2>
-    <p class="lead">Style “Captions made for you” with the plugin's presets and design controls. Change a setting and watch the preview.</p>
+    <p class="lead">Try the shared caption styles for Premiere Pro and After Effects. Change a preset or design setting and watch the sample. This browser designer previews appearance; transcription and caption placement run in your Adobe app.</p>
     <div class="caption-demo" data-caption-demo>
       <div class="demo-topbar">
-        <div class="demo-brand"><span class="demo-logo" aria-hidden="true"><i></i><i></i><i></i></span><strong>Captions Gen</strong><span class="demo-version">1.1.8</span></div>
-        <span class="demo-ready-label"><i aria-hidden="true"></i>Live demo</span>
+        <div class="demo-brand"><span class="demo-logo" aria-hidden="true"><i></i><i></i><i></i></span><strong>Captions Gen</strong><span class="demo-version">Style preview</span></div>
+        <span class="demo-ready-label"><i aria-hidden="true"></i>Style designer</span>
       </div>
       <div class="demo-mode-tabs" role="tablist" aria-label="Captions Gen demo views">
         <button id="demo-tab-presets" type="button" role="tab" aria-selected="true" aria-controls="demo-view-presets" tabindex="0" data-view="presets">Presets</button>
@@ -792,10 +822,10 @@
         <div id="demo-view-settings" role="tabpanel" aria-labelledby="demo-tab-settings" hidden>
           <div class="demo-design-card demo-settings-card">
             <div class="demo-design-head"><span class="card-title">Settings</span></div>
-            <p class="demo-hint" id="demo-settings-note">Transcription and placement settings are available in the Premiere Pro and After Effects panels. This browser demo previews the design using four sample words.</p>
+            <p class="demo-hint" id="demo-settings-note">Install the Premiere Pro or After Effects panel to transcribe audio and place captions. This browser designer uses four sample words; the disabled settings below illustrate options and don't operate either Adobe app.</p>
             <fieldset disabled aria-describedby="demo-settings-note">
-              <div class="row"><div><label class="field-label" for="demo-model">Transcription model</label><select id="demo-model"><option>Turbo — best</option></select></div><div><label class="field-label" for="demo-language">Spoken language</label><select id="demo-language"><option>Auto-detect</option></select></div></div>
-              <label class="field-label" for="demo-track">Caption track</label><select id="demo-track"><option>Above the selected clip</option></select>
+              <div class="row"><div><label class="field-label" for="demo-model">Transcription model</label><select id="demo-model"><option>Turbo (default)</option></select></div><div><label class="field-label" for="demo-language">Spoken language</label><select id="demo-language"><option>Auto-detect</option></select></div></div>
+              <label class="field-label" for="demo-track">Placement example (Premiere Pro)</label><select id="demo-track"><option>Above the selected clip</option></select>
               <label class="check"><input type="checkbox">Check transcript before generating</label>
             </fieldset>
             <div class="demo-settings-section"><span class="card-title">Help &amp; feedback</span><a href="#faq">Help &amp; FAQ</a><a href="mailto:business@captionsgen.com">Report a bug or request a feature</a><a href="news/captions-gen-1-1-9.html">What's new in 1.1.9 ›</a></div>
@@ -820,14 +850,15 @@
 
 <section id="how">
   <div class="wrap">
-    <h2>Three <span class="y">steps.</span></h2>
-    <p class="lead">Select a clip in Premiere Pro or an audio/video layer in After Effects, pick a look, then press Generate Captions.</p>
+    <h2>From speech <span class="y">to captions.</span></h2>
+    <p class="lead">Once setup and the first model downloads are complete, the workflow is the same in both panels: select your speech, choose a look and generate.</p>
     <div class="steps">
       <div class="step"><div class="n">1</div><h3>Select your media</h3><p>Select a timeline clip in Premiere Pro, or an audio/video layer in your After Effects composition.</p></div>
-      <div class="step"><div class="n">2</div><h3>Pick a style</h3><p>Choose a preset or tune your own. The live preview plays the animation in your font, with your words.</p></div>
-      <div class="step"><div class="n">3</div><h3>Generate</h3><p>Speech is transcribed locally. Premiere receives editable graphics; After Effects receives native caption layers.</p></div>
+      <div class="step"><div class="n">2</div><h3>Pick a style</h3><p>Choose one of the 18 presets or customize your own. Preview the highlight, font and animation before placement.</p></div>
+      <div class="step"><div class="n">3</div><h3>Generate and review</h3><p>Speech is transcribed on your CPU. Premiere receives editable graphics; After Effects receives native caption layers. Review the words and timing.</p></div>
     </div>
-    <p class="after">Changed the design? <b>Apply style</b> updates the last generated captions. Edited their text? Select the changed caption and use <b>Update animation</b>. The generated captions’ <b>⋯</b> menu has <b>Remove generated captions</b>.</p>
+    <p class="after">Change the design with <b>Apply style</b> without transcribing again. After editing caption text, select the changed captions and use <b>Update animation</b> when offered, then check playback. In After Effects, you can also edit text in the panel's <b>Captions</b> tab. See <a href="#caption-editing">editing and timing details</a>.</p>
+    <p class="after">The result stays editable in the project and renders into the picture at export. For SRT, selectable subtitles or closed captions, keep a separate native caption workflow. <a href="#caption-output">See the output limits.</a></p>
     <!-- Drop a panel screenshot at img/panel.png and remove this comment wrapper:
     <div class="shot"><img src="img/panel.png" alt="Captions Gen panel inside Premiere Pro"></div>
     -->
@@ -838,31 +869,31 @@
   <div class="wrap">
     <div class="price-wrap">
       <div class="price">
-        <div class="launch">No time limit</div>
+        <div class="launch">Current Windows release</div>
         <div class="amt">Free</div>
-        <div class="was">No watermark · no subscription<br>Windows · Premiere Pro or After Effects</div>
+        <div class="was">No watermark · no subscription<br>Premiere Pro + After Effects · one Windows setup</div>
         <ul>
-          <li>Unlimited videos, no watermark</li>
+          <li>No transcription time cap or watermark</li>
           <li>All built-in caption styles, restyling and the live preview</li>
-          <li>Updates installed from the panel</li>
-          <li>Use it on all your computers</li>
+          <li>Install Premiere Pro, After Effects, or Both</li>
+          <li>One shared engine and Models folder</li>
         </ul>
         <div class="price-actions">
-          <a target="_blank" rel="noopener" class="btn" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download free</a>
+          <a target="_blank" rel="noopener" class="btn" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Get the free Windows setup</a>
         </div>
         <!-- Panels before the free release still stop at 15 minutes and link here. -->
-        <div class="promo">Seeing a 15-minute limit?<span>That's an older version. Press Update in the panel, then restart your Adobe app, and the limit is gone.</span></div>
-        <div class="fine">Free checkout by Lemon Squeezy · no card needed · download link by email</div>
+        <div class="promo">Seeing a 15-minute limit?<span>That limit was removed in 1.1.0. Install the current update or full setup, then restart your Adobe app.</span></div>
+        <div class="fine">Free checkout by Lemon Squeezy · email required · no payment card<br><a href="news/captions-gen-1-1-9.html">What's in the 1.1.9 release</a></div>
       </div>
       <div class="price-side">
         <h2>Why I made it <span class="y">free.</span></h2>
-        <p>I want every editor to be able to add animated captions without another bill. Captions Gen is free: local transcription, word-by-word karaoke captions, the built-in presets and the live preview, with no time limit and no watermark.</p>
+        <p>I want editors to be able to add animated captions without another bill. The current free release includes both Adobe panels, local transcription, karaoke highlights, the built-in presets and the live preview.</p>
         <p><a href="/product.html">Current pricing, compatibility and product facts</a>. Adobe Premiere Pro and After Effects are separate paid applications. Paid features are planned for the future.</p>
         <p>Bought a license before? Thank you for the early support. Your key stays active.</p>
         <dl class="license-facts">
-          <div><dt>Price</dt><dd>Free</dd></div>
-          <div><dt>Time limit</dt><dd>None</dd></div>
-          <div><dt>Updates</dt><dd>From the panel</dd></div>
+          <div><dt>Current plugin price</dt><dd>Free</dd></div>
+          <div><dt>Adobe panels</dt><dd>Premiere Pro + After Effects</dd></div>
+          <div><dt>Transcription time cap</dt><dd>None</dd></div>
         </dl>
       </div>
     </div>
@@ -871,17 +902,17 @@
 
 <section class="alt" id="caption-guides">
   <div class="wrap">
-    <h2>Caption workflows <span class="y">&amp; fixes.</span></h2>
-    <p class="lead">Start with native subtitles, fix a missing caption track, or get the popular animated caption looks for free.</p>
+    <h2>Help for <span class="y">both apps.</span></h2>
+    <p class="lead">Start in your Adobe app, then check the shared speech models, editable-caption workflow and delivery limits. Native Premiere subtitle tracks have their own guides.</p>
     <div class="two">
-      <div class="card"><h3><a href="blog/how-to-add-captions-in-premiere-pro.html">How to add captions in Premiere Pro</a></h3><p>Transcribe, create a caption track, style it in Properties, and choose a video or SRT export.</p></div>
-      <div class="card"><h3><a href="blog/auto-captions-premiere-pro.html">Generate auto captions with Speech to Text</a></h3><p>Set up automatic captions and check accuracy, timing, and dialogue sources.</p></div>
-      <div class="card"><h3><a href="blog/premiere-pro-captions-not-showing.html">Fix captions that are not showing</a></h3><p>Separate preview problems from missing caption tracks, invisible styling, and export settings.</p></div>
-      <div class="card"><h3><a href="blog/animated-captions-premiere-pro.html">Choose an animated caption workflow</a></h3><p>Compare native single-word captions, manual graphics, and Captions Gen's presets.</p></div>
-      <div class="card"><h3><a href="blog/hormozi-style-captions-premiere-pro.html">Hormozi-style captions</a></h3><p>Heavy caps, a few words at a time, the spoken word in yellow. By hand or with a free preset.</p></div>
-      <div class="card"><h3><a href="blog/mrbeast-style-captions-premiere-pro.html">MrBeast-style captions</a></h3><p>A comic font, one or two words, a thick outline and a bouncing colored word.</p></div>
-      <div class="card"><h3><a href="blog/free-caption-templates-premiere-pro.html">Free caption templates</a></h3><p>18 animated caption presets, and how they differ from MOGRT text templates.</p></div>
-      <div class="card"><h3><a href="blog/autocut-alternative-captions.html">Free AutoCut and Submagic alternative</a></h3><p>Animated captions inside Premiere Pro without a subscription or an upload.</p></div>
+      <div class="card"><h3><a href="blog/free-caption-plugin-premiere-pro.html">Captions Gen in Premiere Pro</a></h3><p>Install the panel, generate editable graphics and compare them with Premiere's native subtitle tracks.</p></div>
+      <div class="card"><h3><a href="blog/how-to-add-captions-in-after-effects.html">Captions Gen in After Effects</a></h3><p>Install the panel, create your first caption layers, edit them and export the composition.</p></div>
+      <div class="card"><h3><a href="#performance">Choose a speech model</a></h3><p>Base, Small and Turbo use the same local engine in both panels. Check storage and processing expectations.</p></div>
+      <div class="card"><h3><a href="#caption-editing">Edit text and update animation</a></h3><p>Keep placed captions editable and review highlights after changing their words.</p></div>
+      <div class="card"><h3><a href="blog/premiere-pro-captions-not-showing.html">Fix missing Premiere captions</a></h3><p>Check native track visibility, timing, appearance and export settings.</p></div>
+      <div class="card"><h3><a href="blog/how-to-add-captions-in-premiere-pro.html">Native Premiere subtitles and SRT</a></h3><p>Use a native caption track when delivery needs selectable subtitles or a separate caption file.</p></div>
+      <div class="card"><h3><a href="product.html">Compatibility and current product facts</a></h3><p>Check the supported Adobe versions, Windows requirements, free download and public release limits.</p></div>
+      <div class="card"><h3><a href="#custom">Try the shared caption styles</a></h3><p>Preview the 18 presets and customize a look before installing either Adobe panel.</p></div>
     </div>
   </div>
 </section>
@@ -889,27 +920,29 @@
 <section id="install">
   <div class="wrap">
     <h2>Requirements <span class="y">&amp; install.</span></h2>
-    <p class="lead">For Windows editors. After Effects 2026 has been tested on Windows 11. <a href="#performance">See speech models and performance tips.</a></p>
+    <p class="lead">One Windows installer for Premiere Pro, After Effects, or Both. Check the requirements for the app you choose, then allow time for the first speech-model downloads.</p>
     <div class="two">
       <div class="card">
         <h3>Requirements</h3>
         <ul class="list">
-          <li><b>Premiere Pro 25.6+.</b> After Effects is tested with <b>After Effects 2026 on Windows 11</b>; earlier After Effects versions are not certified for this release. Install either panel or both.</li>
-          <li><b>Windows 10 / 11, 64-bit</b>, on a version supported by the Adobe app you use. This public release does not include a Mac installer.</li>
-          <li><b>CPU, RAM and graphics:</b> meet Adobe's requirements for your chosen app, with memory available for the speech model. See the <a href="https://helpx.adobe.com/premiere/desktop/get-started/technical-requirements/adobe-premiere-pro-technical-requirements.html">Premiere requirements</a> if you use Premiere. The Adobe app's Windows requirements still apply.</li>
-          <li><b>Transcription runs on your CPU.</b> It does not use GPU acceleration. No dedicated GPU is required for transcription; Your Adobe app's own GPU requirements still apply.</li>
+          <li><b>Premiere Pro:</b> 25.6 or newer on supported 64-bit Windows 10 or 11. Premiere versions before 25.6 aren't supported.</li>
+          <li><b>After Effects:</b> tested with After Effects 2026 on Windows 11. Earlier After Effects versions aren't certified for this release.</li>
+          <li><b>CPU, RAM and graphics:</b> meet Adobe's <a href="https://helpx.adobe.com/premiere/desktop/get-started/technical-requirements/adobe-premiere-pro-technical-requirements.html">Premiere requirements</a> or <a href="https://helpx.adobe.com/after-effects/desktop/get-started/technical-requirements/system-requirements.html">After Effects requirements</a>, with memory available for the speech model.</li>
+          <li><b>Transcription runs on your CPU.</b> It doesn't use GPU acceleration. A dedicated GPU isn't required for transcription itself; the Adobe app's GPU requirements still apply.</li>
           <li><b>At least 3 GB free for speech models</b>, in addition to the plugin, Adobe apps and your project files. Both panels share the downloaded models. Model sizes can change.</li>
           <li><b>Internet for model downloads and update checks.</b> Legacy license checks also use the internet. Audio stays on your computer during transcription.</li>
+          <li><b>Windows public release.</b> No public Mac installer is included.</li>
         </ul>
       </div>
       <div class="card">
-        <h3>Install</h3><p class="after">Creative Cloud Desktop is required. Complete Adobe’s installation and permission prompts. If After Effects asks, allow scripts to write files and access the network in its scripting preferences.</p>
+        <h3>Install either panel or both</h3><p class="after">Keep Creative Cloud Desktop installed and complete Adobe's installation prompts. The full Windows setup installs the selected panels and their shared engine.</p>
         <ol class="list">
           <li>Press <b>Download free</b> and enter your email. The download link arrives by email.</li>
-          <li>Run <b>CaptionsGen-Setup-1.1.9.exe</b>. Choose <b>Premiere Pro</b>, <b>After Effects</b>, or <b>Both</b>. Save your work and close the Adobe apps when asked.</li>
-          <li>Complete Adobe’s installation prompts, then reopen your app. Premiere: <kbd>Window</kbd> › <kbd>UXP Plugins</kbd> › <kbd>Captions Gen</kbd>. After Effects: <kbd>Window</kbd> › <kbd>Extensions</kbd> › <kbd>Captions Gen</kbd>.</li>
-          <li>Select a clip in Premiere or an audio/video layer in After Effects, then press <b>Generate Captions</b>. No key needed.</li>
+          <li>Save your work and close Premiere Pro and After Effects. Run the full <b>CaptionsGen-Setup-1.1.9.exe</b> and choose <b>Premiere Pro</b>, <b>After Effects</b>, or <b>Both</b>.</li>
+          <li>Complete Adobe's installation prompts, then reopen your app. Premiere: <b>Window &gt; UXP Plugins &gt; Captions Gen</b>. After Effects: <b>Window &gt; Extensions &gt; Captions Gen</b>.</li>
+          <li>Let missing speech models download and wait for your chosen model to be ready. Select a clip in Premiere or an audio/video layer in After Effects, choose a preset, then press <b>Generate Captions</b>. Review text and timing before export.</li>
         </ol>
+        <p class="after">No plugin account or license key is needed. The two panels share the engine and Models folder. For an existing installation, see the <a href="news/captions-gen-1-1-9.html">current update notes</a>.</p>
       </div>
     </div>
   </div>
@@ -918,7 +951,7 @@
 <section id="performance">
   <div class="wrap">
     <h2>Transcription <span class="y">&amp; performance.</span></h2>
-    <p class="lead">Transcription time depends on your processor, selected speech model and audio length. Timeline playback and export also depend on your footage, effects and animated graphics.</p>
+    <p class="lead">Premiere Pro and After Effects use the same local CPU engine. Transcription time depends on your processor, model and audio length; preview and export also depend on the Adobe project.</p>
     <div class="two">
       <div class="card">
         <h3>Choose a speech model</h3>
@@ -928,7 +961,7 @@
           <li><b>Turbo:</b> the default quality setting and the largest built-in model. Allow more memory for it than Base or Small.</li>
           <li>Choose a model in <b>Settings</b>. Try a short sample in your language and review spelling and word timing before processing a long edit.</li>
         </ul>
-        <p class="after">The local engine downloads any missing built-in models when it starts, then reuses the cached files. Initial downloads take extra time. Transcription itself runs locally with Faster Whisper.</p>
+        <p class="after">The shared engine downloads missing built-in models, then reuses the cached files in either app. Initial downloads take extra time. Search supported spoken languages in Settings or assign a compatible custom model. Language selection transcribes the speech; it doesn't translate it.</p>
       </div>
       <div class="card">
         <h3>Playback and export</h3>
@@ -936,7 +969,7 @@
         <ul class="list">
           <li>Finish the main edit before adding large batches of animated captions.</li>
           <li>Use <b>Apply style</b> to restyle the last generated captions without transcribing the audio again.</li>
-          <li>After timing and styling, render sequence previews for smoother review.</li>
+          <li>Review a short section in your Premiere sequence or After Effects composition after timing and styling. In Premiere, rendered sequence previews can help with heavier playback.</li>
           <li>Export still renders the graphics. Export time depends on the project and your hardware.</li>
         </ul>
       </div>
@@ -957,8 +990,12 @@
       <p>Yes. Captions Gen is currently free for Premiere Pro 25.6 or newer on 64-bit Windows, with no time limit, watermark or subscription. It creates animated, word-by-word captions as editable graphics using local transcription. The download requires an email address, with no payment card. Adobe Premiere Pro is a separate paid application. Paid features are planned for the future.</p>
     </details>
     <details>
-      <summary>Is there a karaoke captions plugin for Premiere Pro?</summary>
-      <p>Yes. Captions Gen is a Premiere Pro plugin that adds karaoke-style captions: it transcribes the clip on your computer and places word-by-word highlighted, animated captions on the timeline as editable graphics. Free for Windows, with no time limit or watermark.</p>
+      <summary>Is there a free animated captions plugin for After Effects?</summary>
+      <p>Yes. The current Captions Gen Windows release includes an After Effects panel, tested with After Effects 2026 on Windows 11. It transcribes locally on the CPU and creates native editable caption layers in your composition. It's currently free without a watermark or transcription time cap. The download needs an email address, with no payment card; After Effects is a separate paid Adobe application. Earlier After Effects versions aren't certified for this release.</p>
+    </details>
+    <details>
+      <summary>Can I use karaoke highlights in both Adobe apps?</summary>
+      <p>Yes. Both panels offer word-by-word highlights with color swaps, highlight size and pill backgrounds. Choose a preset, generate from the speech, then review its word timing. Premiere receives editable Motion Graphics clips; After Effects receives native caption layers.</p>
     </details>
     <details open>
       <summary>Does my audio or video leave my computer?</summary>
@@ -970,7 +1007,7 @@
     </details>
     <details>
       <summary>Does Captions Gen use my GPU for transcription?</summary>
-      <p>No. The current version uses your CPU for Faster Whisper transcription, without GPU acceleration. A dedicated GPU is not required for transcription. Your computer must still meet Premiere's own processor, memory and GPU requirements, with memory available for the speech model.</p>
+      <p>No. Both panels use the CPU for Faster Whisper transcription, without GPU acceleration. A dedicated GPU isn't required for transcription itself. Your computer must still meet the processor, memory and GPU requirements of the Adobe app you use, with memory available for the speech model.</p>
     </details>
     <details>
       <summary>How can I improve transcription speed on an older computer?</summary>
@@ -978,23 +1015,23 @@
     </details>
     <details>
       <summary>How much disk space do the speech models need?</summary>
-      <p>Allow at least 3 GB free for the built-in speech models, in addition to the plugin, Premiere and your project files. The engine downloads missing Base, Small and Turbo models when it starts and caches them for later use. Model sizes can change, and custom models need additional space.</p>
+      <p>Allow at least 3 GB free for the built-in speech models, in addition to the plugin, Adobe apps and project files. The engine downloads missing Base, Small and Turbo models and caches them for either panel to use. Installing both panels doesn't require separate copies of the models. Model sizes can change, and custom models need additional space.</p>
     </details>
     <details>
       <summary>Can it do CapCut-style captions?</summary>
-      <p>Yes — that look is the whole point. Word-by-word karaoke highlights, pill backgrounds, pop and bounce animations, placed as editable graphics on your Premiere Pro timeline. No round-trip through CapCut, no burned-in video.</p>
+      <p>You can make similar bold highlights, pill backgrounds and pop or bounce animations using Captions Gen's own presets. They remain editable in your Premiere sequence or After Effects composition. The designs aren't exact copies of every CapCut template, and the animation becomes part of the picture when you export the video.</p>
     </details>
     <details>
       <summary>Is it really free?</summary>
-      <p>Yes. Captions Gen is free, with no time limit, no watermark and no subscription: local transcription, word-by-word karaoke captions, the built-in presets and the live preview.</p>
+      <p>The current Windows release is free for both panels, with no transcription time cap, watermark or subscription. The email checkout doesn't require a payment card. Premiere Pro and After Effects are separate paid Adobe applications. Paid Captions Gen features are planned for the future.</p>
     </details>
     <details>
       <summary>I bought a license. What happens to it?</summary>
       <p>Thank you for supporting Captions Gen early. Your key stays active.</p>
     </details>
-    <details>
+    <details id="caption-editing">
       <summary>Can I edit captions after they're placed?</summary>
-      <p>Yes. Select an edited Captions Gen caption and use Update animation when it appears. Available word timings are retained, and new words can be timed against the original audio. If timings must be estimated, the panel tells you. Review playback after edits. Premiere 26 reads edited graphics through the signed text reader included in setup; restart Premiere after updating. In After Effects, you can also edit captions from the Captions tab. Apply style changes the existing batch without transcribing again. This does not convert native subtitle tracks.</p>
+      <p>Yes. Edit the Motion Graphics in Premiere's Properties panel, or use the Captions tab in the After Effects panel. Select edited Captions Gen captions and use Update animation when it appears. Available word timings are retained, and new words can be timed against the original audio. If timing must be estimated, the panel tells you. Review playback after edits. Apply style changes the look without transcribing again. This doesn't convert native subtitle tracks.</p>
     </details>
     <details>
       <summary>Which languages work?</summary>
@@ -1002,11 +1039,15 @@
     </details>
     <details>
       <summary>Why does timeline playback get heavier with many captions?</summary>
-      <p>Each caption is a live animated graphic that Premiere evaluates during playback and export. Many captions or complex styles can make playback heavier. Finish the main edit first, then render sequence previews after timing and styling for smoother review. Export still renders the graphics, so export time depends on the project and your hardware.</p>
+      <p>Premiere evaluates the placed graphics, and After Effects evaluates the caption layers in the composition. Many captions or complex styles can make preview and export heavier. Finish the main edit first, then review a short section after timing and styling. Premiere sequence previews can help with heavier playback. Export time depends on the project and hardware.</p>
     </details>
     <details>
-      <summary>Does it work in After Effects?</summary>
-      <p>Yes. The same Windows setup installs the Premiere Pro panel, the After Effects panel, or both. After Effects receives native editable caption layers. Both panels share the transcription engine and model downloads.</p>
+      <summary>Can I install Premiere Pro and After Effects panels together?</summary>
+      <p>Yes. Choose Both in the 1.1.9 Windows setup, or choose just the app you need. Both panels share the local transcription engine and Models folder. No plugin account or second set of model downloads is needed. Each Adobe app keeps its own project and generated captions.</p>
+    </details>
+    <details id="caption-output">
+      <summary>Does Captions Gen export SRT or closed captions?</summary>
+      <p>No. Captions Gen creates editable Motion Graphics clips in Premiere and native editable caption layers in After Effects. Highlights, backgrounds and animations render into the picture. For an SRT sidecar, selectable subtitles or broadcast closed captions, use a separate native caption workflow, such as Premiere's caption tracks. Captions Gen doesn't convert those tracks or translate speech in this public release.</p>
     </details>
     <details>
       <summary>Mac?</summary>
@@ -1022,18 +1063,18 @@
       Captions Gen
     </span>
     <div class="fl">
-      <a href="#about-kris">Made by Kris, video editor</a> <a href="mailto:business@captionsgen.com">Email Kris for support</a> <a href="blog/how-to-add-captions-in-premiere-pro.html">Add captions guide</a> <a href="blog/animated-captions-premiere-pro.html">Animated captions</a> <a href="blog/auto-captions-premiere-pro.html">Auto captions</a> <a href="blog/premiere-pro-captions-not-showing.html">Captions not showing</a> <a href="blog/free-caption-templates-premiere-pro.html">Free caption templates</a> <a href="blog/hormozi-style-captions-premiere-pro.html">Hormozi-style captions</a> <a href="news/">News and updates</a>
+      <a href="#about-kris">Made by Kris, video editor</a> <a href="mailto:business@captionsgen.com">Email Kris for support</a> <a href="blog/free-caption-plugin-premiere-pro.html">Premiere Pro guide</a> <a href="blog/how-to-add-captions-in-after-effects.html">After Effects guide</a> <a href="#custom">Caption style designer</a> <a href="#install">Install either panel or both</a> <a href="blog/">All caption guides</a> <a href="news/">News and updates</a>
       <a href="/product.html">Product facts</a>
       <a href="/privacy.html">Website privacy</a>
       <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button>
-      <span>Plugin: no account needed · footage stays on your machine</span>
+      <span>Both panels: local transcription · no plugin account needed</span>
     </div>
     <div class="launch-badges">
       <a href="https://nicklaunches.com/products/captions-gen/" target="_blank" rel="noopener noreferrer">
         <img src="https://nicklaunches.com/badges/featured-dark.png" alt="Captions Gen on Nick Launches" width="244" height="56" loading="lazy" />
       </a>
     </div>
-    <span>© 2026 Captions Gen. Not affiliated with Adobe. Adobe and Premiere Pro are trademarks of Adobe Inc.</span>
+    <span>© 2026 Captions Gen. Not affiliated with Adobe. Adobe, Premiere Pro and After Effects are trademarks of Adobe Inc.</span>
   </div>
 </footer>
 
