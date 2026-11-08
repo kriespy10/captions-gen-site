@@ -1,9 +1,13 @@
 {
-  "version": "1.1.8",
-  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.8.exe",
-  "sha256": "beff7ac5b2cd53ec12ead4ed1af256dc78df7c5e866f531bd64b51bff60a3abb",
-  "size": 8379227,
-  "notes": "Custom speech models, searchable languages and more reliable timing for edited captions. Apply styles to existing captions. Includes model-loading fixes and clearer, consistent controls.",
+  "version": "1.1.9",
+  "panels": {
+    "premiere": "1.1.9",
+    "aftereffects": "1.1.9"
+  },
+  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.9.exe",
+  "sha256": "24651c6509eefd89a9cb1af81fa67bbb3570ed29122505505040feed2e02fe0a",
+  "size": 34902390,
+  "notes": "Now in After Effects. One Windows setup for Premiere Pro, After Effects, or both, with a shared speech engine and Models folder.",
   "full": "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece",
   "date": "2026-11-08"
 }

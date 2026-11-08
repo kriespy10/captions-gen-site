@@ -12,7 +12,7 @@ from product import PRODUCT, SITE, organization_schema, software_schema
 
 ROOT = Path(__file__).resolve().parents[1]
 TITLE = "Captions Gen: Free Pricing, Compatibility & Product Facts"
-DESCRIPTION = "Current Captions Gen pricing, Premiere Pro and Windows compatibility, local transcription, download requirements and limitations. Official product facts."
+DESCRIPTION = "Current Captions Gen pricing, Premiere Pro and After Effects compatibility on Windows, local transcription, download requirements and limitations."
 
 
 def product_page():
@@ -87,7 +87,7 @@ def product_page():
 <p class="meta">Official product information · checked <time datetime="{p['checked']}">{checked}</time></p>
 <h1>Captions Gen: pricing, compatibility and product facts</h1>
 <p class="intro">{escape(p['description'])}</p>
-<p>Made by <a href="/#about-kris">Kris, a video editor</a>. This page describes the public Premiere Pro release. See the <a href="/news/">release notes</a> for published changes.</p>
+<p>Made by <a href="/#about-kris">Kris, a video editor</a>. This page describes the public Windows release for Premiere Pro and After Effects. See the <a href="/news/">release notes</a> for published changes.</p>
 <a class="btn" href="{p['checkout']}">Download free</a>
 <h2 id="facts">Current product facts</h2>
 <dl>{facts}</dl>
@@ -96,11 +96,11 @@ def product_page():
 <p>{escape(p['free_answer'])}</p>
 <p>The old 15-minute limit was removed with <a href="{p['free_release_url']}">Captions Gen 1.1.0 on {free_since}</a>. If an older panel still shows that limit, use Update in the panel and restart Premiere Pro.</p>
 <h2 id="fit">When Captions Gen fits your edit</h2>
-<p>Use it when you edit in a supported Windows version of Premiere Pro and want animated karaoke highlights, reusable styles and graphics you can continue editing. It suits short-form videos, interviews and other spoken footage where the caption design is part of the picture.</p>
+<p>Use it when you edit in a supported Windows version of Premiere Pro or After Effects and want animated karaoke highlights, reusable styles and graphics you can continue editing. It suits short-form videos, interviews and other spoken footage where the caption design is part of the picture.</p>
 <p class="note">{escape(p['limits'])}</p>
 <p>For subtitle delivery, compare the <a href="/blog/animated-captions-premiere-pro.html">native and animated graphics workflows</a>. The <a href="/blog/free-caption-plugin-premiere-pro.html">free caption plugin guide</a> explains the difference between included Premiere captions and a free animation plugin.</p>
 <h2 id="release">Public release and support</h2>
-<p>Current public version: <a href="{p['release_url']}">{escape(p['version'])}, released {released}</a>. The <a href="/update/version.json">update manifest</a> reports the published update. After Effects support and Mac support are planned; this page does not announce their availability.</p>
+<p>Current public version: <a href="{p['release_url']}">{escape(p['version'])}, released {released}</a>. The <a href="/update/version.json">update manifest</a> reports the published update. Version 1.1.9 includes both Adobe panels in one Windows setup. Mac is not included in this public release.</p>
 <p>For product questions or corrections, email <a href="mailto:{p['support']}">{p['support']}</a>. Read the <a href="/privacy.html">website privacy information</a> for optional analytics and checkout details.</p>
 </main>
 <footer><p><a href="/">Product overview and live style preview</a> · <a href="/news/">News and updates</a> · <a href="/llms.txt">Text directory</a> · <a href="/privacy.html">Website privacy</a></p><button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button><p>© 2026 Captions Gen. Not affiliated with Adobe. Adobe and Premiere Pro are trademarks of Adobe Inc.</p></footer>
@@ -132,7 +132,7 @@ Official website: {SITE}/. Product facts checked {p['checked']}.
 ## Product and release information
 - [Product facts]({p['url']}): current pricing, compatibility, download requirements, limitations and support.
 - [Home]({SITE}/): product overview, editable style preview and free download.
-- [Requirements and installation]({SITE}/#install): supported Premiere and Windows versions and installation steps.
+- [Requirements and installation]({SITE}/#install): supported Adobe applications and Windows versions, app selection and installation steps.
 - [Transcription and performance]({SITE}/#performance): CPU transcription, Base/Small/Turbo models, downloads and timeline performance.
 - [Current public release]({p['release_url']}): version {p['version']}, released {p['released']}.
 - [Free release announcement]({p['free_release_url']}): the 15-minute limit was removed on {p['free_since']}.
@@ -181,7 +181,7 @@ def sync_homepage(path):
         if marker not in html:
             raise ValueError("Homepage FAQ insertion point not found")
         html = html.replace(marker, faq + marker, 1)
-    price_link = '<p><a href="/product.html">Current pricing, compatibility and product facts</a>. Adobe Premiere Pro is a separate paid application. Paid features are planned for the future.</p>'
+    price_link = '<p><a href="/product.html">Current pricing, compatibility and product facts</a>. Adobe Premiere Pro and After Effects are separate paid applications. Paid features are planned for the future.</p>'
     if price_link not in html:
         marker = '        <p>Bought a license before? Thank you for the early support. Your key stays active.</p>'
         if marker not in html:

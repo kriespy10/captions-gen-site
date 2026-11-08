@@ -327,7 +327,7 @@ NEWS_HEAD = f"""{ANALYTICS_HEAD}
 <link rel="alternate" type="application/rss+xml" title="Captions Gen news" href="{SITE}/news/feed.xml">"""
 NEWS_CLOSING = f"""<div class="box">
 <p class="t">Get the update</p>
-<p>Already using Captions Gen? Open the panel in Premiere Pro and press <strong>Update</strong> when it shows, then restart Premiere Pro. New here? Captions Gen is free, with no time limit.</p>
+<p>Already using Captions Gen? Open <strong>Settings &gt; Check for updates</strong> in your Adobe panel. Save your work and close the Adobe apps when the installer asks, then reopen them. To add another Adobe app, use the full Windows setup. Captions Gen is free, with no time limit.</p>
 <a class="btn" href="{FREE}">Download free</a>
 <a class="btn ghost" href="{SITE}/#how">See how it works</a>
 </div>"""
@@ -389,11 +389,11 @@ news_idx = f"""<!doctype html>
 <html lang="en"><head>
 {NEWS_HEAD}
 <title>News and updates · Captions Gen</title>
-<meta name="description" content="What's new in Captions Gen, the animated captions plugin for Premiere Pro: release notes for every update.">
+<meta name="description" content="What's new in Captions Gen for Premiere Pro and After Effects on Windows: release notes for every update.">
 <link rel="canonical" href="{SITE}/news/"><meta property="og:title" content="Captions Gen news and updates"><meta property="og:url" content="{SITE}/news/">
 <style>{CSS}</style></head><body>
 {NEWS_NAV}
-<article><div class="col idx"><h1>News and updates</h1><p class="sub">What's new in Captions Gen, one short post per update. Updates install from the panel in Premiere Pro. <a href="feed.xml">RSS feed</a></p>
+<article><div class="col idx"><h1>News and updates</h1><p class="sub">What's new in Captions Gen, one short post per update. Check for updates from either Adobe panel. <a href="feed.xml">RSS feed</a></p>
 {news_cards}</div></article>
 {NEWS_FOOTER}
 </body></html>
@@ -407,7 +407,7 @@ items = "".join(f"""
   <item><title>{escape(n["title"])}</title><link>{SITE}/news/{n["slug"]}.html</link><guid>{SITE}/news/{n["slug"]}.html</guid><pubDate>{rfc822(n["date"])}</pubDate><description>{escape(n["desc"])}</description></item>""" for n in NEWS)
 feed = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
-  <title>Captions Gen news</title><link>{SITE}/news/</link><description>Updates to Captions Gen, the animated captions plugin for Premiere Pro.</description><language>en</language><lastBuildDate>{rfc822(NEWS_UPDATED)}</lastBuildDate>{items}
+  <title>Captions Gen news</title><link>{SITE}/news/</link><description>Updates to Captions Gen for Premiere Pro and After Effects.</description><language>en</language><lastBuildDate>{rfc822(NEWS_UPDATED)}</lastBuildDate>{items}
 </channel></rss>
 """
 io.open(os.path.join("news", "feed.xml"), "w", encoding="utf-8", newline="").write(feed)

@@ -1,11 +1,11 @@
 {
   "whatsNew": {
-    "version": "1.1.8",
-    "title": "Your models. Better caption edits.",
-    "text": "Use custom speech models and find your language quickly. Added words can be timed against the original audio. Change the look of existing captions with the new Apply style button.\n\nAlso includes fixes for speech-model loading.",
+    "version": "1.1.9",
+    "title": "Now in After Effects.",
+    "text": "One Windows setup now installs Captions Gen for Premiere Pro, After Effects, or both.\n\nUse custom speech models and search supported spoken languages. Added words can be timed against the original audio after caption edits. Apply style changes the look of existing captions. Both Adobe panels share the transcription engine.",
     "video": "https://captionsgen.com/update/media/1.1.8/whats-new.mp4",
     "media": "https://captionsgen.com/update/media/1.1.8/poster.jpg",
-    "url": "https://captionsgen.com/news/captions-gen-1-1-8.html",
+    "url": "https://captionsgen.com/news/captions-gen-1-1-9.html",
     "frames": [
       "https://captionsgen.com/update/media/1.1.8/01.jpg",
       "https://captionsgen.com/update/media/1.1.8/02.jpg",
@@ -70,5 +70,9 @@
     ],
     "fps": 5
   },
-  "promos": []
+  "promos": [],
+  "panels": {
+    "premiere": "1.1.9",
+    "aftereffects": "1.1.9"
+  }
 }
