@@ -1,6 +1,8 @@
-// Captions Gen 1.1.2: synced from uxp-panel/main.js.
+// Captions Gen 1.1.9: verified against both public Premiere Pro and After Effects packages.
+// The 18 preset values and defaults match both released main.js files; browser fonts
+// remain the explicit fallbacks below, rather than a promise of identical host rendering.
 // Values use the shipped panel's slider units; gCase maps to browser textCase.
-export const PANEL_VERSION = '1.1.2';
+export const PANEL_VERSION = '1.1.9';
 export const FIRST_PRESET = "Bold Impact";
 export const GROUPING_DEFAULTS = {
   "textCase": "upper",

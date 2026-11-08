@@ -3,8 +3,8 @@
 <head>
 <link rel="stylesheet" href="/analytics.css">
 <script defer src="/analytics.js"></script>
-<link rel="stylesheet" href="/caption-demo.css?v=shared-styles-20261108">
-<script type="module" src="/caption-demo.js?v=shared-styles-20261108"></script>
+<link rel="stylesheet" href="/caption-demo.css?v=demo-1.1.9-20261108">
+<script type="module" src="/caption-demo.js?v=demo-1.1.9-20261108"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Free Caption Plugin: Premiere Pro &amp; After Effects | Captions Gen</title>
@@ -489,15 +489,21 @@
 <section id="custom" aria-labelledby="demo-heading">
   <div class="wrap">
     <h2 id="demo-heading">Make it <span class="y">yours.</span></h2>
-    <p class="lead">Try the shared caption styles for Premiere Pro and After Effects. Change a preset or design setting and watch the sample. This browser designer previews appearance; transcription and caption placement run in your Adobe app.</p>
+    <p class="lead">Try the 1.1.9 workflow for Premiere Pro and After Effects. Pick a style, generate prepared sample captions and edit their words. Everything here runs in your browser; your media and Adobe apps stay untouched.</p>
     <div class="caption-demo" data-caption-demo>
+      <div class="demo-host-switch" role="group" aria-label="Choose a panel to preview">
+        <button type="button" data-demo-host="premiere" aria-pressed="true"><span class="demo-host-icon demo-host-pr" aria-hidden="true">Pr</span>Premiere Pro</button>
+        <button type="button" data-demo-host="after-effects" aria-pressed="false"><span class="demo-host-icon demo-host-ae" aria-hidden="true">Ae</span>After Effects</button>
+      </div>
+      <p class="demo-host-context" data-demo-host-context>Premiere Pro places editable caption graphics in your sequence.</p>
       <div class="demo-topbar">
-        <div class="demo-brand"><span class="demo-logo" aria-hidden="true"><i></i><i></i><i></i></span><strong>Captions Gen</strong><span class="demo-version">Style preview</span></div>
-        <span class="demo-ready-label"><i aria-hidden="true"></i>Style designer</span>
+        <div class="demo-brand"><span class="demo-logo" aria-hidden="true"><i></i><i></i><i></i></span><strong>Captions Gen</strong><span class="demo-version">1.1.9 demo</span></div>
+        <span class="demo-ready-label">Browser sample</span>
       </div>
       <div class="demo-mode-tabs" role="tablist" aria-label="Captions Gen demo views">
         <button id="demo-tab-presets" type="button" role="tab" aria-selected="true" aria-controls="demo-view-presets" tabindex="0" data-view="presets">Presets</button>
         <button id="demo-tab-customize" type="button" role="tab" aria-selected="false" aria-controls="demo-view-customize" tabindex="-1" data-view="customize">Customize</button>
+        <button id="demo-tab-captions" type="button" role="tab" aria-selected="false" aria-controls="demo-view-captions" tabindex="-1" data-view="captions" data-demo-for-host="after-effects" hidden>Captions</button>
         <button id="demo-tab-settings" type="button" role="tab" aria-selected="false" aria-controls="demo-view-settings" tabindex="-1" data-view="settings">Settings</button>
       </div>
       <form class="demo-controls" aria-label="Caption design settings">
@@ -506,11 +512,25 @@
           <div class="demo-look-tools"><button type="button" class="demo-save" data-preset-actions aria-haspopup="dialog" aria-expanded="false">Save preset…</button><button type="button" class="demo-save" data-customize-link>Customize ›</button></div>
           <div class="demo-preview">
               <div class="demo-stage" role="group" aria-label="Animated caption preview: Captions made for you">
-                <span class="demo-live">Live preview</span>
+                <span class="demo-live">Sample preview</span>
                 <div class="demo-scene"><div class="demo-caption-anchor"><div class="demo-caption" aria-hidden="true">Captions made for you</div></div></div>
                 <button type="button" class="demo-play" data-demo-play aria-label="Play caption preview">▶</button>
               </div>
             </div>
+          <button type="button" class="demo-generate demo-generate-inline" data-demo-generate>Generate sample captions</button>
+        </div>
+        <div class="demo-batch demo-design-card" data-demo-batch hidden>
+          <div class="demo-batch-head"><span class="card-title" data-demo-batch-title>Sample captions</span><button type="button" class="demo-action demo-action-primary" data-demo-apply hidden>Apply style</button></div>
+          <div class="demo-sample-list" data-demo-sample-list aria-label="Generated sample captions"></div>
+          <div class="demo-caption-actions">
+            <button type="button" class="demo-action" data-demo-edit>Edit caption</button>
+            <button type="button" class="demo-action" data-demo-manual-edit>Try a manual text edit</button>
+            <button type="button" class="demo-action demo-action-primary" data-demo-update hidden>Update animation</button>
+            <button type="button" class="demo-action demo-action-quiet" data-demo-remove>Remove</button>
+            <button type="button" class="demo-action demo-action-quiet" data-demo-undo disabled>Undo</button>
+          </div>
+          <p class="demo-hint" data-demo-for-host="premiere">Select a sample graphic to edit. Save caption updates its text and sample timing together. The manual-edit example shows a text change like one made in Premiere's Properties panel.</p>
+          <p class="demo-hint" data-demo-for-host="after-effects" hidden>Open Captions to edit or find and replace words. Save caption updates the text and sample timing together. The manual-edit example represents changing Source Text outside the panel.</p>
         </div>
         <div id="demo-view-presets" role="tabpanel" aria-labelledby="demo-tab-presets">
           <div class="demo-preset-card">
@@ -532,7 +552,7 @@
             <label class="check"><input type="checkbox" data-setting="gStripPunct" checked>Remove punctuation <span class="demo-hint">. , ! ?</span></label>
             <div class="row demo-grouping-pair"><div><div class="slider-field"><div class="slider-head"><label class="field-label" for="demo-gMinWords">Min words</label><output class="val" for="demo-gMinWords" data-output="gMinWords">1</output></div><input type="range" id="demo-gMinWords" data-setting="gMinWords" min="1" max="10" value="1"></div></div><div><div class="slider-field"><div class="slider-head"><label class="field-label" for="demo-gMaxWords">Max words</label><output class="val" for="demo-gMaxWords" data-output="gMaxWords">3</output></div><input type="range" id="demo-gMaxWords" data-setting="gMaxWords" min="1" max="36" value="3"></div></div></div>
             <p class="demo-hint">Karaoke highlights up to 8 words per caption</p>
-            <div class="slider-field"><div class="slider-head"><label class="field-label" for="demo-gMaxChars">Max characters</label><output class="val" for="demo-gMaxChars" data-output="gMaxChars">Auto</output></div><input type="range" id="demo-gMaxChars" data-setting="gMaxChars" min="0" max="48" value="0"></div><div class="slider-field"><div class="slider-head"><label class="field-label" for="demo-gMaxDur">Max duration</label><output class="val" for="demo-gMaxDur" data-output="gMaxDur">Auto</output></div><input type="range" id="demo-gMaxDur" data-setting="gMaxDur" min="0" max="8" value="0"></div><div class="demo-line-stepper"><span class="field-label">Max lines</span><div role="group" aria-label="Max lines"><button type="button" class="demo-step-button" data-line-step="-1" aria-label="Fewer caption lines">−</button><span class="demo-step-value" data-line-value aria-live="polite">2</span><button type="button" class="demo-step-button" data-line-step="1" aria-label="More caption lines">+</button></div><input type="range" id="demo-gMaxLines" data-setting="gMaxLines" aria-label="Max lines" min="1" max="3" value="2" hidden></div>
+            <div class="slider-field"><div class="slider-head"><label class="field-label" for="demo-gMaxChars">Max characters</label><output class="val" for="demo-gMaxChars" data-output="gMaxChars">Auto</output></div><input type="range" id="demo-gMaxChars" data-setting="gMaxChars" min="0" max="48" value="0"></div><div class="slider-field"><div class="slider-head"><label class="field-label" for="demo-gMaxDur">Max duration</label><output class="val" for="demo-gMaxDur" data-output="gMaxDur">Auto</output></div><input type="range" id="demo-gMaxDur" data-setting="gMaxDur" min="0" max="8" step="0.1" value="0"></div><div class="demo-line-stepper"><span class="field-label">Max lines</span><div role="group" aria-label="Max lines"><button type="button" class="demo-step-button" data-line-step="-1" aria-label="Fewer caption lines">−</button><span class="demo-step-value" data-line-value aria-live="polite">2</span><button type="button" class="demo-step-button" data-line-step="1" aria-label="More caption lines">+</button></div><input type="range" id="demo-gMaxLines" data-setting="gMaxLines" aria-label="Max lines" min="1" max="3" value="2" hidden></div>
           </div>
           <div class="demo-design-card">
             <div class="demo-design-head"><span class="card-title">Design</span></div>
@@ -819,21 +839,49 @@
           </div>
           </div>
         </div>
+        <div id="demo-view-captions" role="tabpanel" aria-labelledby="demo-tab-captions" data-demo-for-host="after-effects" hidden>
+          <div class="demo-design-card demo-captions-card">
+            <div class="demo-design-head"><span class="card-title">Captions</span><span class="demo-context-badge">Sample composition</span></div>
+            <label class="field-label" for="demo-caption-search">Search captions</label>
+            <input id="demo-caption-search" type="search" data-demo-caption-search placeholder="Search sample captions" autocomplete="off">
+            <div class="demo-caption-list" data-demo-caption-list aria-label="Captions in the sample composition"></div>
+            <div class="demo-inline-editor">
+              <label class="field-label" for="demo-caption-text">Caption text</label>
+              <textarea id="demo-caption-text" data-demo-caption-text rows="3" maxlength="4000" placeholder="Generate sample captions, then select one to edit."></textarea>
+              <div class="demo-editor-footer"><p class="demo-hint">Sample word timing updates when you save. New words use estimated timing.</p><button type="button" class="demo-action demo-action-primary" data-demo-caption-save>Save caption</button></div>
+            </div>
+            <details class="demo-find-panel">
+              <summary>Find &amp; replace</summary>
+              <p class="demo-hint">Find whole words across this sample batch. Leave the replacement blank to find matches without changing text.</p>
+              <div class="row"><div><label class="field-label" for="demo-find">Find whole words</label><input id="demo-find" type="text" data-demo-find autocomplete="off" placeholder="Word or phrase"></div><div><label class="field-label" for="demo-replace">Replace with</label><input id="demo-replace" type="text" data-demo-replace autocomplete="off" placeholder="Replacement text"></div></div>
+              <div class="demo-editor-footer"><p class="demo-hint" data-demo-find-status role="status" aria-live="polite">Enter a word or phrase to preview replacements.</p><button type="button" class="demo-action demo-action-primary" data-demo-find-replace disabled>Replace all</button></div>
+            </details>
+          </div>
+        </div>
         <div id="demo-view-settings" role="tabpanel" aria-labelledby="demo-tab-settings" hidden>
           <div class="demo-design-card demo-settings-card">
             <div class="demo-design-head"><span class="card-title">Settings</span></div>
-            <p class="demo-hint" id="demo-settings-note">Install the Premiere Pro or After Effects panel to transcribe audio and place captions. This browser designer uses four sample words; the disabled settings below illustrate options and don't operate either Adobe app.</p>
-            <fieldset disabled aria-describedby="demo-settings-note">
-              <div class="row"><div><label class="field-label" for="demo-model">Transcription model</label><select id="demo-model"><option>Turbo (default)</option></select></div><div><label class="field-label" for="demo-language">Spoken language</label><select id="demo-language"><option>Auto-detect</option></select></div></div>
-              <label class="field-label" for="demo-track">Placement example (Premiere Pro)</label><select id="demo-track"><option>Above the selected clip</option></select>
-              <label class="check"><input type="checkbox">Check transcript before generating</label>
+            <p class="demo-hint" id="demo-settings-note">Explore the panel's options with prepared sample text. These choices don't download models, transcribe audio or place anything in Adobe.</p>
+            <fieldset aria-describedby="demo-settings-note">
+              <label class="field-label" for="demo-model">Transcription model</label>
+              <select id="demo-model" data-demo-model><option value="large-v3-turbo" selected>Turbo · best</option><option value="small">Small · balanced</option><option value="base">Base · fastest</option></select>
+              <p class="demo-hint" data-demo-model-note>Turbo is the default in the installed panel. Model choice has no effect on this prepared sample.</p>
+              <label class="field-label" for="demo-language-search">Search spoken languages</label>
+              <input id="demo-language-search" type="search" data-demo-language-search placeholder="Search by language or code" aria-controls="demo-language" autocomplete="off">
+              <label class="field-label demo-language-label" for="demo-language">Spoken language</label>
+              <select id="demo-language" data-demo-language><option value="">Auto-detect</option></select>
+              <p class="demo-hint">Language selection transcribes the original speech in the installed panel. It doesn't translate it.</p>
+              <label class="field-label" for="demo-track"><span data-demo-for-host="premiere">Caption track</span><span data-demo-for-host="after-effects" hidden>Caption layers</span></label>
+              <select id="demo-track" data-demo-placement><option value="auto">Above the selected clip</option><option value="1">V2</option><option value="2">V3</option><option value="3">V4</option><option value="4">V5</option><option value="5">V6</option><option value="6">V7</option><option value="7">V8</option></select>
+              <label class="check"><input type="checkbox" data-demo-review>Check transcript before generating</label>
             </fieldset>
+            <div class="demo-custom-models"><div class="demo-design-head"><span class="card-title">Custom models</span><span class="demo-context-badge">Example only</span></div><p class="demo-hint">In either installed panel, open the shared Models folder, copy in a compatible Faster Whisper model and refresh the list. You can assign a model to a spoken language or choose it manually.</p><button type="button" class="demo-action" data-demo-add-model>Add example model</button><p class="demo-hint">The demo adds a menu example only. It doesn't read your folders or install a model.</p></div>
             <div class="demo-settings-section"><span class="card-title">Help &amp; feedback</span><a href="#faq">Help &amp; FAQ</a><a href="mailto:business@captionsgen.com">Report a bug or request a feature</a><a href="news/captions-gen-1-1-9.html">What's new in 1.1.9 ›</a></div>
             <p class="demo-hint">Version 1.1.9</p>
           </div>
         </div>
       </form>
-      <div class="demo-footer"><a class="demo-install" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Get the plugin free →</a><div class="demo-bottom"><span>Generate Captions runs in your Adobe app.</span><button type="button" class="demo-reset" data-demo-reset>Reset demo</button></div></div>
+      <div class="demo-footer"><button type="button" class="demo-generate" data-demo-generate>Generate sample captions</button><div class="demo-bottom"><span>Prepared text, estimated sample timing. No media upload.</span><button type="button" class="demo-reset" data-demo-reset>Reset demo</button></div><a class="demo-install" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Get the plugin free →</a></div>
       <p class="demo-status" role="status" aria-live="polite" data-demo-status></p>
       <dialog class="demo-save-dialog demo-preset-actions-dialog" aria-labelledby="demo-actions-title">
         <div class="demo-dialog-head"><h3 id="demo-actions-title" data-actions-title>Bold Impact</h3><button type="button" data-actions-close aria-label="Close preset actions">×</button></div>
@@ -843,6 +891,14 @@
       </dialog>
             <dialog class="demo-save-dialog" aria-labelledby="demo-save-title">
         <form method="dialog"><div class="demo-dialog-head"><h3 id="demo-save-title">Save preset</h3><button type="button" data-save-close aria-label="Close save preset">×</button></div><label for="demo-preset-name">Preset name</label><input id="demo-preset-name" name="preset-name" type="text" maxlength="40" placeholder="My caption style" required><p>Saved in this browser.</p><p class="demo-save-error" role="alert" hidden></p><button type="submit" class="demo-save-confirm">Save</button></form>
+      </dialog>
+      <dialog class="demo-caption-dialog" data-demo-caption-dialog aria-labelledby="demo-edit-title">
+        <div class="demo-dialog-head"><h3 id="demo-edit-title">Edit caption</h3></div>
+        <label for="demo-edit-text">Caption text</label>
+        <textarea id="demo-edit-text" data-demo-edit-text rows="4" maxlength="4000"></textarea>
+        <p>Saving updates this sample's text and animation timing together. New word timing is estimated here.</p>
+        <p class="demo-edit-error" data-demo-edit-error role="alert" hidden></p>
+        <div class="demo-dialog-actions"><button type="button" class="demo-action" data-demo-edit-close>Cancel</button><button type="button" class="demo-action demo-action-primary" data-demo-edit-save>Save caption</button></div>
       </dialog>
     </div>
   </div>
