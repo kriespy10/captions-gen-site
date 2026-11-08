@@ -44,6 +44,7 @@
   article { padding:40px 0 20px; }
   h1 { font-size:34px; line-height:1.2; letter-spacing:-.02em; margin:0 0 10px; }
   .meta { color:var(--muted); font-size:13px; margin-bottom:28px; }
+  .app-guide { padding:12px 16px; margin:0 0 24px; border:1px solid var(--hair2); border-radius:10px; font-size:14px; }
   .breadcrumbs { font-size:13px; color:var(--muted); margin:0 0 16px; }
   .breadcrumbs a { color:var(--muted2); }
   .sources { font-size:13px; margin-top:28px; }
@@ -165,6 +166,7 @@
 <h1>Captions Gen 1.1.9: now in After Effects</h1>
 <div class="meta"><span class="ver">v1.1.9</span><time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 <p>Captions Gen 1.1.9 brings the caption panel to After Effects. One Windows setup installs the Premiere Pro panel, the After Effects panel, or both.</p>
+<p>Follow the <a href="/blog/how-to-add-captions-in-after-effects.html">After Effects installation and first-caption guide</a> for source-layer selection, generating captions, text corrections and rendering.</p>
 <video controls muted playsinline preload="metadata" poster="https://captionsgen.com/update/media/1.1.8/poster.jpg" style="display:block;width:100%;height:auto;border-radius:12px;margin:20px 0;"><source src="https://captionsgen.com/update/media/1.1.8/whats-new.mp4" type="video/mp4"></video>
 <p>The video above shows the shared caption design and editing features.</p>
 <h2>Native caption layers in After Effects</h2>
@@ -172,7 +174,6 @@
 <h2>Choose your Adobe apps during setup</h2>
 <p>Download <strong>CaptionsGen-Setup-1.1.9.exe</strong> from the free checkout. Choose <strong>Premiere Pro</strong>, <strong>After Effects</strong>, or <strong>Both</strong>. You only need one setup, and both panels share the same transcription engine, downloaded models and Models folder.</p>
 <p>Keep Creative Cloud Desktop installed. Save your work and close Premiere Pro and After Effects when the installer asks. Complete Adobe's installation and permission prompts, then reopen your app. In Premiere, open <strong>Window &gt; UXP Plugins &gt; Captions Gen</strong>. In After Effects, open <strong>Window &gt; Extensions &gt; Captions Gen</strong>.</p>
-<p>If After Effects asks for script permissions, enable <strong>Allow Scripts to Write Files and Access Network</strong> in its scripting preferences.</p>
 <h2>Custom models and edited captions in both panels</h2>
 <p>Copy a compatible Faster Whisper/CTranslate2 model folder into the shared Models folder, refresh the list and choose its spoken language. The panel can use that model automatically when you select the language. Search the language menu to find any supported spoken language quickly.</p>
 <p>After editing caption text, select the changed captions and use <strong>Update animation</strong>. Available word timings are retained, and added words can be aligned against the original audio. If timing has to be estimated, the panel tells you. Review playback after edits.</p>

@@ -45,6 +45,7 @@ CSS = """
   article { padding:40px 0 20px; }
   h1 { font-size:34px; line-height:1.2; letter-spacing:-.02em; margin:0 0 10px; }
   .meta { color:var(--muted); font-size:13px; margin-bottom:28px; }
+  .app-guide { padding:12px 16px; margin:0 0 24px; border:1px solid var(--hair2); border-radius:10px; font-size:14px; }
   .breadcrumbs { font-size:13px; color:var(--muted); margin:0 0 16px; }
   .breadcrumbs a { color:var(--muted2); }
   .sources { font-size:13px; margin-top:28px; }
@@ -158,14 +159,18 @@ CLOSING = f"""
 <p class="t">Try animated captions on your own edit</p>
 <p>{escape(PRODUCT['description'])}</p>
 <p>{escape(PRODUCT['pricing'])}</p>
-<p>Current release: <a href="{escape(PRODUCT['release_url'], quote=True)}">{escape(PRODUCT['version'])}</a>. Check <a href="https://captionsgen.com/product.html">supported Adobe versions, installation requirements and limitations</a>. Keep a native caption track when you need SRT, selectable subtitles or broadcast closed captions.</p>
+<p>Current release: <a href="{escape(PRODUCT['release_url'], quote=True)}">{escape(PRODUCT['version'])}</a>. Check <a href="https://captionsgen.com/product.html">supported Adobe versions, installation requirements and limitations</a>. Use Premiere Pro's native caption tracks when you need SRT, selectable subtitles or broadcast closed captions.</p>
 <a class="btn" href="__FREE__">Download free</a>
 <a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
 </div>
 """
 
-def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, published=DATE, faq=None):
+def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, published=DATE, faq=None, app="Premiere Pro"):
     closing = CLOSING.replace("__FREE__", FREE)
+    if app == "After Effects":
+        app_guide = '<p class="app-guide"><strong>After Effects guide.</strong> Working in Premiere Pro? <a href="animated-captions-premiere-pro.html">Choose a Premiere caption workflow</a>.</p>'
+    else:
+        app_guide = '<p class="app-guide"><strong>Premiere Pro guide.</strong> Using After Effects? <a href="how-to-add-captions-in-after-effects.html">Install its panel and create your first captions</a>.</p>'
     rel = "\n".join(f'<li><a href="{r["slug"]}.html">{r["t"]}</a></li>' for r in related)
     article = {
         "@context": "https://schema.org", "@type": "Article", "headline": h1,
@@ -238,6 +243,7 @@ def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, p
 <p class="breadcrumbs"><a href="{SITE}/">Home</a> / <a href="{SITE}/blog/">Caption guides</a> / {h1}</p>
 <h1>{h1}</h1>
 <div class="meta">Updated <time datetime="{modified}">{display_date}</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+{app_guide}
 {body_html}
 {closing}
 <div class="box"><p class="t">Related guides</p><ul>{rel}</ul></div>
@@ -252,6 +258,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from bodies import POSTS
 from bodies2 import P
 from bodies3 import P3
+from aftereffects import AE_POSTS
 from genproduct import generate as generate_product
 REL0 = {
   "how-to-add-captions-in-premiere-pro": ["auto-captions-premiere-pro","premiere-pro-captions-not-showing","burn-in-captions-premiere-pro","free-caption-plugin-premiere-pro"],
@@ -262,6 +269,7 @@ REL0 = {
 for k, v in REL0.items(): POSTS[k]["rel"] = v
 POSTS.update(P)
 POSTS.update(P3)
+POSTS.update(AE_POSTS)
 for post in POSTS.values():
     post["modified"] = max(post.get("modified", DATE), SHARED_REQUIREMENTS_UPDATED)
 POSTS["animated-captions-premiere-pro"]["image"] = "/img/styles/Bold-Impact.png"
@@ -282,25 +290,29 @@ NAV_HTML = """<nav><div class="wrap">
     <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
   </div>
 </div></nav>"""
-cards = "".join(f'<a class="post" href="{k}.html"><div class="pt">{v["h1"]}</div><div class="pd">{v["desc"]}</div></a>' for k, v in POSTS.items())
+def guide_cards(app):
+    return "".join(f'<a class="post" href="{k}.html"><div class="pt">{v["h1"]}</div><div class="pd">{v["desc"]}</div></a>'
+                   for k, v in POSTS.items() if v.get("app", "Premiere Pro") == app)
 idx = f"""<!doctype html>
 <html lang="en"><head>
 {ANALYTICS_HEAD}
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
-<title>Premiere Pro caption guides · Captions Gen</title>
-<meta name="description" content="Practical guides on captions in Premiere Pro: adding captions, auto captions, animated karaoke captions, and fixing captions that won't show.">
-<link rel="canonical" href="{SITE}/blog/"><meta property="og:title" content="Premiere Pro caption guides"><meta property="og:url" content="{SITE}/blog/">
+<title>Premiere Pro &amp; After Effects Caption Guides | Captions Gen</title>
+<meta name="description" content="Caption workflows for After Effects and Premiere Pro: installation, local transcription, animated graphics, native subtitles, styling and troubleshooting.">
+<link rel="canonical" href="{SITE}/blog/"><meta property="og:title" content="Caption guides for Premiere Pro and After Effects"><meta property="og:url" content="{SITE}/blog/">
 <style>{CSS}</style></head><body>
 {NAV_HTML}
-<article><div class="col idx"><h1>Premiere Pro caption guides</h1><p class="sub">Practical workflows for native subtitles and animated caption graphics. Written by Kris, maker of Captions Gen.</p>
+<article><div class="col idx"><h1>Caption guides for Premiere Pro and After Effects</h1><p class="sub">Choose the Adobe application you use. These guides cover Captions Gen's animated graphics and Premiere Pro's native subtitle tools. Written by Kris, maker of Captions Gen.</p>
 <div class="box quick-answer"><p class="t">Start with your task</p><ul>
+<li><a href="how-to-add-captions-in-after-effects.html">After Effects: install the panel and generate your first captions</a></li>
 <li><a href="how-to-add-captions-in-premiere-pro.html">Add captions: transcription, styling, and export</a></li>
 <li><a href="auto-captions-premiere-pro.html">Generate auto captions with Speech to Text</a></li>
 <li><a href="premiere-pro-captions-not-showing.html">Fix captions missing from the preview or export</a></li>
 <li><a href="animated-captions-premiere-pro.html">Choose an animated or word-by-word workflow</a></li>
 <li><a href="free-caption-plugin-premiere-pro.html">Check the free plugin, compatibility and setup</a></li>
-</ul></div>{cards}</div></article>
+</ul></div><h2 id="after-effects">After Effects</h2><p>Use the Windows panel to create editable animated caption layers in a composition.</p>{guide_cards('After Effects')}
+<h2 id="premiere-pro">Premiere Pro</h2><p>Choose native caption tracks for subtitle delivery, or editable graphics for animated caption designs.</p>{guide_cards('Premiere Pro')}</div></article>
 <footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/product.html">Product facts &amp; compatibility</a> · <a href="{SITE}/#faq">FAQ</a> · <a href="{SITE}/news/">News</a> · {PRIVACY_FOOTER}</div></footer>
 </body></html>
 """
@@ -310,7 +322,7 @@ print("wrote index")
 for slug, p in POSTS.items():
     related = [{"slug": s, "t": POSTS[s]["h1"]} for s in p.get("rel", []) if s in POSTS]
     html = page(slug, p["title"], p["desc"], p["h1"], p["body"].replace("__FREE__", FREE), related,
-                p.get("modified", DATE), p.get("image"), p.get("published", DATE), p.get("faq"))
+                p.get("modified", DATE), p.get("image"), p.get("published", DATE), p.get("faq"), p.get("app", "Premiere Pro"))
     import re as _re
     html = html.replace('<a target="_blank" rel="noopener" ', "<a ").replace('href="https://captionsgen.lemonsqueezy', 'target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy')
     with io.open(os.path.join("blog", slug + ".html"), "w", encoding="utf-8", newline="") as f:

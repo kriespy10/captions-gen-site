@@ -59,17 +59,25 @@ async function submit(request, env) {
   return json({ ok: true });
 }
 
+function reportValue(value) {
+  if (typeof value !== "string" && !(typeof value === "number" && Number.isFinite(value))) return "?";
+  return String(value).replace(/[\u0000-\u001f\u007f-\u009f]/g, " ").replace(/\s+/g, " ").trim().slice(0, 120) || "?";
+}
+
 // E-mail the report to the business mailbox through Resend (RESEND_API_KEY
 // secret). Never fails the submit: the report is already stored.
 export async function notify(env, r, fetchImpl = fetch) {
   if (!env.RESEND_API_KEY) return false;
   const bug = r.kind === "bug";
-  const app = r.app || {};
+  const app = r.app && typeof r.app === "object" ? r.app : {};
+  const host = app.hostApp === "after-effects"
+    ? `After Effects ${reportValue(app.afterEffects)}`
+    : `Premiere ${reportValue(app.premiere)}`;
   const lines = [
     r.message,
     "",
     `From: ${r.email || "(no email given)"}`,
-    `Captions Gen ${app.panel || "?"} / engine ${app.engine || "?"} / Premiere ${app.premiere || "?"} / ${app.os || "?"} / ${app.licensed ? "licensed" : "free"}`,
+    `Captions Gen ${reportValue(app.panel)} / engine ${reportValue(app.engine)} / ${host} / ${reportValue(app.os)} / ${app.licensed ? "licensed" : "free"}`,
   ];
   if (bug && r.log) lines.push("", "--- engine log (last lines) ---", r.log.slice(-6000));
   try {

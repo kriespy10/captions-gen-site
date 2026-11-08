@@ -1,6 +1,6 @@
-import { DEFAULTS, PRESETS, GROUPING_DEFAULTS, FIRST_PRESET, PANEL_VERSION, WORDS, WORD_TIMES, LOOP, frameAt, hexAlpha, pillTextColor, previewLetterSpacing } from './caption-engine.mjs?v=panel-1.1.2-20261031';
-import { PRESET_META } from './caption-presets.mjs?v=panel-1.1.2-20261031';
-import { groupWords } from './caption-grouping.mjs?v=panel-1.1.2-20261031';
+import { DEFAULTS, PRESETS, GROUPING_DEFAULTS, FIRST_PRESET, WORDS, WORD_TIMES, LOOP, frameAt, hexAlpha, pillTextColor, previewLetterSpacing } from './caption-engine.mjs?v=shared-styles-20261108';
+import { PRESET_META } from './caption-presets.mjs?v=shared-styles-20261108';
+import { groupWords } from './caption-grouping.mjs?v=shared-styles-20261108';
 
 const GROUP_KEYS = {
   text: ['font', 'gFontSize', 'gPosY', 'gTracking', 'textColor'],
@@ -113,7 +113,7 @@ function initDemo(root) {
   let settings = { ...base }, baseline = { ...base }, activePreset = FIRST_PRESET;
   let view = 'presets', filter = 'All', mainPreset = '', renameFrom = '', saveSettings = null;
   let playing = false, inView = false, time = 1, raf = 0, previous = null;
-  root.querySelector('.demo-version').textContent = PANEL_VERSION;
+  root.querySelector('.demo-version').textContent = 'Style preview';
   fillCaption(caption);
   function normalize(raw) {
     const result = { ...base };
@@ -365,7 +365,7 @@ function initDemo(root) {
       if (file.size > 100000) throw new Error('Choose a preset file smaller than 100 KB.');
       const value = JSON.parse(await file.text());
       if (value?.type !== 'preset' || value.app !== 'Captions Gen' || !value.settings || typeof value.settings !== 'object' || Array.isArray(value.settings)) throw new Error('Choose a Captions Gen .cgpreset file.');
-      if (value.settings.v !== 4) throw new Error('Import this older preset into the current Premiere plugin and export it again before using it here.');
+      if (value.settings.v !== 4) throw new Error('Import this older preset into the current Captions Gen panel and export it again before using it here.');
       const fontPS = String(value.settings.fontPS || '').toLowerCase();
       const fonts = { 'montserrat-black':'montserrat-black', 'montserrat-extrabold':'montserrat-xbold', 'montserrat-bold':'montserrat-bold', 'montserrat-medium':'montserrat-medium', 'anton-regular':'anton', 'bangers-regular':'bangers', 'luckiestguy-regular':'luckiest', 'inter-semibold':'inter', 'dmserifdisplay-regular':'dmserif' };
       const imported = normalize({ ...value.settings, font: fonts[fontPS] || value.settings.font || 'impact' });

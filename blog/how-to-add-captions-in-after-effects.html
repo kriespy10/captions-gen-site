@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/analytics.css">
+<script defer src="/analytics.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
+<title>How to Add Animated Captions in After Effects | Captions Gen</title>
+<meta name="description" content="Install Captions Gen in After Effects on Windows, select your source layer, generate editable animated captions, fix words and timing, and render your video.">
+<link rel="canonical" href="https://captionsgen.com/blog/how-to-add-captions-in-after-effects.html">
+<meta property="og:title" content="How to Add Animated Captions in After Effects | Captions Gen">
+<meta property="og:description" content="Install Captions Gen in After Effects on Windows, select your source layer, generate editable animated captions, fix words and timing, and render your video.">
+<meta property="og:url" content="https://captionsgen.com/blog/how-to-add-captions-in-after-effects.html">
+<meta property="og:type" content="article">
+
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "How to add animated captions in After Effects", "datePublished": "2026-11-08", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/how-to-add-captions-in-after-effects.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "How to add animated captions in After Effects", "item": "https://captionsgen.com/blog/how-to-add-captions-in-after-effects.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Captions Gen free for After Effects?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The current Windows release is free, with no watermark, subscription or transcription time cap. Download uses an email checkout without a payment card. Adobe After Effects is a separate paid application; paid Captions Gen features are planned for the future."}}, {"@type": "Question", "name": "Which After Effects version has been tested?", "acceptedAnswer": {"@type": "Answer", "text": "The public panel has been tested with After Effects 2026 on Windows 11. Earlier After Effects versions are not certified for this release. There is no public Mac installer."}}, {"@type": "Question", "name": "Does it transcribe the composition's work area or audio effects?", "acceptedAnswer": {"@type": "Answer", "text": "It reads the underlying files of the selected supported audio/video layers and their visible layer ranges. The composition work area does not choose the transcription range, and After Effects audio effects are not captured. Render processed or retimed audio to a new file when that is the source you need captioned."}}, {"@type": "Question", "name": "Can I export these captions as SRT?", "acceptedAnswer": {"@type": "Answer", "text": "This workflow creates editable animated layers rendered into the picture. It does not create an SRT file or selectable subtitle stream. Use a separate subtitle workflow when your delivery requires one."}}]}]</script>
+<style>
+  :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
+    --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
+    --green:#30d158; --amber:#ff9f0a; --red:#ff6b6b; --cyan:#64d2ff; --card2:#1b1b1e; --pick:#0d1a2b;
+    --body:"Instrument Sans",-apple-system,"Segoe UI",system-ui,sans-serif; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:var(--body); background:var(--bg); color:var(--text); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 24px; }
+  .col { max-width:720px; margin:0 auto; padding:0 20px; }
+  nav { position:sticky; top:0; z-index:20; backdrop-filter:saturate(160%) blur(18px); -webkit-backdrop-filter:saturate(160%) blur(18px); background:rgba(7,7,8,.66); border-bottom:1px solid var(--hair); }
+  nav .wrap { display:flex; align-items:center; justify-content:space-between; height:54px; }
+  nav a { text-decoration:none; }
+  .brand { display:flex; align-items:center; gap:10px; color:var(--text); font-weight:600; font-size:15px; letter-spacing:-.01em; }
+  .brand svg { width:26px; height:26px; display:block; }
+  nav .links { display:flex; gap:24px; font-size:13.5px; align-items:center; }
+  nav .links a { color:var(--muted2); }
+  nav .links a:hover { color:var(--text); }
+  nav .links a.on { color:var(--text); }
+  nav .links a.buy { color:#fff; background:var(--blue); padding:7px 15px; border-radius:999px; font-weight:600; }
+  nav .links a.buy:hover { background:var(--blue2); }
+  @media (max-width:800px) { nav .links a:not(.buy):not(.on) { display:none; } }
+  .idx h1 { margin-bottom:6px; } .idx .sub { color:var(--muted); margin-bottom:26px; }
+  .post { display:block; background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px; margin-bottom:12px; text-decoration:none; }
+  .post:hover { border-color:var(--hair2); }
+  .post .pt { color:var(--text); font-weight:700; font-size:18px; margin-bottom:4px; }
+  .post .pd { color:var(--muted2); font-size:14px; }
+  article { padding:40px 0 20px; }
+  h1 { font-size:34px; line-height:1.2; letter-spacing:-.02em; margin:0 0 10px; }
+  .meta { color:var(--muted); font-size:13px; margin-bottom:28px; }
+  .app-guide { padding:12px 16px; margin:0 0 24px; border:1px solid var(--hair2); border-radius:10px; font-size:14px; }
+  .breadcrumbs { font-size:13px; color:var(--muted); margin:0 0 16px; }
+  .breadcrumbs a { color:var(--muted2); }
+  .sources { font-size:13px; margin-top:28px; }
+  .caption-example { margin:24px 0; }
+  .caption-example img { display:block; width:100%; height:auto; border-radius:12px; }
+  .caption-example figcaption { color:var(--muted); font-size:13px; margin-top:8px; }
+  .quick-answer { margin-top:20px; }
+  .quick-answer ul { margin-bottom:0; }
+  h2 { font-size:22px; margin:36px 0 10px; letter-spacing:-.01em; }
+  h2[id] { scroll-margin-top:78px; }
+  h3 { font-size:17px; margin:24px 0 8px; }
+  p, li { color:var(--muted2); font-size:16px; }
+  li { margin-bottom:6px; }
+  strong { color:var(--text); }
+  a { color:var(--blue); }
+  a:hover { color:var(--blue2); }
+  ol li::marker { color:var(--yellow); font-weight:700; }
+  .box { background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px; margin:32px 0; }
+  .box p { margin:6px 0; }
+  .box .t { color:var(--text); font-weight:700; }
+  kbd { background:var(--card); border:1px solid var(--hair2); border-radius:5px; padding:1px 6px; font-size:13px; color:var(--text); }
+  footer { border-top:1px solid var(--hair); margin-top:48px; padding:24px 0 48px; color:var(--muted); font-size:13px; }
+  footer a { color:var(--muted); }
+  .cta-line { background:rgba(10,132,255,.08); border-left:3px solid var(--blue); padding:10px 14px; border-radius:0 10px 10px 0; margin:18px 0 6px; font-size:15px; }
+  .btn { display:inline-block; background:var(--yellow); color:#111; font-weight:700; text-decoration:none; padding:11px 18px; border-radius:10px; margin:10px 10px 0 0; }
+  .btn:hover { color:#111; background:#fff176; }
+  .btn.ghost { background:transparent; color:var(--text); border:1px solid var(--hair2); }
+  .btn.ghost:hover { color:var(--text); background:rgba(255,255,255,.06); }
+  .ptable-wrap { position:relative; left:50%; transform:translateX(-50%); width:min(1100px, calc(100vw - 40px)); margin:18px 0 6px; border:1px solid var(--hair2); border-radius:16px; overflow-x:auto; background:var(--card); -webkit-overflow-scrolling:touch; }
+  .ptable { width:100%; min-width:1040px; border-collapse:separate; border-spacing:0; font-size:14px; font-variant-numeric:tabular-nums; }
+  .ptable th { background:var(--card2); color:var(--muted); font-size:11.5px; font-weight:600; text-transform:uppercase; letter-spacing:.07em; text-align:left; padding:12px 11px; border-bottom:1px solid var(--hair2); white-space:nowrap; }
+  .ptable td { padding:14px 11px; border-bottom:1px solid var(--hair); color:var(--muted2); vertical-align:middle; line-height:1.4; }
+  .ptable tr:last-child td { border-bottom:0; }
+  .ptable tbody tr:hover td { background:var(--card2); }
+  .ptable td:first-child, .ptable th:first-child { position:sticky; left:0; z-index:1; background:var(--card); border-right:1px solid var(--hair); }
+  .ptable th:first-child { background:var(--card2); }
+  .ptable tbody tr:hover td:first-child { background:var(--card2); }
+  .ptable .tool { color:var(--text); font-weight:700; font-size:15px; white-space:nowrap; }
+  .ptable .sub { color:var(--muted); font-size:12.5px; margin-top:2px; }
+  .ptable .price { color:var(--text); font-weight:600; white-space:nowrap; }
+  .ptable td:nth-child(2) .sub { white-space:nowrap; }
+  .ptable tr.pick td, .ptable tr.pick:hover td { background:var(--pick); }
+  .ptable tr.pick td:first-child { box-shadow:inset 3px 0 0 var(--yellow); }
+  .ptable .tag { display:inline-block; margin-left:6px; padding:2px 8px; border-radius:999px; border:1px solid var(--yellow); color:var(--yellow); font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; vertical-align:2px; }
+  .pill { display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:999px; font-size:12.5px; font-weight:600; white-space:nowrap; border:1px solid currentColor; }
+  .pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+  .pill.ok { color:var(--green); } .pill.sub { color:var(--amber); } .pill.mix { color:var(--cyan); } .pill.neutral { color:var(--muted2); }
+  .mark { display:inline-flex; align-items:center; gap:7px; white-space:nowrap; }
+  .mark i { font-style:normal; display:inline-grid; place-items:center; width:20px; height:20px; border-radius:50%; font-size:12px; font-weight:800; border:1px solid currentColor; }
+  .mark.yes { color:var(--green); } .mark.no { color:var(--red); } .mark.na { color:var(--muted); }
+  .yr { min-width:150px; }
+  .yr .amt { color:var(--text); font-weight:600; white-space:nowrap; }
+  .yr .bar { position:relative; height:6px; margin-top:7px; border-radius:3px; background:var(--hair); overflow:hidden; }
+  .yr .bar span { position:absolute; left:0; top:0; bottom:0; border-radius:3px; background:var(--amber); }
+  .yr .bar span.lo { background:var(--green); }
+  .yr .bar span.range { opacity:.35; }
+  @media (max-width:600px) {
+    .ptable-wrap { left:0; transform:none; width:auto; }
+    .ptable .tool + .sub { display:none; }
+    .ptable td:first-child { max-width:132px; }
+    .ptable .tool { white-space:normal; font-size:14px; }
+    .ptable .tag { display:block; width:max-content; margin:5px 0 0; }
+  }
+  .ver { display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.06em; color:var(--blue); background:rgba(10,132,255,.14); border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .post .pm { color:var(--muted); font-size:13px; margin-bottom:6px; }
+  .tldr { background:var(--card); border:1px solid var(--hair); border-left:3px solid var(--yellow); border-radius:0 14px 14px 0; padding:14px 20px 6px; margin:22px 0 26px; }
+  .tldr .t, .toc .t { color:var(--text); font-weight:700; margin:0 0 6px; font-size:15px; }
+  .tldr ul { margin:0; padding-left:20px; }
+  .toc { border:1px solid var(--hair); border-radius:14px; padding:14px 20px; margin:0 0 30px; }
+  .toc ol { margin:0; padding-left:22px; columns:2; column-gap:28px; }
+  .toc li { font-size:14.5px; margin-bottom:4px; break-inside:avoid; }
+  .toc a { color:var(--muted2); text-decoration:none; }
+  .toc a:hover { color:var(--text); }
+  @media (max-width:600px) { .toc ol { columns:1; } }
+  article .col { position:relative; }
+  .toc-rail { display:none; }
+  @media (min-width:1040px) {
+    article .col.has-toc { margin-left:max(0px, calc(50% - 480px)); }
+    .has-toc .ptable-wrap { left:0; transform:none; width:auto; }
+    .has-toc .ptable { min-width:0; }
+    .toc-inline { display:none; }
+    .toc-rail { display:block; position:absolute; top:0; bottom:0; left:calc(100% + 28px); width:212px; }
+    .toc-side { position:sticky; top:84px; margin:0; border:0; border-left:1px solid var(--hair2); border-radius:0; padding:2px 0 2px 18px; }
+    .toc-side ol { columns:1; list-style:none; padding:0; }
+    .toc-side li { font-size:14px; line-height:1.45; margin-bottom:9px; }
+    .toc-side a.on { color:var(--text); }
+    .toc-side a.on::before { content:""; position:absolute; left:-1px; width:2px; height:1.4em; background:var(--yellow); }
+  }
+  .tip, .note { border-radius:0 12px 12px 0; padding:10px 16px; margin:18px 0; font-size:15px; color:var(--muted2); }
+  .tip { background:rgba(48,209,88,.07); border-left:3px solid var(--green); }
+  .note { background:rgba(255,159,10,.07); border-left:3px solid var(--amber); }
+  .tip b, .note b { color:var(--text); }
+  .spec { width:100%; border-collapse:collapse; margin:14px 0 8px; font-size:15px; border:1px solid var(--hair); border-radius:12px; overflow:hidden; }
+  .spec th, .spec td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--hair); vertical-align:top; }
+  .spec th { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.06em; background:var(--card2); }
+  .spec td { color:var(--muted2); }
+  .spec td:first-child { color:var(--text); font-weight:600; white-space:nowrap; }
+  .spec tr:last-child td { border-bottom:0; }
+  .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; border:1px solid rgba(255,255,255,.35); }
+  .ptable-legend { display:flex; flex-wrap:wrap; gap:6px 18px; color:var(--muted); font-size:12.5px; margin:10px 2px 0; }
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
+  <div class="links">
+    <a href="https://captionsgen.com/#styles">Styles</a>
+    <a href="https://captionsgen.com/#custom">Build your own</a>
+    <a href="https://captionsgen.com/#how">How it works</a>
+    <a href="https://captionsgen.com/#install">Install</a>
+    <a href="https://captionsgen.com/#faq">FAQ</a>
+    <a class="on" href="https://captionsgen.com/blog/">Guides</a>
+    <a href="https://captionsgen.com/news/">News</a>
+    <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
+  </div>
+</div></nav>
+<article><div class="col">
+
+<p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / How to add animated captions in After Effects</p>
+<h1>How to add animated captions in After Effects</h1>
+<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<p class="app-guide"><strong>After Effects guide.</strong> Working in Premiere Pro? <a href="animated-captions-premiere-pro.html">Choose a Premiere caption workflow</a>.</p>
+
+<p><strong>To add animated captions in After Effects with Captions Gen, install the Windows panel, open your composition, select an audio or video layer, choose a preset and press Generate Captions.</strong> The result is editable caption layers in your project, with word highlights and animation rendered into the picture.</p>
+<p>I make Captions Gen. This guide covers the <a href="/news/captions-gen-1-1-9.html">public 1.1.9 Windows release</a>, tested with After Effects 2026 on Windows 11. Earlier After Effects versions are not certified. The plugin is currently free without a watermark or transcription time cap; Adobe After Effects is separate and paid.</p>
+
+<h2 id="install">1. Install the After Effects panel</h2>
+<ol>
+<li>Save your Adobe projects and close the Adobe applications.</li>
+<li><a target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Get the current Windows setup</a>. The free checkout asks for an email address to deliver the download, with no payment card.</li>
+<li>Run Setup and choose <strong>After Effects</strong>, or <strong>Both</strong> if you also want the Premiere Pro panel. Creative Cloud Desktop and Adobe installation permissions are required.</li>
+<li>Reopen After Effects and choose <strong>Window &gt; Extensions &gt; Captions Gen</strong>.</li>
+</ol>
+<p>Already using Captions Gen only in Premiere? Run the full Setup and choose Both to add the After Effects panel. The two panels share one speech engine and Models folder, so you do not need separate copies of the speech models.</p>
+<p>The Windows EXE remains Authenticode-unsigned; Adobe package signing does not resolve a Windows Smart App Control block. If Windows blocks setup, contact <a href="mailto:business@captionsgen.com">support</a>.</p>
+
+<h2 id="model">2. Wait for the speech model to be ready</h2>
+<p>Open the panel and let a missing model finish downloading. Built-in choices are Base, Small and Turbo; Turbo is selected by default. Base is the lightest built-in choice. Allow at least 3 GB free for the built-in models, in addition to the plugin, Adobe applications and project files.</p>
+<p>Transcription runs locally on the CPU, without GPU acceleration. After Effects still needs the hardware Adobe requires. Processing time depends on your processor, selected model and audio length. Audio and video are not uploaded for transcription; model downloads and update checks use the internet. See the <a href="/product.html">complete requirements</a> and <a href="/privacy.html">privacy information</a>.</p>
+
+<h2 id="source">3. Select the speech source in your composition</h2>
+<p>For your first test, open a composition and select one short, file-based audio or video layer containing clear speech. Keep its audio enabled. The panel can use multiple supported selected layers, but it does not transcribe the rendered composition mix.</p>
+<p>The source range follows the visible layer in/out points within the composition. Moving the work-area handles does not choose a different transcription range. The engine reads the underlying source file, so After Effects audio effects are not included.</p>
+<p>Start with normal forward playback at 100% speed. Time Remap, stretching, reverse playback or a conformed frame rate can make a layer unsupported. For a retimed source or processed audio mix, render a copy to a new audio/video file and test that copy.</p>
+
+<h2 id="generate">4. Pick a look and generate captions</h2>
+<p>Choose one of the 18 built-in looks in <strong>Presets</strong>. Use <strong>Customize</strong> to adjust the design, then press <strong>Generate Captions</strong>. If the transcript-review step is enabled, correct the words before confirming the generation.</p>
+<p>Captions are created as editable layers in per-phrase precompositions. Play the result with the original audio and check names, numbers, line breaks and word highlights. A useful-looking preset does not remove the need to proofread the transcript.</p>
+<p>The <a href="/#custom">browser style preview</a> lets you try caption designs before installing. It is a design sample; it does not transcribe audio or place layers in After Effects.</p>
+
+<h2 id="edit">5. Correct words and review the animation</h2>
+<p>Use the panel's <strong>Captions</strong> tab to find and edit a caption, then save it. Saving updates its word animation. Where a valid audio-source link is still available, the panel can try aligning new words to the audio; otherwise it can warn that timing is estimated. Listen again after a correction.</p>
+<p>If you change Source Text manually inside a generated caption, return to the parent composition, select the caption and use <strong>Update animation</strong>. This refreshes the animation for the changed text; it does not guarantee exact timing for newly added words. Review those highlights against the voice.</p>
+<p>Use <strong>Apply style</strong> to change the look of the current caption batch. Changes to caption grouping can require transcription again. After Effects Undo can undo the panel's grouped host edits; keep a saved project before making wider changes.</p>
+
+<h2 id="render">6. Render a short captioned sample</h2>
+<p>Keep the generated caption layers enabled and inside the duration you render. Export a short sample through your usual After Effects render workflow and watch the actual file. The animated words are part of the picture.</p>
+<p>These layers do not create native subtitle tracks, SRT files or selectable closed captions. If your client also needs subtitle delivery, keep that as a separate workflow. In Premiere Pro, the <a href="import-srt-premiere-pro.html">native SRT workflow</a> serves that purpose.</p>
+
+<h2 id="troubleshoot">If the panel or captions do not appear</h2>
+<ul>
+<li><strong>No Captions Gen entry:</strong> close After Effects, rerun the current full Setup with After Effects or Both selected, then restart the app. Check Window &gt; Extensions, not Premiere's UXP Plugins menu.</li>
+<li><strong>The engine or model is not ready:</strong> wait for downloads to complete and check the panel's status before generating.</li>
+<li><strong>No supported source selected:</strong> open a composition, select an available file-based layer with audio enabled, and check its speed and time-remapping settings.</li>
+<li><strong>Words are wrong:</strong> check the spoken-language choice and source audio, then correct the text and review its timing.</li>
+<li><strong>Captions exist but are absent from the render:</strong> check the layer visibility, composition duration and render range.</li>
+</ul>
+<p>The current release has no public Mac installer, translation or automatic B-roll. If you need help, send the relevant After Effects version, panel version and error through the panel's report flow. Bug reports include a recent engine-log excerpt; the <a href="/privacy.html">privacy page</a> explains that optional flow.</p>
+<p class="sources">Product references: <a href="/product.html">current public facts and limitations</a>, <a href="/news/captions-gen-1-1-9.html">1.1.9 release notes</a> and <a href="/#install">Windows installation</a>. Premiere users can compare the <a href="animated-captions-premiere-pro.html">Premiere-specific caption workflows</a>.</p>
+
+<h2>Questions people ask</h2>
+<h3>Is Captions Gen free for After Effects?</h3>
+<p>Yes. The current Windows release is free, with no watermark, subscription or transcription time cap. Download uses an email checkout without a payment card. Adobe After Effects is a separate paid application; paid Captions Gen features are planned for the future.</p>
+<h3>Which After Effects version has been tested?</h3>
+<p>The public panel has been tested with After Effects 2026 on Windows 11. Earlier After Effects versions are not certified for this release. There is no public Mac installer.</p>
+<h3>Does it transcribe the composition's work area or audio effects?</h3>
+<p>It reads the underlying files of the selected supported audio/video layers and their visible layer ranges. The composition work area does not choose the transcription range, and After Effects audio effects are not captured. Render processed or retimed audio to a new file when that is the source you need captioned.</p>
+<h3>Can I export these captions as SRT?</h3>
+<p>This workflow creates editable animated layers rendered into the picture. It does not create an SRT file or selectable subtitle stream. Use a separate subtitle workflow when your delivery requires one.</p>
+
+<div class="box">
+<p class="t">Try animated captions on your own edit</p>
+<p>Captions Gen is a currently free animated captions plugin for Adobe Premiere Pro and After Effects on Windows. It transcribes audio locally on the CPU with Faster Whisper, then places editable Motion Graphics clips in Premiere or native caption layers in After Effects.</p>
+<p>Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications.</p>
+<p>Current release: <a href="https://captionsgen.com/news/captions-gen-1-1-9.html">1.1.9</a>. Check <a href="https://captionsgen.com/product.html">supported Adobe versions, installation requirements and limitations</a>. Use Premiere Pro's native caption tracks when you need SRT, selectable subtitles or broadcast closed captions.</p>
+<a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download free</a>
+<a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
+</div>
+
+<div class="box"><p class="t">Related guides</p><ul><li><a href="animated-captions-premiere-pro.html">Animated captions in Premiere Pro: choose your workflow</a></li>
+<li><a href="free-caption-plugin-premiere-pro.html">Free caption plugins for Premiere Pro</a></li></ul></div>
+</div></article>
+<footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/product.html">Product facts &amp; compatibility</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="https://captionsgen.com/news/">News</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>
+</body>
+</html>

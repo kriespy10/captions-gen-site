@@ -1,6 +1,6 @@
 # Blog generator
 
-Edit `tools/bodies.py`, `tools/bodies2.py` or `tools/bodies3.py` (post text), `tools/news.py` (releases) and `tools/product.py` (current product facts), then from the repo root run:
+Edit `tools/bodies.py`, `tools/bodies2.py`, `tools/bodies3.py` or `tools/aftereffects.py` (guides), `tools/news.py` (releases) and `tools/product.py` (current product facts), then from the repo root run:
 
     python -B tools/genblog.py
 
