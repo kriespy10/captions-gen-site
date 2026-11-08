@@ -15,7 +15,7 @@
 <meta property="og:type" content="article">
 
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "How to change the caption font in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-07", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/change-caption-font-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "How to change the caption font in Premiere Pro", "item": "https://captionsgen.com/blog/change-caption-font-premiere-pro.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "How to change the caption font in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/change-caption-font-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "How to change the caption font in Premiere Pro", "item": "https://captionsgen.com/blog/change-caption-font-premiere-pro.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -165,35 +165,36 @@
 
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / How to change the caption font in Premiere Pro</p>
 <h1>How to change the caption font in Premiere Pro</h1>
-<div class="meta">Updated <time datetime="2026-11-07">7 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 
 <p>Select a caption on the timeline, open <kbd>Window &gt; Properties</kbd>, and change the font in the Text section. To apply it to every caption on the track, save it as a Track Style. That's the whole procedure; the details below cover the parts that trip people up.</p>
-<p class="cta-line">Track Styles change the font, but every caption still looks and moves the same. For animated captions with a highlighted spoken word, <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin with ready-made style presets. It transcribes on your computer and places editable Motion Graphics captions on the timeline. Free for Windows, with no time limit or watermark.</p>
+<p class="cta-line">Track Styles change the font, but every caption still looks and moves the same. For animated captions with a highlighted spoken word, <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin with ready-made style presets. It transcribes locally on your CPU and places editable Motion Graphics clips on the Premiere timeline. The current Windows release is free, without a transcription time cap or watermark; Adobe Premiere Pro is separate.</p>
 
 <h2>Step by step</h2>
 <ol>
 <li>Click one caption on the caption track.</li>
 <li>In Properties, pick the font family and style, set the size, and adjust fill, stroke and background box.</li>
-<li>At the top of the panel, open the Track Style dropdown and choose Create Style. Name it. Every caption on the track now uses it.</li>
+<li>Use the plus control beside Track style to create and name a style, then apply it to the caption track. Save it to the project or a local style folder as needed.</li>
 </ol>
 
 <h2>Why the font only changed on one caption</h2>
-<p>Because you edited a single caption instead of the Track Style. Captions on the track follow the Track Style unless you override them individually. Set the style once at track level and the override problem goes away.</p>
+<p>Because you edited a single caption instead of the Track Style. Captions on the track follow the Track Style unless you override them individually. Apply the intended Track Style, then check any individual overrides. Redefine Style lets you update the linked style or apply the edited appearance across the track.</p>
 
 <h2>Why the font isn't in the list</h2>
 <p>Premiere reads fonts installed in the operating system. Install the font, restart Premiere, and it appears. Adobe Fonts activated through Creative Cloud also show up after a restart.</p>
 
 <h2>Size that reads on a phone</h2>
-<p>For vertical video, captions between 5 and 7 percent of the frame height read well on a phone. On a 1080 x 1920 sequence that is roughly 55 to 75 px. Smaller than that and viewers squint; larger and two lines eat the frame.</p>
+<p>For a 1080 x 1920 edit, try 55 to 75 px as a starting point, then preview the export on a phone. Font metrics, line length and the footage behind the text affect readability; adjust rather than treating one size as a rule.</p>
 
 <h2>What you can't change</h2>
-<p>You can't give the spoken word a different color or size from the rest of the line, and you can't animate the font in. Those need a graphic layer rather than a caption track.</p>
+<p>You can style a selected part of a native caption manually. That static formatting does not automatically follow the currently spoken word. For a moving highlight or animated entrance, use timed graphics. See the <a href="highlight-words-in-captions-premiere-pro.html">spoken-word highlight workflow</a>.</p>
 
 
 <div class="box">
 <p class="t">Try animated captions on your own edit</p>
-<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and one-click restyling of placed captions. Native captions remain useful when you need subtitles or a separate caption file.</p>
-<p><strong>Windows 10/11, 64-bit · Premiere Pro 25.6+</strong>. Transcription runs locally on your CPU. Free, with no time limit and no watermark. See <a href="https://captionsgen.com/#performance">requirements, model choices and performance</a>.</p>
+<p>Captions Gen is a currently free animated captions plugin for Adobe Premiere Pro and After Effects on Windows. It transcribes audio locally on the CPU with Faster Whisper, then places editable Motion Graphics clips in Premiere or native caption layers in After Effects.</p>
+<p>Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications.</p>
+<p>Current release: <a href="https://captionsgen.com/news/captions-gen-1-1-9.html">1.1.9</a>. Check <a href="https://captionsgen.com/product.html">supported Adobe versions, installation requirements and limitations</a>. Keep a native caption track when you need SRT, selectable subtitles or broadcast closed captions.</p>
 <a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download free</a>
 <a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
 </div>

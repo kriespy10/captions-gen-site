@@ -15,7 +15,7 @@
 <meta property="og:type" content="article">
 
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Converting captions to graphics in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-07", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/premiere-pro-captions-to-graphics.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Converting captions to graphics in Premiere Pro", "item": "https://captionsgen.com/blog/premiere-pro-captions-to-graphics.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Converting captions to graphics in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/premiere-pro-captions-to-graphics.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Converting captions to graphics in Premiere Pro", "item": "https://captionsgen.com/blog/premiere-pro-captions-to-graphics.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -165,28 +165,29 @@
 
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Converting captions to graphics in Premiere Pro</p>
 <h1>Converting captions to graphics in Premiere Pro</h1>
-<div class="meta">Updated <time datetime="2026-11-07">7 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 
-<p>Right-click a caption and choose Upgrade Caption to Graphic. Premiere turns it into a Motion Graphics clip with the same text and timing, sitting on a video track. From there you can animate it like any title.</p>
-<p class="cta-line">Converting captions to graphics is the manual route to animated captions. <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin that skips it: it generates word-by-word animated graphics directly. It transcribes on your computer and places editable Motion Graphics captions on the timeline. Free for Windows, with no time limit or watermark.</p>
+<p>Select caption clips on the timeline, then choose <strong>Graphics and Titles &gt; Upgrade Caption to Graphic</strong>. Premiere creates graphics on a video track with the caption text and timing. Review them before adding effects or animation.</p>
+<p class="cta-line">Converting captions to graphics is the manual route to animated captions. <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin that skips it: it generates word-by-word animated graphics directly. It transcribes locally on your CPU and places editable Motion Graphics clips on the Premiere timeline. The current Windows release is free, without a transcription time cap or watermark; Adobe Premiere Pro is separate.</p>
 
 <h2>Why you'd convert</h2>
 <p>Native caption tracks support reusable Track Styles, and current Premiere versions include a Single Word layout. A graphic gives you keyframes and effects for custom motion or a moving highlight within a line.</p>
 
 <h2>How to convert all captions at once</h2>
-<p>Select every caption on the track (click the first, shift-click the last), then right-click and Upgrade Caption to Graphic. Premiere creates one graphic per caption on a new video track, timed to match.</p>
+<p>Select the caption clips you want to convert, then use Graphics and Titles &gt; Upgrade Caption to Graphic. Check the graphics on their video track and retain an original caption-track copy if you also need SRT or closed-caption delivery.</p>
 
 <h2>What you lose</h2>
-<p>Graphics are not captions any more. They won't export as a sidecar .srt and they don't use the caption track's export options. Check the video track output and graphic layers instead. They are simply part of the picture. That is fine for social and wrong for broadcast delivery.</p>
+<p>These graphics no longer use native caption-track export. They do not produce an SRT sidecar; check the video track output and graphic layers to render them into the picture. A rendered caption treatment does not replace a required broadcast caption stream or sidecar. Follow the delivery specification and keep the original caption track when needed.</p>
 
 <h2>The time cost</h2>
-<p>Converting is instant. Animating is not. Each graphic needs its own keyframes, and a 60-second clip can have 30 to 40 captions. Do it for one hero clip if you like the control; for regular output, a plugin that generates animated caption graphics directly saves the afternoon.</p>
+<p>Conversion preserves text and timing, but it does not create a moving spoken-word highlight. You still need the animation and word-level changes. Captions Gen can generate editable timed graphics from selected speech; compare the <a href="free-caption-plugin-premiere-pro.html">current free plugin and its setup requirements</a>. Its graphics are separate from Premiere's subtitle-track export.</p>
 
 
 <div class="box">
 <p class="t">Try animated captions on your own edit</p>
-<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and one-click restyling of placed captions. Native captions remain useful when you need subtitles or a separate caption file.</p>
-<p><strong>Windows 10/11, 64-bit · Premiere Pro 25.6+</strong>. Transcription runs locally on your CPU. Free, with no time limit and no watermark. See <a href="https://captionsgen.com/#performance">requirements, model choices and performance</a>.</p>
+<p>Captions Gen is a currently free animated captions plugin for Adobe Premiere Pro and After Effects on Windows. It transcribes audio locally on the CPU with Faster Whisper, then places editable Motion Graphics clips in Premiere or native caption layers in After Effects.</p>
+<p>Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications.</p>
+<p>Current release: <a href="https://captionsgen.com/news/captions-gen-1-1-9.html">1.1.9</a>. Check <a href="https://captionsgen.com/product.html">supported Adobe versions, installation requirements and limitations</a>. Keep a native caption track when you need SRT, selectable subtitles or broadcast closed captions.</p>
 <a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download free</a>
 <a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
 </div>

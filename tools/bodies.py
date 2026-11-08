@@ -6,10 +6,10 @@ POSTS["how-to-add-captions-in-premiere-pro"] = dict(
 title="How to Add Captions in Premiere Pro: Create, Style, Export",
 desc="Add captions in Premiere Pro using Speech to Text. Follow the transcript, caption track, Properties styling, and burn-in or SRT export steps in this guide.",
 h1="How to add captions in Premiere Pro, step by step",
-modified="2026-10-20",
+modified="2026-11-08",
 body="""
 <p>To add captions in Premiere Pro, <strong>transcribe your sequence, create captions from the transcript, style the caption track, and choose how to export it</strong>. Premiere includes Speech to Text; you do not need a separate plugin for standard subtitles.</p>
-<p class="cta-line">Premiere's own captions are static: one style per track and no highlight on the spoken word. For animated, word-by-word captions in the same timeline, <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin that generates them in one click. It transcribes on your computer and places editable Motion Graphics captions on the timeline. Free for Windows, with no time limit or watermark.</p>
+<p class="cta-line">For a moving highlight across a line of text, <a href="animated-captions-premiere-pro.html">compare native captions and animated graphics</a>. Captions Gen transcribes locally on the CPU and places editable Motion Graphics clips in Premiere Pro 25.6 or newer on supported 64-bit Windows. It's currently free, with no time limit or watermark. The download requires an email address, with no payment card; see the <a href="/product.html">installation requirements</a> before choosing it.</p>
 <p>This guide uses the current Text and Properties panels. Older Premiere tutorials may show Essential Graphics for styling.</p>
 
 <h2 id="transcribe">1. Transcribe the sequence</h2>
@@ -48,10 +48,10 @@ POSTS["auto-captions-premiere-pro"] = dict(
 title="Premiere Pro Auto Captions: Generate, Style & Export",
 desc="Generate auto captions in Premiere Pro with Speech to Text. Choose the dialogue track, create subtitles, fix mistakes, style the text, and export your video.",
 h1="Auto captions in Premiere Pro with Speech to Text",
-modified="2026-10-20",
+modified="2026-11-08",
 body="""
 <p>Premiere Pro makes auto captions in two stages: <strong>Speech to Text creates a transcript, then Create captions turns that transcript into timed subtitles</strong>. Automatic transcription is included with Premiere. Creating the transcript does not place visible text on the video by itself.</p>
-<p class="cta-line">Premiere's auto captions come out as plain subtitles. For auto captions that highlight and animate each spoken word, <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin that does it in one click. It transcribes on your computer and places editable Motion Graphics captions on the timeline. Free for Windows, with no time limit or watermark.</p>
+<p class="cta-line">For karaoke highlights and animated graphics, <a href="https://captionsgen.com/">Captions Gen</a> offers another workflow on Premiere Pro 25.6 or newer for supported 64-bit Windows. It transcribes locally on the CPU and creates editable Motion Graphics clips. The plugin is currently free without a watermark or time limit; the download needs an email address, with no payment card.</p>
 
 <h2 id="generate">Generate auto captions in four steps</h2>
 <ol>
@@ -79,7 +79,7 @@ body="""
 <p>In current versions, expand Captioning Preferences in the Create Captions dialog and select <strong>Layout &gt; Single Word</strong>. If your version lacks that option, check its available layouts. The <a href="word-by-word-captions-premiere-pro.html">word-by-word caption guide</a> explains the difference between showing one word and highlighting it within a line.</p>
 
 <h2 id="graphics">When an animated caption plugin helps</h2>
-<p>Native captions are a useful choice for subtitles and sidecar files. If you want karaoke highlights, pill backgrounds, bounce animations, and editable graphics from a repeatable preset, consider <a href="https://captionsgen.com/#styles">Captions Gen's animated caption styles</a>. It transcribes locally with Whisper and builds graphics on the Premiere timeline.</p>
+<p>Native captions are a useful choice for subtitles and sidecar files. If you want karaoke highlights, pill backgrounds, bounce animations, and editable graphics from a repeatable preset, consider <a href="https://captionsgen.com/#styles">Captions Gen's animated caption styles</a>. It uses Faster Whisper on the CPU. Missing speech models download first and are cached for later use; allow at least 3 GB for the built-in models, then review the generated words and timing. The <a href="/product.html">product reference</a> lists the current requirements.</p>
 <p>Keep a native caption track as well when your delivery needs an SRT file. Graphics are part of the picture, not a substitute for a selectable caption file. Compare the <a href="animated-captions-premiere-pro.html">native and graphics workflows</a> before choosing.</p>
 <p class="sources">References: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-captions.html">caption workflow</a> and <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-single-word-captions.html">Single Word layout</a>.</p>
 """)
@@ -88,7 +88,7 @@ POSTS["animated-captions-premiere-pro"] = dict(
 title="Animated Captions in Premiere Pro: Native, Graphics, Plugin",
 desc="Compare native single-word captions, manually animated graphics, and Captions Gen for Premiere Pro. Choose a workflow for subtitles or karaoke highlights.",
 h1="Animated captions in Premiere Pro: choose your workflow",
-modified="2026-11-07",
+modified="2026-11-08",
 body="""
 <p>To make animated captions in Premiere Pro, start with the look you need: <strong>one word appearing at a time, manually animated text, or a moving highlight within a multi-word line</strong>. These use different workflows. Current Premiere versions include native single-word captions; graphics give you more control over motion and highlighting.</p>
 
@@ -97,14 +97,15 @@ body="""
 <p>This route suits a simple one-word-at-a-time look and keeps the text on a native caption track. For the setup, follow the <a href="word-by-word-captions-premiere-pro.html">word-by-word captions workflow</a>.</p>
 
 <h2 id="manual">2. Animate caption graphics by hand</h2>
-<p>Create ordinary captions first, then use <strong>Upgrade Caption to Graphic</strong> for the clips you want to animate. Once the text is a graphic, use its text appearance and keyframes to build the motion you need.</p>
+<p>Create ordinary captions first, select the clips you want to animate, then choose <strong>Graphics and Titles &gt; Upgrade Caption to Graphic</strong>. Once the text is a graphic, use its text appearance and keyframes to build the motion you need.</p>
 <p>A moving highlight across several words takes additional timing work. One method is to split the graphic at each spoken word and change that word's appearance in each segment. It gives you control, but corrections and longer edits mean more clips to maintain. See <a href="highlight-words-in-captions-premiere-pro.html">how to highlight spoken words</a>.</p>
 <p>Graphics render as part of the video. Keep the original caption track if you also need a sidecar file or closed-caption delivery.</p>
 
 <h2 id="plugin">3. Generate animated graphics with Captions Gen</h2>
-<p><a href="https://captionsgen.com/">Captions Gen</a> transcribes on your machine with Whisper and places word-synced graphics on the Premiere timeline. Its presets combine karaoke highlights, color swaps or pill backgrounds, bounce, and in/out animations. You can edit the placed graphics or use “Apply style to placed captions” to change their appearance without transcribing again.</p>
+<p><a href="https://captionsgen.com/">Captions Gen</a> transcribes locally on the CPU with Faster Whisper and places word-synced Motion Graphics clips on the Premiere timeline. Its presets combine karaoke highlights, color swaps or pill backgrounds, bounce, and in/out animations. You can edit the placed graphics or use <strong>Apply style to placed captions</strong> to change their appearance without transcribing again. After editing caption text, review the updated animation and word timing.</p>
 <figure class="caption-example"><img src="/img/styles/Bold-Impact.png" width="1280" height="480" loading="lazy" alt="Captions Gen preview reading Use Your Shield, with Shield highlighted in yellow"><figcaption>A Captions Gen graphic with the spoken word highlighted. This is a plugin preview, not Premiere's native caption track.</figcaption></figure>
-<p>The plugin runs on Windows 10/11, 64-bit, with Premiere Pro 25.6 or newer. It's free, with no time limit or watermark.</p>
+<p>The plugin runs on supported 64-bit Windows 10 or 11 with Premiere Pro 25.6 or newer. It's currently free, with no time limit or watermark. Enter an email address at the free checkout to get the download, with no payment card. Missing speech models download before use, so allow at least 3 GB of model storage and time for that first download. Review the <a href="/product.html">full requirements and limitations</a>.</p>
+<p>Working in After Effects too? The <a href="/news/captions-gen-1-1-9.html">1.1.9 Windows setup</a> can install Premiere Pro, After Effects, or both, sharing the engine and Models folder. The After Effects panel creates native editable caption layers and is tested with After Effects 2026 on Windows 11. This guide's timeline steps are for Premiere Pro.</p>
 
 <h2>Which workflow fits your edit?</h2>
 <ul>

@@ -3,15 +3,16 @@
 import json, os, io, re
 from datetime import date
 from html import escape
+from product import PRODUCT
 
 SITE = "https://captionsgen.com"
 FREE = "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece"
 DATE = "2026-08-26"
 SITE_UPDATED = "2026-11-08"
-GUIDE_INDEX_UPDATED = "2026-10-19"
+GUIDE_INDEX_UPDATED = "2026-11-08"
 # Every guide includes the shared requirements box below. Its factual correction
 # is a content update even when the rest of an article has not changed.
-SHARED_REQUIREMENTS_UPDATED = "2026-11-07"
+SHARED_REQUIREMENTS_UPDATED = "2026-11-08"
 ANALYTICS_HEAD = '<link rel="stylesheet" href="/analytics.css">\n<script defer src="/analytics.js"></script>'
 PRIVACY_FOOTER = '<a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button>'
 
@@ -152,11 +153,12 @@ l.forEach(function(a,k){var e=document.getElementById(a.hash.slice(1));if(e&&e.g
 l.forEach(function(a,k){a.classList.toggle('on',k===i)})}
 addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',f)})();"""
 
-CLOSING = """
+CLOSING = f"""
 <div class="box">
 <p class="t">Try animated captions on your own edit</p>
-<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and one-click restyling of placed captions. Native captions remain useful when you need subtitles or a separate caption file.</p>
-<p><strong>Windows 10/11, 64-bit · Premiere Pro 25.6+</strong>. Transcription runs locally on your CPU. Free, with no time limit and no watermark. See <a href="https://captionsgen.com/#performance">requirements, model choices and performance</a>.</p>
+<p>{escape(PRODUCT['description'])}</p>
+<p>{escape(PRODUCT['pricing'])}</p>
+<p>Current release: <a href="{escape(PRODUCT['release_url'], quote=True)}">{escape(PRODUCT['version'])}</a>. Check <a href="https://captionsgen.com/product.html">supported Adobe versions, installation requirements and limitations</a>. Keep a native caption track when you need SRT, selectable subtitles or broadcast closed captions.</p>
 <a class="btn" href="__FREE__">Download free</a>
 <a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
 </div>
@@ -250,12 +252,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from bodies import POSTS
 from bodies2 import P
 from bodies3 import P3
-from product import PRODUCT
 from genproduct import generate as generate_product
 REL0 = {
-  "how-to-add-captions-in-premiere-pro": ["auto-captions-premiere-pro","premiere-pro-captions-not-showing","burn-in-captions-premiere-pro"],
+  "how-to-add-captions-in-premiere-pro": ["auto-captions-premiere-pro","premiere-pro-captions-not-showing","burn-in-captions-premiere-pro","free-caption-plugin-premiere-pro"],
   "auto-captions-premiere-pro": ["how-to-add-captions-in-premiere-pro","premiere-pro-captions-not-showing","animated-captions-premiere-pro"],
-  "animated-captions-premiere-pro": ["word-by-word-captions-premiere-pro","highlight-words-in-captions-premiere-pro","best-caption-plugin-premiere-pro"],
+  "animated-captions-premiere-pro": ["word-by-word-captions-premiere-pro","highlight-words-in-captions-premiere-pro","best-caption-plugin-premiere-pro","free-caption-plugin-premiere-pro"],
   "premiere-pro-captions-not-showing": ["how-to-add-captions-in-premiere-pro","premiere-pro-captions-not-exporting","premiere-pro-speech-to-text-not-working"],
 }
 for k, v in REL0.items(): POSTS[k]["rel"] = v
@@ -298,6 +299,7 @@ idx = f"""<!doctype html>
 <li><a href="auto-captions-premiere-pro.html">Generate auto captions with Speech to Text</a></li>
 <li><a href="premiere-pro-captions-not-showing.html">Fix captions missing from the preview or export</a></li>
 <li><a href="animated-captions-premiere-pro.html">Choose an animated or word-by-word workflow</a></li>
+<li><a href="free-caption-plugin-premiere-pro.html">Check the free plugin, compatibility and setup</a></li>
 </ul></div>{cards}</div></article>
 <footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/product.html">Product facts &amp; compatibility</a> · <a href="{SITE}/#faq">FAQ</a> · <a href="{SITE}/news/">News</a> · {PRIVACY_FOOTER}</div></footer>
 </body></html>

@@ -15,7 +15,7 @@
 <meta property="og:type" content="article">
 
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Fix caption timing in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-07", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/fix-caption-timing-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Fix caption timing in Premiere Pro", "item": "https://captionsgen.com/blog/fix-caption-timing-premiere-pro.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Fix caption timing in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/fix-caption-timing-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Fix caption timing in Premiere Pro", "item": "https://captionsgen.com/blog/fix-caption-timing-premiere-pro.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -165,31 +165,35 @@
 
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Fix caption timing in Premiere Pro</p>
 <h1>Fix caption timing in Premiere Pro</h1>
-<div class="meta">Updated <time datetime="2026-11-07">7 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 
 <p>Captions in Premiere Pro are clips on a caption track, so you fix timing the way you fix any clip: drag edges to retime, drag the whole thing to shift, and use the razor to split. For a constant offset, select all and move them together.</p>
-<p class="cta-line">Premiere times captions per line, not per word. <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin that times every word to the speech and places animated, word-by-word captions on the timeline. It transcribes on your computer and places editable Motion Graphics captions on the timeline. Free for Windows, with no time limit or watermark.</p>
+<p class="cta-line">Premiere can time native lines or Single Word captions in supported versions. For a moving highlight, <a href="https://captionsgen.com/">Captions Gen</a> transcribes locally on your CPU and generates timed, editable Motion Graphics clips. Review their word timing against the audio. The current Windows release is free, without a transcription time cap or watermark; Adobe Premiere Pro is separate.</p>
 
 <h2>Everything is off by the same amount</h2>
 <p>Click the first caption, shift-click the last, and drag. Hold the playhead on a word you can hear and line the caption up to it. Imported .srt files cause this most often.</p>
 
 <h2>Captions drift over time</h2>
-<p>A drift that grows means the captions were made for a different cut. If you trimmed the video after transcribing, the captions after the cut are all late by the length you removed. Re-transcribe after locking the edit, or select everything after the cut and shift it.</p>
+<p>Growing drift can come from a different cut, a speed change or a timecode conversion. A trim made without corresponding caption edits can also leave later captions out of sync. Compare several points against the audio before deciding whether to shift a section, retime the captions or recreate them after the edit is locked.</p>
 
 <h2>Two captions overlap</h2>
 <p>Trim the first caption's out point to the second's in point. Overlapping captions flicker or fail to render in some players.</p>
 
 <h2>A caption is too long or too short</h2>
-<p>Split it with the razor at the natural pause, or select two and choose Merge Captions from the right-click menu. Aim for captions of one to three seconds.</p>
+<p>Split at a natural pause, or merge adjacent captions when they read better as one phrase. For phrase captions, one to three seconds can be a starting range; adjust to the amount of text and speech. Single Word captions need their own word timing.</p>
 
 <h2>Word-level timing</h2>
 <p>Native single-word captions can have word timing. For moving highlights across a multi-word line, use a graphics workflow with the timing data needed for that effect.</p>
 
+<h2>After editing animated caption text</h2>
+<p>Captions Gen graphics use word timing for their highlights and animation. After editing the caption words, select the relevant graphics and use <strong>Update animation</strong> when the panel offers it, then review the result against the original audio. <strong>Apply style</strong> changes the look; it is not a replacement for correcting edited words. The <a href="/news/captions-gen-1-1-9.html">current Windows release</a> supports Premiere and After Effects with a shared engine. Native subtitle tracks and After Effects caption layers are different editing surfaces.</p>
+
 
 <div class="box">
 <p class="t">Try animated captions on your own edit</p>
-<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and one-click restyling of placed captions. Native captions remain useful when you need subtitles or a separate caption file.</p>
-<p><strong>Windows 10/11, 64-bit · Premiere Pro 25.6+</strong>. Transcription runs locally on your CPU. Free, with no time limit and no watermark. See <a href="https://captionsgen.com/#performance">requirements, model choices and performance</a>.</p>
+<p>Captions Gen is a currently free animated captions plugin for Adobe Premiere Pro and After Effects on Windows. It transcribes audio locally on the CPU with Faster Whisper, then places editable Motion Graphics clips in Premiere or native caption layers in After Effects.</p>
+<p>Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications.</p>
+<p>Current release: <a href="https://captionsgen.com/news/captions-gen-1-1-9.html">1.1.9</a>. Check <a href="https://captionsgen.com/product.html">supported Adobe versions, installation requirements and limitations</a>. Keep a native caption track when you need SRT, selectable subtitles or broadcast closed captions.</p>
 <a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download free</a>
 <a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
 </div>

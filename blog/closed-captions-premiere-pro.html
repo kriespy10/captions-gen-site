@@ -15,7 +15,7 @@
 <meta property="og:type" content="article">
 
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Closed captions in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-07", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/closed-captions-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Closed captions in Premiere Pro", "item": "https://captionsgen.com/blog/closed-captions-premiere-pro.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Closed captions in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/closed-captions-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Closed captions in Premiere Pro", "item": "https://captionsgen.com/blog/closed-captions-premiere-pro.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -165,12 +165,12 @@
 
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Closed captions in Premiere Pro</p>
 <h1>Closed captions in Premiere Pro</h1>
-<div class="meta">Updated <time datetime="2026-11-07">7 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 
 <p>Closed captions in Premiere Pro are created the same way as subtitles, with the format set to CEA-608 or CEA-708 in the Create captions dialog. The difference is what happens after: styling is limited to what the standard allows, and export embeds the captions as data or writes a sidecar file.</p>
 
 <h2>608 or 708?</h2>
-<p>CEA-608 is the older standard with basic styling and channel limits. CEA-708 is the modern digital standard with more styling options and multiple services. If your delivery spec doesn't say, 708 is the safer default; many deliverables ask for both.</p>
+<p>CEA-608 is the older standard with basic styling and channel limits. CEA-708 is the modern digital standard with more styling options and multiple services. Use the format, channel/service and container specified by the recipient. Ask for a delivery specification when it is missing rather than choosing a standard by default.</p>
 
 <h2>Creating them</h2>
 <p>Transcribe the sequence, click Create captions, choose the closed caption format, and set the line length the spec requires (32 characters is the common 608 limit). Premiere enforces the standard's rules as you edit, so a line that is too long gets flagged.</p>
@@ -179,7 +179,7 @@
 <p>You can set position, a small set of colors, and background boxes. You cannot use custom fonts. That's by design; the viewer's device renders the captions with its own font.</p>
 
 <h2>Exporting</h2>
-<p>In the export dialog's Captions tab, choose Create Sidecar File (.scc for 608, .mcc or .xml for 708 depending on the spec) or embed the captions in the video stream where the format allows it. Burn-in is available too, but it defeats the point of closed captions.</p>
+<p>In the export dialog's Captions tab, choose Create Sidecar File (.scc for 608, .mcc or .xml for 708 depending on the spec) or embed the captions in the video stream where the format allows it. Burn-in is available when a visible-text copy is requested, but it does not replace a required selectable caption stream or sidecar.</p>
 
 <h2>Checking your output</h2>
 <p>Test the exported file in a player that supports its caption format. Load a sidecar file when required and enable embedded captions in the player. Check the result against the client's delivery specification.</p>
@@ -187,8 +187,9 @@
 
 <div class="box">
 <p class="t">Try animated captions on your own edit</p>
-<p><a href="https://captionsgen.com/#styles">Captions Gen</a> creates word-synced animated graphics inside Premiere Pro, with local Whisper transcription, karaoke highlights, animation presets, and one-click restyling of placed captions. Native captions remain useful when you need subtitles or a separate caption file.</p>
-<p><strong>Windows 10/11, 64-bit · Premiere Pro 25.6+</strong>. Transcription runs locally on your CPU. Free, with no time limit and no watermark. See <a href="https://captionsgen.com/#performance">requirements, model choices and performance</a>.</p>
+<p>Captions Gen is a currently free animated captions plugin for Adobe Premiere Pro and After Effects on Windows. It transcribes audio locally on the CPU with Faster Whisper, then places editable Motion Graphics clips in Premiere or native caption layers in After Effects.</p>
+<p>Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications.</p>
+<p>Current release: <a href="https://captionsgen.com/news/captions-gen-1-1-9.html">1.1.9</a>. Check <a href="https://captionsgen.com/product.html">supported Adobe versions, installation requirements and limitations</a>. Keep a native caption track when you need SRT, selectable subtitles or broadcast closed captions.</p>
 <a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download free</a>
 <a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
 </div>
