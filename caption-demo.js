@@ -1,6 +1,10 @@
-import { DEFAULTS, PRESETS, GROUPING_DEFAULTS, FIRST_PRESET, WORDS, WORD_TIMES, LOOP, frameAt, hexAlpha, pillTextColor, previewLetterSpacing } from './caption-engine.mjs?v=shared-styles-20261108';
-import { PRESET_META } from './caption-presets.mjs?v=shared-styles-20261108';
-import { groupWords } from './caption-grouping.mjs?v=shared-styles-20261108';
+import { DEFAULTS, PRESETS, GROUPING_DEFAULTS, FIRST_PRESET, PANEL_VERSION, WORDS, WORD_TIMES, LOOP, frameAt, phraseFrameAt, hexAlpha, previewLetterSpacing } from './caption-engine.mjs?v=demo-1.1.9-20261108';
+import { PRESET_META } from './caption-presets.mjs?v=demo-1.1.9-20261108';
+import { groupWords, autoCharsPerLine } from './caption-grouping.mjs?v=demo-1.1.9-20261108';
+import { decodePreset, encodePreset } from './caption-preset-format.mjs?v=demo-1.1.9-20261108';
+import { initSampleWorkflow } from './caption-workflow.mjs?v=demo-1.1.9-20261108';
+
+const PREVIEW_WORDS = WORDS.map((text, i) => ({ id: `preview-${i}`, text, start: WORD_TIMES[i], end: WORD_TIMES[i] + .55 }));
 
 const GROUP_KEYS = {
   text: ['font', 'gFontSize', 'gPosY', 'gTracking', 'textColor'],
@@ -22,7 +26,7 @@ function settingLabel(key, value) {
   if (key === 'gHlPop') return n === 0 ? 'Off' : `${n}%`;
   if (key === 'gTracking') return `${n}px`;
   if (key === 'gMaxChars') return n ? String(n) : 'No limit';
-  if (key === 'gMaxDur') return n ? `${n.toFixed(1)}s` : 'No limit';
+  if (key === 'gMaxDur') return +value ? `${(+value).toFixed(1)}s` : 'No limit';
   if (key === 'gShadowDir') return `${n}°`;
   if (['gStroke', 'gShadowDist', 'gShadowBlur'].includes(key)) return key === 'gStroke' && n === 0 ? 'None' : `${n}px`;
   if (['gShadow', 'gBoxOpacity'].includes(key)) return n === 0 ? 'None' : `${n}%`;
@@ -37,35 +41,40 @@ const FONTS = { impact: 'Impact, Anton, sans-serif', 'montserrat-black': 'Montse
   sans: 'Arial, sans-serif', serif: 'Georgia, serif', mono: '"Courier New", monospace' };
 // The free fonts the plugin installs come in one weight each.
 const WEIGHTS = { 'montserrat-black': '900', 'montserrat-xbold': '800', 'montserrat-bold': '700', 'montserrat-medium': '500', inter: '600' };
-const fontWeight = font => WEIGHTS[font] || (['impact', 'anton', 'bangers', 'luckiest', 'dmserif'].includes(font) ? '400' : '700');
+const fontWeight = font => WEIGHTS[font] || '400';
 const BASE = { ...DEFAULTS, ...GROUPING_DEFAULTS, textColor: '#FFFFFF', hlColor: '#FFEB3B', strokeColor: '#000000', shadowColor: '#000000', boxColor: '#000000', font: 'impact', gBoxBounce: false };
 
-function fillCaption(caption) {
-  caption.replaceChildren(...WORDS.flatMap(text => {
+function fillCaption(caption, words = PREVIEW_WORDS) {
+  caption.replaceChildren(...words.flatMap((item, index) => {
     const br = document.createElement('br'); br.hidden = true;
-    const word = document.createElement('span'); word.className = 'demo-word'; word.textContent = text; return [br, word];
+    const word = document.createElement('span'); word.className = 'demo-word'; word.textContent = item.text; word.dataset.wordId = item.id ?? String(index); return [br, word];
   }));
 }
-function paintCaption(caption, s, seconds) {
-  const wordFrame = frameAt(s, seconds), stage = caption.closest('.demo-stage');
-  const groupingKey = JSON.stringify([s.textCase, s.gStripPunct, s.gMinWords, s.gMaxWords, s.gMaxChars, s.gMaxDur, s.gMaxLines, s.karaoke]);
+function paintCaption(caption, s, seconds, words = PREVIEW_WORDS, settled = false) {
+  const wordsKey = JSON.stringify(words);
+  if (caption.wordsKey !== wordsKey) { fillCaption(caption, words); caption.wordsKey = wordsKey; }
+  if (!words.length) return;
+  const stage = caption.closest('.demo-stage');
+  const groupingKey = JSON.stringify([wordsKey, s.textCase, s.gStripPunct, s.gMinWords, s.gMaxWords, s.gMaxChars, s.gMaxDur, s.gMaxLines, s.karaoke, s.gFontSize, s.gTracking]);
   if (caption.groupingKey !== groupingKey) {
     caption.groupingKey = groupingKey;
-    caption.phrases = groupWords(WORDS.map((text, i) => ({ text, start: WORD_TIMES[i], end: WORD_TIMES[i] + .55 })), {
-      layout: { maxCharsPerLine: 26, maxLines: s.gMaxLines, maxWordsPerPhrase: Math.min(s.gMaxWords, s.karaoke ? 8 : 36), minWordsPerPhrase: s.gMinWords, maxCharsPerPhrase: s.gMaxChars, maxDurationSec: s.gMaxDur, maxGapSec: .5, stripPunctuation: s.gStripPunct, textCase: s.textCase },
-      timing: { holdSec: .2, minPhraseSec: .3 },
+    caption.phrases = groupWords(words, {
+      layout: { maxCharsPerLine: autoCharsPerLine(1080, 1920, s.gFontSize / 10, s.gTracking) || 16, maxLines: s.gMaxLines, maxWordsPerPhrase: Math.min(s.gMaxWords, s.karaoke ? 8 : 36), minWordsPerPhrase: s.gMinWords, maxCharsPerPhrase: s.gMaxChars, maxDurationSec: s.gMaxDur, maxGapSec: .8, stripPunctuation: s.gStripPunct, textCase: s.textCase },
+      timing: { holdSec: .12, minPhraseSec: .9 },
     });
   }
-  const phrase = caption.phrases.findLast(p => p.start <= seconds) || caption.phrases[0];
-  const frame = frameAt(s, Math.max(0, seconds - phrase.start + .1));
+  const phrase = settled ? caption.phrases[0] : caption.phrases.findLast(p => p.start <= seconds) || caption.phrases[0];
   const nextPhrase = caption.phrases[caption.phrases.indexOf(phrase) + 1], phraseEnd = nextPhrase?.start ?? LOOP;
-  if (+s.gAnimOut && seconds > phraseEnd - s.gOutDur / 10) {
-    const exit = frameAt({ ...s, gAnimStyle:'0' }, LOOP - phraseEnd + seconds);
-    frame.opacity *= exit.opacity; frame.scale *= exit.scale; frame.y += exit.y; frame.blur += exit.blur;
-  }
-  const visibleWords = new Map(phrase.words.map((word, i) => [WORD_TIMES.indexOf(word.start), { ...word, lineStart: i > 0 && phrase.lines.some(line => line[0] === i) }]));
+  const duration = Math.max(.01, phraseEnd - phrase.start);
+  const displaySeconds = settled ? phrase.start + Math.min(duration / 2, Math.max(.1, s.gAnimDur / 10)) : seconds;
+  const wordFrame = frameAt(s, displaySeconds, words);
+  const frame = phraseFrameAt(s, Math.max(0, displaySeconds - phrase.start), phrase.words.map(word => ({ ...word, start: word.start - phrase.start, end: word.end - phrase.start })), duration);
+  const visibleWords = new Map(phrase.words.map((word, i) => [String(word.id), { ...word, lineStart: i > 0 && phrase.lines.some(line => line[0] === i) }]));
   const scale = stage.clientWidth / 640 || 1;
   caption.style.fontFamily = FONTS[s.font]; caption.style.fontWeight = fontWeight(s.font);
+  const imported = s.importedFont?.previewFont === s.font && !s.fontNotice ? s.importedFont : null;
+  if (imported && Number.isFinite(imported.fontWeight)) caption.style.fontWeight = String(imported.fontWeight);
+  caption.style.fontStyle = imported && (imported.fontItalic ?? /italic|oblique/i.test(imported.fontPS || '')) ? 'italic' : 'normal';
   caption.style.fontSize = `${46 * s.gFontSize / 52}px`; caption.style.color = s.textColor;
   caption.style.webkitTextStroke = `${s.gStroke * 0.36}px ${s.strokeColor}`;
   const angle = (s.gShadowDir - 45) * Math.PI / 180, distance = s.gShadowDist * 0.6;
@@ -73,16 +82,17 @@ function paintCaption(caption, s, seconds) {
   const background = hexAlpha(s.boxColor, s.gBoxOpacity);
   caption.style.backgroundColor = s.gBoxBounce ? 'transparent' : background;
   caption.style.setProperty('--demo-bounce-bg', background); caption.classList.toggle('has-box-bounce', s.gBoxBounce);
-  caption.style.setProperty('--demo-box-scale', wordFrame.words[wordFrame.active].scale);
+  caption.style.setProperty('--demo-box-scale', wordFrame.words[wordFrame.active]?.scale ?? 1);
   caption.style.padding = s.gBoxOpacity > 0 ? '12px 24px' : '0';
   caption.style.opacity = String(frame.opacity); caption.style.filter = `blur(${frame.blur * 2}px)`;
   caption.style.clipPath = frame.clip > 0 ? `inset(0 ${frame.clip}% 0 0)` : 'none';
   caption.style.letterSpacing = `${previewLetterSpacing(s, frame)}px`;
   [...caption.querySelectorAll('.demo-word')].forEach((node, i) => {
-    node.hidden = !visibleWords.has(i); node.previousElementSibling.hidden = !visibleWords.get(i)?.lineStart;
+    const id = String(words[i].id);
+    node.hidden = !visibleWords.has(id); node.previousElementSibling.hidden = !visibleWords.get(id)?.lineStart;
     const active = s.karaoke && wordFrame.active === i, pill = active && s.hlMode === 'pill';
-    node.textContent = visibleWords.get(i)?.text || WORDS[i];
-    node.style.color = active ? pill ? pillTextColor(s.hlColor, s.textColor) : s.hlColor : s.textColor;
+    node.textContent = visibleWords.get(id)?.text || words[i].text;
+    node.style.color = active && !pill ? s.hlColor : s.textColor;
     node.style.backgroundColor = pill ? s.hlColor : 'transparent';
     node.style.padding = pill ? '6px 16px' : '0'; node.style.fontSize = `${active ? 1 + s.gHlScale / 100 : 1}em`;
     node.style.borderRadius = s.gPillRadius >= 56 ? '999px' : `${s.gPillRadius * 0.5}px`;
@@ -112,8 +122,10 @@ function initDemo(root) {
   const base = BASE;
   let settings = { ...base }, baseline = { ...base }, activePreset = FIRST_PRESET;
   let view = 'presets', filter = 'All', mainPreset = '', renameFrom = '', saveSettings = null;
-  let playing = false, inView = false, time = 1, raf = 0, previous = null;
-  root.querySelector('.demo-version').textContent = 'Style preview';
+  let playing = false, inView = false, time = 1, raf = 0, previous = null, workflow;
+  root.querySelector('.demo-version').textContent = `${PANEL_VERSION} demo`;
+  const fontNotice = document.createElement('p'); fontNotice.className = 'demo-hint'; fontNotice.hidden = true;
+  form.querySelector('#demo-font').parentElement.append(fontNotice);
   fillCaption(caption);
   function normalize(raw) {
     const result = { ...base };
@@ -121,10 +133,18 @@ function initDemo(root) {
       const value = key === 'textCase' ? raw?.gCase ?? raw?.textCase : raw?.[key];
       const control = form.querySelector(`[data-setting="${key}"]`);
       if (typeof base[key] === 'boolean' && typeof value === 'boolean') result[key] = value;
-      else if (typeof base[key] === 'number' && Number.isFinite(value)) result[key] = control ? Math.max(+control.min, Math.min(+control.max, Math.round(value))) : value;
+      else if (typeof base[key] === 'number' && Number.isFinite(value)) result[key] = control ? Math.max(+control.min, Math.min(+control.max, key === 'gMaxDur' ? value : Math.round(value))) : value;
       else if (/Color$/.test(key) && /^#[0-9a-f]{6}$/i.test(value)) result[key] = value;
       else if (control?.tagName === 'SELECT' && [...control.options].some(option => option.value === value)) result[key] = value;
     }
+    if (raw?.importedFont && typeof raw.importedFont === 'object' && raw.importedFont.previewFont === result.font) {
+      const imported = { previewFont: result.font };
+      ['fontPS', 'fontFamily', 'fontFam'].forEach(key => { if (typeof raw.importedFont[key] === 'string') imported[key] = raw.importedFont[key].slice(0, 80); });
+      if (Number.isFinite(raw.importedFont.fontWeight)) imported.fontWeight = raw.importedFont.fontWeight;
+      if (typeof raw.importedFont.fontItalic === 'boolean') imported.fontItalic = raw.importedFont.fontItalic;
+      result.importedFont = imported;
+    }
+    if (typeof raw?.fontNotice === 'string') result.fontNotice = raw.fontNotice.slice(0, 300);
     return result;
   }
   try {
@@ -144,9 +164,15 @@ function initDemo(root) {
   }
   function stateFor(name) {
     const preset = PRESETS[name] || {};
-    return saved.has(name) ? { ...saved.get(name) } : { ...base, ...preset, font: preset.font || settings.font };
+    if (saved.has(name)) return { ...saved.get(name) };
+    const next = { ...base, ...preset, font: preset.font || settings.font };
+    if (!preset.font && settings.importedFont?.previewFont === next.font) {
+      next.importedFont = { ...settings.importedFont };
+      if (settings.fontNotice) next.fontNotice = settings.fontNotice;
+    }
+    return next;
   }
-  function edited() { return Object.keys(base).some(key => settings[key] !== baseline[key]); }
+  function edited() { return Object.keys(base).some(key => settings[key] !== baseline[key]) || JSON.stringify(settings.importedFont) !== JSON.stringify(baseline.importedFont); }
   function playLabel() {
     toggle.textContent = playing ? 'Ⅱ' : '▶';
     toggle.setAttribute('aria-label', playing ? 'Pause caption preview' : 'Play caption preview');
@@ -165,12 +191,13 @@ function initDemo(root) {
     form.querySelector('[data-design-star]').hidden = activePreset !== mainPreset;
     form.querySelector('#demo-font').style.fontFamily = FONTS[settings.font];
     form.querySelector('#demo-font').style.fontWeight = fontWeight(settings.font);
+    fontNotice.hidden = !settings.fontNotice; fontNotice.textContent = settings.fontNotice || '';
     form.querySelectorAll('[data-color-name]').forEach(label => { label.textContent = settings[label.dataset.colorName].toUpperCase(); });
     form.querySelectorAll('[data-text-case]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.textCase === settings.textCase)));
     form.querySelector('[data-line-value]').textContent = settings.gMaxLines;
     const min = Math.min(settings.gMinWords, settings.gMaxWords), max = Math.min(settings.gMaxWords, settings.karaoke ? 8 : 36);
     form.querySelector('[data-grouping-summary]').textContent = `${{none:'As spoken',upper:'ABC',lower:'abc',sentence:'Abc'}[settings.textCase]} · ${Math.min(min, max) < max ? `${Math.min(min, max)}–` : ''}${max} word${max === 1 ? '' : 's'} · ${settings.gMaxLines} line${settings.gMaxLines === 1 ? '' : 's'}`;
-    updateGroups(); playLabel();
+    updateGroups(); playLabel(); workflow?.refresh();
   }
   function updateGroups() {
     const value = key => settingLabel(key, settings[key]);
@@ -197,7 +224,16 @@ function initDemo(root) {
     form.querySelector('#demo-gPopLabel').textContent = IN_STRENGTH[anim] || 'Strength';
     form.querySelector('#demo-gOutPopLabel').textContent = OUT_STRENGTH[out] || 'Strength';
   }
-  function draw() { if (view !== 'settings') paintCaption(caption, settings, time); }
+  function draw() {
+    if (view === 'settings') return;
+    const sample = workflow?.preview(view);
+    const previewSettings = sample?.settings || settings;
+    const previewWords = sample?.pending ? [{ id:'pending-text', text:sample.text, start:0, end:LOOP }] : sample?.words || PREVIEW_WORDS;
+    paintCaption(caption, sample?.pending ? { ...previewSettings, karaoke:false, gAnimStyle:'0', gAnimOut:'0', gBoxBounce:false, textCase:'none', gStripPunct:false } : previewSettings, sample?.pending ? 1 : time, previewWords, !playing && time === 1);
+    toggle.disabled = !!sample?.pending;
+    root.querySelector('.demo-live').textContent = sample ? sample.pending ? 'Update animation' : 'Sample caption' : 'Design preview';
+    root.querySelector('.demo-look-card .demo-stage').setAttribute('aria-label', `Animated caption preview: ${sample?.text || WORDS.join(' ')}`);
+  }
   function tick(now) {
     raf = 0;
     time += previous === null ? 0 : Math.min((now - previous) / 1000, .1); previous = now;
@@ -210,6 +246,7 @@ function initDemo(root) {
   }
   function replay() { time = 0; playing = true; previous = null; playLabel(); draw(); schedule(); }
   function setView(next, focus = false) {
+    if (next === 'captions' && workflow?.host !== 'after-effects') next = 'presets';
     view = next; previous = null;
     tabs.forEach(tab => {
       const active = tab.dataset.view === next;
@@ -220,10 +257,11 @@ function initDemo(root) {
     root.querySelector('[data-demo-look]').hidden = next === 'settings';
     root.querySelector('[data-customize-link]').hidden = next !== 'presets';
     if (next === 'presets') renderGallery();
-    draw(); schedule();
+    workflow?.refresh(); draw(); schedule();
   }
   function load(name, animate = false) {
     settings = stateFor(name); baseline = { ...settings }; activePreset = name;
+    workflow?.designChanged();
     time = 1; playing = false; controls(); draw();
     if (view === 'presets') renderGallery();
     if (animate && !reducedMotion.matches) replay();
@@ -260,14 +298,12 @@ function initDemo(root) {
     if (saved.has(name)) {
       action('Rename…', () => openSave(saved.get(name), name));
       action('Export…', () => {
-        const value = { ...saved.get(name), v:4, gCase: saved.get(name).textCase }; delete value.textCase;
-        value.fontPS = { impact:'Impact', 'montserrat-black':'Montserrat-Black', 'montserrat-xbold':'Montserrat-ExtraBold', 'montserrat-bold':'Montserrat-Bold', 'montserrat-medium':'Montserrat-Medium', anton:'Anton-Regular', bangers:'Bangers-Regular', luckiest:'LuckiestGuy-Regular', inter:'Inter-SemiBold', dmserif:'DMSerifDisplay-Regular', sans:'ArialMT', serif:'Georgia', mono:'CourierNewPSMT' }[value.font]; delete value.font;
-        const font = saved.get(name).font;
-        value.fontFamily = form.querySelector(`#demo-font option[value="${font}"]`).textContent;
-        value.fontFam = FONTS[font].split(',')[0].replace(/"/g, ''); value.fontWeight = +fontWeight(font); value.fontItalic = false;
-        const url = URL.createObjectURL(new Blob([JSON.stringify({ type:'preset', format:1, app:'Captions Gen', name, settings:value }, null, 2)], { type:'application/json' }));
-        const link = document.createElement('a'); link.href = url; link.download = `${name.replace(/[^a-z0-9 _-]/gi, '_')}.cgpreset`; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
-        status.textContent = `${name} exported. Import the file in Captions Gen.`;
+        try {
+          const value = encodePreset(name, saved.get(name));
+          const url = URL.createObjectURL(new Blob([JSON.stringify(value, null, 2)], { type:'application/json' }));
+          const link = document.createElement('a'); link.href = url; link.download = `${name.replace(/[^a-z0-9 _-]/gi, '_')}.cgpreset`; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+          status.textContent = `${name} exported. Import the file in Captions Gen.`;
+        } catch (error) { status.textContent = error.message; }
       });
       action('Delete…', () => {
         const old = saved.get(name); saved.delete(name);
@@ -296,19 +332,20 @@ function initDemo(root) {
       const more = document.createElement('button'); more.type = 'button'; more.className = 'demo-tile-more'; more.textContent = '⋯'; more.setAttribute('aria-label', `${name} preset actions`); more.addEventListener('click', () => tileMenu(name)); tile.append(more);
       if (name === mainPreset) { const star = document.createElement('span'); star.className = 'demo-tile-star'; star.textContent = '★'; star.setAttribute('aria-label', 'Main preset'); tile.append(star); }
       (saved.has(name) ? userGrid : grid).append(tile);
-      const cap = preview.querySelector('.demo-caption'); fillCaption(cap); tileCaptions.set(name, cap); paintCaption(cap, stateFor(name), 1);
+      const cap = preview.querySelector('.demo-caption'); fillCaption(cap); tileCaptions.set(name, cap); paintCaption(cap, stateFor(name), 1, PREVIEW_WORDS, true);
     }
   }
   for (const name of ['All', 'Trend', 'Clean', 'Motion']) {
     const button = document.createElement('button'); button.type = 'button'; button.dataset.presetFilter = name; button.textContent = name;
     button.addEventListener('click', () => { filter = name; renderGallery(); }); root.querySelector('.demo-categories').append(button);
   }
-  tabs.forEach((tab, i) => {
+  tabs.forEach(tab => {
     tab.addEventListener('click', () => setView(tab.dataset.view));
     tab.addEventListener('keydown', event => {
       if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
-        event.preventDefault(); const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (i + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
-        setView(tabs[next].dataset.view, true);
+        const visible = tabs.filter(item => !item.hidden), i = visible.indexOf(tab);
+        event.preventDefault(); const next = event.key === 'Home' ? 0 : event.key === 'End' ? visible.length - 1 : (i + (event.key === 'ArrowRight' ? 1 : -1) + visible.length) % visible.length;
+        setView(visible[next].dataset.view, true);
       }
     });
   });
@@ -317,6 +354,8 @@ function initDemo(root) {
   form.addEventListener('input', event => {
     const control = event.target; if (!control.matches('[data-setting]')) return;
     settings[control.dataset.setting] = control.type === 'checkbox' ? control.checked : control.type === 'range' ? +control.value : control.value;
+    if (control.dataset.setting === 'font') { delete settings.importedFont; delete settings.fontNotice; }
+    workflow?.designChanged();
     controls(); draw(); status.textContent = `${activePreset} · edited. Preview updated.`;
     if (GROUP_KEYS.animation.includes(control.dataset.setting) && !reducedMotion.matches) replay();
   });
@@ -329,9 +368,13 @@ function initDemo(root) {
     const button = group.querySelector('.dg-head'), body = group.querySelector('.dg-body');
     group.classList.toggle('is-open', button.getAttribute('aria-expanded') === 'true');
     button.addEventListener('click', () => { const open = button.getAttribute('aria-expanded') !== 'true'; button.setAttribute('aria-expanded', String(open)); body.hidden = !open; group.classList.toggle('is-open', open); });
-    group.querySelector('[data-reset-group]').addEventListener('click', () => { GROUP_KEYS[group.dataset.group].forEach(key => { settings[key] = baseline[key]; }); controls(); draw(); status.textContent = `${group.querySelector('.dg-title').textContent} settings reset.`; });
+    group.querySelector('[data-reset-group]').addEventListener('click', () => {
+      GROUP_KEYS[group.dataset.group].forEach(key => { settings[key] = baseline[key]; });
+      if (group.dataset.group === 'text') { delete settings.importedFont; delete settings.fontNotice; if (baseline.importedFont) settings.importedFont = structuredClone(baseline.importedFont); if (baseline.fontNotice) settings.fontNotice = baseline.fontNotice; }
+      workflow?.designChanged(); controls(); draw(); status.textContent = `${group.querySelector('.dg-title').textContent} settings reset.`;
+    });
   });
-  root.querySelector('[data-demo-reset]').addEventListener('click', () => { settings = { ...base }; load(mainPreset || FIRST_PRESET); setView('presets'); });
+  root.querySelector('[data-demo-reset]').addEventListener('click', () => { workflow?.reset(); settings = { ...base }; load(mainPreset || FIRST_PRESET); setView('presets'); status.textContent = 'Sample projects reset. Your saved presets are kept.'; });
   toggle.addEventListener('click', () => { if (playing) { playing = false; playLabel(); schedule(); } else replay(); });
   const presetActionButton = root.querySelector('[data-preset-actions]');
   presetActionButton.addEventListener('click', () => {
@@ -344,7 +387,7 @@ function initDemo(root) {
   actions.addEventListener('close', () => presetActionButton.setAttribute('aria-expanded', 'false'));
   actions.querySelector('[data-actions-close]').addEventListener('click', () => actions.close());
   actions.querySelector('[data-preset-update]').addEventListener('click', () => { if (saved.has(activePreset) && savePreset(activePreset, settings)) { baseline = { ...settings }; controls(); if (view === 'presets') renderGallery(); status.textContent = `${activePreset} updated in this browser.`; } actions.close(); });
-  actions.querySelector('[data-preset-revert]').addEventListener('click', () => { settings = { ...baseline }; controls(); draw(); actions.close(); status.textContent = 'Preset changes reverted.'; });
+  actions.querySelector('[data-preset-revert]').addEventListener('click', () => { settings = { ...baseline }; workflow?.designChanged(); controls(); draw(); actions.close(); status.textContent = 'Preset changes reverted.'; });
   root.querySelectorAll('[data-demo-save]').forEach(button => button.addEventListener('click', () => openSave()));
   root.querySelector('[data-save-close]').addEventListener('click', () => dialog.close());
   dialog.querySelector('form').addEventListener('submit', event => {
@@ -364,20 +407,22 @@ function initDemo(root) {
     try {
       if (file.size > 100000) throw new Error('Choose a preset file smaller than 100 KB.');
       const value = JSON.parse(await file.text());
-      if (value?.type !== 'preset' || value.app !== 'Captions Gen' || !value.settings || typeof value.settings !== 'object' || Array.isArray(value.settings)) throw new Error('Choose a Captions Gen .cgpreset file.');
-      if (value.settings.v !== 4) throw new Error('Import this older preset into the current Captions Gen panel and export it again before using it here.');
-      const fontPS = String(value.settings.fontPS || '').toLowerCase();
-      const fonts = { 'montserrat-black':'montserrat-black', 'montserrat-extrabold':'montserrat-xbold', 'montserrat-bold':'montserrat-bold', 'montserrat-medium':'montserrat-medium', 'anton-regular':'anton', 'bangers-regular':'bangers', 'luckiestguy-regular':'luckiest', 'inter-semibold':'inter', 'dmserifdisplay-regular':'dmserif' };
-      const imported = normalize({ ...value.settings, font: fonts[fontPS] || value.settings.font || 'impact' });
-      const name = uniqueName(value.name || file.name.replace(/\.[^.]+$/, ''));
-      if (savePreset(name, imported)) { load(name); status.textContent = `${name} imported into this browser.`; }
+      const decoded = decodePreset(value), imported = normalize({ ...decoded.settings, fontNotice: decoded.notice });
+      const name = uniqueName(decoded.name || file.name.replace(/\.[^.]+$/, ''));
+      if (savePreset(name, imported)) { load(name); status.textContent = `${name} imported into this browser.${decoded.notice ? ` ${decoded.notice}` : ''}`; }
     } catch (e) { status.textContent = e.message || 'The preset could not be imported.'; }
     fileInput.value = '';
   });
-  new ResizeObserver(() => { draw(); if (view === 'presets') tileCaptions.forEach((cap, name) => paintCaption(cap, stateFor(name), 1)); }).observe(root);
+  new ResizeObserver(() => { draw(); if (view === 'presets') tileCaptions.forEach((cap, name) => paintCaption(cap, stateFor(name), 1, PREVIEW_WORDS, true)); }).observe(root);
   new IntersectionObserver(entries => { inView = entries[0].isIntersecting; schedule(); }, { threshold: .05 }).observe(root);
   document.addEventListener('visibilitychange', schedule);
   reducedMotion.addEventListener('change', event => { if (event.matches) { playing = false; time = 1; draw(); playLabel(); schedule(); } });
+  workflow = initSampleWorkflow(root, {
+    getSettings: () => settings, getPresetName: () => activePreset, getView: () => view, setView,
+    onHostChange(host) { if (host === 'premiere' && view === 'captions') setView('presets'); },
+    onPreviewChange() { time = 1; playing = false; previous = null; playLabel(); draw(); schedule(); },
+  });
+  workflow.initialize();
   load(mainPreset || FIRST_PRESET); setView('presets'); root.classList.add('demo-ready');
   document.fonts.ready.then(() => { draw(); if (view === 'presets') renderGallery(); });
 }
