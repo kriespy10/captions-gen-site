@@ -1,9 +1,9 @@
 {
-  "version": "1.1.4",
-  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.4.exe",
-  "sha256": "6f54ae07bad3ea6160787c3ac7f3e9fee1dcb796f3d608d935ab16e45682634b",
-  "size": 6930862,
-  "notes": "Improved speech-model reliability: custom Python settings survive updates, model readiness follows your configured cache, and model-loading errors are clearer.",
+  "version": "1.1.8",
+  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.8.exe",
+  "sha256": "beff7ac5b2cd53ec12ead4ed1af256dc78df7c5e866f531bd64b51bff60a3abb",
+  "size": 8379227,
+  "notes": "Custom speech models, searchable languages and more reliable timing for edited captions. Apply styles to existing captions. Includes model-loading fixes and clearer, consistent controls.",
   "full": "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece",
-  "date": "2026-11-05"
+  "date": "2026-11-08"
 }

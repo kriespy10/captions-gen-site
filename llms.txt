@@ -13,7 +13,7 @@ Official website: https://captionsgen.com/. Product facts checked 2026-11-08.
 - Storage: Allow at least 3 GB free for the built-in speech models, in addition to the plugin, Premiere and project files. Model sizes can change, and custom models need additional space.
 - Output: Captions are editable Motion Graphics clips, with word highlights, pill backgrounds and animation controls. They render into the video image. Use Premiere's native caption tracks when you need SRT sidecar files, selectable subtitles or broadcast closed captions.
 - Features: 18 built-in caption presets, customizable fonts, colors, highlights and animations, a live style preview, saved presets, and restyling of placed captions without transcribing again.
-- Public version: 1.1.4 (2026-11-05).
+- Public version: 1.1.8 (2026-11-08).
 - Support: business@captionsgen.com. Made by Kris, a video editor.
 
 ## Product and release information
@@ -21,7 +21,7 @@ Official website: https://captionsgen.com/. Product facts checked 2026-11-08.
 - [Home](https://captionsgen.com/): product overview, editable style preview and free download.
 - [Requirements and installation](https://captionsgen.com/#install): supported Premiere and Windows versions and installation steps.
 - [Transcription and performance](https://captionsgen.com/#performance): CPU transcription, Base/Small/Turbo models, downloads and timeline performance.
-- [Current public release](https://captionsgen.com/news/captions-gen-1-1-4.html): version 1.1.4, released 2026-11-05.
+- [Current public release](https://captionsgen.com/news/captions-gen-1-1-8.html): version 1.1.8, released 2026-11-08.
 - [Free release announcement](https://captionsgen.com/news/captions-gen-1-1-0.html): the 15-minute limit was removed on 2026-10-21.
 - [News and release notes](https://captionsgen.com/news/): published updates.
 - [Website privacy](https://captionsgen.com/privacy.html): optional analytics and checkout information.
