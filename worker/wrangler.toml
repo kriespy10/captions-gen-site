@@ -5,8 +5,8 @@ compatibility_date = "2026-10-01"
 # Keep the deployed API subdomain and existing site API route. The static
 # website continues to publish through GitHub Pages.
 routes = [
-  { pattern = "api.captionsgen.com", custom_domain = true },
-  { pattern = "captionsgen.com/api/*", zone_name = "captionsgen.com" }
+  { pattern = "captionsgen.com/api/*", zone_name = "captionsgen.com" },
+  { pattern = "api.captionsgen.com", custom_domain = true }
 ]
 
 [[kv_namespaces]]
