@@ -261,34 +261,46 @@ body="""
 """)
 
 P["free-caption-plugin-premiere-pro"] = dict(
-modified="2026-11-07",
+modified="2026-11-08",
 title="Free Caption Plugin for Premiere Pro: Auto Captions, No Watermark",
-desc="Free auto caption plugins for Premiere Pro compared: the built-in tool, Captions Gen (free animated captions, no time limit, no watermark) and other plugins' free tiers.",
+desc="Yes: Captions Gen is currently a free animated caption plugin for Premiere Pro 25.6+ on Windows, with local transcription, no watermark and no time cap.",
 h1="Free caption plugins for Premiere Pro",
 rel=["best-caption-plugin-premiere-pro","free-caption-templates-premiere-pro","hormozi-style-captions-premiere-pro"],
+faq=[
+("Is there a free animated caption plugin for Premiere Pro?",
+ "Yes. Captions Gen is currently free for Premiere Pro 25.6 or newer on 64-bit Windows supported by your Premiere version. It creates editable animated captions with local transcription, no watermark and no transcription time cap. Adobe Premiere Pro is a separate paid subscription."),
+("Is Captions Gen a 15-minute trial?",
+ "No. The 15-minute limit was removed in <a href=\"/news/captions-gen-1-1-0.html\">version 1.1.0 on 21 October 2026</a>. The current release has no transcription time cap, watermark or subscription. Paid features are planned for the future."),
+("Do I need a card to download Captions Gen?",
+ "No. The current free download uses Lemon Squeezy checkout and asks for your email address, without a payment card. See <a href=\"/product.html\">current product facts and download details</a>."),
+("Does Captions Gen upload my footage for transcription?",
+ "No. Transcription processes your audio locally on your CPU. Initial speech-model downloads and update checks use the internet. Local transcription does not mean the plugin makes no network requests."),
+("Does Captions Gen work on Mac or older Premiere versions?",
+ "The current public release supports Windows and Premiere Pro 25.6 or newer. Mac and Premiere versions before 25.6 are not supported. Your computer must also meet Adobe's requirements for its installed Premiere version.")],
 body="""
-<p>Quick answer: for plain captions, Premiere's own Speech to Text is free and unlimited. For animated, word-by-word captions, <a href="https://captionsgen.com/">Captions Gen</a> is a free plugin with no time limit and no watermark: it transcribes on your computer and places karaoke-style captions on your timeline in one click. Most other caption plugins are paid, with a trial or a capped free tier.</p>
+<p><strong>Yes. <a href="/product.html">Captions Gen</a> is currently a free animated caption plugin for Adobe Premiere Pro 25.6 or newer on Windows, with no watermark and no transcription time cap.</strong> It transcribes locally and places editable, word-by-word captions on your timeline. Download through email checkout; no card is needed. Adobe Premiere Pro is a separate paid subscription.</p>
+<p>I make Captions Gen. These are its current product facts as of <time datetime="2026-11-08">8 November 2026</time>. Paid features are planned for the future.</p>
 
 <h2>Free options at a glance</h2>
 <div class="ptable-wrap">
 <table class="ptable">
 <thead><tr><th>Option</th><th>Price</th><th>Animated, word by word</th><th>Limit</th><th>Mac</th></tr></thead>
 <tbody>
-<tr class="pick"><td><div class="tool">Captions Gen <span class="tag">Made by me</span></div></td><td>Free</td><td><span class="mark yes"><i>✓</i>Yes, 18 presets</span></td><td>No time limit, no watermark</td><td><span class="mark no"><i>✕</i>Windows only</span></td></tr>
-<tr><td><div class="tool">Premiere Pro built-in</div></td><td>Included</td><td><span class="mark no"><i>✕</i>Static, Single Word layout</span></td><td>None</td><td><span class="mark yes"><i>✓</i>Yes</span></td></tr>
-<tr><td><div class="tool">Paid plugins' free tiers</div></td><td>Free to try</td><td><span class="mark yes"><i>✓</i>Usually</span></td><td>Trial days, minute caps or a watermark</td><td>Varies</td></tr>
+<tr class="pick"><td><div class="tool">Captions Gen <span class="tag">Made by me</span></div></td><td>Currently free; Premiere separate</td><td><span class="mark yes"><i>✓</i>Yes, 18 presets</span></td><td>No transcription time cap, no watermark</td><td><span class="mark no"><i>✕</i>Windows only</span></td></tr>
+<tr><td><div class="tool">Premiere Pro built-in</div></td><td>Included with a paid Premiere plan</td><td>Native subtitles and Single Word layout</td><td>Check your installed Premiere version</td><td><span class="mark yes"><i>✓</i>Yes</span></td></tr>
 </tbody>
 </table>
 </div>
-<p>For prices of the paid plugins, see the <a href="best-caption-plugin-premiere-pro.html">caption plugin comparison</a>.</p>
+<p>For other tools, see the <a href="best-caption-plugin-premiere-pro.html">caption plugin comparison</a> and check each vendor's current plan and limits before choosing.</p>
 
-<h2>Premiere's built-in captions (free, unlimited)</h2>
-<p>Transcribe the sequence, then Create captions. Speech to Text is included with Premiere and runs locally once the language pack is installed. Current versions offer a Single Word layout and Track Styles for a consistent look. What it can't do is highlight the word being spoken or animate words in.</p>
+<h2>Premiere's built-in captions (included with Premiere)</h2>
+<p>For native subtitles, transcribe the sequence, then Create captions. Speech to Text is included with Premiere and runs locally once the language pack is installed. Current versions offer a Single Word layout and Track Styles for a consistent look. A native subtitle track is a different workflow from the editable animated Motion Graphics that Captions Gen generates. See the <a href="how-to-add-captions-in-premiere-pro.html">built-in captions guide</a>.</p>
 
-<h2>Captions Gen (free, no time limit, no watermark)</h2>
-<p>Captions Gen, the plugin I make, is free. It covers local transcription (Whisper, on your machine), word-by-word karaoke highlighting, 18 animated presets, a live preview, your own saved presets and restyling captions you've already placed. The captions are editable Motion Graphics on your timeline, not a rendered video.</p>
+<h2>Captions Gen (currently free, no time cap, no watermark)</h2>
+<p>The current free release covers local transcription (Whisper, on your machine), word-by-word karaoke highlighting, 18 animated presets, a live preview, your own saved presets and restyling captions you've already placed. The captions are editable Motion Graphics on your timeline. See <a href="/product.html">product facts, pricing and compatibility</a>.</p>
+<p><strong>The old 15-minute trial limit no longer applies.</strong> It was removed in <a href="/news/captions-gen-1-1-0.html">Captions Gen 1.1.0, released on 21 October 2026</a>. If an older installed panel still shows that limit, update to the current public version.</p>
 <ol>
-<li><a href="__FREE__">Download Captions Gen</a>. Checkout is free and only asks for an email address.</li>
+<li><a href="__FREE__">Download Captions Gen</a>. The current free Lemon Squeezy checkout asks for your email address; no payment card is needed.</li>
 <li>Run the installer. It sets up the engine, the Premiere Pro panel and the free fonts the presets use.</li>
 <li>In Premiere Pro, open Window, UXP Plugins, Captions Gen, select your clip, pick a preset and press Generate.</li>
 </ol>
@@ -296,18 +308,12 @@ body="""
 <p>Transcription runs locally on your CPU; a dedicated GPU is not required for transcription. Choose Base for faster processing, Small for a balance of speed and accuracy, or Turbo for the default model. Processing time depends on your CPU, available memory, clip length and model. The engine downloads the built-in speech models at initial startup and caches them; allow at least 3 GB free for models, plus space for the app and your projects. Your audio is not uploaded for transcription. Follow Adobe's CPU, RAM, GPU and Windows requirements for your Premiere version, with additional memory available for the speech model. See <a href="https://captionsgen.com/#performance">requirements and performance details</a>.</p>
 
 <h2>Free tiers of other caption plugins</h2>
-<p>Plugins that animate captions usually charge, because word-level transcription and the caption templates are the product. Their free route is a trial with a day or minute cap, or exports with a watermark. Read the limit before you build a workflow around it: a watermark on client work is a bad surprise.</p>
+<p>Check each vendor's current terms for trial length, transcription caps, watermarks, platform support and paid renewal. A free trial and a currently free release can have different limits. This page does not make a current pricing claim for another vendor.</p>
 
 <h2>The CapCut route</h2>
 <p>Check the current CapCut plan and the caption features available in your region. If you caption in CapCut and bring the video back into Premiere, the burned-in text can no longer be edited in Premiere.</p>
 
-<h2>Common questions</h2>
-<h3>Is Captions Gen really free?</h3>
-<p>Yes. No time limit, no watermark and no subscription.</p>
-<h3>Does it upload my footage?</h3>
-<p>No. Transcription runs on your computer, so the audio never leaves it.</p>
-<h3>Does it work on a Mac?</h3>
-<p>Not yet. Captions Gen is Windows-only for now. On a Mac, use Premiere's own captions or test a paid plugin's trial.</p>
+<p class="sources">Product sources: <a href="/product.html">current Captions Gen product facts</a>, <a href="/news/captions-gen-1-1-0.html">1.1.0 release notes removing the 15-minute limit</a>, <a href="https://captionsgen.com/#install">installation requirements</a> and <a href="https://www.adobe.com/products/premiere.html">Adobe Premiere plans</a>.</p>
 """)
 
 

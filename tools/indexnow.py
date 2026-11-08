@@ -1,4 +1,5 @@
-# Tells Bing (and through it ChatGPT search, Copilot, Yandex, Seznam) that pages changed.
+# Notifies participating search engines that published pages changed.
+# Acceptance is not a guarantee of crawling, indexing or AI citations.
 # Run after publishing: python -B tools/indexnow.py            (every URL in sitemap.xml)
 #                   or: python -B tools/indexnow.py URL [URL...] (only those URLs)
 import json, re, sys, urllib.request

@@ -22,4 +22,8 @@ Run `node --test tools/analytics.test.cjs` to check consent behavior and page co
 
 Completed purchase tracking requires enabling Lemon Squeezy's Google Analytics integration with the same measurement ID. Configure both website and checkout domains in the Google tag's cross-domain settings before relying on attribution.
 
-After publishing changed pages, run `python -B tools/indexnow.py` to notify Bing through IndexNow (ChatGPT search and Copilot read Bing's index). The key file `2a88f6ee9b151c8bffbd34b722a31453.txt` at the site root must stay published and match the key in the script.
+Product pricing, release version, compatibility, download details and limitations are maintained in `tools/product.py`. Run `python -B tools/genblog.py` to rebuild the dated `product.html` reference, `llms.txt`, homepage product schema, guides, news and sitemap together. `python -B tools/genproduct.py` rebuilds only the product surfaces. Keep the visible homepage, guide claims and product source consistent when the offer changes; do not update the checked date without reviewing the facts.
+
+Run `python -B tools/check_seo.py` for crawlability, sitemap, internal links, structured data and product consistency checks, alongside the existing checks above. The AI visibility research and measurement method are in `docs/ai-visibility-research-2026-11-08.md`.
+
+After publishing changed pages, run `python -B tools/indexnow.py URL [URL...]` to notify participating search engines through IndexNow. Acceptance does not guarantee crawling, indexing or recommendations in ChatGPT, Gemini or Claude. The key file `2a88f6ee9b151c8bffbd34b722a31453.txt` at the site root must stay published and match the key in the script.
