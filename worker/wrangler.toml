@@ -2,10 +2,11 @@ name = "captions-gen-reports"
 main = "report-worker.js"
 compatibility_date = "2026-10-01"
 
-# A subdomain of its own: Cloudflare creates the DNS record, and the main
-# site on GitHub Pages stays exactly as it is (no proxying of captionsgen.com).
+# Keep the deployed API subdomain and existing site API route. The static
+# website continues to publish through GitHub Pages.
 routes = [
-  { pattern = "api.captionsgen.com", custom_domain = true }
+  { pattern = "api.captionsgen.com", custom_domain = true },
+  { pattern = "captionsgen.com/api/*", zone_name = "captionsgen.com" }
 ]
 
 [[kv_namespaces]]
