@@ -7,7 +7,7 @@ from html import escape
 SITE = "https://captionsgen.com"
 FREE = "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece"
 DATE = "2026-08-26"
-SITE_UPDATED = "2026-11-07"
+SITE_UPDATED = "2026-11-08"
 GUIDE_INDEX_UPDATED = "2026-10-19"
 # Every guide includes the shared requirements box below. Its factual correction
 # is a content update even when the rest of an article has not changed.
@@ -240,7 +240,7 @@ def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, p
 {closing}
 <div class="box"><p class="t">Related guides</p><ul>{rel}</ul></div>
 </div></article>
-<footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/#faq">FAQ</a> · <a href="{SITE}/blog/">Guides</a> · <a href="{SITE}/news/">News</a> · {PRIVACY_FOOTER}</div></footer>
+<footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/product.html">Product facts &amp; compatibility</a> · <a href="{SITE}/#faq">FAQ</a> · <a href="{SITE}/blog/">Guides</a> · <a href="{SITE}/news/">News</a> · {PRIVACY_FOOTER}</div></footer>
 </body>
 </html>
 """
@@ -250,6 +250,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from bodies import POSTS
 from bodies2 import P
 from bodies3 import P3
+from product import PRODUCT
+from genproduct import generate as generate_product
 REL0 = {
   "how-to-add-captions-in-premiere-pro": ["auto-captions-premiere-pro","premiere-pro-captions-not-showing","burn-in-captions-premiere-pro"],
   "auto-captions-premiere-pro": ["how-to-add-captions-in-premiere-pro","premiere-pro-captions-not-showing","animated-captions-premiere-pro"],
@@ -297,7 +299,7 @@ idx = f"""<!doctype html>
 <li><a href="premiere-pro-captions-not-showing.html">Fix captions missing from the preview or export</a></li>
 <li><a href="animated-captions-premiere-pro.html">Choose an animated or word-by-word workflow</a></li>
 </ul></div>{cards}</div></article>
-<footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/#faq">FAQ</a> · <a href="{SITE}/news/">News</a> · {PRIVACY_FOOTER}</div></footer>
+<footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/product.html">Product facts &amp; compatibility</a> · <a href="{SITE}/#faq">FAQ</a> · <a href="{SITE}/news/">News</a> · {PRIVACY_FOOTER}</div></footer>
 </body></html>
 """
 with io.open(os.path.join("blog", "index.html"), "w", encoding="utf-8", newline="") as f:
@@ -318,7 +320,7 @@ from news import NEWS
 NEWS_UPDATED = NEWS[0]["date"]
 os.makedirs("news", exist_ok=True)
 NEWS_NAV = NAV_HTML.replace('<a class="on" href="https://captionsgen.com/blog/">', '<a href="https://captionsgen.com/blog/">').replace('<a href="https://captionsgen.com/news/">', '<a class="on" href="https://captionsgen.com/news/">')
-NEWS_FOOTER = f'<footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/#faq">FAQ</a> · <a href="{SITE}/blog/">Guides</a> · <a href="{SITE}/news/">News</a> · {PRIVACY_FOOTER}</div></footer>'
+NEWS_FOOTER = f'<footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/product.html">Product facts &amp; compatibility</a> · <a href="{SITE}/#faq">FAQ</a> · <a href="{SITE}/blog/">Guides</a> · <a href="{SITE}/news/">News</a> · {PRIVACY_FOOTER}</div></footer>'
 NEWS_HEAD = f"""{ANALYTICS_HEAD}
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
@@ -412,10 +414,13 @@ io.open(os.path.join("news", "feed.xml"), "w", encoding="utf-8", newline="").wri
 print("wrote news index + feed", len(NEWS), "posts")
 
 sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-      f'  <url><loc>{SITE}/</loc><lastmod>{SITE_UPDATED}</lastmod></url>', f'  <url><loc>{SITE}/blog/</loc><lastmod>{GUIDE_INDEX_UPDATED}</lastmod></url>']
+      f'  <url><loc>{SITE}/</loc><lastmod>{SITE_UPDATED}</lastmod></url>',
+      f'  <url><loc>{PRODUCT["url"]}</loc><lastmod>{PRODUCT["checked"]}</lastmod></url>',
+      f'  <url><loc>{SITE}/blog/</loc><lastmod>{GUIDE_INDEX_UPDATED}</lastmod></url>']
 sm += [f'  <url><loc>{SITE}/blog/{k}.html</loc><lastmod>{p.get("modified", DATE)}</lastmod></url>' for k, p in POSTS.items()]
 sm.append(f'  <url><loc>{SITE}/news/</loc><lastmod>{NEWS_UPDATED}</lastmod></url>')
 sm += [f'  <url><loc>{SITE}/news/{n["slug"]}.html</loc><lastmod>{n["date"]}</lastmod></url>' for n in NEWS]
 sm.append('</urlset>')
 io.open("sitemap.xml", "w", encoding="utf-8", newline="").write(chr(10).join(sm) + chr(10))
-print("sitemap", len(POSTS) + 3 + len(NEWS), "urls")
+print("sitemap", len(POSTS) + 4 + len(NEWS), "urls")
+generate_product()
