@@ -85,49 +85,131 @@ body="""
 """)
 
 P["premiere-pro-caption-presets"] = dict(
-modified='2026-11-08',
-title="Premiere Pro Caption Presets: Save and Reuse Caption Styles",
-desc="How caption presets and Track Styles work in Premiere Pro, how to save your own, and where ready-made animated caption presets come from.",
-h1="Premiere Pro caption presets",
+modified='2026-11-09',
+title="Premiere Pro Caption Presets: Save, Apply and Share Styles",
+desc="Save and apply Premiere Pro Track Styles, reuse caption creation settings, and share Captions Gen designs as .cgpreset files. Illustrated steps and checks.",
+h1="Save, apply and share Premiere Pro caption presets",
 rel=["change-caption-font-premiere-pro","animated-captions-premiere-pro","best-fonts-for-captions"],
 body="""
-<p>Premiere Pro has two things people mean by "caption preset": the creation preset in the Create captions dialog (line length, lines, format) and the Track Style that controls how captions look. Saving both lets you reuse the setup on another video; you still need to transcribe, create and review its captions.</p>
-<p class="cta-line">Track Styles save a static look; they cannot save animation or a word highlight. <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin with animated caption presets (karaoke highlight, pop, bounce) that you can customize and reuse. It transcribes locally on your CPU and places editable Motion Graphics clips on the Premiere timeline. The current Windows release is free, without a transcription time cap or watermark; Adobe Premiere Pro is separate.</p>
+<p><strong>To save the look of native captions in Premiere Pro, create a Track Style in Properties.</strong> The Caption preset in Create captions controls how the transcript becomes caption clips. A Captions Gen preset saves a plugin design, including animation. Choose the type that matches what you want to reuse.</p>
 
-<h2>Creation presets</h2>
-<p>In the Create captions dialog, set your format, max characters per line and number of lines, then use the preset menu at the top to save them. Next time, pick the preset and the settings load. A short-form preset with Subtitle, 18 characters and a single line is the one most people want.</p>
+<h2 id="preset-types">Which kind of caption preset do you need?</h2>
+<div class="ptable-wrap">
+<table class="ptable">
+<thead><tr><th>Preset or style</th><th>What it controls</th><th>Where you use it</th></tr></thead>
+<tbody>
+<tr><td>Create captions preset</td><td>Caption creation settings such as format, line length, duration and number of lines</td><td>Premiere's Create captions dialog, when making a native caption track</td></tr>
+<tr><td>Adobe Track Style</td><td>The appearance of native captions, such as font, fill, stroke and background</td><td>Properties and the Track style menu</td></tr>
+<tr><td>Captions Gen preset</td><td>The plugin's caption design, including its highlight and animation settings</td><td>The Captions Gen panel; saved designs can be shared as .cgpreset files</td></tr>
+</tbody>
+</table>
+</div>
+<p>These are different workflows. A native Track Style does not generate speech timing or a moving word highlight. A Captions Gen preset does not turn its graphics into native subtitle tracks.</p>
+<figure class="caption-example"><img src="/img/guides/presets-workflow.svg" width="960" height="1080" loading="lazy" alt="Three preset workflows: caption creation settings, Adobe Track Styles for native caption appearance, and Captions Gen presets for animated graphics"><figcaption>Workflow illustration. Choose the preset type before saving or sharing it. <a href="/img/guides/presets-workflow.svg">Open full-size diagram</a>.</figcaption></figure>
 
-<h2>Track Styles</h2>
-<p>Style a caption in Properties, then create a Track Style with the plus control. Save it to the project for that edit or a local style folder for reuse. Use Redefine Style when you want an appearance change to reach the captions linked to that style.</p>
+<h2 id="creation-preset">Set up captions in Create captions</h2>
+<p>Use this part of the workflow when you are turning a reviewed transcript into a native caption track.</p>
+<ol>
+<li>Open the Text panel and choose <strong>Captions &gt; Create captions from transcript</strong>. If you need the transcription steps, start with the <a href="how-to-add-captions-in-premiere-pro.html">native Premiere captions guide</a>.</li>
+<li>Choose an available <strong>Caption preset</strong>, then check Format, line length, duration, gap and Lines for this edit. Subtitle is a useful starting format for ordinary subtitle delivery; follow the delivery specification for broadcast formats.</li>
+<li>Choose an available caption style in the <strong>Style</strong> field if you already have one. Create the captions, then review line breaks and timing against the audio.</li>
+</ol>
+<p>For a short vertical video, try shorter lines and check them on a phone. A wide interview can need a different layout. There is no line-length preset that suits every font, frame size and speaking pace.</p>
 
-<h2>Sharing presets between machines</h2>
-<p>A template project with your saved Track Styles is one way to carry a consistent setup between edits or computers. Check the style import and export options available in your installed Premiere version before moving locally saved styles.</p>
+<h2 id="save-track-style">Save a native caption Track Style</h2>
+<ol>
+<li>Select a native caption clip on the timeline and open <strong>Window &gt; Properties</strong>.</li>
+<li>Set its font and appearance. Start with readable text, then adjust fill, stroke, shadow or background as needed. See the <a href="change-caption-font-premiere-pro.html">caption font guide</a> for appearance checks.</li>
+<li>Use the <strong>plus control</strong> beside the Track style menu and choose <strong>Create style</strong>. Give the style a name you will recognize in another edit.</li>
+<li>Save to the <strong>Project</strong> to create a style item there, or to <strong>Local styles</strong> for reuse through the style browser in other projects on that computer.</li>
+<li>Choose the style from the Track style menu for the intended caption track. Check a few captions, including a long line, before applying the same look throughout your delivery.</li>
+</ol>
+<p>Adobe's current instructions describe these <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-styles-for-captions.html">caption style controls and save locations</a>. Older tutorials may show Essential Graphics; these steps use Properties.</p>
 
-<h2>Animated caption presets</h2>
-<p>Native presets are static styles. The animated looks you see on social (highlighted word, bounce, pill background) aren't something Premiere's caption track can store. A plugin preset can include animation alongside font and colors. Captions Gen has 18 built-in looks and saved presets for its editable graphics. Its <a href="/news/captions-gen-1-1-9.html">1.1.9 Windows setup</a> offers Premiere Pro, After Effects, or Both with a shared engine and Models folder. The native Track Styles described above remain a Premiere workflow.</p>
+<h2 id="update-track-style">Change all linked captions with Redefine Style</h2>
+<p>Editing one caption's appearance can leave you with a local change. To update a saved style, select a caption using it, make the change and choose <strong>Redefine Style</strong> beside the style menu. Read the dialog: for captions, Premiere offers a choice between applying the change across the track and overwriting the saved style.</p>
+<p>Check that you chose the intended track and style before confirming. Adobe documents the distinction in its <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/stylize-text/redefine-linked-and-track-styles.html">Redefine Style instructions</a>.</p>
+
+<h2 id="share-native-style">Reuse or share a native caption style</h2>
+<p>For another project on the same computer, save the style to Local styles and choose it through the style browser. For a project handoff, save the Track Style to the Project and keep a short sample caption in the project so the recipient can see the intended result. A reusable project template can carry that setup into later edits.</p>
+<p>The recipient still needs the font. Check the project on the receiving computer before treating the handoff as complete. Exporting captions as SRT is a different task: it delivers subtitle text and timing, not your complete Premiere design. Use the <a href="import-srt-premiere-pro.html">SRT workflow</a> for that delivery.</p>
+
+<h2 id="animated-presets">Save and share an animated Captions Gen preset</h2>
+<p>I make Captions Gen. The <a href="/product.html">current 1.1.9 Windows release</a> has 18 built-in designs for editable animated captions. In Premiere, it places Motion Graphics clips on video tracks. It currently has no watermark or transcription time cap; Adobe Premiere Pro is a separate paid application.</p>
+<ol>
+<li>In Captions Gen, choose a built-in look and adjust it in <strong>Customize</strong>.</li>
+<li>Open <strong>Save preset</strong> beside the preview, choose <strong>Save as preset</strong> or <strong>Save as new preset</strong>, and give the design a name. It appears under <strong>Your presets</strong>.</li>
+<li>To share a saved design, open that preset's <strong>⋯</strong> menu and choose <strong>Export</strong>. Save the <strong>.cgpreset</strong> file.</li>
+<li>On the receiving installation, choose <strong>Import</strong> under Your presets and select the file. Check the font and preview, then generate and review a short captioned sample.</li>
+</ol>
+<p>A .cgpreset file contains design settings and font identity, not a transcript or font files. It is for Captions Gen; importing it as a native Adobe Track Style or SRT will not work. Installing the required font and checking its license is part of sharing your design.</p>
+<p>Use <strong>Apply style</strong> to change the look of captions already placed by the plugin. After changing caption text, use <strong>Update animation</strong> where offered and review word timing. If you already have native captions and want to animate them manually, follow <a href="premiere-pro-captions-to-graphics.html">converting captions to graphics</a>.</p>
+
+<h2 id="preset-problems">If the saved look does not appear</h2>
+<ul>
+<li><strong>Only one caption changed:</strong> check the track's selected Track Style and whether you changed one caption locally. Use Redefine Style when the change should reach the track or saved style.</li>
+<li><strong>The style is missing in a new project:</strong> check whether you saved it only to the original Project. Use Local styles for reuse on the same computer, or carry the project style with the handoff.</li>
+<li><strong>The font looks different:</strong> check that the receiving computer has the intended font and weight installed.</li>
+<li><strong>A preset has no moving highlight:</strong> a native caption Track Style stores appearance. Use timed graphics for a highlight that follows speech within a line, or use native Single Word captions when one word at a time is enough.</li>
+</ul>
+<p>Try the <a href="/\u0023custom">browser caption designer</a> for a sample of Captions Gen's styles, or check the <a href="free-caption-plugin-premiere-pro.html">free plugin guide</a> for supported versions and installation. The browser preview uses sample text; it does not transcribe your footage.</p>
+<p class="sources">References checked 9 November 2026: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-captions.html">Create captions settings</a>, <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/stylize-text/apply-linked-and-track-styles.html">applying Linked and Track Styles</a>, and <a href="/product.html">Captions Gen product facts</a>.</p>
 """)
 
 P["premiere-pro-captions-to-graphics"] = dict(
-modified='2026-11-08',
-title="Premiere Pro: Convert Captions to Graphics (and Why)",
-desc="How to upgrade captions to graphics in Premiere Pro so you can animate and style them freely, what you lose, and when a plugin is faster.",
-h1="Converting captions to graphics in Premiere Pro",
+modified='2026-11-09',
+title="Convert Captions to Graphics in Premiere Pro: Step by Step",
+desc="Use Upgrade Caption to Graphic, keep a subtitle copy for SRT, and animate the resulting graphics. An illustrated Premiere Pro workflow with export checks.",
+h1="Convert captions to graphics in Premiere Pro",
 rel=["animated-captions-premiere-pro","word-by-word-captions-premiere-pro","how-to-add-captions-in-premiere-pro"],
 body="""
 <p>Select caption clips on the timeline, then choose <strong>Graphics and Titles &gt; Upgrade Caption to Graphic</strong>. Premiere creates graphics on a video track with the caption text and timing. Review them before adding effects or animation.</p>
-<p class="cta-line">Converting captions to graphics is the manual route to animated captions. <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin that skips it: it generates word-by-word animated graphics directly. It transcribes locally on your CPU and places editable Motion Graphics clips on the Premiere timeline. The current Windows release is free, without a transcription time cap or watermark; Adobe Premiere Pro is separate.</p>
+<p><strong>Save a copy before converting if you also need SRT or closed captions.</strong> The graphics render into the picture through video tracks. They do not replace a native subtitle track for a separate caption-file delivery.</p>
 
-<h2>Why you'd convert</h2>
-<p>Native caption tracks support reusable Track Styles, and current Premiere versions include a Single Word layout. A graphic gives you keyframes and effects for custom motion or a moving highlight within a line.</p>
+<h2 id="before-converting">Check whether conversion is needed</h2>
+<p>Keep native captions when your job is to correct text, adjust timing, change a font or reuse a static look. Premiere's <a href="premiere-pro-caption-presets.html">Track Styles</a> handle consistent appearance without conversion. Current Premiere versions also offer a <a href="word-by-word-captions-premiere-pro.html">Single Word layout</a> if you want one word displayed at a time.</p>
+<p>Convert when you need graphics controls such as keyframed motion or effects. A moving highlight inside a multi-word line needs additional word-level animation; choosing Upgrade Caption to Graphic does not create that highlight automatically.</p>
 
-<h2>How to convert all captions at once</h2>
-<p>Select the caption clips you want to convert, then use Graphics and Titles &gt; Upgrade Caption to Graphic. Check the graphics on their video track and retain an original caption-track copy if you also need SRT or closed-caption delivery.</p>
+<h2 id="convert-captions">Convert selected captions, or a whole track</h2>
+<ol>
+<li><strong>Review the native captions first.</strong> Correct names, numbers, line breaks and timing while they are still in the caption workflow. If you have only a transcript, <a href="how-to-add-captions-in-premiere-pro.html">create the caption track</a> before trying to upgrade it.</li>
+<li><strong>Save and duplicate the sequence.</strong> Keep one copy with its native caption track if you need SRT or another caption format later. Work on the other copy for the animated version.</li>
+<li><strong>Select the caption clips to convert.</strong> Select clips on the caption track in the Timeline, rather than selecting transcript words or an ordinary video clip. For a whole track, check that the selection includes all the intended caption clips before continuing.</li>
+<li>Choose <strong>Graphics and Titles &gt; Upgrade Caption to Graphic</strong>.</li>
+<li><strong>Inspect the resulting graphics on the video track.</strong> Play several captions and check their text, in/out points, position and appearance. Watch for another video or graphic layer covering them.</li>
+<li>Select a resulting graphic and open <strong>Properties</strong> for its text and appearance. Add and review keyframes or effects as needed. Test one caption before building the same animation across a long sequence.</li>
+</ol>
+<figure class="caption-example"><img src="/img/guides/captions-to-graphics-workflow.svg" width="960" height="900" loading="lazy" alt="Save a native-caption copy, upgrade selected captions, then animate and render the resulting video-track graphics"><figcaption>Workflow illustration with simplified timelines. Keep a native-caption copy before conversion when subtitle delivery is required. <a href="/img/guides/captions-to-graphics-workflow.svg">Open full-size diagram</a>.</figcaption></figure>
+<p>Preserving the original is a separate step, not something to assume the conversion command will do for you. If you keep native captions and graphics in the same working sequence, check their visibility so the video does not show the same words twice.</p>
 
-<h2>What you lose</h2>
-<p>These graphics no longer use native caption-track export. They do not produce an SRT sidecar; check the video track output and graphic layers to render them into the picture. A rendered caption treatment does not replace a required broadcast caption stream or sidecar. Follow the delivery specification and keep the original caption track when needed.</p>
+<h2 id="after-conversion">What changes after conversion?</h2>
+<div class="ptable-wrap">
+<table class="ptable">
+<thead><tr><th>Task</th><th>Native caption track</th><th>Converted graphics</th></tr></thead>
+<tbody>
+<tr><td>Keep a consistent static look</td><td>Use a Track Style</td><td>Edit the graphic's appearance</td></tr>
+<tr><td>Add motion or effects</td><td>Caption-track controls have different limits</td><td>Use graphics controls, effects and keyframes</td></tr>
+<tr><td>Deliver an SRT sidecar</td><td>Export a supported caption file from the native track</td><td>The graphics themselves do not produce an SRT track</td></tr>
+<tr><td>Make words visible in the rendered video</td><td>Use caption burn-in</td><td>Keep the graphics and their video-track output enabled</td></tr>
+</tbody>
+</table>
+</div>
+<p>A graphic can retain the caption's text and clip timing without knowing exactly when each word is spoken. For a karaoke highlight, review the audio and add the word changes or use a speech-driven tool that generates word timing.</p>
 
-<h2>The time cost</h2>
-<p>Conversion preserves text and timing, but it does not create a moving spoken-word highlight. You still need the animation and word-level changes. Captions Gen can generate editable timed graphics from selected speech; compare the <a href="free-caption-plugin-premiere-pro.html">current free plugin and its setup requirements</a>. Its graphics are separate from Premiere's subtitle-track export.</p>
+<h2 id="command-unavailable">If Upgrade Caption to Graphic is unavailable</h2>
+<p>First check what you have selected. A transcript is not a caption clip, and existing Type-tool text or plugin graphics are already a different kind of timeline item. Select an actual native caption clip in the Timeline and look for the command in Graphics and Titles.</p>
+<p>If you cannot find a native caption track, return to the Text panel and create captions from the transcript. If the track exists but its text is missing from the preview, follow <a href="premiere-pro-captions-not-showing.html">the caption visibility checks</a> before converting more clips. Conversion is not a general fix for an unavailable transcript or a missing speech model.</p>
+<p>Menu locations and panel names can differ in older tutorials. Check the installed Premiere version when asking for help, and try one caption in a saved copy before changing the whole edit.</p>
+
+<h2 id="export-graphics">Export graphics and subtitle files separately</h2>
+<p>For the animated version, keep the graphics inside the export range with their video track enabled, then export a short section and watch the actual file. The native Captions export options do not control those graphic clips. If they are missing, check their duration, video-track output, appearance and any covering layers.</p>
+<p>For an SRT file or specified closed-caption delivery, use the preserved native-caption sequence and its supported export settings. Keep text revisions consistent between the two versions. See <a href="premiere-pro-captions-not-exporting.html">caption export checks</a> and the <a href="import-srt-premiere-pro.html">SRT guide</a> for those outputs.</p>
+
+<h2 id="generate-animated-graphics">Generate animated graphics directly with Captions Gen</h2>
+<p>I make Captions Gen. It transcribes selected speech locally on your CPU and creates editable Motion Graphics clips with word timing in Premiere, so its output does not need the native-caption upgrade step. It does not import or convert your native caption track.</p>
+<p>The <a href="/product.html">current public Windows release</a> supports Premiere Pro 25.6 or newer and is free without a watermark or transcription time cap. Adobe Premiere Pro is separate and paid. Choose a preset, generate from your source clip and review the transcript and highlights. Check the <a href="free-caption-plugin-premiere-pro.html">free plugin setup guide</a> before installing.</p>
+<p>Both workflows need a text and timing check. Use native captions for SRT or selectable subtitle delivery, and graphics for the animated treatment rendered into the picture. For the panel in After Effects, follow the separate <a href="how-to-add-captions-in-after-effects.html">After Effects captions guide</a>; this Premiere menu command is not an After Effects step.</p>
+<p class="sources">References checked 9 November 2026: Adobe documents the <a href="https://helpx.adobe.com/premiere/desktop/troubleshooting/limitations-and-known-issues/known-and-fixed-issues.html">Upgrade Caption to Graphic command</a> in its caption-related export guidance; see also <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-captions.html">creating native captions</a>, <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-images-and-graphics/animate-layers-using-the-effect-controls-panel.html">animating graphics with Effect Controls</a> and <a href="/product.html">Captions Gen's output and limitations</a>.</p>
 """)
 
 P["premiere-pro-captions-not-exporting"] = dict(
