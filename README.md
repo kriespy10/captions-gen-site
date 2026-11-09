@@ -26,9 +26,13 @@ Guide content lives in `tools/bodies.py`, `tools/bodies2.py`, `tools/bodies3.py`
 
 Google Analytics uses measurement ID `G-PR571RC95P` in analytics.js. The Google tag loads only after opt-in, only on captionsgen.com and www.captionsgen.com. Trial and buy links send `trial_click` and `checkout_click`; neither is a completed purchase. Visitors can revoke analytics using the footer control.
 
+Cross-domain measurement stays configured in GA4 Admin; analytics.js does not override its linker settings. The read-only audit on 9 November 2026 confirmed exact domain rules for captionsgen.com, www.captionsgen.com and captionsgen.lemonsqueezy.com. After opt-in, Google's configured linker can append its short-lived `_gl` parameter when a visitor clicks through to checkout; the site does not copy cookie IDs or invent checkout campaign parameters. Primary, keyboard and middle-click checkout activation keep their native navigation.
+
 Run `node --test tools/analytics.test.cjs` to check consent behavior and page coverage. Serve locally with `python -m http.server 8765 --bind 127.0.0.1`; local previews do not send analytics.
 
-Completed purchase tracking requires enabling Lemon Squeezy's Google Analytics integration with the same measurement ID. Configure both website and checkout domains in the Google tag's cross-domain settings before relying on attribution.
+Lemon Squeezy's Google Analytics integration uses the same measurement ID, verified on 9 November 2026. A controlled production baseline check before this batch retained `_gl` through checkout redirects and maintained client/session continuity. The current GA4 Admin key-event definition is `purchase`, counted once per event; `trial_click` and `checkout_click` are ordinary events. No account settings were changed by this batch.
+
+The analytics changes harden click handling and clarify measurement; they do not fix a demonstrated broken session handoff. Recheck the handoff after publication with collection suppressed on both source and destination navigations. Keep clicks separate from checkout completion events; an attributed click is not a download or purchase. Browser consent, blockers and checkout behavior can limit measurement, and the historical attribution discrepancy is not evidence of a current reproducible failure or something this batch can repair retrospectively.
 
 Product pricing, release version, compatibility, download details and limitations are maintained in `tools/product.py`. Run `python -B tools/genblog.py` to rebuild the dated `product.html` reference, `llms.txt`, homepage product schema, guides, news and sitemap together. `python -B tools/genproduct.py` rebuilds only the product surfaces. All homepage FAQ schema answers are generated from the visible FAQ section to prevent stale cross-host answers. Keep visible copy, guide claims and product source consistent when the offer changes; do not update the checked date without reviewing the facts.
 

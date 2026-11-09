@@ -48,6 +48,7 @@
     // Basic consent mode: do not load Google or send any analytics before opt-in.
     window.gtag('consent', 'default', consent('denied'));
     window.gtag('consent', 'update', consent('granted'));
+    // Keep cross-domain settings authoritative in GA4 Admin.
     window.gtag('js', new Date());
 
     var page = new URL(window.location.href);
@@ -116,7 +117,7 @@
     banner.setAttribute('aria-labelledby', 'analytics-consent-title');
     banner.hidden = true;
     banner.innerHTML = '<div><h2 id="analytics-consent-title">Help us improve Captions Gen?</h2>' +
-      '<p>With your permission, Google Analytics measures website visits and clicks on our download button. ' +
+      '<p>With your permission, Google Analytics measures website visits, download-button clicks and journeys to our checkout. ' +
       'You can change your choice anytime in the footer. <a href="/privacy.html">Privacy details</a></p>' +
       '<p id="analytics-current-choice"></p></div><div class="analytics-consent-actions">' +
       '<button type="button" data-analytics-choice="denied">Decline</button>' +
@@ -126,9 +127,15 @@
     if (preference === 'granted') startAnalytics();
     else if (preference !== 'denied') showPreferences(false);
 
-    document.addEventListener('click', function (event) {
+    function handleClick(event) {
+      if (event.type === 'click' && event.button !== 0) return;
+      if (event.type === 'auxclick' && event.button !== 1) return;
       var target = event.target.closest && event.target.closest('[data-analytics-choice], [data-analytics-preferences], a[href]');
       if (!target) return;
+      // Auxiliary clicks are only for measuring a checkout opened in a new tab.
+      // Consent/preference buttons remain normal primary-click controls.
+      if (event.type === 'auxclick' &&
+          (target.hasAttribute('data-analytics-preferences') || target.hasAttribute('data-analytics-choice'))) return;
       if (target.hasAttribute('data-analytics-preferences')) {
         event.preventDefault();
         returnFocus = target;
@@ -140,11 +147,16 @@
         return;
       }
       if (!allowed || !started) return;
-      var link = new URL(target.href, window.location.href);
-      if (link.hostname !== 'captionsgen.lemonsqueezy.com') return;
+      var link;
+      try { link = new URL(target.href, window.location.href); }
+      catch (error) { return; }
+      if (link.protocol !== 'https:' || link.hostname !== 'captionsgen.lemonsqueezy.com') return;
+      // Query strings can contain checkout form details. Identify only our
+      // known shareable checkout paths and send none of those query values.
+      var checkoutPath = link.pathname;
       var eventName;
-      if (link.pathname === '/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece') eventName = 'trial_click';
-      if (link.pathname === '/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63') eventName = 'checkout_click';
+      if (checkoutPath === '/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece') eventName = 'trial_click';
+      if (checkoutPath === '/checkout/buy/dbc6cfa2-cee0-40c4-b73f-38efe70b2b63') eventName = 'checkout_click';
       if (!eventName) return;
       window.gtag('event', eventName, {
         send_to: measurementId,
@@ -152,7 +164,9 @@
         link_placement: (target.closest('[id]') || {}).id || 'guide',
         transport_type: 'beacon'
       });
-    });
+    }
+    document.addEventListener('click', handleClick);
+    document.addEventListener('auxclick', handleClick);
     window.addEventListener('storage', function (event) {
       if (event.key !== storageKey) return;
       var choice = readPreference();

@@ -9,7 +9,7 @@ SITE = "https://captionsgen.com"
 FREE = "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece"
 DATE = "2026-08-26"
 SITE_UPDATED = "2026-11-08"
-GUIDE_INDEX_UPDATED = "2026-11-08"
+GUIDE_INDEX_UPDATED = "2026-11-09"
 # Every guide includes the shared requirements box below. Its factual correction
 # is a content update even when the rest of an article has not changed.
 SHARED_REQUIREMENTS_UPDATED = "2026-11-08"
@@ -154,6 +154,31 @@ l.forEach(function(a,k){var e=document.getElementById(a.hash.slice(1));if(e&&e.g
 l.forEach(function(a,k){a.classList.toggle('on',k===i)})}
 addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',f)})();"""
 
+# These illustrated workflows use readable tables and framed instructional media.
+# Keep the change local to the guides that use the new figures.
+WORKFLOW_GUIDES = {"premiere-pro-caption-presets", "premiere-pro-captions-to-graphics"}
+WORKFLOW_CSS = """
+  .caption-example { margin:30px 0; }
+  .caption-example img { border:1px solid var(--hair2); background:#101013; }
+  .caption-example figcaption { line-height:1.5; color:var(--muted2); padding:0 2px; }
+  .caption-example figcaption a { white-space:nowrap; }
+  .ptable-wrap { left:0; transform:none; width:100%; }
+  .ptable { min-width:620px; }
+  .ptable th { white-space:normal; }
+  .ptable td:first-child { width:27%; }
+  .spec { table-layout:fixed; }
+  .spec th, .spec td { overflow-wrap:anywhere; }
+  .spec td:first-child { white-space:normal; }
+  article ol > li { padding-left:4px; margin-bottom:12px; }
+  article .tip, article .note { line-height:1.6; }
+  article a:focus-visible { outline:2px solid var(--yellow); outline-offset:4px; border-radius:2px; }
+  @media (max-width:600px) {
+    h1 { font-size:30px; }
+    .spec th, .spec td { padding:10px 9px; font-size:14px; }
+    .caption-example { margin:24px 0; }
+  }
+"""
+
 CLOSING = f"""
 <div class="box">
 <p class="t">Try animated captions on your own edit</p>
@@ -166,6 +191,14 @@ CLOSING = f"""
 """
 
 def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, published=DATE, faq=None, app="Premiere Pro"):
+    page_css = CSS + (WORKFLOW_CSS if slug in WORKFLOW_GUIDES else "")
+    if slug in WORKFLOW_GUIDES and 'class="toc toc-inline"' not in body_html:
+        headings = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', body_html)
+        if headings:
+            items = ''.join(f'<li><a href="#{escape(anchor, quote=True)}">{label}</a></li>' for anchor, label in headings)
+            toc = f'<aside class="toc toc-inline" aria-label="On this page"><p class="t">On this page</p><ol>{items}</ol></aside>\n'
+            first_heading = body_html.index('<h2 ')
+            body_html = body_html[:first_heading] + toc + body_html[first_heading:]
     closing = CLOSING.replace("__FREE__", FREE)
     if app == "After Effects":
         app_guide = '<p class="app-guide"><strong>After Effects guide.</strong> Working in Premiere Pro? <a href="animated-captions-premiere-pro.html">Choose a Premiere caption workflow</a>.</p>'
@@ -222,7 +255,7 @@ def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, p
 {image_meta}
 <meta name="twitter:card" content="{'summary_large_image' if image else 'summary'}">
 <script type="application/ld+json">{schema}</script>
-<style>{CSS}</style>
+<style>{page_css}</style>
 </head>
 <body>
 <nav><div class="wrap">
