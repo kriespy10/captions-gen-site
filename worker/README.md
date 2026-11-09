@@ -33,6 +33,25 @@ Open https://api.captionsgen.com/funnel and paste the admin token once (it stays
 to see installs, opted-in installs per step, and who placed captions without buying.
 The same numbers as JSON: `curl -H "Authorization: Bearer <ADMIN_TOKEN>" https://api.captionsgen.com/api/funnel`.
 
+## Direct installer download counts
+
+The funnel page also shows **Installer downloads**, read from the public GitHub release assets
+in `kriespy10/captions-gen-site`. Only uploaded `CaptionsGen-Setup-X.Y.Z.exe` assets on published,
+non-prerelease releases are included. Updates and other attachments are excluded. Counts can be
+up to five minutes old; GitHub failures show unavailable rather than an invented zero.
+
+These are download requests, including repeat downloads, not unique people, completed transfers
+or installations. Earlier Lemon Squeezy downloads are not included. Downloads do not require
+newsletter signup, cookies or Google Analytics consent. This endpoint stores no visitor data
+and needs no GitHub token. It uses the existing dashboard admin authorization:
+
+```
+curl -H "Authorization: Bearer <ADMIN_TOKEN>" https://api.captionsgen.com/api/downloads
+```
+
+GitHub's [release API](https://docs.github.com/en/rest/releases/releases) supplies each asset's
+`download_count`. Preserve published installer assets when adding releases so their counts remain available.
+
 ## Email sign-ups
 
 `subscribe.js` stores sign-ups from the panel's "Get updates by email" sheet (`POST /api/subscribe`):

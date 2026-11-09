@@ -29,8 +29,8 @@ def faq_entries():
         (
             "Is Captions Gen free for After Effects?",
             "Yes. The current Windows plugin is free, with no watermark, subscription "
-            "or transcription time cap. Its download checkout asks for an email address "
-            "without a payment card. Adobe After Effects is a separate paid application. "
+            "or transcription time cap. Download the installer directly without an email address "
+            "or payment card. Newsletter signup is optional. Adobe After Effects is a separate paid application. "
             "Paid Captions Gen features are planned for the future.",
         ),
         (
@@ -114,7 +114,7 @@ def after_effects_page():
         f'<details><summary>{escape(question)}</summary><p>{escape(answer)}</p></details>'
         for question, answer in questions
     )
-    checkout = escape(p["checkout"], quote=True)
+    checkout = escape(p["download_url"], quote=True)
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -152,7 +152,7 @@ def after_effects_page():
       <p class="lede">Captions Gen is a currently free After Effects caption plugin. Transcribe speech locally on your CPU and create editable animated caption layers in your composition.</p>
       <p class="free-line"><span>No watermark</span><span>No transcription time cap</span></p>
       <div class="hero-actions"><a class="button" href="{checkout}" target="_blank" rel="noopener">Download free <small>Windows setup {escape(p['version'])}</small></a><a class="text-link" href="/blog/how-to-add-captions-in-after-effects.html">Read the full setup guide <span aria-hidden="true">↗</span></a></div>
-      <p class="download-note">Email checkout. No payment card. After Effects is a separate paid Adobe application.</p>
+      <p class="download-note">Direct download. No email or payment card required. After Effects is a separate paid Adobe application.</p>
       <p class="compatibility-note">{escape(ae_compatibility)}</p>
     </div>
     <figure class="hero-preview">
@@ -220,7 +220,7 @@ def after_effects_page():
 
   <section class="wrap final-section" aria-labelledby="download-heading">
     <div><p class="eyebrow">Captions Gen for After Effects</p><h2 id="download-heading">Try it on a short edit.</h2><p>Generate a sample, correct the words and watch the rendered result.</p></div>
-    <div><a class="button" href="{checkout}" target="_blank" rel="noopener">Download free <small>Windows setup {escape(p['version'])}</small></a><p class="download-note">Email required. No payment card.</p></div>
+    <div><a class="button" href="{checkout}" target="_blank" rel="noopener">Download free <small>Windows setup {escape(p['version'])}</small></a><p class="download-note">No email or payment card required.</p></div>
   </section>
   <section class="wrap maker-section" aria-labelledby="maker-heading"><h2 id="maker-heading">Made by Kris, a video editor.</h2><p>I built Captions Gen for editors who want animated captions inside their Adobe projects. This page describes <a href="{escape(p['release_url'], quote=True)}">public release {escape(p['version'])}, released {released}</a>. You can <a href="mailto:{escape(p['support'], quote=True)}">email me</a> with product questions or corrections.</p><p class="small-note">{dates} Current pricing and compatibility are maintained in <a href="/product.html">the official product reference</a>.</p></section>
 </main>

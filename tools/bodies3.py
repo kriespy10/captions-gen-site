@@ -43,7 +43,7 @@ SAFE = gfig("vertical-safe-zone", "A 9:16 phone frame with the caption area mark
 LOOKS = gfig("preset-looks.jpg", "Six caption presets: Bold Impact, Karaoke Pill, Beast Comic, Glow, Punch and Gamer",
              "Style samples from six of the 18 built-in presets. Font fallback, frame size and host rendering can change the result.")
 INSTALL = """<ol>
-<li><a href="__FREE__">Get the free Windows setup</a> through the email checkout, with no payment card. Save your work, close the Adobe apps, then choose <strong>Premiere Pro</strong> in setup. You need Premiere Pro 25.6 or newer on supported 64-bit Windows 10 or 11, Creative Cloud Desktop and Adobe installation permissions.</li>
+<li><a href="__FREE__">Get the free Windows setup</a> directly, with no email address or payment card required. Save your work, close the Adobe apps, then choose <strong>Premiere Pro</strong> in setup. You need Premiere Pro 25.6 or newer on supported 64-bit Windows 10 or 11, Creative Cloud Desktop and Adobe installation permissions.</li>
 <li>Reopen Premiere Pro and go to <kbd>Window</kbd> &gt; <kbd>UXP Plugins</kbd> &gt; <kbd>Captions Gen</kbd>. Let any missing speech models download before generating; allow at least 3 GB for the built-in models. Later transcription uses the cached models on your CPU.</li>
 <li>Select the clip with the voice in your timeline.</li>
 </ol><p>Use the full Setup for a first installation. Check the <a href="/product.html">current product requirements</a> and <a href="/news/captions-gen-1-1-9.html">1.1.9 release notes</a> if you're updating an existing installation.</p>"""
@@ -63,7 +63,7 @@ faq=[
 ("Can Premiere Pro make Hormozi captions without a plugin?",
  "Yes, with manual graphics work. Premiere can transcribe and create native captions, including a Single Word layout in current versions. To move a yellow highlight across a multi-word line, upgrade captions to graphics and time the color changes yourself."),
 ("Is there a free Hormozi captions preset for Premiere Pro?",
- "Yes. Captions Gen is currently free for Premiere Pro 25.6 or newer on supported 64-bit Windows. Bold Impact gives heavy caps with a yellow spoken word; Punch gives a taller version. The download uses an email checkout, with no payment card, watermark or time limit."),
+ "Yes. Captions Gen is currently free for Premiere Pro 25.6 or newer on supported 64-bit Windows. Bold Impact gives heavy caps with a yellow spoken word; Punch gives a taller version. The installer downloads directly, with no email requirement, payment card, watermark or time limit."),
 ("Can I change the yellow to green?",
  "Yes. In Captions Gen, open the Customize tab and pick a different highlight color. Save it as your own preset so every video uses it."),
 ("Can I still edit the captions after generating them?",
@@ -199,7 +199,7 @@ faq=[
 ("How do I make words bounce in Premiere Pro?",
  "For a manual bounce, use a separate graphic for each word and keyframe Scale from about 80% to 110%, then 100%. Adjust the keyframe spacing to the frame rate and speech. Captions Gen's Beast Comic preset applies its own bounce animation automatically."),
 ("Is there a free MrBeast captions preset for Premiere Pro?",
- "Yes. Captions Gen is currently free for Premiere Pro 25.6 or newer on supported 64-bit Windows. Beast Comic has a green spoken-word highlight and bounce; Gamer uses Luckiest Guy with a cyan highlight. The email checkout needs no payment card."),
+ "Yes. Captions Gen is currently free for Premiere Pro 25.6 or newer on supported 64-bit Windows. Beast Comic has a green spoken-word highlight and bounce; Gamer uses Luckiest Guy with a cyan highlight. The direct installer download needs no email address or payment card."),
 ("Should I use MrBeast style captions on long YouTube videos?",
  "Use them for the big moments, like the hook, numbers and reveals. For a whole long video, a calmer style such as Podcast or Subtitle Box is easier to watch."),
 ("Does it work on Mac?",
@@ -328,7 +328,7 @@ faq=[
 ("Do the templates work in other languages?",
  "Captions Gen offers searchable spoken-language selection and compatible custom speech models. Accuracy and word timing vary by language and model. Choose a font that contains the script's characters and review the result; a preset does not translate speech."),
 ("Is there a watermark or time limit?",
- "The current free Captions Gen release has no watermark or transcription time limit. The email checkout needs no payment card. Paid features are planned for the future."),
+ "The current free Captions Gen release has no watermark or transcription time limit. The direct installer download needs no email address or payment card. Paid features are planned for the future."),
 ],
 body="""
 <p>A free caption template can mean three different things in Premiere Pro: a MOGRT graphic, a native caption Track Style, or a speech-driven plugin preset. Before downloading one, decide whether you need reusable design, selectable subtitle text, or animated word-by-word graphics.</p>
@@ -501,7 +501,7 @@ body="""
 <h2 id="cost">What AutoCut captions cost</h2>
 <p>AutoCut's <strong>Basic</strong> plan excludes AutoCaptions. Captions are in the <strong>AI Plan</strong>, alongside the wider editing features. The pricing page advertises a 14-day trial with no credit card.</p>
 <p>On 9 November 2026, the fetched yearly quote showed the AI Plan at <strong>US$14.90 per month equivalent, billed US$178.80 yearly</strong>. That is an annual commitment, not a monthly invoice. See <a href="https://www.autocut.com/en/pricing/">AutoCut's live quote</a> for current monthly billing, regional taxes and terms.</p>
-<p>Captions Gen is currently free, with no subscription. Its download uses an email checkout, with no payment card. Premiere Pro and After Effects are separate paid Adobe applications, and paid Captions Gen features are planned for the future.</p>
+<p>Captions Gen is currently free, with no subscription. Its installer downloads directly, with no email address or payment card required. Premiere Pro and After Effects are separate paid Adobe applications, and paid Captions Gen features are planned for the future.</p>
 <h2 id="compare">AutoCut vs Captions Gen</h2>
 <div class="ptable-wrap">
 <table class="ptable">
@@ -573,7 +573,7 @@ faq=[
 ("Is Submagic free?",
  "Submagic offers a trial for uploading and editing three short videos; its help page says no-watermark downloads require a subscription. Its official help lists monthly US-dollar plans from $19 per member. Credits, billing period and regional pricing affect the quote. Sources reviewed 9 November 2026."),
 ("Is there a free Submagic alternative without a watermark?",
- "Captions Gen is currently free without a watermark or transcription time limit for Premiere Pro 25.6 or newer on supported 64-bit Windows. The download uses an email checkout, with no payment card. Adobe Premiere Pro is separate and paid."),
+ "Captions Gen is currently free without a watermark or transcription time limit for Premiere Pro 25.6 or newer on supported 64-bit Windows. The installer downloads directly, with no email address or payment card required. Adobe Premiere Pro is separate and paid."),
 ("Does Submagic work inside Premiere Pro?",
  "Submagic's editor runs in the browser rather than as a Premiere panel. You upload media and download the result. Submagic also advertises SRT export for text and timing; that file doesn't carry its animated graphic appearance."),
 ("Can I get Submagic-style captions in Premiere Pro?",

@@ -7,13 +7,13 @@ from product import PRODUCT
 from genlanding import UPDATED as AFTER_EFFECTS_UPDATED
 
 SITE = "https://captionsgen.com"
-FREE = "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece"
+FREE = PRODUCT["download_url"]
 DATE = "2026-08-26"
 SITE_UPDATED = "2026-11-09"
 GUIDE_INDEX_UPDATED = "2026-11-09"
 # Every guide includes the shared requirements box below. Its factual correction
 # is a content update even when the rest of an article has not changed.
-SHARED_REQUIREMENTS_UPDATED = "2026-11-08"
+SHARED_REQUIREMENTS_UPDATED = "2026-11-09"
 ANALYTICS_HEAD = '<link rel="stylesheet" href="/analytics.css">\n<script defer src="/analytics.js"></script>'
 PRIVACY_FOOTER = '<a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button>'
 
@@ -421,7 +421,7 @@ for slug, p in POSTS.items():
     html = page(slug, p["title"], p["desc"], p["h1"], p["body"].replace("__FREE__", FREE), related,
                 p.get("modified", DATE), p.get("image"), p.get("published", DATE), p.get("faq"), p.get("app", "Premiere Pro"))
     import re as _re
-    html = html.replace('<a target="_blank" rel="noopener" ', "<a ").replace('href="https://captionsgen.lemonsqueezy', 'target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy')
+    html = html.replace('<a target="_blank" rel="noopener" ', "<a ").replace('href="https://github.com/kriespy10/captions-gen-site/releases/download/', 'target="_blank" rel="noopener" href="https://github.com/kriespy10/captions-gen-site/releases/download/')
     with io.open(os.path.join("blog", slug + ".html"), "w", encoding="utf-8", newline="") as f:
         f.write(html)
     print("wrote", slug, len(html))

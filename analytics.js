@@ -117,7 +117,7 @@
     banner.setAttribute('aria-labelledby', 'analytics-consent-title');
     banner.hidden = true;
     banner.innerHTML = '<div><h2 id="analytics-consent-title">Help us improve Captions Gen?</h2>' +
-      '<p>With your permission, Google Analytics measures website visits, download-button clicks and journeys to our checkout. ' +
+      '<p>With your permission, Google Analytics measures website visits and download-button clicks. ' +
       'You can change your choice anytime in the footer. <a href="/privacy.html">Privacy details</a></p>' +
       '<p id="analytics-current-choice"></p></div><div class="analytics-consent-actions">' +
       '<button type="button" data-analytics-choice="denied">Decline</button>' +
@@ -132,7 +132,7 @@
       if (event.type === 'auxclick' && event.button !== 1) return;
       var target = event.target.closest && event.target.closest('[data-analytics-choice], [data-analytics-preferences], a[href]');
       if (!target) return;
-      // Auxiliary clicks are only for measuring a checkout opened in a new tab.
+      // Auxiliary clicks measure download or legacy checkout links opened in a new tab.
       // Consent/preference buttons remain normal primary-click controls.
       if (event.type === 'auxclick' &&
           (target.hasAttribute('data-analytics-preferences') || target.hasAttribute('data-analytics-choice'))) return;
@@ -150,7 +150,20 @@
       var link;
       try { link = new URL(target.href, window.location.href); }
       catch (error) { return; }
-      if (link.protocol !== 'https:' || link.hostname !== 'captionsgen.lemonsqueezy.com') return;
+      if (link.protocol !== 'https:') return;
+      var installer = link.hostname === 'github.com' && link.pathname.match(/^\/kriespy10\/captions-gen-site\/releases\/download\/v(\d+\.\d+\.\d+)\/CaptionsGen-Setup-\1\.exe$/);
+      if (installer) {
+        window.gtag('event', 'download_click', {
+          send_to: measurementId,
+          page_path: window.location.pathname,
+          link_placement: (target.closest('[id]') || {}).id || 'guide',
+          file_name: 'CaptionsGen-Setup-' + installer[1] + '.exe',
+          version: installer[1],
+          transport_type: 'beacon'
+        });
+        return;
+      }
+      if (link.hostname !== 'captionsgen.lemonsqueezy.com') return;
       // Query strings can contain checkout form details. Identify only our
       // known shareable checkout paths and send none of those query values.
       var checkoutPath = link.pathname;

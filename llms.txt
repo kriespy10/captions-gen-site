@@ -6,7 +6,7 @@ Official website: https://captionsgen.com/. Product facts checked 2026-11-09.
 
 ## Current facts
 - Pricing: Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications.
-- Download: Download one Windows setup through the free Lemon Squeezy checkout: enter an email address to receive the download link. Choose Premiere Pro, After Effects, or both during setup. No payment card is required. No account or license key is needed to use the current free plugin.
+- Download: Download one Windows setup directly. No email address is required; newsletter signup is optional. Choose Premiere Pro, After Effects, or both during setup. No payment card is required. No account or license key is needed to use the current free plugin.
 - Compatibility: Premiere Pro 25.6 or newer on supported 64-bit Windows 10 or 11. After Effects has been tested with After Effects 2026 on Windows 11; earlier After Effects versions are not certified for this release. Creative Cloud Desktop and Adobe installation permissions are required. Install either panel or both with the same Windows setup. Premiere versions before 25.6 are not supported. This public release does not include a Mac installer.
 - Processing: Audio and video are not uploaded for transcription. The engine downloads missing speech models and caches them for later use. Model downloads, update checks and legacy license checks use the internet.
 - Hardware: Meet Adobe's processor, RAM and GPU requirements for the Adobe application you use, with memory available for the speech model. Transcription uses the CPU, without GPU acceleration; a dedicated GPU is not required for transcription itself.
@@ -25,7 +25,7 @@ Official website: https://captionsgen.com/. Product facts checked 2026-11-09.
 - [Current public release](https://captionsgen.com/news/captions-gen-1-1-9.html): version 1.1.9, released 2026-11-08.
 - [Free release announcement](https://captionsgen.com/news/captions-gen-1-1-0.html): the 15-minute limit was removed on 2026-10-21.
 - [News and release notes](https://captionsgen.com/news/): published updates.
-- [Website privacy](https://captionsgen.com/privacy.html): optional analytics and checkout information.
+- [Website privacy](https://captionsgen.com/privacy.html): optional analytics, direct downloads and email updates.
 
 ## Caption guides
 - [Add animated captions in After Effects](https://captionsgen.com/blog/how-to-add-captions-in-after-effects.html): combined Windows setup, the After Effects panel, caption layers, text edits, styling and rendering.

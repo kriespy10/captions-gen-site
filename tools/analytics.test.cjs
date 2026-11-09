@@ -230,3 +230,24 @@ test('every published HTML page includes the shared tag once and a preferences c
     assert.ok(html.includes('/privacy.html') || file === 'privacy.html', file);
   }
 });
+
+test('direct installer clicks respect consent and exact asset identity without altering navigation', () => {
+  const installer = 'https://github.com/kriespy10/captions-gen-site/releases/download/v1.1.9/CaptionsGen-Setup-1.1.9.exe';
+  for (const choice of [undefined, 'denied', 'granted']) {
+    const page = browser({ choice });
+    const click = page.link(installer + '?email=private@example.com');
+    assert.equal(click.prevented, false);
+    const events = page.commands().filter(args => args[0] === 'event');
+    assert.equal(events.length, choice === 'granted' ? 1 : 0);
+    if (choice === 'granted') {
+      assert.equal(events[0][1], 'download_click');
+      assert.equal(events[0][2].file_name, 'CaptionsGen-Setup-1.1.9.exe');
+      assert.equal(JSON.stringify(events).includes('private'), false);
+    }
+  }
+  const page = browser({ choice: 'granted' });
+  for (const url of [installer.replace('github.com', 'github.com.evil.example'), installer.replace('https:', 'http:'), installer.replace('Setup', 'Update'), installer.replace('/v1.1.9/', '/v1.1.8/')]) page.link(url);
+  assert.equal(page.commands().filter(args => args[0] === 'event').length, 0);
+  page.link(installer, { type: 'auxclick', button: 1 });
+  assert.equal(page.commands().filter(args => args[0] === 'event').length, 1);
+});

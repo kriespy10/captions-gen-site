@@ -136,7 +136,7 @@ def product_page():
 <h1>Captions Gen: pricing, compatibility and product facts</h1>
 <p class="intro">{escape(p['description'])}</p>
 <p>Made by <a href="/#about-kris">Kris, a video editor</a>. This page describes the public Windows release for Premiere Pro and After Effects. See the <a href="/news/">release notes</a> for published changes.</p>
-<a class="btn" href="{p['checkout']}">Download free</a>
+<a class="btn" href="{p['download_url']}">Download free</a>
 <h2 id="facts">Current product facts</h2>
 <dl>{facts}</dl>
 <p>For setup and model choices, see <a href="/#install">requirements and installation</a> and <a href="/#performance">transcription and performance</a>.</p>
@@ -153,7 +153,7 @@ def product_page():
 <p>Start in your Adobe application: <a href="/blog/how-to-add-captions-in-after-effects.html">generate animated captions in After Effects</a>, or <a href="/blog/animated-captions-premiere-pro.html">choose a Premiere Pro caption workflow</a>. After Effects layers and Premiere Motion Graphics clips have different host editing steps.</p>
 <h2 id="release">Public release and support</h2>
 <p>Current public version: <a href="{p['release_url']}">{escape(p['version'])}, released {released}</a>. The <a href="/update/version.json">update manifest</a> reports the published update. The current Windows setup offers Premiere Pro, After Effects, or Both, with a shared engine and Models folder. Mac is not included in this public release.</p>
-<p>For product questions or corrections, email <a href="mailto:{p['support']}">{p['support']}</a>. Read the <a href="/privacy.html">website privacy information</a> for optional analytics and checkout details.</p>
+<p>For product questions or corrections, email <a href="mailto:{p['support']}">{p['support']}</a>. Read the <a href="/privacy.html">website privacy information</a> for optional analytics, direct downloads and email updates.</p>
 </main>
 <footer><p><a href="/">Product overview and live style preview</a> · <a href="/news/">News and updates</a> · <a href="/llms.txt">Text directory</a> · <a href="/privacy.html">Website privacy</a></p><button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button><p>© 2026 Captions Gen. Not affiliated with Adobe. Adobe, Premiere Pro and After Effects are trademarks of Adobe Inc.</p></footer>
 </body>
@@ -190,7 +190,7 @@ Official website: {SITE}/. Product facts checked {p['checked']}.
 - [Current public release]({p['release_url']}): version {p['version']}, released {p['released']}.
 - [Free release announcement]({p['free_release_url']}): the 15-minute limit was removed on {p['free_since']}.
 - [News and release notes]({SITE}/news/): published updates.
-- [Website privacy]({SITE}/privacy.html): optional analytics and checkout information.
+- [Website privacy]({SITE}/privacy.html): optional analytics, direct downloads and email updates.
 
 ## Caption guides
 - [Add animated captions in After Effects]({SITE}/blog/how-to-add-captions-in-after-effects.html): combined Windows setup, the After Effects panel, caption layers, text edits, styling and rendering.

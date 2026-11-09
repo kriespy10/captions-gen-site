@@ -8,21 +8,59 @@
 // secret RESEND_API_KEY, optional MAIL_FROM / MAIL_TO vars.
 import { usage } from "./usage.js";
 import { subscribe } from "./subscribe.js";
+import { downloads } from "./downloads.js";
 
 const MAX_BODY = 40000;
 const KINDS = ["bug", "feature"];
 const json = (body, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json" } });
+const SUBSCRIBE_ORIGINS = new Set(["https://captionsgen.com", "https://www.captionsgen.com"]);
+
+function subscribeCors(response, origin) {
+  const headers = new Headers(response.headers);
+  headers.set("access-control-allow-origin", origin);
+  headers.append("vary", "Origin");
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+}
+
+function subscribePreflight(request) {
+  const origin = request.headers.get("origin");
+  const requestedHeaders = (request.headers.get("access-control-request-headers") || "")
+    .split(",").map((header) => header.trim().toLowerCase()).filter(Boolean);
+  if (!SUBSCRIBE_ORIGINS.has(origin) || request.headers.get("access-control-request-method") !== "POST" ||
+      requestedHeaders.some((header) => header !== "content-type"))
+    return new Response(null, { status: 403, headers: { vary: "Origin" } });
+  return new Response(null, { status: 204, headers: {
+    "access-control-allow-origin": origin,
+    "access-control-allow-methods": "POST",
+    "access-control-allow-headers": "Content-Type",
+    "access-control-max-age": "600",
+    vary: "Origin",
+  } });
+}
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.pathname === "/api/subscribe") {
+      if (request.method === "OPTIONS") return subscribePreflight(request);
+      const origin = request.headers.get("origin");
+      if (request.method === "POST" && SUBSCRIBE_ORIGINS.has(origin)) {
+        try {
+          return subscribeCors(await subscribe(request, env, url), origin);
+        } catch {
+          return subscribeCors(json({ ok: false, error: "Sign-up is temporarily unavailable." }, 500), origin);
+        }
+      }
+    }
     if (url.pathname === "/api/report" && request.method === "POST") return submit(request, env);
     if (url.pathname === "/api/reports" && request.method === "GET") return list(request, env);
     const stats = await usage(request, env, url);
     if (stats) return stats;
     const emails = await subscribe(request, env, url);
     if (emails) return emails;
+    const installers = await downloads(request, env, url);
+    if (installers) return installers;
     return json({ ok: false, error: "not found" }, 404);
   },
 };

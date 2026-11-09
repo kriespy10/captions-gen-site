@@ -121,7 +121,7 @@ h2{font-size:16px;margin:28px 0 8px}.lbl{color:#d4d4d8}input,button{font:inherit
 button{background:#3b82f6;border:0;cursor:pointer}#err{color:#f87171}small{color:#71717a}
 </style><main><h1>Captions Gen funnel</h1><p>Opt-in installs only, plus anonymous daily counts.</p>
 <form id="f" hidden><input id="t" type="password" placeholder="Admin token" size="30"> <button>Show</button></form>
-<div id="err"></div><div id="out"></div><div id="subs"></div></main>
+<div id="err"></div><section id="downloads" aria-live="polite"></section><div id="out"></div><div id="subs"></div></main>
 <script>
 const L={consent:"Said yes to stats",panel_open:"Opened the panel",transcribe:"Transcribed",captions_placed:"Placed captions",buy_click:"Clicked Buy",licensed:"Licensed"};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -138,7 +138,23 @@ async function load(tok){
   const days=Object.keys(p.daily).sort().reverse().slice(0,14);
   h+="<h2>Last 14 days</h2>"+days.map(k=>'<div><small>'+k+'</small> new installs '+(p.daily[k].install||0)+', engines running '+(p.daily[k].engine_start||0)+'</div>').join("");
   document.getElementById("out").innerHTML=h;
+  loadDownloads(tok);
   loadSubs(tok);
+}
+async function loadDownloads(tok){
+  const box=document.getElementById("downloads");
+  box.innerHTML="<h2>Installer downloads</h2><p>Loading download counts…</p>";
+  try{
+    const r=await fetch("/api/downloads",{headers:{authorization:"Bearer "+tok}});
+    if(!r.ok)throw new Error("unavailable");
+    const d=await r.json();
+    if(!d.ok)throw new Error("unavailable");
+    box.innerHTML="<h2>Installer downloads ("+d.total+")</h2>"+
+      bars(d.files.map(file=>["Windows setup "+file.version,file.downloads]),Math.max(d.total,1))+
+      '<p>GitHub release download requests, including repeats. These are not unique people, completed transfers or installs. Earlier Lemon Squeezy downloads are not included. Counts may take a few minutes to refresh. <a href="https://github.com/kriespy10/captions-gen-site/releases" target="_blank" rel="noopener">View releases</a>.</p>';
+  }catch{
+    box.innerHTML="<h2>Installer downloads</h2><p>Download counts are temporarily unavailable. Try refreshing later.</p>";
+  }
 }
 async function loadSubs(tok){
   const r=await fetch("/api/subscribers",{headers:{authorization:"Bearer "+tok}});

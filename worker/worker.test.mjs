@@ -2,6 +2,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import worker, { notify } from "./report-worker.js";
+import { downloads } from "./downloads.js";
 
 function setup() {
   const store = new Map();
@@ -26,6 +27,139 @@ function setup() {
 }
 const admin = { authorization: "Bearer admin" };
 const ID = "123e4567-e89b-42d3-a456-426614174000";
+
+test("website newsletter preflight allows only exact production origins, POST and Content-Type", async () => {
+  const { call } = setup();
+  for (const origin of ["https://captionsgen.com", "https://www.captionsgen.com"]) {
+    const response = await call("OPTIONS", "/api/subscribe", null, {
+      origin, "access-control-request-method": "POST", "access-control-request-headers": "content-type",
+    });
+    assert.equal(response.status, 204);
+    assert.equal(response.headers.get("access-control-allow-origin"), origin);
+    assert.equal(response.headers.get("access-control-allow-methods"), "POST");
+    assert.equal(response.headers.get("access-control-allow-headers"), "Content-Type");
+    assert.equal(response.headers.get("access-control-max-age"), "600");
+    assert.equal(response.headers.get("vary"), "Origin");
+    assert.equal(response.headers.has("access-control-allow-credentials"), false);
+  }
+  for (const origin of ["https://captionsgen.com.evil.example", "http://captionsgen.com", "https://evil.example", "null"]) {
+    const response = await call("OPTIONS", "/api/subscribe", null, { origin, "access-control-request-method": "POST" });
+    assert.equal(response.status, 403);
+    assert.equal(response.headers.has("access-control-allow-origin"), false);
+  }
+  for (const headers of [
+    { "access-control-request-method": "DELETE" },
+    { "access-control-request-method": "POST", "access-control-request-headers": "content-type, authorization" },
+  ]) {
+    const response = await call("OPTIONS", "/api/subscribe", null, { origin: "https://captionsgen.com", ...headers });
+    assert.equal(response.status, 403);
+    assert.equal(response.headers.has("access-control-allow-origin"), false);
+  }
+});
+
+test("website newsletter success and validation errors carry matching CORS, without widening other routes", async () => {
+  const { call } = setup();
+  for (const origin of ["https://captionsgen.com", "https://www.captionsgen.com"]) {
+    for (const [body, status] of [[{ email: "website@example.com", consent: "website-2026-11" }, 200], [{ email: "bad" }, 400]]) {
+      const response = await call("POST", "/api/subscribe", body, { origin, "content-type": "application/json" });
+      assert.equal(response.status, status);
+      assert.equal(response.headers.get("access-control-allow-origin"), origin);
+      assert.equal(response.headers.get("vary"), "Origin");
+      assert.equal(response.headers.has("access-control-allow-credentials"), false);
+    }
+  }
+  for (const headers of [{}, { origin: "https://captionsgen.com.evil.example" }]) {
+    const response = await call("POST", "/api/subscribe", { email: "panel@example.com", consent: "panel-2026-10" }, headers);
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.has("access-control-allow-origin"), false);
+  }
+  const response = await call("DELETE", "/api/subscribe", { email: "missing@example.com", token: "wrong" }, { origin: "https://captionsgen.com" });
+  assert.equal(response.status, 403);
+  assert.equal(response.headers.has("access-control-allow-origin"), false);
+  assert.equal((await call("OPTIONS", "/api/reports", null, { origin: "https://captionsgen.com" })).status, 404);
+});
+
+test("website newsletter internal errors remain readable through the approved CORS origin", async () => {
+  const response = await worker.fetch(new Request("https://api.captionsgen.com/api/subscribe", {
+    method: "POST", headers: { origin: "https://captionsgen.com", "content-type": "application/json" },
+    body: JSON.stringify({ email: "website@example.com", consent: "website-2026-11" }),
+  }), { ADMIN_TOKEN: "admin", REPORTS: { get() { throw new Error("test failure"); } } });
+  assert.equal(response.status, 500);
+  assert.equal(response.headers.get("access-control-allow-origin"), "https://captionsgen.com");
+  assert.equal((await response.json()).ok, false);
+});
+
+const installer = (count = 42) => ({ name: "CaptionsGen-Setup-1.1.9.exe", state: "uploaded", download_count: count });
+const release = (assets = [installer()]) => ({ draft: false, prerelease: false, assets });
+function downloadCall(fetchImpl, headers = admin, env = { ADMIN_TOKEN: "admin" }) {
+  const request = new Request("https://api.captionsgen.com/api/downloads", { headers });
+  return downloads(request, env, new URL(request.url), fetchImpl);
+}
+
+test("installer counts require the existing admin authorization before contacting GitHub", async () => {
+  let calls = 0;
+  const fetchImpl = async () => { calls++; throw new Error("must not be called"); };
+  for (const headers of [{}, { authorization: "Bearer wrong" }])
+    assert.equal((await downloadCall(fetchImpl, headers)).status, 401);
+  assert.equal((await downloadCall(fetchImpl, admin, {})).status, 401);
+  const { call } = setup();
+  assert.equal((await call("GET", "/api/downloads")).status, 401);
+  assert.equal(calls, 0);
+});
+
+test("installer counts include only published full Windows setup assets and keep credentials local", async () => {
+  const result = await downloadCall(async (url, options) => {
+    assert.equal(url, "https://api.github.com/repos/kriespy10/captions-gen-site/releases?per_page=100&page=1");
+    assert.equal(options.headers.authorization, undefined);
+    assert.equal(options.headers["user-agent"], "CaptionsGen-download-dashboard");
+    assert.equal(options.cf.cacheTtl, 300);
+    return Response.json([
+      release([installer(42), { name: "CaptionsGen-Update-1.1.9.exe", state: "uploaded", download_count: 999 }, { name: "notes.txt", state: "uploaded", download_count: 100 }, { name: "CaptionsGen-Setup-1.1.8.exe", state: "starter", download_count: 30 }]),
+      { ...release([installer(10)]), draft: true },
+      { ...release([installer(20)]), prerelease: true },
+    ]);
+  });
+  assert.equal(result.status, 200);
+  assert.equal(result.headers.get("cache-control"), "private, no-store");
+  assert.deepEqual(await result.json(), { ok: true, source: "GitHub release assets", total: 42, files: [{ name: "CaptionsGen-Setup-1.1.9.exe", version: "1.1.9", downloads: 42 }], releasesUrl: "https://github.com/kriespy10/captions-gen-site/releases" });
+});
+
+test("an actual zero download count is distinct from unavailable", async () => {
+  const result = await downloadCall(async () => Response.json([release([installer(0)])]));
+  assert.equal(result.status, 200);
+  assert.equal((await result.json()).total, 0);
+});
+
+test("installer counts paginate before reporting the total", async () => {
+  let calls = 0;
+  const result = await downloadCall(async (url) => {
+    calls++;
+    assert.match(url, new RegExp("page=" + calls + "$"));
+    return Response.json([release([installer(calls)])], calls === 1 ? { headers: { link: '<https://api.github.com/repos/kriespy10/captions-gen-site/releases?per_page=100&page=2>; rel="next"' } } : undefined);
+  });
+  assert.equal((await result.json()).total, 3);
+  assert.equal(calls, 2);
+});
+
+test("GitHub failures, missing installers and malformed counters never become a false zero", async () => {
+  const responses = [
+    () => new Response("rate limited", { status: 403 }),
+    () => { throw new Error("network failure"); },
+    () => Response.json([]),
+    () => Response.json({ message: "bad shape" }),
+    () => Response.json([release([{ name: "CaptionsGen-Setup-1.1.9.exe", state: "uploaded" }])]),
+    () => Response.json([release([installer(-1)])]),
+    () => Response.json([release([installer("42")])]),
+    () => new Response("not JSON"),
+  ];
+  for (const response of responses) {
+    const result = await downloadCall(async () => response());
+    assert.equal(result.status, 503);
+    const data = await result.json();
+    assert.equal(data.ok, false);
+    assert.equal(Object.hasOwn(data, "total"), false);
+  }
+});
 
 test("usage: opted-in steps reach the funnel; DELETE removes the install", async () => {
   const { store, call } = setup();

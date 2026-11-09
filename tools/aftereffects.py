@@ -12,7 +12,7 @@ AE_POSTS = {
         rel=["edit-captions-in-after-effects", "after-effects-captions-not-showing", "word-by-word-captions-after-effects"],
         faq=[
             ("Is Captions Gen free for After Effects?",
-             "The current Windows release is free, without a watermark, subscription or transcription time cap. The download uses an email checkout without a payment card. Adobe After Effects is a separate paid application. Paid Captions Gen features are planned for the future."),
+             "The current Windows release is free, without a watermark, subscription or transcription time cap. The installer downloads directly without an email address or payment card. Adobe After Effects is a separate paid application. Paid Captions Gen features are planned for the future."),
             ("Which After Effects versions are supported?",
              "The public panel has been tested with After Effects 2026 on Windows 11. Earlier After Effects versions are not certified for this release. There is no public Mac installer."),
             ("Does the work area choose which audio is transcribed?",
@@ -37,7 +37,7 @@ AE_POSTS = {
 <h2 id="install">1. Install and open the After Effects panel</h2>
 <ol>
 <li>Save your projects and close the Adobe applications.</li>
-<li><a href="__FREE__">Download the current Windows Setup</a>. The free checkout uses an email address to deliver the link; it does not require a payment card.</li>
+<li><a href="__FREE__">Download the current Windows Setup</a>. The installer downloads directly; no email address or payment card is required.</li>
 <li>Run Setup and choose <strong>After Effects</strong>, or <strong>Both</strong> to install the Premiere Pro panel too. Keep Creative Cloud Desktop installed and complete Adobe's installation prompts.</li>
 <li>Open After Effects, then choose <strong>Window &gt; Extensions &gt; Captions Gen</strong>.</li>
 </ol>
