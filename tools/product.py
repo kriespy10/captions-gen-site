@@ -5,10 +5,11 @@ Do not infer a public release from development builds or promotional assets.
 """
 
 SITE = "https://captionsgen.com"
+AFTER_EFFECTS_COMPATIBILITY = "After Effects has been tested with After Effects 2026 on Windows 11; earlier After Effects versions are not certified for this release."
 PRODUCT = {
     "name": "Captions Gen",
     "url": f"{SITE}/product.html",
-    "checked": "2026-11-08",
+    "checked": "2026-11-09",
     "version": "1.1.9",
     "released": "2026-11-08",
     "release_url": "https://captionsgen.com/news/captions-gen-1-1-9.html",
@@ -19,7 +20,8 @@ PRODUCT = {
     "description": "Captions Gen is a currently free animated captions plugin for Adobe Premiere Pro and After Effects on Windows. It transcribes audio locally on the CPU with Faster Whisper, then places editable Motion Graphics clips in Premiere or native caption layers in After Effects.",
     "pricing": "Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications.",
     "download": "Download one Windows setup through the free Lemon Squeezy checkout: enter an email address to receive the download link. Choose Premiere Pro, After Effects, or both during setup. No payment card is required. No account or license key is needed to use the current free plugin.",
-    "compatibility": "Premiere Pro 25.6 or newer on supported 64-bit Windows 10 or 11. After Effects has been tested with After Effects 2026 on Windows 11; earlier After Effects versions are not certified for this release. Creative Cloud Desktop and Adobe installation permissions are required. Install either panel or both with the same Windows setup. Premiere versions before 25.6 are not supported. This public release does not include a Mac installer.",
+    "after_effects_compatibility": AFTER_EFFECTS_COMPATIBILITY,
+    "compatibility": "Premiere Pro 25.6 or newer on supported 64-bit Windows 10 or 11. " + AFTER_EFFECTS_COMPATIBILITY + " Creative Cloud Desktop and Adobe installation permissions are required. Install either panel or both with the same Windows setup. Premiere versions before 25.6 are not supported. This public release does not include a Mac installer.",
     "hardware": "Meet Adobe's processor, RAM and GPU requirements for the Adobe application you use, with memory available for the speech model. Transcription uses the CPU, without GPU acceleration; a dedicated GPU is not required for transcription itself.",
     "storage": "Allow at least 3 GB free for the built-in speech models, in addition to the plugin, Adobe applications and project files. Both panels use the same engine and Models folder. Model sizes can change, and custom models need additional space.",
     "network": "Audio and video are not uploaded for transcription. The engine downloads missing speech models and caches them for later use. Model downloads, update checks and legacy license checks use the internet.",
