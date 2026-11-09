@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1000" viewBox="0 0 960 1000" role="img" aria-labelledby="title description">
+<title id="title">One native track, three delivery choices</title><desc id="description">An editable native C1 caption track can be delivered as permanently visible text burned into the video picture, a separate text-and-timing SRT sidecar, or an embedded selectable caption stream where the chosen track format and container support it. Caption format and delivery are separate decisions; test with the receiving system.</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#696974" stroke-width="1.6"/></marker></defs>
+<rect width="960" height="1000" rx="24" fill="#101013"/><g font-family="Arial, sans-serif">
+<text x="48" y="52" font-size="20" fill="#ffeb3b" font-weight="700">CAPTIONS GEN GUIDES</text>
+
+<text x="48" y="108" font-size="40" fill="#f5f5f7" font-weight="700">One track, three delivery choices</text>
+<text x="48" y="156" font-size="24" fill="#b7b7c0">Choose the caption format, then a supported delivery method.</text>
+<rect x="40" y="190" width="880" height="208" rx="16" fill="#19191e" stroke="#37373f"/>
+<text x="66" y="226" font-size="20" fill="#ffeb3b" font-weight="700">EDITABLE NATIVE CAPTION TRACK</text>
+<text x="66" y="262" font-size="24" fill="#b7b7c0">Subtitle or the caption format required by the delivery brief</text>
+<rect x="66" y="285" width="828" height="72" rx="7" fill="#101013" stroke="#37373f"/>
+<text x="87" y="330" font-size="24" fill="#ffeb3b" font-weight="700">C1</text>
+<rect x="156" y="294" width="357" height="54" rx="5" fill="#383424" stroke="#b2a338"/>
+<text x="176" y="329" font-size="26" fill="#f5f5f7" font-weight="700">Keep it clear.</text>
+<rect x="535" y="294" width="333" height="54" rx="5" fill="#28232f" stroke="#625379"/>
+<text x="555" y="329" font-size="25" fill="#b7b7c0">Next caption…</text>
+<text x="66" y="383" font-size="22" fill="#b7b7c0">Text and timing remain editable in the project.</text>
+<path d="M480 404V428H180V454" fill="none" stroke="#696974" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M480 428V454" fill="none" stroke="#696974" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M480 428H780V454" fill="none" stroke="#696974" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="40" y="470" width="280" height="392" rx="16" fill="#19191e" stroke="#37373f"/>
+<rect x="340" y="470" width="280" height="392" rx="16" fill="#19191e" stroke="#37373f"/>
+<rect x="640" y="470" width="280" height="392" rx="16" fill="#19191e" stroke="#37373f"/>
+<text x="64" y="510" font-size="21" fill="#ffeb3b" font-weight="700">BURN-IN</text>
+<text x="364" y="510" font-size="21" fill="#63b9ff" font-weight="700">SIDECAR · SRT</text>
+<text x="664" y="510" font-size="21" fill="#b9adff" font-weight="700">EMBEDDED</text>
+<rect x="64" y="534" width="232" height="142" rx="8" fill="#12283d" stroke="#326687"/><circle cx="231.04" cy="576.6" r="18.46" fill="#284c68"/><path d="M64 676L142.88 587.96L217.12 676Z" fill="#234660"/><path d="M152.16 676L242.64000000000001 593.64L296 676Z" fill="#1b3b53"/><rect x="72" y="633" width="216" height="34" rx="6" fill="#101013" stroke="none"/><text x="180.0" y="657" font-size="20" fill="#f5f5f7" font-weight="700" text-anchor="middle">Keep it clear.</text>
+<text x="64" y="716" font-size="25" fill="#f5f5f7" font-weight="700">Captioned picture</text>
+<text x="64" y="755" font-size="22" fill="#b7b7c0">Text stays visible.</text>
+<text x="64" y="787" font-size="22" fill="#b7b7c0">The viewer cannot</text>
+<text x="64" y="817" font-size="22" fill="#b7b7c0">switch it off.</text>
+<rect x="364" y="546" width="134" height="96" rx="8" fill="#12283d" stroke="#326687"/><circle cx="460.48" cy="574.8" r="12.48" fill="#284c68"/><path d="M364 642L409.56 582.48L452.44 642Z" fill="#234660"/><path d="M414.92 642L467.18 586.32L498 642Z" fill="#1b3b53"/>
+<path d="M520 534H575L596 555V659H520Z M575 534V555H596" fill="#101013" stroke="#63b9ff" stroke-width="2"/>
+<text x="536" y="591" font-size="23" fill="#63b9ff" font-weight="700">SRT</text>
+<path d="M534 610H582 M534 624H582 M534 638H568" fill="none" stroke="#63b9ff" stroke-width="2"/>
+<text x="364" y="716" font-size="25" fill="#f5f5f7" font-weight="700">Video + text file</text>
+<text x="364" y="755" font-size="22" fill="#b7b7c0">Player loads the SRT.</text>
+<text x="364" y="787" font-size="22" fill="#b7b7c0">Text + cue times;</text>
+<text x="364" y="817" font-size="22" fill="#b7b7c0">appearance may vary.</text>
+<rect x="664" y="534" width="232" height="142" rx="8" fill="#101013" stroke="#625379"/>
+<text x="681" y="565" font-size="16" fill="#b9adff" font-weight="700">OUTPUT CONTAINER</text>
+<rect x="678" y="582" width="204" height="32" rx="4" fill="#17364e" stroke="none"/>
+<text x="690" y="605" font-size="20" fill="#63b9ff">Video stream</text>
+<rect x="678" y="626" width="204" height="32" rx="4" fill="#302941" stroke="none"/>
+<text x="690" y="649" font-size="20" fill="#b9adff">Caption stream</text>
+<text x="664" y="716" font-size="25" fill="#f5f5f7" font-weight="700">One container</text>
+<text x="664" y="755" font-size="22" fill="#b7b7c0">Enable captions in a</text>
+<text x="664" y="787" font-size="22" fill="#b7b7c0">compatible player.</text>
+<text x="664" y="817" font-size="21" fill="#b9adff">Only where supported.</text>
+<text x="480" y="904" font-size="23" fill="#b7b7c0" text-anchor="middle">Available options depend on the caption format and container.</text>
+<text x="480" y="936" font-size="23" fill="#b7b7c0" text-anchor="middle">Test the actual file, loaded sidecar or caption stream.</text>
+<text x="48" y="962" font-size="22" fill="#b7b7c0">Workflow illustration · Captions Gen guides</text></g></svg>

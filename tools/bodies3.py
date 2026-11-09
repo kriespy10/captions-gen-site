@@ -7,7 +7,13 @@ def fig(name, alt, cap):
     return (f'<figure class="caption-example"><img src="/img/styles/{name}.png" width="1280" height="480" '
             f'loading="lazy" alt="{alt}"><figcaption>{cap}</figcaption></figure>')
 
-GUIDE_SIZES = {"panel-steps.jpg": (1200, 399), "preset-looks.jpg": (1200, 837)}
+GUIDE_SIZES = {
+    "panel-steps.jpg": (1200, 399), "preset-looks.jpg": (1200, 837),
+    "style-motion-layers.svg": (960, 760),
+    "style-preset-contents.svg": (960, 820),
+    "alternative-editing-sequence.svg": (960, 760),
+    "alternative-caption-handoff.svg": (960, 860),
+}
 
 def gfig(file, alt, cap):
     if "." not in file:
@@ -31,11 +37,11 @@ def note(text):
     return f'<p class="note"><b>Note:</b> {text}</p>'
 
 PANEL = gfig("panel-steps.jpg", "The Captions Gen panel: pick a look on the Presets tab, then change the highlight color and size on the Customize tab",
-             "Step 1: pick a look on Presets. Step 2: make it yours on Customize. Then press Generate.")
+             "Panel overview: choose a preset, customize its appearance, then use Generate Captions. Review the placed text and timing before delivery.")
 SAFE = gfig("vertical-safe-zone", "A 9:16 phone frame with the caption area marked in green, and the bottom and right edge marked in red where TikTok, Reels and Shorts put their buttons",
-            "Keep captions out of the red areas on TikTok, Reels and Shorts.")
+            "Placement illustration, not a fixed platform safe-area specification. Preview your actual upload: interface positions change with the app, device and viewing mode.")
 LOOKS = gfig("preset-looks.jpg", "Six caption presets: Bold Impact, Karaoke Pill, Beast Comic, Glow, Punch and Gamer",
-             "Six of the 18 free presets, as they look in Premiere Pro.")
+             "Style samples from six of the 18 built-in presets. Font fallback, frame size and host rendering can change the result.")
 INSTALL = """<ol>
 <li><a href="__FREE__">Get the free Windows setup</a> through the email checkout, with no payment card. Save your work, close the Adobe apps, then choose <strong>Premiere Pro</strong> in setup. You need Premiere Pro 25.6 or newer on supported 64-bit Windows 10 or 11, Creative Cloud Desktop and Adobe installation permissions.</li>
 <li>Reopen Premiere Pro and go to <kbd>Window</kbd> &gt; <kbd>UXP Plugins</kbd> &gt; <kbd>Captions Gen</kbd>. Let any missing speech models download before generating; allow at least 3 GB for the built-in models. Later transcription uses the cached models on your CPU.</li>
@@ -45,7 +51,7 @@ INSTALL = """<ol>
 
 # ---------------------------------------------------------------- Hormozi
 P3["hormozi-style-captions-premiere-pro"] = dict(
-published="2026-10-22", modified="2026-11-08",
+published="2026-10-22", modified="2026-11-09",
 image="/img/guides/hormozi-anatomy.png",
 title="Hormozi Style Captions in Premiere Pro: Font, Settings and Free Preset",
 desc="Recreate Hormozi style captions in Premiere Pro with bold fonts, a yellow word highlight and readable placement. Follow manual steps or use the free Bold Impact preset.",
@@ -61,7 +67,7 @@ faq=[
 ("Can I change the yellow to green?",
  "Yes. In Captions Gen, open the Customize tab and pick a different highlight color. Save it as your own preset so every video uses it."),
 ("Can I still edit the captions after generating them?",
- "Yes. Captions Gen places editable Motion Graphics clips on the Premiere timeline. You can correct the text or move a clip. Version 1.1.9 includes animation updates after text edits; review the word timing after a correction."),
+ "Yes. Captions Gen places editable Motion Graphics clips on the Premiere timeline. In 1.1.9, correct the words in the caption editor and use Update animation when offered. Direct Properties text edits also need the animation update. New word timings can be estimated, so review the highlight against the voice."),
 ("Does it work on Mac or in CapCut?",
  "This public Captions Gen release is for Windows, with Premiere Pro and After Effects panels. There is no public Mac installer or CapCut plugin. The manual Premiere method in this guide can also be used on a Mac."),
 ],
@@ -77,16 +83,17 @@ body="""
 ) + toc(
 ("what-it-is", "What Hormozi style captions are"),
 ("font", "The font"),
-("settings", "The exact settings"),
+("settings", "The Bold Impact starting settings"),
 ("highlight", "How the word highlight works"),
 ("by-hand", "Method 1: by hand"),
 ("plugin", "Method 2: free with Captions Gen"),
 ("placement", "Where to place them"),
+("review", "Fix words without losing the rhythm"),
 ("mistakes", "Common mistakes"),
 ) + """
 <h2 id="what-it-is">What Hormozi style captions are</h2>
 <p>Editors use "Hormozi style" for short phrases in heavy caps with a contrasting spoken-word highlight. The look is associated with Alex Hormozi's social videos, but you can adapt the font, color and timing to your own channel.</p>
-<p>It works because it's easy to read with the sound off. The eye only has to take in a couple of words, and the color shows exactly where the speaker is.</p>
+<p>Two or three words leave room for a large font. The moving color gives the reader a cue, but the caption still needs to make sense when paused. Read a whole sentence across the cuts: an isolated word can look tidy while hiding the meaning.</p>
 """ + gfig("hormozi-anatomy", "A Hormozi style caption with four labels: heavy font in all caps, thick black outline and shadow, the spoken word in yellow, and only two or three words on screen",
            "The four things that make the look.") + """
 <h2 id="font">The font</h2>
@@ -96,9 +103,9 @@ body="""
 <li><strong>Montserrat ExtraBold</strong>: a little lighter if Black feels too heavy.</li>
 <li><strong>Anton</strong>: tall and narrow. Fits more letters on a vertical frame.</li>
 </ul>
-<p>All three are on Google Fonts. Install the font, then restart Premiere Pro so it shows up in the font list.</p>
+<p>Find <a href="https://fonts.google.com/specimen/Montserrat">Montserrat</a> and <a href="https://fonts.google.com/specimen/Anton">Anton</a> on Google Fonts. Install the needed weight, then restart Premiere Pro so it appears in the font list. A font name alone does not guarantee that another computer has the same font file.</p>
 """ + tip("Captions Gen bundles Montserrat and Anton. Bold Impact uses The Bold Font if you already have it installed, with Montserrat Black as a fallback. The website preview uses that fallback.") + """
-<h2 id="settings">The exact settings</h2>
+<h2 id="settings">The Bold Impact starting settings</h2>
 <p>These settings describe the Bold Impact preset. Font selection depends on which fonts are installed; adjust size and position for your sequence.</p>
 <table class="spec">
 <thead><tr><th>Setting</th><th>Value</th></tr></thead>
@@ -109,14 +116,14 @@ body="""
 <tr><td>Outline</td><td><span class="swatch" style="background:#000000"></span>Black, thick</td></tr>
 <tr><td>Shadow</td><td>Black, short distance, a little blur</td></tr>
 <tr><td>Spoken word</td><td><span class="swatch" style="background:#F7C204"></span>Yellow #F7C204, a little bigger</td></tr>
-<tr><td>Words on screen</td><td>2 to 3</td></tr>
+<tr><td>Grouping</td><td>Minimum 1, maximum 3 words; up to 2 lines</td></tr>
 <tr><td>Animation</td><td>A quick pop as each group appears</td></tr>
 </tbody>
 </table>
 <p>Prefer green? Use <span class="swatch" style="background:#00E676"></span>#00E676. It's the green of the Karaoke preset.</p>
 
 <h2 id="highlight">How the word highlight works</h2>
-<p>The highlight is what makes this style hard to do by hand. Every word changes color at the exact moment it's spoken.</p>
+<p>The highlight follows word timings, not just the beginning of each caption clip. Automatic timings are a draft to check against the voice, especially around quick speech, names and edits.</p>
 """ + gfig("word-highlight-timing", "Three frames of the caption USE YOUR SHIELD: first USE is yellow, then YOUR, then SHIELD, at 0.00, 0.28 and 0.52 seconds",
            "The yellow moves with the voice, one word at a time.") + """
 <p>In the manual method, you can split a three-word graphic into three timed segments and change which word is yellow in each segment. The more speech you include, the more color changes you need to maintain.</p>
@@ -138,9 +145,9 @@ body="""
 <p>Then make the captions:</p>
 <ol start="4">
 <li>On the <strong>Presets</strong> tab, tap <strong>Bold Impact</strong>. The preview plays the look.</li>
-<li>Press <strong>Generate</strong>.</li>
+<li>Press <strong>Generate Captions</strong>. If transcript review is enabled, correct names before placing the graphics.</li>
 </ol>
-<p>That's it. Each word gets its own timing and color, as editable graphics on the track above your clip.</p>
+<p>The generated graphics sit above your video. Play through one full sentence before generating a longer section. A short test catches a poor font fallback, oversized text or a highlight that arrives early.</p>
 """ + PANEL + """
 <h3>Make it your own</h3>
 <p>Open the <strong>Customize</strong> tab to change the look. The changes show in the preview right away.</p>
@@ -159,10 +166,18 @@ body="""
 <h2 id="placement">Where to place them</h2>
 <p>On vertical video, the app's buttons cover parts of the frame. Put your captions a little below the middle, away from the bottom and the right edge.</p>
 """ + SAFE + """
+<h2 id="review">Fix words without losing the rhythm</h2>
+<p>In 1.1.9, a text correction and a style change are different jobs. Use this order rather than regenerating everything for every small change:</p>
+<ol>
+<li><strong>Correct the words.</strong> Use the caption editor. If you edit a graphic's text through Premiere's Properties instead, the existing animation does not automatically know the new wording.</li>
+<li><strong>Update animation.</strong> Use the panel's update action when offered, then listen to the affected phrase. Replacement words can receive estimated timing, so check the first and last highlighted word.</li>
+<li><strong>Restyle separately.</strong> Choose a look and use <strong>Apply style</strong> for appearance changes. Changing grouping can require transcription again; it is not just a color change.</li>
+</ol>
+<p>Need the same broad look in an After Effects composition? Use the separate <a href="word-by-word-captions-after-effects.html">After Effects word-by-word workflow</a>. Its native layers have a different editing workflow from Premiere graphics.</p>
 <h2 id="mistakes">Common mistakes</h2>
 <ul>
 <li><strong>Too many words.</strong> The look falls apart as a full sentence. Keep it to three words or fewer.</li>
-<li><strong>Two highlight colors.</strong> Pick yellow or green for the whole video. Switching looks like a mistake.</li>
+<li><strong>Color without a rule.</strong> Keep one spoken-word color unless a deliberate change communicates something. Make sure the text is still legible without relying on color alone.</li>
 <li><strong>A thin outline.</strong> Over a bright shot the white text disappears. Keep the outline thick.</li>
 <li><strong>Typos in names.</strong> In Captions Gen Settings, turn on <em>Check transcript before generating</em>. Review names before placement, then play through the final graphics.</li>
 </ul>
@@ -172,7 +187,7 @@ body="""
 
 # ---------------------------------------------------------------- MrBeast
 P3["mrbeast-style-captions-premiere-pro"] = dict(
-published="2026-10-22", modified="2026-11-08",
+published="2026-10-22", modified="2026-11-09",
 image="/img/guides/mrbeast-anatomy.png",
 title="MrBeast Style Captions in Premiere Pro: Font, Bounce and Free Preset",
 desc="Make MrBeast style captions in Premiere Pro with a comic font, thick outline and bouncing word highlight. Follow manual steps or try the free Beast Comic preset.",
@@ -189,20 +204,22 @@ faq=[
  "Use them for the big moments, like the hook, numbers and reveals. For a whole long video, a calmer style such as Podcast or Subtitle Box is easier to watch."),
 ("Does it work on Mac?",
  "The public Captions Gen installer is Windows only, with Premiere Pro and After Effects panels. There is no public Mac installer. You can still build the look by hand in Premiere on a Mac."),
+("Does the bounce animate the whole caption or one word?",
+ "Those are separate effects. Beast Comic uses an In Bounce entrance for the caption group, plus a size change and bounce on the active word. Increasing the group animation does not replace word timing or turn every word into its own graphic."),
 ],
 body="""
 <p>For a MrBeast style caption look in Premiere Pro, start with a bold comic font, a thick outline and short phrases. A bright spoken-word highlight and a quick bounce give the text more movement.</p>
 <p>The settings below are a recipe you can adjust, rather than an exact match for every MrBeast video. Build it with graphic keyframes or try Captions Gen's currently free Beast Comic preset on Windows.</p>
 """ + tldr(
 "Font: a comic font like Bangers or Luckiest Guy, all caps.",
-"Style: a very thick black outline and a hard shadow with no blur.",
+"Style: a very thick black outline and a dark, short shadow.",
 "Highlight: the spoken word in neon green, yellow or cyan.",
-"Motion: each word bounces in, growing past full size and settling.",
+"Motion: distinguish the caption group's entrance from the spoken word's size and bounce.",
 "Free option: the Beast Comic preset in <a href=\"https://captionsgen.com/\">Captions Gen</a>.",
 ) + toc(
 ("what-it-is", "What MrBeast style captions are"),
 ("font", "The font"),
-("settings", "The exact settings"),
+("settings", "The Beast Comic starting settings"),
 ("bounce", "The bounce"),
 ("by-hand", "Method 1: by hand"),
 ("plugin", "Method 2: free with Captions Gen"),
@@ -219,9 +236,9 @@ body="""
 <li><strong>Bangers</strong>: narrow comic letters with a slant.</li>
 <li><strong>Luckiest Guy</strong>: round and chunky. Feels more like a game.</li>
 </ul>
-<p>Both are on Google Fonts. Restart Premiere Pro after you install them.</p>
+<p>Both <a href="https://fonts.google.com/specimen/Bangers">Bangers</a> and <a href="https://fonts.google.com/specimen/Luckiest+Guy">Luckiest Guy</a> are on Google Fonts. Restart Premiere Pro after installing them. These are alternatives for a comic look, not proof of the font used in a particular creator's video.</p>
 """ + tip("Captions Gen bundles Bangers and Luckiest Guy. Beast Comic tries Komika Axis first if it's already installed, then uses one of those fallbacks. The website preview uses Bangers.") + """
-<h2 id="settings">The exact settings</h2>
+<h2 id="settings">The Beast Comic starting settings</h2>
 <p>These settings describe the Beast Comic preset. Its font depends on what's installed; the manual bounce below is a separate recipe.</p>
 <table class="spec">
 <thead><tr><th>Setting</th><th>Value</th></tr></thead>
@@ -230,19 +247,20 @@ body="""
 <tr><td>Case</td><td>ALL CAPS</td></tr>
 <tr><td>Text color</td><td><span class="swatch" style="background:#ffffff"></span>White #FFFFFF</td></tr>
 <tr><td>Outline</td><td><span class="swatch" style="background:#000000"></span>Black, very thick</td></tr>
-<tr><td>Shadow</td><td>Black, hard edge, almost no blur</td></tr>
+<tr><td>Shadow</td><td>Black, short distance, little blur</td></tr>
 <tr><td>Spoken word</td><td><span class="swatch" style="background:#39FF14"></span>Neon green #39FF14, noticeably bigger</td></tr>
 <tr><td>Words on screen</td><td>1 to 2</td></tr>
-<tr><td>Animation</td><td>A bouncy pop on every word</td></tr>
+<tr><td>Animation</td><td>In Bounce group entrance; active-word scale and bounce</td></tr>
 </tbody>
 </table>
 <p>Other colors that fit the look: <span class="swatch" style="background:#F7C204"></span>yellow #F7C204 and <span class="swatch" style="background:#00E5FF"></span>cyan #00E5FF.</p>
 
 <h2 id="bounce">The bounce</h2>
-<p>The bounce is what makes the captions feel alive. Each word starts small, grows a little past full size, then settles.</p>
+<p>There are two places to add motion: the entrance of the whole caption and the emphasis on the currently spoken word. Beast Comic uses both. If everything jumps at once, reduce one of them before making the text smaller.</p>
+""" + gfig("style-motion-layers.svg", "Two separate motion controls: a group entrance moves the whole caption; word emphasis changes only the active word, while the other word stays still", "Illustration: group entrance and spoken-word emphasis are separate controls. This is not a frame-accurate capture of the plugin.") + """
 """ + gfig("bounce-animation", "The word YOUR at 80% size on frame 0, 110% on frame 3 and 100% on frame 5, with a curve showing the scale going past 100% and settling",
-           "Small, then a little too big, then normal. All in about five frames.") + """
-<p>That small overshoot is the trick. Without it, the word just grows and looks stiff.</p>
+           "Manual keyframe recipe: 80%, 110%, then 100%. Five frames is an example, not the duration or curve of the shipped Beast Comic animation.") + """
+<p>For a manual effect, use a modest overshoot and listen to the word onset. The same five-frame move lasts different amounts of time at 24 and 60 fps, so adjust it to your sequence. The plugin's preset uses its own curve rather than these three keyframes.</p>
 
 <h2 id="by-hand">Method 1: by hand in Premiere Pro</h2>
 <ol>
@@ -260,9 +278,9 @@ body="""
 <p>Then make the captions:</p>
 <ol start="4">
 <li>On the <strong>Presets</strong> tab, tap <strong>Beast Comic</strong>.</li>
-<li>Press <strong>Generate</strong>.</li>
+<li>Press <strong>Generate Captions</strong>, then review the transcript if prompted.</li>
 </ol>
-<p>Every word gets its own timing, color and bounce, as editable graphics on your timeline.</p>
+<p>Review the generated graphics at normal playback speed. One or two words per group can create many clips, so test a representative section before committing a long sequence.</p>
 """ + PANEL + """
 <h3>Make it your own</h3>
 <p>On the <strong>Customize</strong> tab you can:</p>
@@ -279,19 +297,20 @@ body="""
 """ + fig("Gamer", "Gamer caption preset: USE YOUR in a chunky round font with YOUR in cyan", "Gamer: chunky letters and a bouncing cyan word.") + """
 <h2 id="tips">Tips for better results</h2>
 <ul>
-<li><strong>Give big words their own screen.</strong> Numbers, money and names hit harder alone.</li>
-<li><strong>Go bigger in the hook.</strong> Raise the text size for the first three seconds, then bring it back down.</li>
-<li><strong>Keep the outline thick.</strong> On a busy background a thick outline reads better than a box behind the text.</li>
-<li><strong>Mind the buttons.</strong> On Shorts, Reels and TikTok, keep captions above the bottom fifth of the frame.</li>
+<li><strong>Keep meaning together.</strong> A number without its unit, or a name split across cuts, can be harder to follow than a short phrase.</li>
+<li><strong>Watch the footage.</strong> If the shot already has a fast zoom or a reaction, try less caption movement. Compare with a still frame and normal-speed playback.</li>
+<li><strong>Check long words.</strong> A narrow comic font may fit a short English phrase but need a smaller size or different grouping in another language.</li>
+<li><strong>Correct, then update.</strong> After changing text, use <strong>Update animation</strong> when offered and check the active-word timing. Use <strong>Apply style</strong> for appearance; grouping changes can require another transcription.</li>
 </ul>
 """ + SAFE + """
+<p>For native layers in a composition, follow <a href="word-by-word-captions-after-effects.html">word-by-word captions in After Effects</a>. Premiere's graphic keyframes and After Effects' layer controls are separate workflows.</p>
 <p class="sources">"MrBeast style" describes the look; Captions Gen isn't affiliated with MrBeast. Native workflow references: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-single-word-captions.html">Single Word captions</a> and <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/stylize-text/apply-linked-and-track-styles.html">Linked Styles in Properties</a>.</p>
 """)
 
 
 # ---------------------------------------------------------------- Templates
 P3["free-caption-templates-premiere-pro"] = dict(
-published="2026-10-22", modified="2026-11-08",
+published="2026-10-22", modified="2026-11-09",
 image="/img/guides/template-vs-preset.png",
 title="Free Caption Templates for Premiere Pro: 18 Animated Presets",
 desc="Free animated caption templates for Premiere Pro: karaoke highlights, pill boxes, comic and glow looks. How they differ from MOGRT text templates, and how to use them.",
@@ -304,17 +323,19 @@ faq=[
  "A MOGRT is a Motion Graphics Template that can expose editable text and design controls; it doesn't generate a transcript by itself. In Captions Gen, a preset combines design, grouping and animation settings for captions generated from speech."),
 ("How do I save my own caption template in Premiere Pro?",
  "In Premiere, style a native caption in Properties and save a Track Style. In Captions Gen, customize a look, open Save preset beside the preview, and choose Save as preset or Save as new preset. Its tile menu lets you export the preset to share."),
+("Can I import a MOGRT or Adobe style as a Captions Gen preset?",
+ "No. A MOGRT, an Adobe Track Style or Linked Style, and a Captions Gen .cgpreset are different formats. A .cgpreset shares the panel's design and grouping settings, not a transcript, media, font files or an installed speech model."),
 ("Do the templates work in other languages?",
  "Captions Gen offers searchable spoken-language selection and compatible custom speech models. Accuracy and word timing vary by language and model. Choose a font that contains the script's characters and review the result; a preset does not translate speech."),
 ("Is there a watermark or time limit?",
  "The current free Captions Gen release has no watermark or transcription time limit. The email checkout needs no payment card. Paid features are planned for the future."),
 ],
 body="""
-<p>Looking for free caption templates for Premiere Pro? Most of what you'll find are MOGRT text templates. They look nice, but you still type and time every caption yourself.</p>
+<p>A free caption template can mean three different things in Premiere Pro: a MOGRT graphic, a native caption Track Style, or a speech-driven plugin preset. Before downloading one, decide whether you need reusable design, selectable subtitle text, or animated word-by-word graphics.</p>
 <p>This guide separates graphic templates, native caption styles and speech-driven plugin presets. It also covers the 18 currently free animated presets in Captions Gen for Premiere Pro on Windows.</p>
 """ + tldr(
 "MOGRT text templates: reusable graphics; text and timing need another workflow.",
-"Premiere Track Styles: free and quick, but static. No word highlight or animation.",
+"Premiere Track Styles: included with Premiere, for the appearance of native captions; speech transcription is a separate step.",
 "Captions Gen presets: combine text grouping, appearance and animation with locally generated word timings.",
 "<a href=\"https://captionsgen.com/\">Captions Gen</a> has 18 free animated presets, with no time limit and no watermark (Windows).",
 ) + toc(
@@ -324,16 +345,17 @@ body="""
 ("use", "How to use them"),
 ("own", "Make your own template"),
 ("share", "Share it with your team"),
+("check", "Check a template before using it"),
 ) + """
 <h2 id="kinds">The three kinds of caption templates</h2>
 """ + gfig("template-vs-preset", "Left: a text template timeline with one purple clip per caption, each to be typed by hand. Right: a caption preset timeline with many blue word clips lined up with the audio",
-           "A text template is one clip per caption. A preset styles the whole transcript at once.") + """
+           "Workflow illustration: a graphic template needs supplied text and timing. A speech-driven preset applies settings while the plugin builds caption graphics; it is not necessarily one clip per word.") + """
 <h3>1. MOGRT text templates</h3>
 <p>A MOGRT (Motion Graphics Template) provides a reusable graphic, often with editable text and design controls. Add it to the timeline and fill in the controls its author exposed.</p>
 <p>It can work well for a title or lower third. A MOGRT alone doesn't transcribe the dialogue or decide where every caption belongs, so plan how you'll supply and time the words.</p>
 
 <h3>2. Premiere Track Styles</h3>
-<p>Premiere Pro can save a caption look as a Track Style. It's free and applies to the whole caption track at once.</p>
+<p>Premiere Pro can save a caption look as a Track Style. This feature is included with the paid Adobe application and applies the appearance across a caption track.</p>
 <p>The catch: Track Styles are static. There's no highlight on the spoken word and no animation.</p>
 
 <h3>3. Caption presets in a plugin</h3>
@@ -348,7 +370,8 @@ body="""
 <tr><td>Timing</td><td>You supply it</td><td>Existing caption timing, per phrase or Single Word</td><td>Generated word timing, then review</td></tr>
 <tr><td>Spoken word highlight</td><td>Depends on template and timing work</td><td>No moving highlight within a line</td><td>Available in karaoke presets</td></tr>
 <tr><td>Animation</td><td>Depends on template</td><td>No graphic keyframe animation</td><td>Available by preset</td></tr>
-<tr><td>Best for</td><td>Titles</td><td>Plain subtitles</td><td>Social captions</td></tr>
+<tr><td>Editable result</td><td>Controls exposed by the template</td><td>Native caption text</td><td>Captions Gen Motion Graphics clips</td></tr>
+<tr><td>SRT delivery</td><td>Not supplied by the graphic itself</td><td>Use the native caption export workflow</td><td>Keep a separate native caption track</td></tr>
 </tbody>
 </table>
 
@@ -377,7 +400,8 @@ body="""
 <tr><td>Minimal</td><td>Lowercase grey, the word turns white</td><td>Calm, aesthetic edits</td></tr>
 <tr><td>Subtitle Box</td><td>White text on a dark box</td><td>Busy backgrounds, long videos</td></tr>
 <tr><td>Serif Story</td><td>Lowercase serif</td><td>Storytelling, documentaries</td></tr>
-<tr><td>Clean Fade, Clean, Plain</td><td>Simple text, soft or no animation</td><td>Corporate, education</td></tr>
+<tr><td>Clean Fade, Clean</td><td>Word fade or a simple group fade, without a color highlight</td><td>Corporate, education</td></tr>
+<tr><td>Plain</td><td>Template defaults: white Impact, yellow karaoke and pop entrance</td><td>A base to customize, not a promise of static subtitles</td></tr>
 </tbody>
 </table>
 
@@ -386,7 +410,7 @@ body="""
 <thead><tr><th>Preset</th><th>Look</th><th>Good for</th></tr></thead>
 <tbody>
 <tr><td>Typewriter</td><td>Text types on</td><td>Quotes, reveals</td></tr>
-<tr><td>Spring</td><td>Words spring into place</td><td>Upbeat edits</td></tr>
+<tr><td>Spring</td><td>A damped bounce entrance on the caption group</td><td>Upbeat edits</td></tr>
 <tr><td>Rise</td><td>Words rise in, like a lyric video</td><td>Music, voice-overs</td></tr>
 <tr><td>Smooth</td><td>A soft slide</td><td>Vlogs, travel</td></tr>
 </tbody>
@@ -396,11 +420,11 @@ body="""
 """ + INSTALL + """
 <ol start="4">
 <li>Tap a preset on the <strong>Presets</strong> tab. The big preview plays it.</li>
-<li>Press <strong>Generate</strong>.</li>
+<li>Press <strong>Generate Captions</strong> and check the words before placement if transcript review is enabled.</li>
 </ol>
 <p>Your captions appear as editable graphics above your clip. Review names, line breaks and word highlights before exporting.</p>
 """ + PANEL + """
-<p>Changed your mind about the look? Pick another preset and click <strong>Apply style to placed captions</strong>. The captions restyle without transcribing again.</p>
+<p>Changed your mind about the look? Pick another preset and use <strong>Apply style</strong> for the placed captions. Appearance changes can reuse the existing words; changing grouping can require transcription again. After correcting text, use <strong>Update animation</strong> when offered and check the timing.</p>
 
 <h2 id="own">Make your own template</h2>
 <p>Most editors build one style for their channel and use it on every video. Here's how:</p>
@@ -412,15 +436,24 @@ body="""
 </ol>
 
 <h2 id="share">Share it with your team</h2>
-<p>Open a preset's <strong>⋯</strong> menu to export it as a small file. On another computer, click <strong>Import</strong> to add it.</p>
-<p>It's the easy way to keep the same caption style across a channel, a team or a client's videos.</p>
-<p>The <a href="/news/captions-gen-1-1-9.html">1.1.9 combined Windows installer</a> also offers an After Effects panel, tested with After Effects 2026 on Windows 11. It creates native editable caption layers and shares the engine and Models folder with Premiere. The instructions above cover Premiere Pro.</p>
+<p>Open a preset's <strong>⋯</strong> menu to export a <code>.cgpreset</code> file. On another installation, use <strong>Import</strong>. The current panels use the same preset settings, while Premiere creates graphics and After Effects creates native layers. Check a short sample in each host rather than expecting identical rendering.</p>
+""" + gfig("style-preset-contents.svg", "A Captions Gen preset carries design, grouping and font metadata; the recipient still needs fonts, media, transcript generation and a compatible installed speech model", "Illustration: a preset carries settings, not a ready-made transcript or the files needed to render it.") + """
+<p>Send your team the exact font family and weight as well as the preset. Font metadata identifies the desired font; it does not install or license the font. Test a long word and a non-Latin character if the project uses them.</p>
+<p>The <a href="/news/captions-gen-1-1-9.html">1.1.9 combined Windows installer</a> offers Premiere Pro, After Effects or Both, sharing the engine and Models folder. For composition work, follow <a href="how-to-add-captions-in-after-effects.html">the After Effects installation guide</a>, then <a href="edit-captions-in-after-effects.html">editing captions in After Effects</a>. The steps above cover Premiere Pro.</p>
+<h2 id="check">Check a template before using it</h2>
+<ul>
+<li><strong>Deliverable:</strong> decide whether the client needs visible graphics, SRT text or both. A rendered caption design does not create a selectable caption track.</li>
+<li><strong>Format:</strong> import the file into the tool that created it. Renaming a MOGRT or Adobe style to <code>.cgpreset</code> does not convert it.</li>
+<li><strong>Fonts and script:</strong> confirm the installed font includes the characters you need. The spoken-language selector chooses recognition; it does not translate or supply missing glyphs.</li>
+<li><strong>Real footage:</strong> check contrast, line breaks and motion on a bright shot, a busy shot and the longest phrase. The home page's <a href="/#custom">prepared-sample demo</a> helps explore settings but does not transcribe your footage or prove native performance.</li>
+</ul>
+<p class="sources">Native style behavior: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-styles-for-captions.html">caption styles</a> and <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/stylize-text/apply-linked-and-track-styles.html">Track Styles and Linked Styles</a>. Captions Gen preset names and settings were checked against the public 1.1.9 panels.</p>
 """)
 
 
 # ---------------------------------------------------------------- AutoCut
 P3["autocut-alternative-captions"] = dict(
-published="2026-10-22", modified="2026-11-08",
+published="2026-10-22", modified="2026-11-09",
 image="/img/styles/Bold-Impact.png",
 title="Free AutoCut Alternative for Captions in Premiere Pro (2026)",
 desc="Compare AutoCut's paid caption workflow with currently free Captions Gen for Premiere Pro on Windows: animated graphics, local transcription and honest limits.",
@@ -428,7 +461,7 @@ h1="A free AutoCut alternative for captions",
 rel=["submagic-alternative-premiere-pro","best-caption-plugin-premiere-pro","free-caption-plugin-premiere-pro","animated-captions-premiere-pro"],
 faq=[
 ("Is AutoCut free?",
- "AutoCut advertises a 14-day free trial without a credit card. Continued AutoCaptions use needs a paid plan; check the current AI Plan quote and billing period on its pricing page. Vendor pages reviewed 8 November 2026."),
+ "AutoCut advertises a 14-day free trial without a credit card. Continued AutoCaptions use needs its paid AI Plan; Basic excludes captions. Check the current quote and billing period. Official vendor pages reviewed 9 November 2026."),
 ("What is a free AutoCut alternative for captions?",
  "For Premiere Pro 25.6 or newer on supported 64-bit Windows, Captions Gen is currently free without a time limit or watermark. It creates animated Motion Graphics clips using local CPU transcription. It doesn't cut silences or switch podcast cameras."),
 ("Is there a free AutoCut alternative for DaVinci Resolve or Mac?",
@@ -440,7 +473,7 @@ faq=[
 ],
 body="""
 <p>If you use AutoCut mainly for animated captions, Captions Gen offers a currently free alternative in Premiere Pro on Windows. It creates editable Motion Graphics clips with local CPU transcription, without a watermark or transcription time limit.</p>
-<p>If captions are all you need, you don't have to pay for a whole editing suite. Here's how AutoCut compares with a free alternative for captions.</p>
+<p>AutoCut may still be the better fit if you use its silence cuts, camera switching or other editing tools. This comparison separates those jobs from caption design and explains what to test before switching.</p>
 """ + tldr(
 "AutoCaptions is a paid AutoCut feature after its 14-day trial; check the current AI Plan price before buying.",
 "<a href=\"https://captionsgen.com/\">Captions Gen</a> makes animated, word-by-word captions in Premiere Pro for free. No time limit, no watermark.",
@@ -452,9 +485,9 @@ body="""
 ("compare", "AutoCut vs Captions Gen"),
 ("autocut-better", "When AutoCut is the better pick"),
 ("captionsgen-better", "When Captions Gen is the better pick"),
-("switch", "How to switch"),
+("switch", "Test a switch on a finished cut"),
 ("both", "Using both together"),
-) + note("I make Captions Gen, so read this with that in mind. AutoCut's pricing and AutoCaptions pages were reviewed on 8 November 2026. This comparison is about caption workflows, not a test of every AutoCut feature.") + """
+) + note("I make Captions Gen. This comparison uses AutoCut's official pricing, feature pages and September 2026 update, reviewed on 9 November 2026. It is not an independent hands-on benchmark of AutoCut or a test of every feature.") + """
 <h2 id="what">What AutoCut is</h2>
 <p>AutoCut is a set of AI editing tools that run inside Premiere Pro and DaVinci Resolve. The main ones:</p>
 <ul>
@@ -463,10 +496,11 @@ body="""
 <li><strong>AutoZoom:</strong> adds punch-in zooms.</li>
 <li><strong>AutoCaptions:</strong> adds animated captions.</li>
 </ul>
-<p>It's a strong tool if you use several of those. If you only want captions, you're paying for a lot you don't use.</p>
+<p>AutoCaptions is not limited to a simple preset picker. AutoCut's <a href="https://www.autocut.com/en/updates/">17 September 2026 update</a> introduced <strong>Advanced Mode beta for Premiere Pro</strong>, with typography, layout, animation and saved custom presets. The release note names Premiere for that beta; do not assume every Advanced Mode feature is available in Resolve.</p>
 
 <h2 id="cost">What AutoCut captions cost</h2>
-<p>AutoCut lists a <strong>Basic</strong> plan for silence removal and an <strong>AI Plan</strong> for its wider editing features, including captions. It advertises a 14-day trial with no credit card. Check the <a href="https://www.autocut.com/en/pricing/">current pricing page</a> for the quote, billing period and taxes that apply to you.</p>
+<p>AutoCut's <strong>Basic</strong> plan excludes AutoCaptions. Captions are in the <strong>AI Plan</strong>, alongside the wider editing features. The pricing page advertises a 14-day trial with no credit card.</p>
+<p>On 9 November 2026, the fetched yearly quote showed the AI Plan at <strong>US$14.90 per month equivalent, billed US$178.80 yearly</strong>. That is an annual commitment, not a monthly invoice. See <a href="https://www.autocut.com/en/pricing/">AutoCut's live quote</a> for current monthly billing, regional taxes and terms.</p>
 <p>Captions Gen is currently free, with no subscription. Its download uses an email checkout, with no payment card. Premiere Pro and After Effects are separate paid Adobe applications, and paid Captions Gen features are planned for the future.</p>
 <h2 id="compare">AutoCut vs Captions Gen</h2>
 <div class="ptable-wrap">
@@ -476,7 +510,7 @@ body="""
 <tr><td>Price for captions</td><td>Paid AI Plan; see current vendor quote</td><td>Currently free</td></tr>
 <tr><td>Free option</td><td>14-day trial, no card</td><td>Current free release has no time limit or watermark</td></tr>
 <tr><td>Animated word-by-word captions</td><td><span class="mark yes"><i>✓</i>Yes</span></td><td><span class="mark yes"><i>✓</i>Yes</span></td></tr>
-<tr><td>Presets</td><td>Editable presets in Standard and Advanced modes; see vendor examples</td><td>18 built-ins, plus your own saved presets</td></tr>
+<tr><td>Caption design</td><td>Simple Mode; Advanced Mode beta for Premiere adds deeper design controls</td><td>18 built-ins, custom appearance and grouping, saved presets</td></tr>
 <tr><td>Silence cutting, zooms, B-roll</td><td><span class="mark yes"><i>✓</i>Yes</span></td><td><span class="mark no"><i>✕</i>No, captions only</span></td></tr>
 <tr><td>Premiere Pro</td><td><span class="mark yes"><i>✓</i>Yes</span></td><td><span class="mark yes"><i>✓</i>Yes</span></td></tr>
 <tr><td>DaVinci Resolve</td><td><span class="mark yes"><i>✓</i>Yes</span></td><td><span class="mark no"><i>✕</i>No</span></td></tr>
@@ -486,7 +520,7 @@ body="""
 </div>
 <div class="ptable-legend"><span>On a phone, swipe the table sideways.</span></div>
 <p>The <a href="/news/captions-gen-1-1-9.html">Captions Gen 1.1.9 Windows setup</a> also offers After Effects or Both. The After Effects panel has been tested with After Effects 2026 on Windows 11; earlier versions aren't certified for this release. Both panels share the engine and Models folder. The steps below are for Premiere Pro.</p>
-<p class="sources">Sources reviewed 8 November 2026: <a href="https://www.autocut.com/en/pricing/" rel="nofollow">AutoCut plans and trial</a> and <a href="https://www.autocut.com/en/autocaptions/" rel="nofollow">AutoCaptions features and supported editors</a>. Check the vendor's live quote before buying.</p>
+<p class="sources">Official sources reviewed 9 November 2026: <a href="https://www.autocut.com/en/pricing/">AutoCut plans and trial</a>, <a href="https://www.autocut.com/en/autocaptions/">AutoCaptions features and supported editors</a>, and <a href="https://www.autocut.com/en/updates/">the 17 September Advanced Mode beta announcement</a>. Feature descriptions are vendor-documented, not measured accuracy or speed results.</p>
 
 <h2 id="autocut-better">When AutoCut is the better pick</h2>
 <ul>
@@ -503,36 +537,41 @@ body="""
 <li><strong>You want to restyle later.</strong> Pick another preset and apply it to captions you already placed.</li>
 </ul>
 """ + fig("Bold-Impact", "Bold Impact caption preset: USE YOUR SHIELD in heavy white caps with SHIELD in yellow", "Bold Impact, one of the 18 free presets.") + """
-<h2 id="switch">How to switch</h2>
-<p>Try a short copy of a finished sequence first. Initial setup time includes downloading the speech models.</p>
+<h2 id="switch">Test a switch on a finished cut</h2>
+<p>Duplicate the sequence and choose 20 to 30 seconds containing a name, a pause and a fast phrase. Keep the existing AutoCut captions in the original. This gives you a useful comparison without rebuilding a whole project.</p>
+<p>Captions Gen does not import AutoCut's proprietary caption presets or automatically convert its existing graphics. Generate from the original spoken audio and rebuild the appearance you need. Initial setup includes model downloads; later cached transcription runs locally on the CPU.</p>
 """ + INSTALL + """
 <ol start="4">
 <li>Pick a look on the <strong>Presets</strong> tab.</li>
 <li>Change colors or size on <strong>Customize</strong> if you like.</li>
-<li>Press <strong>Generate</strong>.</li>
+<li>Press <strong>Generate Captions</strong>, correct the transcript if review is enabled, then inspect the generated graphics.</li>
 </ol>
 """ + PANEL + """
+<p>Check the same things in both versions: names, word onset, long-word wrapping, caption placement and playback on your hardware. This guide supplies no measured winner for accuracy or speed. Appearance edits use <strong>Apply style</strong>; after text corrections, use <strong>Update animation</strong> when offered and recheck timing.</p>
 <h2 id="both">Using both together</h2>
 <p>A workflow to test is finishing the cut with AutoCut, then adding captions with Captions Gen. Keep a project copy; this isn't a compatibility guarantee for every combination of plugin versions.</p>
 <ol>
 <li>Cut your video with AutoCut as usual.</li>
-<li>Select the final clip and generate captions with Captions Gen.</li>
+<li>In the duplicate sequence, remove or hide the old caption graphics so you do not stack two caption sets. Keep the underlying speech clip.</li>
+<li>Select the intended speech clip, generate captions with Captions Gen and play through the result.</li>
 </ol>
-""" + tip("Add captions last. If you change the cut afterwards, generate again so the timing stays right.") + """
+""" + gfig("alternative-editing-sequence.svg", "Workflow illustration: finish the picture cut, duplicate the sequence, generate from the intended speech clip, then review words and timing; changing the cut sends you back to caption review", "Illustration: test captions after the structural edit. This is a proposed workflow, not a verified compatibility claim between the two plugins.") + """
+<p>If you also work in After Effects, the same Windows setup can install its separate panel. Read <a href="how-to-add-captions-in-after-effects.html">the After Effects setup and first-caption steps</a> before treating it as a drop-in replacement for a Premiere workflow.</p>
+""" + tip("A late cut can leave a caption over the wrong audio. Recheck or regenerate the affected section; restyling changes appearance, not the underlying edit.") + """
 """)
 
 
 # ---------------------------------------------------------------- Submagic
 P3["submagic-alternative-premiere-pro"] = dict(
-published="2026-10-22", modified="2026-11-08",
+published="2026-10-22", modified="2026-11-09",
 image="/img/guides/web-app-round-trip.png",
 title="Free Submagic Alternative for Premiere Pro (No Watermark)",
-desc="Submagic is a web app with plans from $19/month and length limits. Captions Gen adds Submagic-style animated captions inside Premiere Pro for free, without uploading.",
+desc="Compare Submagic's web editor, credits and SRT handoff with currently free animated caption graphics inside Premiere Pro on Windows. See what remains editable.",
 h1="A free Submagic alternative for Premiere Pro",
 rel=["autocut-alternative-captions","mrbeast-style-captions-premiere-pro","hormozi-style-captions-premiere-pro","free-caption-plugin-premiere-pro"],
 faq=[
 ("Is Submagic free?",
- "Submagic offers a trial for uploading and editing three short videos; its help page says no-watermark downloads require a subscription. The pricing page lists Starter, Pro and Business at $19, $39 and $69 per member per month with monthly billing, reviewed 8 November 2026. Yearly billing has different rates."),
+ "Submagic offers a trial for uploading and editing three short videos; its help page says no-watermark downloads require a subscription. Its official help lists monthly US-dollar plans from $19 per member. Credits, billing period and regional pricing affect the quote. Sources reviewed 9 November 2026."),
 ("Is there a free Submagic alternative without a watermark?",
  "Captions Gen is currently free without a watermark or transcription time limit for Premiere Pro 25.6 or newer on supported 64-bit Windows. The download uses an email checkout, with no payment card. Adobe Premiere Pro is separate and paid."),
 ("Does Submagic work inside Premiere Pro?",
@@ -546,18 +585,18 @@ body="""
 <p>For an alternative to Submagic inside Premiere Pro, Captions Gen creates animated caption graphics directly on your timeline. It's currently free on Windows and transcribes on the CPU without uploading your audio or video.</p>
 <p>Submagic is a browser editor with captioning and other editing tools. The useful choice is whether you want a web workflow with those extras or editable graphics in the Premiere project you already use.</p>
 """ + tldr(
-"Submagic runs in the browser. Monthly-billed plans list $19, $39 or $69 per member, with different video-length limits.",
+"Submagic runs in the browser, with paid plans, a shared credit balance and video-length limits.",
 "Its trial lets you upload and edit three short videos; no-watermark downloads require a subscription.",
-"<a href=\"https://captionsgen.com/\">Captions Gen</a> adds Submagic-style captions inside Premiere Pro for free, with no watermark and no length limit.",
+"<a href=\"https://captionsgen.com/\">Captions Gen</a> adds animated caption graphics inside Premiere Pro for free, with no watermark or transcription time cap.",
 "Submagic also adds B-roll, emojis and sound effects. Captions Gen is captions only, on Windows.",
 ) + toc(
 ("how", "How Submagic works"),
 ("compare", "Submagic vs Captions Gen"),
 ("why", "Why editors look for an alternative"),
 ("submagic-better", "When Submagic is the better pick"),
-("looks", "Get the same looks in Premiere"),
+("looks", "Build similar looks in Premiere"),
 ("steps", "Step by step"),
-) + note("I make Captions Gen, so read this with that in mind. Submagic's pricing, trial and export pages were reviewed on 8 November 2026. This comparison covers the caption workflow, not a benchmark of transcription accuracy.") + """
+) + note("I make Captions Gen. This comparison uses Submagic's official pricing, trial and export documentation, reviewed on 9 November 2026. It is not an independent hands-on test or a transcription-accuracy benchmark.") + """
 <h2 id="how">How Submagic works</h2>
 <p>Submagic is a website, not a Premiere Pro plugin. The workflow looks like this:</p>
 <ol>
@@ -570,13 +609,16 @@ body="""
 <p>Submagic also advertises <strong>SRT export</strong>. An SRT can bring text and timings into Premiere's native caption workflow, but it doesn't transfer animated highlights, backgrounds or bounce effects. A downloaded video contains the rendered animation in its picture.</p>
 """ + gfig("web-app-round-trip", "Rendered-video workflow: export from Premiere, upload to a web editor, add captions, download the rendered video and import it back. Captions Gen generates graphics in the Premiere project",
            "Rendered animated video needs a round trip. An SRT handoff carries text and timing instead of that animation.") + """
+<h3>What does the handoff preserve?</h3>
+<p>Choose the deliverable before choosing a caption style. A rendered video preserves the visible result, while SRT preserves editable words and times. Neither imports the web editor's animated design as native Premiere graphics.</p>
+""" + gfig("alternative-caption-handoff.svg", "Three handoffs: rendered video keeps the visible animation but not separate caption controls; SRT keeps text and timing but not the animated style; Captions Gen creates editable graphics in the Premiere project", "Illustration: pixels, subtitle text and editable graphics are different deliverables. Keep a native caption track when the job requires SRT or closed captions.") + """
 <h2 id="compare">Submagic vs Captions Gen</h2>
 <div class="ptable-wrap">
 <table class="ptable">
 <thead><tr><th></th><th>Submagic</th><th>Captions Gen</th></tr></thead>
 <tbody>
 <tr><td>Where it runs</td><td>Browser editor</td><td>Premiere panel; After Effects panel also available on Windows</td></tr>
-<tr><td>Price</td><td>$19, $39 or $69/member/month with monthly billing; yearly rates differ</td><td>Currently free</td></tr>
+<tr><td>Price</td><td>Paid per member; credits and billing term apply</td><td>Currently free; paid features planned</td></tr>
 <tr><td>Free option</td><td>Trial for 3 short uploads; subscription for no-watermark downloads</td><td>No time limit or watermark in the current free release</td></tr>
 <tr><td>Video length</td><td>Up to 2, 5 or 30 minutes by plan</td><td>No transcription time cap; processing depends on hardware and audio</td></tr>
 <tr><td>Your footage</td><td>Uploaded for the web workflow</td><td>No audio or video upload for transcription</td></tr>
@@ -587,11 +629,13 @@ body="""
 </table>
 </div>
 <div class="ptable-legend"><span>On a phone, swipe the table sideways.</span></div>
-<p class="sources">Sources reviewed 8 November 2026: <a href="https://www.submagic.co/pricing" rel="nofollow">Submagic pricing</a>, <a href="https://care.submagic.co/en/article/does-submagic-have-a-free-trial-7opyg3/" rel="nofollow">three-video trial</a>, and <a href="https://www.submagic.co/video-to-text" rel="nofollow">SRT export</a>. Dollar prices are the US-dollar listing; check the current billing term, regional price and taxes before buying.</p>
+<p>Submagic's pricing help, updated 28 October 2026, lists monthly USD <strong>$19, $39 and $69 per member</strong> for Starter, Pro and Business. The plans have <strong>45, 120 and 300 credits</strong>. An upload costs 3 credits; additional AI features draw from the same pool. Do not read that as an unlimited video allowance. The main pricing page can show local currency and yearly rates instead.</p>
+<p class="sources">Official sources reviewed 9 November 2026: <a href="https://care.submagic.co/en/article/how-much-does-it-cost-to-use-submagic-1xm83pa/">pricing and credits</a>, <a href="https://www.submagic.co/pricing">current plan and length limits</a>, <a href="https://care.submagic.co/en/article/does-submagic-have-a-free-trial-7opyg3/">trial terms</a>, and <a href="https://www.submagic.co/video-to-text">SRT export</a>. Check the current regional quote, billing term and taxes before buying.</p>
 <h2 id="why">Why editors look for an alternative</h2>
 <ul>
 <li><strong>The rendered-video round trip.</strong> Changes to the underlying cut may require another export and upload. An SRT handoff avoids baking in the text, but loses the animation.</li>
 <li><strong>Length caps.</strong> Longer videos need a bigger plan.</li>
+<li><strong>Credits.</strong> Captions are one part of the editing bill: uploads and additional AI operations use the monthly credit pool.</li>
 <li><strong>Client footage.</strong> Some clients don't want their footage uploaded to another service.</li>
 <li><strong>Graphic edits.</strong> A typo in a rendered animated video needs another render. An SRT can be edited as native caption text, with a separate styling workflow.</li>
 </ul>
@@ -620,10 +664,11 @@ body="""
 """ + INSTALL + """
 <ol start="4">
 <li>Pick a preset on the <strong>Presets</strong> tab.</li>
-<li>Press <strong>Generate</strong>.</li>
+<li>Press <strong>Generate Captions</strong>. Review names and difficult phrases before placing graphics if transcript review is enabled.</li>
 </ol>
 """ + PANEL + """
-<p>Changed the cut? Generate again. Want a different look? Pick another preset and click <strong>Apply style to placed captions</strong>. You never leave Premiere Pro.</p>
-""" + tip("Captions Gen places captions as separate graphics, not burned into the video. You can fix a typo on the timeline at any time.") + """
-<p>The <a href="/news/captions-gen-1-1-9.html">1.1.9 setup</a> can also install an After Effects panel, tested with After Effects 2026 on Windows 11. It creates native editable caption layers. There is no public Mac installer or translation feature.</p>
+<p>Try a short duplicate sequence before replacing an existing workflow. Generate from the original speech clip rather than a downloaded video that already contains visible captions, or you can end up with two caption layers in the picture.</p>
+<p>For an appearance change, choose a preset and use <strong>Apply style</strong>. Changing grouping can require transcription again. If the underlying cut changes, recheck or regenerate the affected section.</p>
+""" + tip("Correct text in the caption editor or Premiere's Properties, then use Update animation when offered. Review the new highlights against the voice; a corrected or added word can receive estimated timing.") + """
+<p>The <a href="/news/captions-gen-1-1-9.html">1.1.9 setup</a> also offers an After Effects panel, tested with After Effects 2026 on Windows 11. It creates native editable caption layers; use <a href="edit-captions-in-after-effects.html">the After Effects editing guide</a> for its controls. There is no public Mac installer or translation feature.</p>
 """)

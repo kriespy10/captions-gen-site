@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1000" viewBox="0 0 960 1000" role="img" aria-labelledby="title description">
+<title id="title">SRT in, corrected SRT out</title><desc id="description">An SRT excerpt with a spelling mistake is imported into an editable native C1 caption track. Correct the wording and cue boundaries, then export the corrected SRT sidecar and keep it with the matching video edit. SRT contains text and cue times, not rendered animation.</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#696974" stroke-width="1.6"/></marker></defs>
+<rect width="960" height="1000" rx="24" fill="#101013"/><g font-family="Arial, sans-serif">
+<text x="48" y="52" font-size="20" fill="#ffeb3b" font-weight="700">CAPTIONS GEN GUIDES</text>
+
+<text x="48" y="108" font-size="42" fill="#f5f5f7" font-weight="700">SRT in, corrected SRT out</text>
+<text x="48" y="156" font-size="24" fill="#b7b7c0">Text and cue times stay separate from the video picture.</text>
+<rect x="40" y="190" width="880" height="220" rx="16" fill="#19191e" stroke="#37373f"/>
+<text x="66" y="226" font-size="20" fill="#ffeb3b" font-weight="700">1  IMPORT THE SUBTITLE FILE</text>
+<rect x="66" y="246" width="505" height="138" rx="8" fill="#101013" stroke="#53535e"/>
+<text x="84" y="274" font-size="21" fill="#b7b7c0" font-family="Consolas, monospace">1</text>
+<text x="84" y="306" font-size="21" fill="#f5f5f7" font-family="Consolas, monospace">00:00:01,000 --&gt; 00:00:03,000</text>
+<text x="84" y="342" font-size="25" fill="#f5f5f7" font-family="Consolas, monospace">We make caption.</text>
+<text x="84" y="370" font-size="18" fill="#b7b7c0">input.en.srt · excerpt</text>
+<text x="600" y="275" font-size="26" fill="#ffeb3b" font-weight="700">File &gt; Import</text>
+<text x="600" y="318" font-size="24" fill="#b7b7c0">Drag the imported</text>
+<text x="600" y="350" font-size="24" fill="#b7b7c0">item into the sequence.</text>
+<path d="M480 416V440" fill="none" stroke="#696974" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="40" y="454" width="880" height="220" rx="16" fill="#19191e" stroke="#37373f"/>
+<text x="66" y="490" font-size="20" fill="#63b9ff" font-weight="700">2  REVIEW THE EDITABLE CAPTION TRACK</text>
+<text x="180" y="527" font-size="19" fill="#b7b7c0">1 s</text>
+<text x="505" y="527" font-size="19" fill="#b7b7c0">3 s</text>
+<text x="800" y="527" font-size="19" fill="#b7b7c0">5 s</text>
+<rect x="66" y="542" width="828" height="68" rx="7" fill="#101013" stroke="#37373f"/>
+<text x="87" y="584" font-size="24" fill="#63b9ff" font-weight="700">C1</text>
+<rect x="180" y="550" width="330" height="52" rx="5" fill="#243649" stroke="#63b9ff"/>
+<text x="198" y="583" font-size="25" fill="#f5f5f7" font-weight="700">We make captions.</text>
+<rect x="536" y="550" width="326" height="52" rx="5" fill="#28232f" stroke="#625379"/>
+<text x="556" y="583" font-size="24" fill="#b7b7c0">Next caption…</text>
+<path d="M180 535V614" fill="none" stroke="#63b9ff" stroke-width="2"/>
+<path d="M510 535V614" fill="none" stroke="#63b9ff" stroke-width="2"/>
+<text x="66" y="646" font-size="24" fill="#b7b7c0">Correct the text and cue boundaries; check against the audio.</text>
+<path d="M480 680V704" fill="none" stroke="#696974" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="40" y="718" width="880" height="204" rx="16" fill="#19191e" stroke="#37373f"/>
+<text x="66" y="754" font-size="20" fill="#b9adff" font-weight="700">3  EXPORT THE CORRECTED SIDECAR</text>
+<rect x="66" y="774" width="505" height="121" rx="8" fill="#101013" stroke="#625379"/>
+<text x="84" y="800" font-size="20" fill="#b7b7c0" font-family="Consolas, monospace">1</text>
+<text x="84" y="830" font-size="21" fill="#f5f5f7" font-family="Consolas, monospace">00:00:01,000 --&gt; 00:00:03,000</text>
+<text x="84" y="866" font-size="25" fill="#f5f5f7" font-family="Consolas, monospace">We make captions.</text>
+<rect x="600" y="777" width="120" height="72" rx="8" fill="#12283d" stroke="#326687"/><circle cx="686.4" cy="798.6" r="9.36" fill="#284c68"/><path d="M600 849L640.8 804.36L679.2 849Z" fill="#234660"/><path d="M645.6 849L692.4 807.24L720 849Z" fill="#1b3b53"/>
+<text x="738" y="800" font-size="22" fill="#f5f5f7" font-weight="700">final.mp4</text>
+<text x="600" y="877" font-size="24" fill="#b9adff" font-weight="700">+ final.en.srt</text>
+<text x="600" y="906" font-size="21" fill="#b7b7c0">Keep the matching edit.</text>
+<text x="48" y="962" font-size="22" fill="#b7b7c0">Workflow illustration · Captions Gen guides</text></g></svg>

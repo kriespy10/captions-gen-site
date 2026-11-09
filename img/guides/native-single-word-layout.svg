@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1000" viewBox="0 0 960 1000" role="img" aria-labelledby="title description">
+<title id="title">Single Word versus phrase highlighting</title><desc id="description">Three successive illustrative moments show MAKE, then IT, then CLEAR alone on the left. The right retains MAKE IT CLEAR throughout and moves yellow emphasis from word to word. These are sample caption scenes, not application captures or measured timing.</desc>
+<defs><linearGradient id="scene" x2="0" y2="1"><stop stop-color="#20364c"/><stop offset="1" stop-color="#10202e"/></linearGradient></defs>
+<rect width="960" height="1000" rx="24" fill="#101013"/>
+<g font-family="Arial, sans-serif">
+<text x="48" y="52" font-size="20" font-weight="700" letter-spacing="2" fill="#ffeb3b">CAPTIONS GEN GUIDES</text>
+<text x="48" y="108" font-size="43" font-weight="700" fill="#f5f5f7">Two ways to follow the speech</text>
+<text x="48" y="153" font-size="25" fill="#b7b7c0">Successive sample moments. No measured word timings.</text>
+<text x="50" y="209" font-size="28" font-weight="700" fill="#ffeb3b">Native Single Word</text>
+<text x="510" y="209" font-size="28" font-weight="700" fill="#63b9ff">Phrase highlight</text><rect x="50" y="234" width="400" height="182" rx="13" fill="url(#scene)" stroke="#4d6276"/>
+<circle cx="374" cy="285" r="25" fill="#54718b" fill-opacity=".45"/>
+<path d="M58 381L146 303L222 379L326 320L442 381Z" fill="#182736"/>
+<path d="M58 397Q238 327 442 397" fill="none" stroke="#40586a" stroke-width="3"/>
+<text x="68" y="261" font-size="18" letter-spacing="1" fill="#d4dce5">MOMENT A</text>
+<rect x="60" y="327" width="380" height="72" rx="8" fill="#0b1018" fill-opacity=".86"/><text x="250" y="380" text-anchor="middle" font-size="54" font-weight="700" fill="#ffeb3b">MAKE</text><rect x="510" y="234" width="400" height="182" rx="13" fill="url(#scene)" stroke="#4d6276"/>
+<circle cx="834" cy="285" r="25" fill="#54718b" fill-opacity=".45"/>
+<path d="M518 381L606 303L682 379L786 320L902 381Z" fill="#182736"/>
+<path d="M518 397Q698 327 902 397" fill="none" stroke="#40586a" stroke-width="3"/>
+<text x="528" y="261" font-size="18" letter-spacing="1" fill="#d4dce5">MOMENT A</text>
+<rect x="520" y="327" width="380" height="72" rx="8" fill="#0b1018" fill-opacity=".86"/><text x="710" y="377" text-anchor="middle" font-size="35" font-weight="700"><tspan fill="#ffeb3b">MAKE </tspan><tspan fill="#f5f5f7">IT </tspan><tspan fill="#f5f5f7">CLEAR</tspan></text><path d="M250 428v23m-7-7 7 7 7-7 M710 428v23m-7-7 7 7 7-7" fill="none" stroke="#738093" stroke-width="3"/><rect x="50" y="466" width="400" height="182" rx="13" fill="url(#scene)" stroke="#4d6276"/>
+<circle cx="374" cy="517" r="25" fill="#54718b" fill-opacity=".45"/>
+<path d="M58 613L146 535L222 611L326 552L442 613Z" fill="#182736"/>
+<path d="M58 629Q238 559 442 629" fill="none" stroke="#40586a" stroke-width="3"/>
+<text x="68" y="493" font-size="18" letter-spacing="1" fill="#d4dce5">MOMENT B</text>
+<rect x="60" y="559" width="380" height="72" rx="8" fill="#0b1018" fill-opacity=".86"/><text x="250" y="612" text-anchor="middle" font-size="54" font-weight="700" fill="#ffeb3b">IT</text><rect x="510" y="466" width="400" height="182" rx="13" fill="url(#scene)" stroke="#4d6276"/>
+<circle cx="834" cy="517" r="25" fill="#54718b" fill-opacity=".45"/>
+<path d="M518 613L606 535L682 611L786 552L902 613Z" fill="#182736"/>
+<path d="M518 629Q698 559 902 629" fill="none" stroke="#40586a" stroke-width="3"/>
+<text x="528" y="493" font-size="18" letter-spacing="1" fill="#d4dce5">MOMENT B</text>
+<rect x="520" y="559" width="380" height="72" rx="8" fill="#0b1018" fill-opacity=".86"/><text x="710" y="609" text-anchor="middle" font-size="35" font-weight="700"><tspan fill="#f5f5f7">MAKE </tspan><tspan fill="#ffeb3b">IT </tspan><tspan fill="#f5f5f7">CLEAR</tspan></text><path d="M250 660v23m-7-7 7 7 7-7 M710 660v23m-7-7 7 7 7-7" fill="none" stroke="#738093" stroke-width="3"/><rect x="50" y="698" width="400" height="182" rx="13" fill="url(#scene)" stroke="#4d6276"/>
+<circle cx="374" cy="749" r="25" fill="#54718b" fill-opacity=".45"/>
+<path d="M58 845L146 767L222 843L326 784L442 845Z" fill="#182736"/>
+<path d="M58 861Q238 791 442 861" fill="none" stroke="#40586a" stroke-width="3"/>
+<text x="68" y="725" font-size="18" letter-spacing="1" fill="#d4dce5">MOMENT C</text>
+<rect x="60" y="791" width="380" height="72" rx="8" fill="#0b1018" fill-opacity=".86"/><text x="250" y="844" text-anchor="middle" font-size="54" font-weight="700" fill="#ffeb3b">CLEAR</text><rect x="510" y="698" width="400" height="182" rx="13" fill="url(#scene)" stroke="#4d6276"/>
+<circle cx="834" cy="749" r="25" fill="#54718b" fill-opacity=".45"/>
+<path d="M518 845L606 767L682 843L786 784L902 845Z" fill="#182736"/>
+<path d="M518 861Q698 791 902 861" fill="none" stroke="#40586a" stroke-width="3"/>
+<text x="528" y="725" font-size="18" letter-spacing="1" fill="#d4dce5">MOMENT C</text>
+<rect x="520" y="791" width="380" height="72" rx="8" fill="#0b1018" fill-opacity=".86"/><text x="710" y="841" text-anchor="middle" font-size="35" font-weight="700"><tspan fill="#f5f5f7">MAKE </tspan><tspan fill="#f5f5f7">IT </tspan><tspan fill="#ffeb3b">CLEAR</tspan></text><text x="50" y="922" font-size="23" fill="#b7b7c0">One word replaces the last.</text><text x="510" y="922" font-size="23" fill="#b7b7c0">The whole phrase stays visible.</text>
+<text x="48" y="972" font-size="22" fill="#b7b7c0">Workflow illustration · Captions Gen guides</text>
+</g></svg>

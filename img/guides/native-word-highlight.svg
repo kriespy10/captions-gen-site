@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1000" viewBox="0 0 960 1000" role="img" aria-labelledby="title description">
+<title id="title">A moving highlight across the same phrase</title><desc id="description">Three illustrated caption-preview crops retain MAKE IT CLEAR in the same position. MAKE is yellow first, IT next and CLEAR last. The changing emphasis is conceptual and does not claim measured speech alignment.</desc>
+<defs><linearGradient id="scene" x2="0" y2="1"><stop stop-color="#20364c"/><stop offset="1" stop-color="#10202e"/></linearGradient></defs>
+<rect width="960" height="1000" rx="24" fill="#101013"/>
+<g font-family="Arial, sans-serif">
+<text x="48" y="52" font-size="20" font-weight="700" letter-spacing="2" fill="#ffeb3b">CAPTIONS GEN GUIDES</text>
+<text x="48" y="108" font-size="43" font-weight="700" fill="#f5f5f7">Same phrase. Moving emphasis.</text>
+<text x="48" y="153" font-size="25" fill="#b7b7c0">Successive caption-preview crops, with illustrative timing.</text><rect x="50" y="215" width="860" height="190" rx="13" fill="url(#scene)" stroke="#4d6276"/>
+<circle cx="746.6" cy="266" r="25" fill="#54718b" fill-opacity=".45"/>
+<path d="M58 370L256.4 284L419.8 368L643.4 301L902 370Z" fill="#182736"/>
+<path d="M58 386Q454.2 308 902 386" fill="none" stroke="#40586a" stroke-width="3"/>
+<text x="68" y="242" font-size="18" letter-spacing="1" fill="#d4dce5">SAMPLE FRAME A</text>
+<rect x="60" y="316" width="840" height="72" rx="8" fill="#0b1018" fill-opacity=".86"/><text x="480" y="366" text-anchor="middle" font-size="62" font-weight="700"><tspan fill="#ffeb3b">MAKE </tspan><tspan fill="#f5f5f7">IT </tspan><tspan fill="#f5f5f7">CLEAR</tspan></text><path d="M480 416v18m-7-7 7 7 7-7" fill="none" stroke="#738093" stroke-width="3"/><rect x="50" y="440" width="860" height="190" rx="13" fill="url(#scene)" stroke="#4d6276"/>
+<circle cx="746.6" cy="491" r="25" fill="#54718b" fill-opacity=".45"/>
+<path d="M58 595L256.4 509L419.8 593L643.4 526L902 595Z" fill="#182736"/>
+<path d="M58 611Q454.2 533 902 611" fill="none" stroke="#40586a" stroke-width="3"/>
+<text x="68" y="467" font-size="18" letter-spacing="1" fill="#d4dce5">SAMPLE FRAME B</text>
+<rect x="60" y="541" width="840" height="72" rx="8" fill="#0b1018" fill-opacity=".86"/><text x="480" y="591" text-anchor="middle" font-size="62" font-weight="700"><tspan fill="#f5f5f7">MAKE </tspan><tspan fill="#ffeb3b">IT </tspan><tspan fill="#f5f5f7">CLEAR</tspan></text><path d="M480 641v18m-7-7 7 7 7-7" fill="none" stroke="#738093" stroke-width="3"/><rect x="50" y="665" width="860" height="190" rx="13" fill="url(#scene)" stroke="#4d6276"/>
+<circle cx="746.6" cy="716" r="25" fill="#54718b" fill-opacity=".45"/>
+<path d="M58 820L256.4 734L419.8 818L643.4 751L902 820Z" fill="#182736"/>
+<path d="M58 836Q454.2 758 902 836" fill="none" stroke="#40586a" stroke-width="3"/>
+<text x="68" y="692" font-size="18" letter-spacing="1" fill="#d4dce5">SAMPLE FRAME C</text>
+<rect x="60" y="766" width="840" height="72" rx="8" fill="#0b1018" fill-opacity=".86"/><text x="480" y="816" text-anchor="middle" font-size="62" font-weight="700"><tspan fill="#f5f5f7">MAKE </tspan><tspan fill="#f5f5f7">IT </tspan><tspan fill="#ffeb3b">CLEAR</tspan></text><text x="50" y="906" font-size="25" fill="#b7b7c0">The words and layout stay fixed; the active word changes.</text>
+<text x="50" y="939" font-size="23" fill="#b7b7c0">Review each change against the actual voice in your edit.</text>
+<text x="48" y="972" font-size="22" fill="#b7b7c0">Workflow illustration · Captions Gen guides</text>
+</g></svg>

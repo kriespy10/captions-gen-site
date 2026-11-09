@@ -7,15 +7,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
 <title>How to Add Captions in Premiere Pro: Create, Style, Export</title>
-<meta name="description" content="Add captions in Premiere Pro using Speech to Text. Follow the transcript, caption track, Properties styling, and burn-in or SRT export steps in this guide.">
+<meta name="description" content="Create native captions in Premiere Pro: transcribe the sequence, style a caption track, fix timing, then export burned-in text, SRT or supported embedded captions.">
 <link rel="canonical" href="https://captionsgen.com/blog/how-to-add-captions-in-premiere-pro.html">
 <meta property="og:title" content="How to Add Captions in Premiere Pro: Create, Style, Export">
-<meta property="og:description" content="Add captions in Premiere Pro using Speech to Text. Follow the transcript, caption track, Properties styling, and burn-in or SRT export steps in this guide.">
+<meta property="og:description" content="Create native captions in Premiere Pro: transcribe the sequence, style a caption track, fix timing, then export burned-in text, SRT or supported embedded captions.">
 <meta property="og:url" content="https://captionsgen.com/blog/how-to-add-captions-in-premiere-pro.html">
 <meta property="og:type" content="article">
 
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "How to add captions in Premiere Pro, step by step", "datePublished": "2026-08-26", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/how-to-add-captions-in-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "How to add captions in Premiere Pro, step by step", "item": "https://captionsgen.com/blog/how-to-add-captions-in-premiere-pro.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "How to add captions in Premiere Pro, step by step", "description": "Create native captions in Premiere Pro: transcribe the sequence, style a caption track, fix timing, then export burned-in text, SRT or supported embedded captions.", "inLanguage": "en", "articleSection": "Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-09", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/how-to-add-captions-in-premiere-pro.html", "image": "https://captionsgen.com/img/guides/core-caption-workflow.svg"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "How to add captions in Premiere Pro, step by step", "item": "https://captionsgen.com/blog/how-to-add-captions-in-premiere-pro.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -146,9 +146,35 @@
   .spec tr:last-child td { border-bottom:0; }
   .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; border:1px solid rgba(255,255,255,.35); }
   .ptable-legend { display:flex; flex-wrap:wrap; gap:6px 18px; color:var(--muted); font-size:12.5px; margin:10px 2px 0; }
+
+  .caption-example { margin:30px 0; }
+  .caption-example img { border:1px solid var(--hair2); background:#101013; }
+  .caption-example figcaption { line-height:1.5; color:var(--muted2); padding:0 2px; }
+  .caption-example figcaption a { white-space:nowrap; }
+  .ptable-wrap { left:0; transform:none; width:100%; }
+  .ptable { min-width:620px; }
+  .ptable:has(th:nth-child(6)) { min-width:1000px; }
+  .ptable th { white-space:normal; }
+  .ptable td:first-child { width:27%; }
+  .spec { table-layout:fixed; }
+  .spec th, .spec td { overflow-wrap:anywhere; }
+  .spec td:first-child { white-space:normal; }
+  article ol > li { padding-left:4px; margin-bottom:12px; }
+  article .tip, article .note { line-height:1.6; }
+  article a:focus-visible { outline:2px solid var(--yellow); outline-offset:4px; border-radius:2px; }
+  .toc-side { max-height:calc(100vh - 108px); overflow-y:auto; scrollbar-width:thin; }
+  .skip-link { position:absolute; z-index:40; top:8px; left:16px; transform:translateY(-180%); padding:8px 14px; background:var(--yellow); color:#111; border-radius:8px; }
+  .skip-link:focus { transform:none; }
+  #guide-content { scroll-margin-top:70px; }
+  @media (max-width:600px) {
+    h1 { font-size:30px; }
+    .spec th, .spec td { padding:10px 9px; font-size:14px; }
+    .caption-example { margin:24px 0; }
+  }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#guide-content">Skip to guide</a>
 <nav><div class="wrap">
   <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
   <div class="links">
@@ -162,17 +188,32 @@
     <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
   </div>
 </div></nav>
-<article><div class="col">
-
+<main id="guide-content" tabindex="-1"><article><div class="col has-toc">
+<div class="toc-rail"><aside class="toc toc-side" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#delivery">Choose the delivery before styling</a></li><li><a href="#transcribe">1. Transcribe the sequence</a></li><li><a href="#create">2. Create captions from the transcript</a></li><li><a href="#style">3. Style the captions in Properties</a></li><li><a href="#review">4. Review timing and line breaks</a></li><li><a href="#export">5. Export visible captions or an SRT file</a></li><li><a href="#delivery-check">Check the exported result, not only the timeline</a></li><li><a href="#can-premiere-make-word-by-word-captions">Can Premiere make word-by-word captions?</a></li></ol></aside></div>
+<script>(function(){function f(){var l=[].slice.call(document.querySelectorAll('.toc-side a')),i=0;
+l.forEach(function(a,k){var e=document.getElementById(a.hash.slice(1));if(e&&e.getBoundingClientRect().top<140)i=k});
+l.forEach(function(a,k){a.classList.toggle('on',k===i)})}
+addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',f)})();</script>
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / How to add captions in Premiere Pro, step by step</p>
 <h1>How to add captions in Premiere Pro, step by step</h1>
-<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Published <time datetime="2026-08-26">26 August 2026</time> · Updated <time datetime="2026-11-09">9 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 <p class="app-guide"><strong>Premiere Pro guide.</strong> Using After Effects? <a href="how-to-add-captions-in-after-effects.html">Install its panel and create your first captions</a>.</p>
 
 <p>To add captions in Premiere Pro, <strong>transcribe your sequence, create captions from the transcript, style the caption track, and choose how to export it</strong>. Premiere includes Speech to Text; you do not need a separate plugin for standard subtitles.</p>
 <p class="cta-line">For a moving highlight across a line of text, <a href="animated-captions-premiere-pro.html">compare native captions and animated graphics</a>. Captions Gen transcribes locally on the CPU and places editable Motion Graphics clips in Premiere Pro 25.6 or newer on supported 64-bit Windows. It's currently free, with no time limit or watermark. The download requires an email address, with no payment card; see the <a href="/product.html">installation requirements</a> before choosing it.</p>
 <p>This guide uses the current Text and Properties panels. Older Premiere tutorials may show Essential Graphics for styling.</p>
 
+<figure class="caption-example"><a class="diagram-link" href="/img/guides/core-caption-workflow.svg"><img src="/img/guides/core-caption-workflow.svg" width="960" height="1080" loading="lazy" alt="A Premiere caption workflow moves from transcript text to timed caption clips, then to burned-in video, SRT sidecar or supported embedded captions"></a><figcaption>Workflow illustration. A transcript, a caption track and the delivered file are three separate stages. <a href="/img/guides/core-caption-workflow.svg">Open full-size diagram</a>.</figcaption></figure>
+
+<aside class="toc toc-inline" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#delivery">Choose the delivery before styling</a></li><li><a href="#transcribe">1. Transcribe the sequence</a></li><li><a href="#create">2. Create captions from the transcript</a></li><li><a href="#style">3. Style the captions in Properties</a></li><li><a href="#review">4. Review timing and line breaks</a></li><li><a href="#export">5. Export visible captions or an SRT file</a></li><li><a href="#delivery-check">Check the exported result, not only the timeline</a></li><li><a href="#can-premiere-make-word-by-word-captions">Can Premiere make word-by-word captions?</a></li></ol></aside>
+<h2 id="delivery">Choose the delivery before styling</h2>
+<p>Check the upload or client brief first. A caption track keeps subtitle text available for caption-file export. A text graphic gives you animation control and renders into the picture. You can keep both in a project when you need a styled video and a separate subtitle file.</p>
+<table class="spec"><thead><tr><th>You need</th><th>Start here</th><th>Check at delivery</th></tr></thead><tbody>
+<tr><td>Always-visible social captions</td><td>Native captions with burn-in, or animated graphics</td><td>Play the exported video with subtitles turned off</td></tr>
+<tr><td>A separate SRT for a platform</td><td>A native Subtitle track</td><td>Upload the SRT alongside the matching video</td></tr>
+<tr><td>Broadcast closed captions</td><td>The caption standard in the delivery brief</td><td>Confirm the supported format and receiving system</td></tr>
+</tbody></table>
+<p>For broadcast specifications, use the <a href="closed-captions-premiere-pro.html">closed-caption delivery guide</a>. For an existing subtitle file, go directly to <a href="import-srt-premiere-pro.html">SRT import</a>.</p>
 <h2 id="transcribe">1. Transcribe the sequence</h2>
 <p>Open your edited sequence and choose <kbd>Window &gt; Text</kbd>. In the Transcript tab, transcribe the sequence if a transcript has not already been created during import. Choose the spoken language and the dialogue audio you want to transcribe. A language pack may need to download before local transcription can run.</p>
 <p>Review names, numbers, and technical terms in the transcript before generating captions. If transcription fails or the transcript is empty, use the <a href="premiere-pro-speech-to-text-not-working.html">Speech to Text troubleshooting guide</a>.</p>
@@ -180,6 +221,7 @@
 <h2 id="create">2. Create captions from the transcript</h2>
 <p>In the Text panel's Captions tab, select <strong>Create captions from transcript</strong>. Use the Subtitle format for ordinary on-screen subtitles, or the format specified by your delivery brief for broadcast closed captions.</p>
 <p>Set the line length, duration, gap, and number of lines for the video you are making. Short lines can help a vertical video, but check the result at the intended viewing size rather than forcing every sentence into the same number of characters.</p>
+<p>Before confirming, check the caption format and any selected style. A short dialogue sample is enough to judge line length and reading time before captioning a long edit. Save a sequence copy if you are replacing an existing caption track.</p>
 <p>Create the captions. Premiere adds timed caption clips to a track above the video. Check that the track's eye icon is enabled, then play the sequence to review the text and timing. See <a href="premiere-pro-captions-not-showing.html">what to check when captions are not showing</a> if the preview is blank.</p>
 
 <h2 id="style">3. Style the captions in Properties</h2>
@@ -200,7 +242,10 @@
 </ul>
 <p>Export a short sample and check it in the intended player before rendering the entire project. For visible social-video subtitles, see the <a href="burn-in-captions-premiere-pro.html">burn-in export guide</a>.</p>
 
-<h2>Can Premiere make word-by-word captions?</h2>
+<h2 id="delivery-check">Check the exported result, not only the timeline</h2>
+<p>Open the exported file from its saved location and play the same captioned phrase you reviewed in Premiere. For burn-in, turn the player's subtitles off: the text should stay visible. For a sidecar, verify that the SRT contains the expected words and upload it with the exact matching video. Embedded captions need a compatible player with the caption stream enabled.</p>
+<p>If a graphic already contains the same words as an enabled native track, check for doubled text before export. Keep the subtitle copy for delivery and enable only the visible treatment you want in the picture. See <a href="premiere-pro-captions-not-exporting.html">caption export troubleshooting</a> if the result differs from the preview.</p>
+<h2 id="can-premiere-make-word-by-word-captions">Can Premiere make word-by-word captions?</h2>
 <p>Current versions include a <strong>Single Word</strong> layout in Captioning Preferences. For a moving highlight across a multi-word line or animated graphics, compare the approaches in the <a href="animated-captions-premiere-pro.html">animated caption guide</a>.</p>
 <p class="sources">References: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-captions.html">caption creation instructions</a>, <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-styles-for-captions.html">Properties and Track Styles</a>, and <a href="https://helpx.adobe.com/ca/premiere/desktop/render-and-export/export-files/overview-of-export-settings.html">export settings</a>.</p>
 
@@ -214,11 +259,11 @@
 <a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
 </div>
 
-<div class="box"><p class="t">Related guides</p><ul><li><a href="auto-captions-premiere-pro.html">Auto captions in Premiere Pro with Speech to Text</a></li>
-<li><a href="premiere-pro-captions-not-showing.html">Premiere Pro captions not showing: preview and export fixes</a></li>
-<li><a href="burn-in-captions-premiere-pro.html">How to burn in captions in Premiere Pro</a></li>
-<li><a href="free-caption-plugin-premiere-pro.html">Free caption plugins for Premiere Pro</a></li></ul></div>
-</div></article>
+<div class="box"><p class="t">Related guides</p><ul><li><a href="import-srt-premiere-pro.html">Import and export SRT files in Premiere Pro</a></li>
+<li><a href="change-caption-font-premiere-pro.html">How to change the caption font in Premiere Pro</a></li>
+<li><a href="premiere-pro-captions-not-exporting.html">Premiere Pro captions not exporting</a></li>
+<li><a href="how-to-add-captions-in-after-effects.html">How to add animated captions in After Effects</a></li></ul></div>
+</div></article></main>
 <footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/product.html">Product facts &amp; compatibility</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="https://captionsgen.com/news/">News</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>
 </body>
 </html>

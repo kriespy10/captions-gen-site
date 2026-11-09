@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1000" viewBox="0 0 960 1000" role="img" aria-labelledby="title description"><title id="title">Recognize, then translate</title><desc id="description">Choose the language in the audio Check detection or a manual language choice. Wait for the required recognition pack. Correct the recognized text Check names, numbers and mixed-language parts. Create the intended caption track. Make a separate language version Review meaning, reading length and timing. Premiere translation uses cloud services.</desc><rect width="960" height="1000" rx="24" fill="#101013"/><g font-family="Arial, sans-serif"><text x="48" y="52" font-size="20" font-weight="700" letter-spacing="2" fill="#ffeb3b">CAPTIONS GEN GUIDES</text>
+<text x="48" y="106" font-size="42" font-weight="700" fill="#f5f5f7">Recognize, then translate</text>
+<text x="48" y="182" font-size="24" fill="#b7b7c0">Spoken language is different from subtitle language.</text>
+<rect x="40" y="236" width="880" height="205" rx="17" fill="#19191e" stroke="#37373f"/><rect x="40" y="254" width="5" height="169" rx="2" fill="#ffeb3b"/><text x="70" y="273" font-size="19" font-weight="700" letter-spacing="1" fill="#ffeb3b">RECOGNIZE</text><text x="70" y="316" font-size="30" font-weight="700" fill="#f5f5f7">Choose the language in the audio</text>
+<text x="72" y="362" font-size="25" fill="#b7b7c0">Check detection or a manual language choice.</text>
+<text x="72" y="397" font-size="25" fill="#b7b7c0">Wait for the required recognition pack.</text>
+<path d="M818 373h8l7-23 10 46 9-61 9 72 9-47 8 13h10" stroke="#ffeb3b" fill="none" stroke-width="4" stroke-linejoin="round"/>
+<path d="M480 447v10m-7-5 7 7 7-7" stroke="#696974" stroke-width="3" fill="none"/>
+<rect x="40" y="464" width="880" height="205" rx="17" fill="#19191e" stroke="#37373f"/><rect x="40" y="482" width="5" height="169" rx="2" fill="#63b9ff"/><text x="70" y="501" font-size="19" font-weight="700" letter-spacing="1" fill="#63b9ff">REVIEW</text><text x="70" y="544" font-size="30" font-weight="700" fill="#f5f5f7">Correct the recognized text</text>
+<text x="72" y="590" font-size="25" fill="#b7b7c0">Check names, numbers and mixed-language parts.</text>
+<text x="72" y="625" font-size="25" fill="#b7b7c0">Create the intended caption track.</text>
+<rect x="818" y="571" width="67" height="58" rx="7" stroke="#63b9ff" fill="none" stroke-width="3"/><path d="M830 592h43 M830 608h32" stroke="#63b9ff" stroke-width="4"/>
+<path d="M480 675v10m-7-5 7 7 7-7" stroke="#696974" stroke-width="3" fill="none"/>
+<rect x="40" y="692" width="880" height="205" rx="17" fill="#19191e" stroke="#37373f"/><rect x="40" y="710" width="5" height="169" rx="2" fill="#b9adff"/><text x="70" y="729" font-size="19" font-weight="700" letter-spacing="1" fill="#b9adff">TRANSLATE IF NEEDED</text><text x="70" y="772" font-size="30" font-weight="700" fill="#f5f5f7">Make a separate language version</text>
+<text x="72" y="818" font-size="25" fill="#b7b7c0">Review meaning, reading length and timing.</text>
+<text x="72" y="853" font-size="25" fill="#b7b7c0">Premiere translation uses cloud services.</text>
+<path d="M825 792h35l17 17v55H825z M860 792v17h17 M836 823h29 M836 835h29 M836 847h18" stroke="#b9adff" fill="none" stroke-width="3"/>
+<text x="48" y="962" font-size="22" fill="#b7b7c0">Workflow illustration · Captions Gen guides</text></g></svg>

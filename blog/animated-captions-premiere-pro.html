@@ -15,7 +15,7 @@
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://captionsgen.com/img/styles/Bold-Impact.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Animated captions in Premiere Pro: choose your workflow", "datePublished": "2026-08-26", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/animated-captions-premiere-pro.html", "image": "https://captionsgen.com/img/styles/Bold-Impact.png"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Animated captions in Premiere Pro: choose your workflow", "item": "https://captionsgen.com/blog/animated-captions-premiere-pro.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Animated captions in Premiere Pro: choose your workflow", "description": "Compare native single-word captions, manually animated graphics, and Captions Gen for Premiere Pro. Choose a workflow for subtitles or karaoke highlights.", "inLanguage": "en", "articleSection": "Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-09", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/animated-captions-premiere-pro.html", "image": "https://captionsgen.com/img/guides/core-caption-motion-options.svg"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Animated captions in Premiere Pro: choose your workflow", "item": "https://captionsgen.com/blog/animated-captions-premiere-pro.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -146,9 +146,35 @@
   .spec tr:last-child td { border-bottom:0; }
   .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; border:1px solid rgba(255,255,255,.35); }
   .ptable-legend { display:flex; flex-wrap:wrap; gap:6px 18px; color:var(--muted); font-size:12.5px; margin:10px 2px 0; }
+
+  .caption-example { margin:30px 0; }
+  .caption-example img { border:1px solid var(--hair2); background:#101013; }
+  .caption-example figcaption { line-height:1.5; color:var(--muted2); padding:0 2px; }
+  .caption-example figcaption a { white-space:nowrap; }
+  .ptable-wrap { left:0; transform:none; width:100%; }
+  .ptable { min-width:620px; }
+  .ptable:has(th:nth-child(6)) { min-width:1000px; }
+  .ptable th { white-space:normal; }
+  .ptable td:first-child { width:27%; }
+  .spec { table-layout:fixed; }
+  .spec th, .spec td { overflow-wrap:anywhere; }
+  .spec td:first-child { white-space:normal; }
+  article ol > li { padding-left:4px; margin-bottom:12px; }
+  article .tip, article .note { line-height:1.6; }
+  article a:focus-visible { outline:2px solid var(--yellow); outline-offset:4px; border-radius:2px; }
+  .toc-side { max-height:calc(100vh - 108px); overflow-y:auto; scrollbar-width:thin; }
+  .skip-link { position:absolute; z-index:40; top:8px; left:16px; transform:translateY(-180%); padding:8px 14px; background:var(--yellow); color:#111; border-radius:8px; }
+  .skip-link:focus { transform:none; }
+  #guide-content { scroll-margin-top:70px; }
+  @media (max-width:600px) {
+    h1 { font-size:30px; }
+    .spec th, .spec td { padding:10px 9px; font-size:14px; }
+    .caption-example { margin:24px 0; }
+  }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#guide-content">Skip to guide</a>
 <nav><div class="wrap">
   <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
   <div class="links">
@@ -162,15 +188,24 @@
     <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
   </div>
 </div></nav>
-<article><div class="col">
-
+<main id="guide-content" tabindex="-1"><article><div class="col has-toc">
+<div class="toc-rail"><aside class="toc toc-side" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#delivery">Decide whether the text must remain a subtitle file</a></li><li><a href="#native">1. Native single-word captions</a></li><li><a href="#manual">2. Animate caption graphics by hand</a></li><li><a href="#plugin">3. Generate animated graphics with Captions Gen</a></li><li><a href="#edit-check">Check an actual caption correction before a long batch</a></li><li><a href="#which-workflow-fits-your-edit">Which workflow fits your edit?</a></li></ol></aside></div>
+<script>(function(){function f(){var l=[].slice.call(document.querySelectorAll('.toc-side a')),i=0;
+l.forEach(function(a,k){var e=document.getElementById(a.hash.slice(1));if(e&&e.getBoundingClientRect().top<140)i=k});
+l.forEach(function(a,k){a.classList.toggle('on',k===i)})}
+addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',f)})();</script>
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Animated captions in Premiere Pro: choose your workflow</p>
 <h1>Animated captions in Premiere Pro: choose your workflow</h1>
-<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Published <time datetime="2026-08-26">26 August 2026</time> · Updated <time datetime="2026-11-09">9 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 <p class="app-guide"><strong>Premiere Pro guide.</strong> Using After Effects? <a href="how-to-add-captions-in-after-effects.html">Install its panel and create your first captions</a>.</p>
 
 <p>To make animated captions in Premiere Pro, start with the look you need: <strong>one word appearing at a time, manually animated text, or a moving highlight within a multi-word line</strong>. These use different workflows. Current Premiere versions include native single-word captions; graphics give you more control over motion and highlighting.</p>
 
+<figure class="caption-example"><a class="diagram-link" href="/img/guides/core-caption-motion-options.svg"><img src="/img/guides/core-caption-motion-options.svg" width="960" height="1080" loading="lazy" alt="Three caption treatments: one native word at a time, manually keyframed text graphics and a highlighted spoken word within a phrase"></a><figcaption>Workflow illustration. Choose the output and motion you need before choosing a tool. <a href="/img/guides/core-caption-motion-options.svg">Open full-size diagram</a>.</figcaption></figure>
+<aside class="toc toc-inline" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#delivery">Decide whether the text must remain a subtitle file</a></li><li><a href="#native">1. Native single-word captions</a></li><li><a href="#manual">2. Animate caption graphics by hand</a></li><li><a href="#plugin">3. Generate animated graphics with Captions Gen</a></li><li><a href="#edit-check">Check an actual caption correction before a long batch</a></li><li><a href="#which-workflow-fits-your-edit">Which workflow fits your edit?</a></li></ol></aside>
+<h2 id="delivery">Decide whether the text must remain a subtitle file</h2>
+<p>Native caption tracks are the starting point for SRT and supported closed-caption delivery. Graphics are the starting point for keyframes, layered designs and a moving highlight. When a project needs both, preserve a native caption sequence or track before upgrading any captions to graphics.</p>
+<p>A one-word layout changes how the words are grouped. A word highlight changes the appearance of the word being spoken inside a longer caption. These effects can look similar in a short preview, but they need different timing and editing controls.</p>
 <h2 id="native">1. Native single-word captions</h2>
 <p>Transcribe the sequence, create captions from the transcript, and select <strong>Layout &gt; Single Word</strong> in Captioning Preferences. Premiere creates timed one-word caption clips. Style them in Properties and choose the caption export format you need.</p>
 <p>This route suits a simple one-word-at-a-time look and keeps the text on a native caption track. For the setup, follow the <a href="word-by-word-captions-premiere-pro.html">word-by-word captions workflow</a>.</p>
@@ -178,15 +213,19 @@
 <h2 id="manual">2. Animate caption graphics by hand</h2>
 <p>Create ordinary captions first, select the clips you want to animate, then choose <strong>Graphics and Titles &gt; Upgrade Caption to Graphic</strong>. Once the text is a graphic, use its text appearance and keyframes to build the motion you need.</p>
 <p>A moving highlight across several words takes additional timing work. One method is to split the graphic at each spoken word and change that word's appearance in each segment. It gives you control, but corrections and longer edits mean more clips to maintain. See <a href="highlight-words-in-captions-premiere-pro.html">how to highlight spoken words</a>.</p>
+<p>Try the motion on one graphic first: set an initial position or scale, enable animation for that property in Effect Controls, move the playhead and change the value. Review the movement at normal speed before copying it to more clips. Keyframes applied to a whole graphic do not automatically identify each spoken word.</p>
 <p>Graphics render as part of the video. Keep the original caption track if you also need a sidecar file or closed-caption delivery.</p>
 
 <h2 id="plugin">3. Generate animated graphics with Captions Gen</h2>
-<p><a href="https://captionsgen.com/">Captions Gen</a> transcribes locally on the CPU with Faster Whisper and places word-synced Motion Graphics clips on the Premiere timeline. Its presets combine karaoke highlights, color swaps or pill backgrounds, bounce, and in/out animations. You can edit the placed graphics or use <strong>Apply style to placed captions</strong> to change their appearance without transcribing again. After editing caption text, review the updated animation and word timing.</p>
+<p><a href="https://captionsgen.com/">Captions Gen</a> transcribes locally on the CPU with Faster Whisper and places word-synced Motion Graphics clips on the Premiere timeline. Its presets combine karaoke highlights, color swaps or pill backgrounds, bounce, and in/out animations. You can edit the placed graphics or use <strong>Apply style</strong> to change their appearance without transcribing again. After editing caption text, review the updated animation and word timing.</p>
 <figure class="caption-example"><img src="/img/styles/Bold-Impact.png" width="1280" height="480" loading="lazy" alt="Captions Gen preview reading Use Your Shield, with Shield highlighted in yellow"><figcaption>A Captions Gen graphic with the spoken word highlighted. This is a plugin preview, not Premiere's native caption track.</figcaption></figure>
 <p>The plugin runs on supported 64-bit Windows 10 or 11 with Premiere Pro 25.6 or newer. It's currently free, with no time limit or watermark. Enter an email address at the free checkout to get the download, with no payment card. Missing speech models download before use, so allow at least 3 GB of model storage and time for that first download. Review the <a href="/product.html">full requirements and limitations</a>.</p>
 <p>Working in After Effects too? The <a href="/news/captions-gen-1-1-9.html">1.1.9 Windows setup</a> can install Premiere Pro, After Effects, or both, sharing the engine and Models folder. The After Effects panel creates native editable caption layers and is tested with After Effects 2026 on Windows 11. This guide's timeline steps are for Premiere Pro.</p>
 
-<h2>Which workflow fits your edit?</h2>
+<h2 id="edit-check">Check an actual caption correction before a long batch</h2>
+<p>Generate a short representative sample, then correct one word. Review the highlight around the edited text rather than judging only the unchanged preset preview. With Captions Gen, use the caption editor where available; direct Properties text edits can require <strong>Update animation</strong> for the selected changed graphics. Recheck the timing after that update.</p>
+<p>Use <strong>Apply style</strong> to change the design of the placed captions rather than transcribing again for a color change. The <a href="free-caption-plugin-premiere-pro.html">free plugin guide</a> explains the current Windows installation and editing limits. In After Effects, follow the separate <a href="word-by-word-captions-after-effects.html">word-by-word layer workflow</a>; its composition controls differ from Premiere's timeline.</p>
+<h2 id="which-workflow-fits-your-edit">Which workflow fits your edit?</h2>
 <ul>
 <li><strong>Readable subtitles or a separate caption file:</strong> start with Premiere's native captions.</li>
 <li><strong>One word at a time:</strong> try the native Single Word layout before adding another tool.</li>
@@ -194,7 +233,7 @@
 <li><strong>Repeatable karaoke highlights and animation presets:</strong> test Captions Gen on a representative clip.</li>
 </ul>
 <p>If your existing workflow goes through another editor, the <a href="capcut-vs-premiere-pro-captions.html">CapCut and Premiere caption comparison</a> covers the export-and-import tradeoff. If captions are missing rather than needing animation, start with the <a href="premiere-pro-captions-not-showing.html">visibility and export checks</a>.</p>
-<p class="sources">Reference: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-single-word-captions.html">native Single Word caption workflow</a>.</p>
+<p class="sources">References: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-images-and-graphics/animate-layers-using-the-effect-controls-panel.html">graphics keyframing instructions</a> and <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-single-word-captions.html">native Single Word caption workflow</a>.</p>
 
 
 <div class="box">
@@ -207,10 +246,10 @@
 </div>
 
 <div class="box"><p class="t">Related guides</p><ul><li><a href="word-by-word-captions-premiere-pro.html">Word by word captions in Premiere Pro</a></li>
+<li><a href="premiere-pro-captions-to-graphics.html">Convert captions to graphics in Premiere Pro</a></li>
 <li><a href="highlight-words-in-captions-premiere-pro.html">How to highlight words in captions in Premiere Pro</a></li>
-<li><a href="best-caption-plugin-premiere-pro.html">Best caption plugins for Premiere Pro in 2026, compared</a></li>
-<li><a href="free-caption-plugin-premiere-pro.html">Free caption plugins for Premiere Pro</a></li></ul></div>
-</div></article>
+<li><a href="word-by-word-captions-after-effects.html">Word-by-word captions in After Effects: layout or highlight?</a></li></ul></div>
+</div></article></main>
 <footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/product.html">Product facts &amp; compatibility</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="https://captionsgen.com/news/">News</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>
 </body>
 </html>

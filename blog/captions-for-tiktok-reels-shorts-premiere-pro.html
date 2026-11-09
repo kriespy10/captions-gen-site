@@ -7,15 +7,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
 <title>Captions for TikTok, Reels and Shorts in Premiere Pro</title>
-<meta name="description" content="Set up captions for vertical video in Premiere Pro: sequence settings, safe zones, readable text, line length, timing and animated graphics.">
+<meta name="description" content="Prepare Premiere captions for vertical video: frame size, interface-safe placement, readable line breaks, word timing and burn-in or subtitle-file delivery.">
 <link rel="canonical" href="https://captionsgen.com/blog/captions-for-tiktok-reels-shorts-premiere-pro.html">
 <meta property="og:title" content="Captions for TikTok, Reels and Shorts in Premiere Pro">
-<meta property="og:description" content="Set up captions for vertical video in Premiere Pro: sequence settings, safe zones, readable text, line length, timing and animated graphics.">
+<meta property="og:description" content="Prepare Premiere captions for vertical video: frame size, interface-safe placement, readable line breaks, word timing and burn-in or subtitle-file delivery.">
 <meta property="og:url" content="https://captionsgen.com/blog/captions-for-tiktok-reels-shorts-premiere-pro.html">
 <meta property="og:type" content="article">
 
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Captions for TikTok, Reels and Shorts in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/captions-for-tiktok-reels-shorts-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Captions for TikTok, Reels and Shorts in Premiere Pro", "item": "https://captionsgen.com/blog/captions-for-tiktok-reels-shorts-premiere-pro.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Captions for TikTok, Reels and Shorts in Premiere Pro", "description": "Prepare Premiere captions for vertical video: frame size, interface-safe placement, readable line breaks, word timing and burn-in or subtitle-file delivery.", "inLanguage": "en", "articleSection": "Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-09", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/captions-for-tiktok-reels-shorts-premiere-pro.html", "image": "https://captionsgen.com/img/guides/native-vertical-safe-area.svg"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Captions for TikTok, Reels and Shorts in Premiere Pro", "item": "https://captionsgen.com/blog/captions-for-tiktok-reels-shorts-premiere-pro.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -146,9 +146,35 @@
   .spec tr:last-child td { border-bottom:0; }
   .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; border:1px solid rgba(255,255,255,.35); }
   .ptable-legend { display:flex; flex-wrap:wrap; gap:6px 18px; color:var(--muted); font-size:12.5px; margin:10px 2px 0; }
+
+  .caption-example { margin:30px 0; }
+  .caption-example img { border:1px solid var(--hair2); background:#101013; }
+  .caption-example figcaption { line-height:1.5; color:var(--muted2); padding:0 2px; }
+  .caption-example figcaption a { white-space:nowrap; }
+  .ptable-wrap { left:0; transform:none; width:100%; }
+  .ptable { min-width:620px; }
+  .ptable:has(th:nth-child(6)) { min-width:1000px; }
+  .ptable th { white-space:normal; }
+  .ptable td:first-child { width:27%; }
+  .spec { table-layout:fixed; }
+  .spec th, .spec td { overflow-wrap:anywhere; }
+  .spec td:first-child { white-space:normal; }
+  article ol > li { padding-left:4px; margin-bottom:12px; }
+  article .tip, article .note { line-height:1.6; }
+  article a:focus-visible { outline:2px solid var(--yellow); outline-offset:4px; border-radius:2px; }
+  .toc-side { max-height:calc(100vh - 108px); overflow-y:auto; scrollbar-width:thin; }
+  .skip-link { position:absolute; z-index:40; top:8px; left:16px; transform:translateY(-180%); padding:8px 14px; background:var(--yellow); color:#111; border-radius:8px; }
+  .skip-link:focus { transform:none; }
+  #guide-content { scroll-margin-top:70px; }
+  @media (max-width:600px) {
+    h1 { font-size:30px; }
+    .spec th, .spec td { padding:10px 9px; font-size:14px; }
+    .caption-example { margin:24px 0; }
+  }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#guide-content">Skip to guide</a>
 <nav><div class="wrap">
   <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
   <div class="links">
@@ -162,33 +188,46 @@
     <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
   </div>
 </div></nav>
-<article><div class="col">
-
+<main id="guide-content" tabindex="-1"><article><div class="col has-toc">
+<div class="toc-rail"><aside class="toc toc-side" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#vertical-sequence">Set the sequence and framing before captions</a></li><li><a href="#vertical-readability">Choose readable text and line breaks</a></li><li><a href="#vertical-timing">Choose phrases, single words or a moving highlight</a></li><li><a href="#vertical-interface">Check placement in the destination app</a></li><li><a href="#vertical-export">Export the intended caption treatment</a></li><li><a href="#vertical-plugin">Animated designs inside the Adobe edit</a></li></ol></aside></div>
+<script>(function(){function f(){var l=[].slice.call(document.querySelectorAll('.toc-side a')),i=0;
+l.forEach(function(a,k){var e=document.getElementById(a.hash.slice(1));if(e&&e.getBoundingClientRect().top<140)i=k});
+l.forEach(function(a,k){a.classList.toggle('on',k===i)})}
+addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',f)})();</script>
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Captions for TikTok, Reels and Shorts in Premiere Pro</p>
 <h1>Captions for TikTok, Reels and Shorts in Premiere Pro</h1>
-<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Published <time datetime="2026-08-26">26 August 2026</time> · Updated <time datetime="2026-11-09">9 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 <p class="app-guide"><strong>Premiere Pro guide.</strong> Using After Effects? <a href="how-to-add-captions-in-after-effects.html">Install its panel and create your first captions</a>.</p>
 
-<p>For vertical captions, choose the delivery aspect ratio, keep text clear of interface overlays, and check font size and line length on a phone. A 1080 x 1920 sequence is a common 9:16 starting point. Native Single Word captions cover one-word-at-a-time text; graphics offer other animation workflows.</p>
-<p class="cta-line">For a moving spoken-word highlight or graphic animation, use a graphics workflow. Native Single Word captions remain an option for showing one timed word at a time. <a href="https://captionsgen.com/">Captions Gen</a> is a Premiere Pro plugin that generates timed animated graphics. It transcribes locally on your CPU and places editable Motion Graphics clips on the Premiere timeline. The current Windows release is free, without a transcription time cap or watermark; Adobe Premiere Pro is separate.</p>
-
-<h2>Sequence settings</h2>
-<p>Choose the destination's aspect ratio and resolution before styling. For a 9:16 edit, 1080 x 1920 is a common starting size. Review captions again after any crop or reframing, because their original position may no longer fit.</p>
-
-<h2>Safe zones</h2>
-<p>TikTok, Reels and Shorts overlay buttons on the right edge and text at the bottom. Keep text away from interface overlays, then check a draft on the destination app. The safe area can differ between platforms, devices and viewing modes; do not assume one fixed position works everywhere.</p>
-
-<h2>Size and line length</h2>
-<p>Try 55 to 75 px on a 1920-tall frame and 16 to 20 characters per line as starting points, then adjust to your font, speech and phone preview. Bold sans fonts with a stroke or background box survive busy footage.</p>
-
-<h2>Timing</h2>
-<p>Keep phrase captions visible long enough to read at normal playback speed. Single Word captions use different timing from a multi-word phrase, so a fixed minimum duration will not suit both. If an automatic split breaks a phrase awkwardly, adjust or merge the caption clips and review them with the audio.</p>
-
-<h2>Export</h2>
-<p>For a fixed visual treatment, burn native captions in through Export &gt; Captions. Graphics render through their enabled video tracks. Check the destination platform's current upload options if you also want selectable caption text.</p>
-
-<h2>The animated look</h2>
-<p>You can show one word at a time with the native Single Word layout in supported Premiere versions. For a moving highlight across a phrase, animate graphics manually or use a plugin. Judge the look against your content rather than assuming animation guarantees better results.</p>
+<p><strong>Set the vertical sequence first, then style captions at the size people will actually watch.</strong> A 1080 x 1920 sequence is a common 9:16 starting point. Keep words clear of the destination app's interface, review line breaks and timing, and test an exported sample on a phone.</p>
+<p>The destination, frame crop and amount of text matter more than copying one fixed position. TikTok, Reels and Shorts can display different overlays across devices and viewing modes. This guide's placement example is an illustration, not a universal platform safe-zone template.</p>
+<aside class="toc toc-inline" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#vertical-sequence">Set the sequence and framing before captions</a></li><li><a href="#vertical-readability">Choose readable text and line breaks</a></li><li><a href="#vertical-timing">Choose phrases, single words or a moving highlight</a></li><li><a href="#vertical-interface">Check placement in the destination app</a></li><li><a href="#vertical-export">Export the intended caption treatment</a></li><li><a href="#vertical-plugin">Animated designs inside the Adobe edit</a></li></ol></aside>
+<h2 id="vertical-sequence">Set the sequence and framing before captions</h2>
+<ol>
+<li>Choose the delivery aspect ratio and frame size for this version of the edit. Keep a separate sequence when also delivering landscape video.</li>
+<li>Reframe the footage and check faces, demonstrations and other visual information. Avoid placing captions over the subject simply because the lower centre is available.</li>
+<li>Finish the main cut before creating a large caption batch, then review timing after any later change to the speech.</li>
+<li>Check graphics and subtitle placement again if the sequence is resized or cropped after styling.</li>
+</ol>
+<figure class="caption-example"><a class="diagram-link" href="/img/guides/native-vertical-safe-area.svg"><img src="/img/guides/native-vertical-safe-area.svg" width="960" height="1000" loading="lazy" alt="Vertical-video planning checks the frame, caption reading area and destination interface before final export"/></a><figcaption>Placement illustration. Shown clearances are conceptual, not official TikTok, Reels or Shorts measurements. <a href="/img/guides/native-vertical-safe-area.svg">Open full-size diagram</a>.</figcaption></figure>
+<h2 id="vertical-readability">Choose readable text and line breaks</h2>
+<p>Use a clear font, sufficient contrast and a line length that fits the frame. For a 1080 x 1920 sample, 55 to 75 pixels and short lines can be starting experiments. They are not platform requirements; font metrics and the actual words change the result.</p>
+<p>Preview the longest likely phrase. Break at a natural language boundary rather than isolating a small function word or splitting a name. If the caption covers too much of the video, shorten the phrase or reduce the treatment rather than pushing it into interface controls.</p>
+<p>Test the font over the brightest and busiest shots. A restrained stroke or background can help. See the <a href="best-fonts-for-captions.html">font and readability guide</a> for a practical comparison process.</p>
+<h2 id="vertical-timing">Choose phrases, single words or a moving highlight</h2>
+<p>Native phrase captions work when the viewer benefits from reading ahead. Current Premiere versions also offer Single Word layout. A moving active-word highlight keeps a phrase visible and uses a different graphics workflow.</p>
+<p>Play the passage at normal speed with sound, then muted. Check whether the text remains understandable rather than assuming a fast animation improves the edit. Do not use one minimum-duration rule for both full phrases and individual words.</p>
+<p>If the recognised text is correct but the timing is wrong, use the <a href="fix-caption-timing-premiere-pro.html">timing checks</a>. If phrase splitting is awkward, revise caption boundaries and review the result with the speech.</p>
+<h2 id="vertical-interface">Check placement in the destination app</h2>
+<p>Render a short sample containing the intended caption position and upload a private or draft version where the destination permits it. Inspect the actual viewing screen, including controls, title text and any automatically displayed subtitles. Do this on the device or viewing mode that matters for the delivery.</p>
+<p>Do not label a generic percentage inset as a guaranteed safe area for every app. Leave room to adjust per platform. If the same video is distributed in several places, prepare platform-specific placement versions when necessary.</p>
+<h2 id="vertical-export">Export the intended caption treatment</h2>
+<p>Burn native captions into the picture when the design must remain visible in the video. In Export, expand Captions and check the selected track and burn-in option. If delivering an SRT too, export it separately and keep its language and edit version clear.</p>
+<p>Type-tool graphics and Captions Gen animations render through video tracks. Their visibility is not controlled by the native Captions export section. Check track output, clip duration and covering layers, then watch the exported file.</p>
+<h2 id="vertical-plugin">Animated designs inside the Adobe edit</h2>
+<p>Captions Gen 1.1.9 creates word-timed editable graphics in Premiere using local CPU transcription. It has 18 built-in presets, custom styling and Apply style for a generated batch. Review spelling and highlights after generation and text edits.</p>
+<p>The public Windows release is currently free without a watermark or transcription time cap. It does not supply SRT conversion or translation. Its <a href="how-to-add-captions-in-after-effects.html">After Effects panel</a> creates composition layers, while native Premiere subtitles remain a separate delivery workflow. See the <a href="free-caption-plugin-premiere-pro.html">setup and compatibility guide</a> before choosing that route.</p>
+<p class="sources">Checked 9 November 2026: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/edit-projects/intro-to-editing/set-the-aspect-ratio-of-a-sequence.html">sequence aspect-ratio controls</a>, <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/create-single-word-captions.html">Single Word captions</a>, <a href="https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-caption-tracks.html">caption delivery</a>, and <a href="/product.html">Captions Gen facts</a>.</p>
 
 
 <div class="box">
@@ -203,7 +242,7 @@
 <div class="box"><p class="t">Related guides</p><ul><li><a href="word-by-word-captions-premiere-pro.html">Word by word captions in Premiere Pro</a></li>
 <li><a href="best-fonts-for-captions.html">Best fonts for captions and subtitles</a></li>
 <li><a href="burn-in-captions-premiere-pro.html">How to burn in captions in Premiere Pro</a></li></ul></div>
-</div></article>
+</div></article></main>
 <footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/product.html">Product facts &amp; compatibility</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="https://captionsgen.com/news/">News</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>
 </body>
 </html>

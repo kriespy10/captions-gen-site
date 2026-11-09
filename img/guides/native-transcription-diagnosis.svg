@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1000" viewBox="0 0 960 1000" role="img" aria-labelledby="title description"><title id="title">Isolate the failed step</title><desc id="description">Identify transcript and speech source Source and sequence audio can be different. Listen to the actual selected dialogue. Check language and model download Use detection or choose the known language. Wait for a missing pack to finish. Inspect the result before broader changes Check words, progress and version-specific issues. Record the exact error and source type.</desc><rect width="960" height="1000" rx="24" fill="#101013"/><g font-family="Arial, sans-serif"><text x="48" y="52" font-size="20" font-weight="700" letter-spacing="2" fill="#ffeb3b">CAPTIONS GEN GUIDES</text>
+<text x="48" y="106" font-size="42" font-weight="700" fill="#f5f5f7">Isolate the failed step</text>
+<text x="48" y="182" font-size="24" fill="#b7b7c0">Use a short, clear passage; change one condition at a time.</text>
+<rect x="40" y="236" width="880" height="205" rx="17" fill="#19191e" stroke="#37373f"/><rect x="40" y="254" width="5" height="169" rx="2" fill="#ffeb3b"/><text x="70" y="273" font-size="19" font-weight="700" letter-spacing="1" fill="#ffeb3b">CONTEXT</text><text x="70" y="316" font-size="30" font-weight="700" fill="#f5f5f7">Identify transcript and speech source</text>
+<text x="72" y="362" font-size="25" fill="#b7b7c0">Source and sequence audio can be different.</text>
+<text x="72" y="397" font-size="25" fill="#b7b7c0">Listen to the actual selected dialogue.</text>
+<path d="M818 373h8l7-23 10 46 9-61 9 72 9-47 8 13h10" stroke="#ffeb3b" fill="none" stroke-width="4" stroke-linejoin="round"/>
+<path d="M480 447v10m-7-5 7 7 7-7" stroke="#696974" stroke-width="3" fill="none"/>
+<rect x="40" y="464" width="880" height="205" rx="17" fill="#19191e" stroke="#37373f"/><rect x="40" y="482" width="5" height="169" rx="2" fill="#63b9ff"/><text x="70" y="501" font-size="19" font-weight="700" letter-spacing="1" fill="#63b9ff">READINESS</text><text x="70" y="544" font-size="30" font-weight="700" fill="#f5f5f7">Check language and model download</text>
+<text x="72" y="590" font-size="25" fill="#b7b7c0">Use detection or choose the known language.</text>
+<text x="72" y="625" font-size="25" fill="#b7b7c0">Wait for a missing pack to finish.</text>
+<rect x="818" y="571" width="67" height="58" rx="7" stroke="#63b9ff" fill="none" stroke-width="3"/><path d="M830 592h43 M830 608h32" stroke="#63b9ff" stroke-width="4"/>
+<path d="M480 675v10m-7-5 7 7 7-7" stroke="#696974" stroke-width="3" fill="none"/>
+<rect x="40" y="692" width="880" height="205" rx="17" fill="#19191e" stroke="#37373f"/><rect x="40" y="710" width="5" height="169" rx="2" fill="#b9adff"/><text x="70" y="729" font-size="19" font-weight="700" letter-spacing="1" fill="#b9adff">SHORT TEST</text><text x="70" y="772" font-size="30" font-weight="700" fill="#f5f5f7">Inspect the result before broader changes</text>
+<text x="72" y="818" font-size="25" fill="#b7b7c0">Check words, progress and version-specific issues.</text>
+<text x="72" y="853" font-size="25" fill="#b7b7c0">Record the exact error and source type.</text>
+<circle cx="849" cy="829" r="30" fill="none" stroke="#b9adff" stroke-width="3"/><path d="M832 829l12 12 23-27" stroke="#b9adff" fill="none" stroke-width="5"/>
+<text x="48" y="962" font-size="22" fill="#b7b7c0">Workflow illustration · Captions Gen guides</text></g></svg>

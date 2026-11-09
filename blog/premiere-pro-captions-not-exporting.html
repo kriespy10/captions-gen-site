@@ -7,15 +7,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
 <title>Premiere Pro Captions Not Exporting: Settings to Check</title>
-<meta name="description" content="Fix missing Premiere captions by checking burn-in, sidecar or embedded export settings, enabled caption tracks and graphics visibility.">
+<meta name="description" content="Diagnose missing Premiere captions by output type: burned-in text, SRT sidecar, embedded captions or graphics. Check tracks, export range and the actual file.">
 <link rel="canonical" href="https://captionsgen.com/blog/premiere-pro-captions-not-exporting.html">
 <meta property="og:title" content="Premiere Pro Captions Not Exporting: Settings to Check">
-<meta property="og:description" content="Fix missing Premiere captions by checking burn-in, sidecar or embedded export settings, enabled caption tracks and graphics visibility.">
+<meta property="og:description" content="Diagnose missing Premiere captions by output type: burned-in text, SRT sidecar, embedded captions or graphics. Check tracks, export range and the actual file.">
 <meta property="og:url" content="https://captionsgen.com/blog/premiere-pro-captions-not-exporting.html">
 <meta property="og:type" content="article">
 
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Premiere Pro captions not exporting", "datePublished": "2026-08-26", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/premiere-pro-captions-not-exporting.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Premiere Pro captions not exporting", "item": "https://captionsgen.com/blog/premiere-pro-captions-not-exporting.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Premiere Pro captions not exporting", "description": "Diagnose missing Premiere captions by output type: burned-in text, SRT sidecar, embedded captions or graphics. Check tracks, export range and the actual file.", "inLanguage": "en", "articleSection": "Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-09", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/premiere-pro-captions-not-exporting.html", "image": "https://captionsgen.com/img/guides/native-caption-export-check.svg"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Premiere Pro captions not exporting", "item": "https://captionsgen.com/blog/premiere-pro-captions-not-exporting.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -146,9 +146,35 @@
   .spec tr:last-child td { border-bottom:0; }
   .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; border:1px solid rgba(255,255,255,.35); }
   .ptable-legend { display:flex; flex-wrap:wrap; gap:6px 18px; color:var(--muted); font-size:12.5px; margin:10px 2px 0; }
+
+  .caption-example { margin:30px 0; }
+  .caption-example img { border:1px solid var(--hair2); background:#101013; }
+  .caption-example figcaption { line-height:1.5; color:var(--muted2); padding:0 2px; }
+  .caption-example figcaption a { white-space:nowrap; }
+  .ptable-wrap { left:0; transform:none; width:100%; }
+  .ptable { min-width:620px; }
+  .ptable:has(th:nth-child(6)) { min-width:1000px; }
+  .ptable th { white-space:normal; }
+  .ptable td:first-child { width:27%; }
+  .spec { table-layout:fixed; }
+  .spec th, .spec td { overflow-wrap:anywhere; }
+  .spec td:first-child { white-space:normal; }
+  article ol > li { padding-left:4px; margin-bottom:12px; }
+  article .tip, article .note { line-height:1.6; }
+  article a:focus-visible { outline:2px solid var(--yellow); outline-offset:4px; border-radius:2px; }
+  .toc-side { max-height:calc(100vh - 108px); overflow-y:auto; scrollbar-width:thin; }
+  .skip-link { position:absolute; z-index:40; top:8px; left:16px; transform:translateY(-180%); padding:8px 14px; background:var(--yellow); color:#111; border-radius:8px; }
+  .skip-link:focus { transform:none; }
+  #guide-content { scroll-margin-top:70px; }
+  @media (max-width:600px) {
+    h1 { font-size:30px; }
+    .spec th, .spec td { padding:10px 9px; font-size:14px; }
+    .caption-example { margin:24px 0; }
+  }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#guide-content">Skip to guide</a>
 <nav><div class="wrap">
   <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
   <div class="links">
@@ -162,33 +188,45 @@
     <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
   </div>
 </div></nav>
-<article><div class="col">
-
+<main id="guide-content" tabindex="-1"><article><div class="col has-toc">
+<div class="toc-rail"><aside class="toc toc-side" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#identify-delivery">First identify what is missing</a></li><li><a href="#burn-in-missing">Native text should be visible in the video</a></li><li><a href="#sidecar-missing">A sidecar exported, but the player shows nothing</a></li><li><a href="#embedded-missing">Embedded captions are absent or unavailable</a></li><li><a href="#graphics-missing">Animated graphics are missing</a></li><li><a href="#queue-range">Check queued jobs and the export range</a></li><li><a href="#still-images">Export Frame is a separate case</a></li></ol></aside></div>
+<script>(function(){function f(){var l=[].slice.call(document.querySelectorAll('.toc-side a')),i=0;
+l.forEach(function(a,k){var e=document.getElementById(a.hash.slice(1));if(e&&e.getBoundingClientRect().top<140)i=k});
+l.forEach(function(a,k){a.classList.toggle('on',k===i)})}
+addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',f)})();</script>
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Premiere Pro captions not exporting</p>
 <h1>Premiere Pro captions not exporting</h1>
-<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Published <time datetime="2026-08-26">26 August 2026</time> · Updated <time datetime="2026-11-09">9 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 <p class="app-guide"><strong>Premiere Pro guide.</strong> Using After Effects? <a href="how-to-add-captions-in-after-effects.html">Install its panel and create your first captions</a>.</p>
 
-<p>If native caption-track text is missing from the exported picture, open the <strong>Captions</strong> section in Export and check Export Options. Choose <strong>Burn Captions Into Video</strong> when you want the words visible in the picture, or a supported sidecar/embedded option when you need selectable captions.</p>
-
-<h2>The Captions tab</h2>
-<p>Premiere does not export captions unless you tell it to, and the setting is on its own tab that many people never open. The choices are None (nothing exported), Create Sidecar File (a separate .srt or similar), and Burn Captions Into Video (text rendered into the picture). For social platforms, burn in.</p>
-
-<h2>Sidecar exported, but the platform shows nothing</h2>
-<p>A sidecar file needs a supported player or a separate platform upload. Check the destination's current caption-file options. If it does not offer a suitable upload and the text must be visible, burn captions into the picture instead.</p>
-
-<h2>Closed captions and burn-in</h2>
-<p>Caption format and output container affect the available embedded and sidecar choices. Burn-in renders enabled caption tracks into the picture; embedded data needs a compatible container and player. Check the delivery specification instead of assuming an embedded stream will appear in every player.</p>
-
-<h2>Caption track disabled</h2>
-<p>Check the output toggle on the caption track header. A disabled track exports nothing even with burn-in selected.</p>
-
-<h2>Media Encoder queue</h2>
-<p>If you queue the sequence in Media Encoder, inspect that job's caption settings before starting it. Export a short section and watch the actual file, with an accompanying sidecar loaded when required.</p>
-
-<h2>Animated graphics use video-track output</h2>
-<p>Captions Gen places editable graphics on video tracks, not a native caption track. The Captions export section does not control those graphics. Check that their video track is enabled, the layers are visible and their duration overlaps the export range. If you need SRT too, keep a separate native caption track. See the <a href="burn-in-captions-premiere-pro.html">burn-in workflow</a> and <a href="/product.html">current output limits</a>.</p>
-<p class="sources">Reference: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-caption-tracks.html">caption export instructions</a>.</p>
+<p><strong>If native captions are missing from the exported picture, open Export &gt; Captions and check Export Options.</strong> Choose Burn Captions Into Video for visible words in the picture. A sidecar or embedded stream needs a compatible receiving workflow. For graphics on video tracks, check their video output instead of native caption export settings.</p>
+<aside class="toc toc-inline" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#identify-delivery">First identify what is missing</a></li><li><a href="#burn-in-missing">Native text should be visible in the video</a></li><li><a href="#sidecar-missing">A sidecar exported, but the player shows nothing</a></li><li><a href="#embedded-missing">Embedded captions are absent or unavailable</a></li><li><a href="#graphics-missing">Animated graphics are missing</a></li><li><a href="#queue-range">Check queued jobs and the export range</a></li><li><a href="#still-images">Export Frame is a separate case</a></li></ol></aside>
+<h2 id="identify-delivery">First identify what is missing</h2>
+<p>Compare the request with the files you actually exported. An MP4 plus an SRT can be a correct sidecar delivery even when opening only the MP4 shows no words. Conversely, text visible in a video does not prove that a required selectable caption stream exists.</p>
+<figure class="caption-example"><a class="diagram-link" href="/img/guides/native-caption-export-check.svg"><img src="/img/guides/native-caption-export-check.svg" width="960" height="1000" loading="lazy" alt="Check native burn-in settings, a separate sidecar or supported embedded stream, and video-track output for graphics"/></a><figcaption>Diagnostic illustration. Start with the intended output rather than changing every setting at once. <a href="/img/guides/native-caption-export-check.svg">Open full-size diagram</a>.</figcaption></figure>
+<h2 id="burn-in-missing">Native text should be visible in the video</h2>
+<ol>
+<li>Open the same sequence that contains the caption track. Park the playhead over a caption and confirm it is visible in the Program Monitor.</li>
+<li>Check the track's output and the caption clip's time range. Enable only the caption tracks intended for this picture version.</li>
+<li>In Export, expand Captions and choose Burn Captions Into Video. Review the listed caption tracks and export range.</li>
+<li>Export a short passage to a new, clearly named file. Open that new file, rather than an older export cached in a player.</li>
+</ol>
+<p>If captions are missing in the preview too, first use the <a href="premiere-pro-captions-not-showing.html">preview visibility guide</a>. Export settings cannot reveal a caption outside its clip duration or repair text placed outside the frame.</p>
+<h2 id="sidecar-missing">A sidecar exported, but the player shows nothing</h2>
+<p>Find the actual caption file and confirm that its language and timing match this video. Load it explicitly in a compatible player or upload it using the destination's caption-file controls. A separate SRT does not become pixels in an MP4 just because the files share a folder.</p>
+<p>If you want a video that always carries the visual treatment, make a separate burned-in version. Keep the clean video and sidecar when the delivery also requires selectable subtitles. The <a href="import-srt-premiere-pro.html">SRT guide</a> covers import, encoding and offsets.</p>
+<h2 id="embedded-missing">Embedded captions are absent or unavailable</h2>
+<p>The caption format and output container determine which embedded options appear. Check both against the recipient's specification. Then test the output in a player that supports the embedded caption stream and enable captions there.</p>
+<p>Do not assume every MP4 export supports the requested broadcast caption format. Adobe documents specific container and caption combinations. For CEA-608, CEA-708 and required channel/service choices, follow the <a href="closed-captions-premiere-pro.html">closed-caption checklist</a>.</p>
+<h2 id="graphics-missing">Animated graphics are missing</h2>
+<p>Captions Gen output, Type-tool titles and upgraded captions live on video tracks. Their visibility depends on the graphic clip, its layers and the video track. Keep them inside the export range and check for an opaque layer above them. The native Captions section does not control those graphics.</p>
+<p>If you can see the design in the sequence but not in a short export, check the selected source sequence, range and graphic visibility before changing transcription settings. A new transcript cannot repair a disabled video track.</p>
+<h2 id="queue-range">Check queued jobs and the export range</h2>
+<p>When using Media Encoder, inspect that queued job's settings and source. Do not assume a previously queued job adopts every later edit. Use a newly queued short sample after changing the sequence or caption options.</p>
+<p>Test the opening, a middle section and the ending of the final delivery. Verify the intended language track, visible text and sidecar separately. A successful short test narrows the problem; it does not certify every later caption or another output preset.</p>
+<h2 id="still-images">Export Frame is a separate case</h2>
+<p>A still image exported from the Program Monitor is different from exporting the sequence video. Adobe lists a caption-in-Export-Frame issue for Premiere 25.6.1 and gives upgrading the affected caption to a graphic as a workaround. Do not treat that version-specific still-image note as the diagnosis for all missing video captions. Preserve native captions before any conversion.</p>
+<p class="sources">Checked 9 November 2026: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-caption-tracks.html">caption export options</a>, <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/supported-file-formats-for-captions.html">supported caption containers</a>, <a href="https://helpx.adobe.com/premiere/desktop/troubleshooting/limitations-and-known-issues/known-and-fixed-issues.html">version-specific Export Frame issue</a>, and <a href="/product.html">plugin output limits</a>.</p>
 
 
 <div class="box">
@@ -203,7 +241,7 @@
 <div class="box"><p class="t">Related guides</p><ul><li><a href="premiere-pro-captions-not-showing.html">Premiere Pro captions not showing: preview and export fixes</a></li>
 <li><a href="burn-in-captions-premiere-pro.html">How to burn in captions in Premiere Pro</a></li>
 <li><a href="closed-captions-premiere-pro.html">Closed captions in Premiere Pro</a></li></ul></div>
-</div></article>
+</div></article></main>
 <footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/product.html">Product facts &amp; compatibility</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="https://captionsgen.com/news/">News</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>
 </body>
 </html>

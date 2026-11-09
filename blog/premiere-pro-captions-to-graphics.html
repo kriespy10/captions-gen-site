@@ -15,7 +15,7 @@
 <meta property="og:type" content="article">
 
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Convert captions to graphics in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-09", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/premiere-pro-captions-to-graphics.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Convert captions to graphics in Premiere Pro", "item": "https://captionsgen.com/blog/premiere-pro-captions-to-graphics.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Convert captions to graphics in Premiere Pro", "description": "Use Upgrade Caption to Graphic, keep a subtitle copy for SRT, and animate the resulting graphics. An illustrated Premiere Pro workflow with export checks.", "inLanguage": "en", "articleSection": "Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-09", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/premiere-pro-captions-to-graphics.html", "image": "https://captionsgen.com/img/guides/captions-to-graphics-workflow.svg"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Convert captions to graphics in Premiere Pro", "item": "https://captionsgen.com/blog/premiere-pro-captions-to-graphics.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -153,6 +153,7 @@
   .caption-example figcaption a { white-space:nowrap; }
   .ptable-wrap { left:0; transform:none; width:100%; }
   .ptable { min-width:620px; }
+  .ptable:has(th:nth-child(6)) { min-width:1000px; }
   .ptable th { white-space:normal; }
   .ptable td:first-child { width:27%; }
   .spec { table-layout:fixed; }
@@ -161,6 +162,10 @@
   article ol > li { padding-left:4px; margin-bottom:12px; }
   article .tip, article .note { line-height:1.6; }
   article a:focus-visible { outline:2px solid var(--yellow); outline-offset:4px; border-radius:2px; }
+  .toc-side { max-height:calc(100vh - 108px); overflow-y:auto; scrollbar-width:thin; }
+  .skip-link { position:absolute; z-index:40; top:8px; left:16px; transform:translateY(-180%); padding:8px 14px; background:var(--yellow); color:#111; border-radius:8px; }
+  .skip-link:focus { transform:none; }
+  #guide-content { scroll-margin-top:70px; }
   @media (max-width:600px) {
     h1 { font-size:30px; }
     .spec th, .spec td { padding:10px 9px; font-size:14px; }
@@ -169,6 +174,7 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#guide-content">Skip to guide</a>
 <nav><div class="wrap">
   <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
   <div class="links">
@@ -182,7 +188,7 @@
     <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
   </div>
 </div></nav>
-<article><div class="col has-toc">
+<main id="guide-content" tabindex="-1"><article><div class="col has-toc">
 <div class="toc-rail"><aside class="toc toc-side" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#before-converting">Check whether conversion is needed</a></li><li><a href="#convert-captions">Convert selected captions, or a whole track</a></li><li><a href="#after-conversion">What changes after conversion?</a></li><li><a href="#command-unavailable">If Upgrade Caption to Graphic is unavailable</a></li><li><a href="#export-graphics">Export graphics and subtitle files separately</a></li><li><a href="#generate-animated-graphics">Generate animated graphics directly with Captions Gen</a></li></ol></aside></div>
 <script>(function(){function f(){var l=[].slice.call(document.querySelectorAll('.toc-side a')),i=0;
 l.forEach(function(a,k){var e=document.getElementById(a.hash.slice(1));if(e&&e.getBoundingClientRect().top<140)i=k});
@@ -190,7 +196,7 @@ l.forEach(function(a,k){a.classList.toggle('on',k===i)})}
 addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',f)})();</script>
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Convert captions to graphics in Premiere Pro</p>
 <h1>Convert captions to graphics in Premiere Pro</h1>
-<div class="meta">Updated <time datetime="2026-11-09">9 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Published <time datetime="2026-08-26">26 August 2026</time> · Updated <time datetime="2026-11-09">9 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 <p class="app-guide"><strong>Premiere Pro guide.</strong> Using After Effects? <a href="how-to-add-captions-in-after-effects.html">Install its panel and create your first captions</a>.</p>
 
 <p>Select caption clips on the timeline, then choose <strong>Graphics and Titles &gt; Upgrade Caption to Graphic</strong>. Premiere creates graphics on a video track with the caption text and timing. Review them before adding effects or animation.</p>
@@ -210,7 +216,7 @@ addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',
 <li><strong>Inspect the resulting graphics on the video track.</strong> Play several captions and check their text, in/out points, position and appearance. Watch for another video or graphic layer covering them.</li>
 <li>Select a resulting graphic and open <strong>Properties</strong> for its text and appearance. Add and review keyframes or effects as needed. Test one caption before building the same animation across a long sequence.</li>
 </ol>
-<figure class="caption-example"><img src="/img/guides/captions-to-graphics-workflow.svg" width="960" height="900" loading="lazy" alt="Save a native-caption copy, upgrade selected captions, then animate and render the resulting video-track graphics"><figcaption>Workflow illustration with simplified timelines. Keep a native-caption copy before conversion when subtitle delivery is required. <a href="/img/guides/captions-to-graphics-workflow.svg">Open full-size diagram</a>.</figcaption></figure>
+<figure class="caption-example"><a class="diagram-link" href="/img/guides/captions-to-graphics-workflow.svg"><img src="/img/guides/captions-to-graphics-workflow.svg" width="960" height="900" loading="lazy" alt="Save a native-caption copy, upgrade selected captions, then animate and render the resulting video-track graphics"></a><figcaption>Workflow illustration with simplified timelines. Keep a native-caption copy before conversion when subtitle delivery is required. <a href="/img/guides/captions-to-graphics-workflow.svg">Open full-size diagram</a>.</figcaption></figure>
 <p>Preserving the original is a separate step, not something to assume the conversion command will do for you. If you keep native captions and graphics in the same working sequence, check their visibility so the video does not show the same words twice.</p>
 
 <h2 id="after-conversion">What changes after conversion?</h2>
@@ -255,7 +261,7 @@ addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',
 <div class="box"><p class="t">Related guides</p><ul><li><a href="animated-captions-premiere-pro.html">Animated captions in Premiere Pro: choose your workflow</a></li>
 <li><a href="word-by-word-captions-premiere-pro.html">Word by word captions in Premiere Pro</a></li>
 <li><a href="how-to-add-captions-in-premiere-pro.html">How to add captions in Premiere Pro, step by step</a></li></ul></div>
-</div></article>
+</div></article></main>
 <footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/product.html">Product facts &amp; compatibility</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="https://captionsgen.com/news/">News</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>
 </body>
 </html>
