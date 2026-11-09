@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1000" viewBox="0 0 960 1000" role="img" aria-labelledby="title description">
+<title id="title">Aligned, offset and drifting captions</title><desc id="description">Three schematic timelines compare speech cues with caption starts. Aligned captions match the cues; constant delay has equal gaps; accumulating drift has increasing gaps. Positions are illustrative, not measured audio.</desc>
+<defs><linearGradient id="scene" x2="0" y2="1"><stop stop-color="#20364c"/><stop offset="1" stop-color="#10202e"/></linearGradient></defs>
+<rect width="960" height="1000" rx="24" fill="#101013"/>
+<g font-family="Arial, sans-serif">
+<text x="48" y="52" font-size="20" font-weight="700" letter-spacing="2" fill="#ffeb3b">CAPTIONS GEN GUIDES</text>
+<text x="48" y="108" font-size="43" font-weight="700" fill="#f5f5f7">Compare three timing patterns</text>
+<text x="48" y="153" font-size="25" fill="#b7b7c0">Illustrative cue positions, not measured audio timestamps.</text>
+<circle cx="60" cy="197" r="8" fill="#63b9ff"/><text x="80" y="205" font-size="23" fill="#b7b7c0">Speech cue</text>
+<rect x="278" y="187" width="28" height="20" rx="4" fill="#ffeb3b"/><text x="318" y="205" font-size="23" fill="#b7b7c0">Caption starts</text>
+<text x="673" y="205" font-size="21" fill="#b7b7c0">Earlier</text><path d="M744 198h92m-8-6 8 6-8 6" fill="none" stroke="#b7b7c0" stroke-width="2"/><text x="848" y="205" font-size="21" fill="#b7b7c0">Later</text><rect x="40" y="230" width="880" height="210" rx="17" fill="#19191e" stroke="#37373f"/>
+<text x="67" y="265" font-size="29" font-weight="700" fill="#f5f5f7">Aligned</text>
+<text x="67" y="319" font-size="21" fill="#b7b7c0">Speech</text><text x="67" y="381" font-size="21" fill="#b7b7c0">Caption</text>
+<path d="M215 312H900 M215 373H900" stroke="#41414b" stroke-width="2"/><path d="M270 322V397" stroke="#637084" stroke-width="2" stroke-dasharray="4 5"/>
+<path d="M258 312h6l3-12 3 24 3-24 3 12h6" fill="none" stroke="#63b9ff" stroke-width="4"/>
+<text x="270" y="293" text-anchor="middle" font-size="17" fill="#b7b7c0">Start</text>
+<rect x="270" y="359" width="70" height="28" rx="5" fill="#ffeb3b"/><text x="305" y="380" text-anchor="middle" font-size="19" font-weight="700" fill="#101013">A</text><path d="M510 322V397" stroke="#637084" stroke-width="2" stroke-dasharray="4 5"/>
+<path d="M498 312h6l3-12 3 24 3-24 3 12h6" fill="none" stroke="#63b9ff" stroke-width="4"/>
+<text x="510" y="293" text-anchor="middle" font-size="17" fill="#b7b7c0">Middle</text>
+<rect x="510" y="359" width="70" height="28" rx="5" fill="#ffeb3b"/><text x="545" y="380" text-anchor="middle" font-size="19" font-weight="700" fill="#101013">B</text><path d="M750 322V397" stroke="#637084" stroke-width="2" stroke-dasharray="4 5"/>
+<path d="M738 312h6l3-12 3 24 3-24 3 12h6" fill="none" stroke="#63b9ff" stroke-width="4"/>
+<text x="750" y="293" text-anchor="middle" font-size="17" fill="#b7b7c0">End</text>
+<rect x="750" y="359" width="70" height="28" rx="5" fill="#ffeb3b"/><text x="785" y="380" text-anchor="middle" font-size="19" font-weight="700" fill="#101013">C</text><text x="67" y="420" font-size="22" fill="#b7b7c0">The caption starts line up with all three sample speech cues.</text><rect x="40" y="460" width="880" height="210" rx="17" fill="#19191e" stroke="#37373f"/>
+<text x="67" y="495" font-size="29" font-weight="700" fill="#ffeb3b">Constant delay</text>
+<text x="67" y="549" font-size="21" fill="#b7b7c0">Speech</text><text x="67" y="611" font-size="21" fill="#b7b7c0">Caption</text>
+<path d="M215 542H900 M215 603H900" stroke="#41414b" stroke-width="2"/><path d="M270 552V627" stroke="#637084" stroke-width="2" stroke-dasharray="4 5"/>
+<path d="M258 542h6l3-12 3 24 3-24 3 12h6" fill="none" stroke="#63b9ff" stroke-width="4"/>
+<text x="270" y="523" text-anchor="middle" font-size="17" fill="#b7b7c0">Start</text>
+<rect x="304" y="589" width="70" height="28" rx="5" fill="#ffeb3b"/><text x="339" y="610" text-anchor="middle" font-size="19" font-weight="700" fill="#101013">A</text><path d="M270 576H304 M270 572v8 M304 572v8" stroke="#ff9f65" stroke-width="3"/><path d="M510 552V627" stroke="#637084" stroke-width="2" stroke-dasharray="4 5"/>
+<path d="M498 542h6l3-12 3 24 3-24 3 12h6" fill="none" stroke="#63b9ff" stroke-width="4"/>
+<text x="510" y="523" text-anchor="middle" font-size="17" fill="#b7b7c0">Middle</text>
+<rect x="544" y="589" width="70" height="28" rx="5" fill="#ffeb3b"/><text x="579" y="610" text-anchor="middle" font-size="19" font-weight="700" fill="#101013">B</text><path d="M510 576H544 M510 572v8 M544 572v8" stroke="#ff9f65" stroke-width="3"/><path d="M750 552V627" stroke="#637084" stroke-width="2" stroke-dasharray="4 5"/>
+<path d="M738 542h6l3-12 3 24 3-24 3 12h6" fill="none" stroke="#63b9ff" stroke-width="4"/>
+<text x="750" y="523" text-anchor="middle" font-size="17" fill="#b7b7c0">End</text>
+<rect x="784" y="589" width="70" height="28" rx="5" fill="#ffeb3b"/><text x="819" y="610" text-anchor="middle" font-size="19" font-weight="700" fill="#101013">C</text><path d="M750 576H784 M750 572v8 M784 572v8" stroke="#ff9f65" stroke-width="3"/><text x="67" y="650" font-size="22" fill="#b7b7c0">The gap is equal at the start, middle and end.</text><rect x="40" y="690" width="880" height="210" rx="17" fill="#19191e" stroke="#37373f"/>
+<text x="67" y="725" font-size="29" font-weight="700" fill="#ffeb3b">Increasing delay</text>
+<text x="67" y="779" font-size="21" fill="#b7b7c0">Speech</text><text x="67" y="841" font-size="21" fill="#b7b7c0">Caption</text>
+<path d="M215 772H900 M215 833H900" stroke="#41414b" stroke-width="2"/><path d="M270 782V857" stroke="#637084" stroke-width="2" stroke-dasharray="4 5"/>
+<path d="M258 772h6l3-12 3 24 3-24 3 12h6" fill="none" stroke="#63b9ff" stroke-width="4"/>
+<text x="270" y="753" text-anchor="middle" font-size="17" fill="#b7b7c0">Start</text>
+<rect x="276" y="819" width="70" height="28" rx="5" fill="#ffeb3b"/><text x="311" y="840" text-anchor="middle" font-size="19" font-weight="700" fill="#101013">A</text><path d="M270 806H276 M270 802v8 M276 802v8" stroke="#ff9f65" stroke-width="3"/><path d="M510 782V857" stroke="#637084" stroke-width="2" stroke-dasharray="4 5"/>
+<path d="M498 772h6l3-12 3 24 3-24 3 12h6" fill="none" stroke="#63b9ff" stroke-width="4"/>
+<text x="510" y="753" text-anchor="middle" font-size="17" fill="#b7b7c0">Middle</text>
+<rect x="542" y="819" width="70" height="28" rx="5" fill="#ffeb3b"/><text x="577" y="840" text-anchor="middle" font-size="19" font-weight="700" fill="#101013">B</text><path d="M510 806H542 M510 802v8 M542 802v8" stroke="#ff9f65" stroke-width="3"/><path d="M750 782V857" stroke="#637084" stroke-width="2" stroke-dasharray="4 5"/>
+<path d="M738 772h6l3-12 3 24 3-24 3 12h6" fill="none" stroke="#63b9ff" stroke-width="4"/>
+<text x="750" y="753" text-anchor="middle" font-size="17" fill="#b7b7c0">End</text>
+<rect x="815" y="819" width="70" height="28" rx="5" fill="#ffeb3b"/><text x="850" y="840" text-anchor="middle" font-size="19" font-weight="700" fill="#101013">C</text><path d="M750 806H815 M750 802v8 M815 802v8" stroke="#ff9f65" stroke-width="3"/><text x="67" y="880" font-size="22" fill="#b7b7c0">The gap grows. A single shift cannot align every cue.</text>
+<text x="48" y="972" font-size="22" fill="#b7b7c0">Workflow illustration · Captions Gen guides</text>
+</g></svg>

@@ -192,6 +192,9 @@ Official website: {SITE}/. Product facts checked {p['checked']}.
 
 ## Caption guides
 - [Add animated captions in After Effects]({SITE}/blog/how-to-add-captions-in-after-effects.html): combined Windows setup, the After Effects panel, caption layers, text edits, styling and rendering.
+- [Edit captions in After Effects]({SITE}/blog/edit-captions-in-after-effects.html): correct words, review timing and update animation after text edits.
+- [After Effects captions not showing]({SITE}/blog/after-effects-captions-not-showing.html): distinguish a missing panel from invisible generated layers or an unsupported speech source.
+- [Word-by-word captions in After Effects]({SITE}/blog/word-by-word-captions-after-effects.html): choose a one-word layout or a spoken-word highlight within a phrase.
 - [Free caption plugin for Premiere Pro]({SITE}/blog/free-caption-plugin-premiere-pro.html): free animated plugin versus Premiere's included native caption tools.
 - [Animated captions workflows]({SITE}/blog/animated-captions-premiere-pro.html): native single-word captions, manual graphics and the plugin workflow.
 - [Word-by-word captions]({SITE}/blog/word-by-word-captions-premiere-pro.html): one word at a time versus highlights within a phrase.

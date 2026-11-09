@@ -7,15 +7,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
 <title>How to Burn In Captions in Premiere Pro (Export Settings)</title>
-<meta name="description" content="Burn captions into the video in Premiere Pro so they show on every platform: the exact export setting, quality tips, and when a sidecar is better.">
+<meta name="description" content="Burn native captions into Premiere video through Export settings, verify the intended tracks and keep a clean master or separate subtitle file when needed.">
 <link rel="canonical" href="https://captionsgen.com/blog/burn-in-captions-premiere-pro.html">
 <meta property="og:title" content="How to Burn In Captions in Premiere Pro (Export Settings)">
-<meta property="og:description" content="Burn captions into the video in Premiere Pro so they show on every platform: the exact export setting, quality tips, and when a sidecar is better.">
+<meta property="og:description" content="Burn native captions into Premiere video through Export settings, verify the intended tracks and keep a clean master or separate subtitle file when needed.">
 <meta property="og:url" content="https://captionsgen.com/blog/burn-in-captions-premiere-pro.html">
 <meta property="og:type" content="article">
 
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "How to burn in captions in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/burn-in-captions-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "How to burn in captions in Premiere Pro", "item": "https://captionsgen.com/blog/burn-in-captions-premiere-pro.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "How to burn in captions in Premiere Pro", "description": "Burn native captions into Premiere video through Export settings, verify the intended tracks and keep a clean master or separate subtitle file when needed.", "inLanguage": "en", "articleSection": "Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-09", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/burn-in-captions-premiere-pro.html", "image": "https://captionsgen.com/img/guides/native-caption-burn-in.svg"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "How to burn in captions in Premiere Pro", "item": "https://captionsgen.com/blog/burn-in-captions-premiere-pro.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -146,9 +146,35 @@
   .spec tr:last-child td { border-bottom:0; }
   .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; border:1px solid rgba(255,255,255,.35); }
   .ptable-legend { display:flex; flex-wrap:wrap; gap:6px 18px; color:var(--muted); font-size:12.5px; margin:10px 2px 0; }
+
+  .caption-example { margin:30px 0; }
+  .caption-example img { border:1px solid var(--hair2); background:#101013; }
+  .caption-example figcaption { line-height:1.5; color:var(--muted2); padding:0 2px; }
+  .caption-example figcaption a { white-space:nowrap; }
+  .ptable-wrap { left:0; transform:none; width:100%; }
+  .ptable { min-width:620px; }
+  .ptable:has(th:nth-child(6)) { min-width:1000px; }
+  .ptable th { white-space:normal; }
+  .ptable td:first-child { width:27%; }
+  .spec { table-layout:fixed; }
+  .spec th, .spec td { overflow-wrap:anywhere; }
+  .spec td:first-child { white-space:normal; }
+  article ol > li { padding-left:4px; margin-bottom:12px; }
+  article .tip, article .note { line-height:1.6; }
+  article a:focus-visible { outline:2px solid var(--yellow); outline-offset:4px; border-radius:2px; }
+  .toc-side { max-height:calc(100vh - 108px); overflow-y:auto; scrollbar-width:thin; }
+  .skip-link { position:absolute; z-index:40; top:8px; left:16px; transform:translateY(-180%); padding:8px 14px; background:var(--yellow); color:#111; border-radius:8px; }
+  .skip-link:focus { transform:none; }
+  #guide-content { scroll-margin-top:70px; }
+  @media (max-width:600px) {
+    h1 { font-size:30px; }
+    .spec th, .spec td { padding:10px 9px; font-size:14px; }
+    .caption-example { margin:24px 0; }
+  }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#guide-content">Skip to guide</a>
 <nav><div class="wrap">
   <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
   <div class="links">
@@ -162,32 +188,48 @@
     <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
   </div>
 </div></nav>
-<article><div class="col">
-
+<main id="guide-content" tabindex="-1"><article><div class="col has-toc">
+<div class="toc-rail"><aside class="toc toc-side" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#burn-in-choice">Decide whether burn-in fits the delivery</a></li><li><a href="#burn-in-steps">Burn a native caption track into the picture</a></li><li><a href="#burn-in-graphics">If the captions are graphics</a></li><li><a href="#burn-in-quality">Check quality at delivery size</a></li><li><a href="#clean-master">Keep a clean master when later changes are likely</a></li><li><a href="#burn-in-problems">If text is missing or duplicated</a></li></ol></aside></div>
+<script>(function(){function f(){var l=[].slice.call(document.querySelectorAll('.toc-side a')),i=0;
+l.forEach(function(a,k){var e=document.getElementById(a.hash.slice(1));if(e&&e.getBoundingClientRect().top<140)i=k});
+l.forEach(function(a,k){a.classList.toggle('on',k===i)})}
+addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',f)})();</script>
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / How to burn in captions in Premiere Pro</p>
 <h1>How to burn in captions in Premiere Pro</h1>
-<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Published <time datetime="2026-08-26">26 August 2026</time> · Updated <time datetime="2026-11-09">9 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 <p class="app-guide"><strong>Premiere Pro guide.</strong> Using After Effects? <a href="how-to-add-captions-in-after-effects.html">Install its panel and create your first captions</a>.</p>
 
-<p>Open the export dialog, click the Captions tab, set Export Options to Burn Captions Into Video, and export. The text becomes part of the picture and shows everywhere, on every player, with no CC button involved.</p>
-
-<h2>When to burn in</h2>
-<p>Burn in when the delivered picture must retain your chosen caption appearance, or when the destination does not accept a suitable caption file. Check each platform's upload options if you also need selectable subtitles.</p>
-
-<h2>When not to</h2>
-<p>When delivery requires selectable subtitles, a sidecar or an embedded caption stream, burn-in alone does not meet that requirement. Follow the supplied specification. You can also provide a visible-text copy when requested.</p>
-
-<h2>Quality</h2>
-<p>Burned-in text is compressed with the video. Small text with thin strokes turns muddy at low bitrates. Preview the font at delivery size and choose export quality appropriate to the codec and footage. No single font size or bitrate guarantees readable text.</p>
-
-<h2>Export format</h2>
-<p>H.264 in an MP4 container is a common social-video delivery choice, and burn-in works with it. Follow the destination's actual format requirements. If you export ProRes or another mezzanine format for a colorist, burn-in still works, but consider leaving captions off that master and burning them into the delivery file instead, so the master stays clean.</p>
-
-<h2>Checking before you post</h2>
-<p>Watch several parts of the exported file. If native caption-track text is missing, check Export &gt; Captions, enabled tracks and the export range. For animated graphics, check video-track and layer visibility instead. The <a href="premiere-pro-captions-not-exporting.html">missing-export checklist</a> separates these cases.</p>
-
-<h2>Animated captions and burn-in</h2>
-<p>Caption graphics made by a plugin render through video tracks rather than the Captions export section. They still need enabled tracks, visible layers and an export range that includes them. Captions Gen's Premiere graphics and After Effects caption layers are part of the rendered picture; they do not create an SRT sidecar.</p>
+<p><strong>For native captions, open Export, expand Captions and choose Burn Captions Into Video.</strong> Check the intended caption tracks and export range, then render a short sample. The words become part of the video picture, so a player does not need to load a separate subtitle file to display that text.</p>
+<p>Graphics are different: Type-tool titles, upgraded captions and Captions Gen output render through video tracks. The native caption burn-in setting does not control those graphic clips.</p>
+<aside class="toc toc-inline" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#burn-in-choice">Decide whether burn-in fits the delivery</a></li><li><a href="#burn-in-steps">Burn a native caption track into the picture</a></li><li><a href="#burn-in-graphics">If the captions are graphics</a></li><li><a href="#burn-in-quality">Check quality at delivery size</a></li><li><a href="#clean-master">Keep a clean master when later changes are likely</a></li><li><a href="#burn-in-problems">If text is missing or duplicated</a></li></ol></aside>
+<h2 id="burn-in-choice">Decide whether burn-in fits the delivery</h2>
+<p>Use burn-in when the delivered picture should retain a fixed caption design or the destination cannot take the required caption file. Use a native sidecar or supported embedded stream when the viewer or recipient needs separately selectable captions.</p>
+<p>A client can request both a captioned video and a clean video with subtitle files. Label those versions clearly. Once words are burned into a delivered image, turning off a player's CC button will not remove them.</p>
+<figure class="caption-example"><a class="diagram-link" href="/img/guides/native-caption-burn-in.svg"><img src="/img/guides/native-caption-burn-in.svg" width="960" height="1000" loading="lazy" alt="Keep a clean master, burn the intended native caption track into a delivery copy, and export a separate subtitle file when required"/></a><figcaption>Delivery illustration. A visible-text copy and a clean subtitle-file delivery serve different purposes. <a href="/img/guides/native-caption-burn-in.svg">Open full-size diagram</a>.</figcaption></figure>
+<h2 id="burn-in-steps">Burn a native caption track into the picture</h2>
+<ol>
+<li>Open the intended final sequence and save the project.</li>
+<li>Enable the caption track or tracks meant to appear in this picture version. Disable unintended alternative-language tracks so they do not appear together.</li>
+<li>Check the caption text and timing in the Program Monitor, including a long line and a bright background shot.</li>
+<li>Open Export and expand Captions. Choose Burn Captions Into Video and inspect the available Caption Tracks.</li>
+<li>Set the correct export range, format and destination filename. Follow the recipient's picture and audio requirements.</li>
+<li>Export a short passage and open that actual new file. Verify that the text is visible without loading an SRT.</li>
+</ol>
+<p>Adobe documents burn-in for active caption tracks. If no relevant track appears, check whether your text is native captions or graphics, and confirm you opened the correct sequence.</p>
+<h2 id="burn-in-graphics">If the captions are graphics</h2>
+<p>Keep the graphic clips inside the export range with their video-track output enabled. Check text-layer visibility, opacity, animation boundaries and any opaque layer above the graphic. Export through the ordinary video rendering workflow.</p>
+<p>Captions Gen's Premiere Motion Graphics and After Effects caption layers use this picture-based output. They do not create a selectable caption stream or SRT sidecar. If required, retain the <a href="how-to-add-captions-in-premiere-pro.html">native caption workflow</a> alongside the animation.</p>
+<h2 id="burn-in-quality">Check quality at delivery size</h2>
+<p>Caption pixels are compressed with the rest of the video. Inspect fine strokes, outlines and small letters in the actual export, especially after scaling or a low-quality encode. No universal bitrate or font size guarantees readable text for every codec and frame size.</p>
+<p>Choose an appropriate export preset for the destination, then test the longest caption over changing footage. For a vertical social version, check a phone and the app's interface. See <a href="captions-for-tiktok-reels-shorts-premiere-pro.html">vertical caption placement</a> and <a href="best-fonts-for-captions.html">font readability</a> for those design checks.</p>
+<h2 id="clean-master">Keep a clean master when later changes are likely</h2>
+<p>If a colourist, translator or client will create another version, keep a sequence or master without burned-in text. A burned-in typo cannot be removed by deleting an SRT. Return to the source project, correct the caption and export a new delivery.</p>
+<p>When also supplying subtitle files, export each required language track and keep it matched to the video version. The <a href="import-srt-premiere-pro.html">SRT guide</a> explains the separate file handoff. Burn-in alone does not replace specified broadcast closed-caption data.</p>
+<h2 id="burn-in-problems">If text is missing or duplicated</h2>
+<p>If it is absent in the preview, check track visibility and caption time ranges before export. If it appears in the preview but not the file, inspect the export source, chosen caption option and intended track. Use a new filename for the test so an older file is not mistaken for the corrected result.</p>
+<p>If words appear twice, check for both graphics and native burn-in, multiple enabled language tracks or a receiving app adding another subtitle layer. Inspect which text is already part of the video before changing the caption file.</p>
+<p>The <a href="premiere-pro-captions-not-exporting.html">missing-export guide</a> separates native burn-in, sidecar, embedded and graphic cases. Check the final delivered file after the full export, not only the short test.</p>
+<p class="sources">Checked 9 November 2026: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-caption-tracks.html">burn-in and Caption Tracks options</a>, <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/supported-file-formats-for-captions.html">supported caption formats</a>, and <a href="/product.html">Captions Gen output limits</a>.</p>
 
 
 <div class="box">
@@ -202,7 +244,7 @@
 <div class="box"><p class="t">Related guides</p><ul><li><a href="premiere-pro-captions-not-exporting.html">Premiere Pro captions not exporting</a></li>
 <li><a href="captions-for-tiktok-reels-shorts-premiere-pro.html">Captions for TikTok, Reels and Shorts in Premiere Pro</a></li>
 <li><a href="closed-captions-premiere-pro.html">Closed captions in Premiere Pro</a></li></ul></div>
-</div></article>
+</div></article></main>
 <footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/product.html">Product facts &amp; compatibility</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="https://captionsgen.com/news/">News</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>
 </body>
 </html>

@@ -154,9 +154,7 @@ l.forEach(function(a,k){var e=document.getElementById(a.hash.slice(1));if(e&&e.g
 l.forEach(function(a,k){a.classList.toggle('on',k===i)})}
 addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',f)})();"""
 
-# These illustrated workflows use readable tables and framed instructional media.
-# Keep the change local to the guides that use the new figures.
-WORKFLOW_GUIDES = {"premiere-pro-caption-presets", "premiere-pro-captions-to-graphics"}
+# Shared article treatment, applied only to guides by page(), not news or products.
 WORKFLOW_CSS = """
   .caption-example { margin:30px 0; }
   .caption-example img { border:1px solid var(--hair2); background:#101013; }
@@ -164,6 +162,7 @@ WORKFLOW_CSS = """
   .caption-example figcaption a { white-space:nowrap; }
   .ptable-wrap { left:0; transform:none; width:100%; }
   .ptable { min-width:620px; }
+  .ptable:has(th:nth-child(6)) { min-width:1000px; }
   .ptable th { white-space:normal; }
   .ptable td:first-child { width:27%; }
   .spec { table-layout:fixed; }
@@ -172,6 +171,10 @@ WORKFLOW_CSS = """
   article ol > li { padding-left:4px; margin-bottom:12px; }
   article .tip, article .note { line-height:1.6; }
   article a:focus-visible { outline:2px solid var(--yellow); outline-offset:4px; border-radius:2px; }
+  .toc-side { max-height:calc(100vh - 108px); overflow-y:auto; scrollbar-width:thin; }
+  .skip-link { position:absolute; z-index:40; top:8px; left:16px; transform:translateY(-180%); padding:8px 14px; background:var(--yellow); color:#111; border-radius:8px; }
+  .skip-link:focus { transform:none; }
+  #guide-content { scroll-margin-top:70px; }
   @media (max-width:600px) {
     h1 { font-size:30px; }
     .spec th, .spec td { padding:10px 9px; font-size:14px; }
@@ -190,15 +193,44 @@ CLOSING = f"""
 </div>
 """
 
+def prepare_article(body_html):
+    """Keep the on-page list aligned with every real article section."""
+    body_html = re.sub(r'<aside class="toc toc-inline".*?</aside>\s*', '', body_html, flags=re.S)
+    # Diagrams remain ordinary discoverable images; their full canvas also opens
+    # from the image itself so a small-screen reader can inspect fine details.
+    def linked_diagram(match):
+        start, image, src = match.groups()
+        return f'{start}<a class="diagram-link" href="{src}">{image}</a>'
+    body_html = re.sub(r'(<figure\b[^>]*>\s*)(<img\b[^>]*\bsrc="(/img/guides/[^\"]+\.svg)"[^>]*>)', linked_diagram, body_html)
+    used = set(re.findall(r'\bid="([^"]+)"', body_html))
+    def heading(match):
+        attrs, label = match.groups()
+        if re.search(r'\bid=', attrs):
+            return match.group(0)
+        base = re.sub(r'[^a-z0-9]+', '-', re.sub(r'<[^>]+>', '', label).lower()).strip('-') or 'section'
+        anchor, count = base, 2
+        while anchor in used:
+            anchor, count = f'{base}-{count}', count + 1
+        used.add(anchor)
+        return f'<h2{attrs} id="{anchor}">{label}</h2>'
+    body_html = re.sub(r'<h2([^>]*)>(.*?)</h2>', heading, body_html, flags=re.S)
+    headings = re.findall(r'<h2[^>]*\bid="([^"]+)"[^>]*>(.*?)</h2>', body_html, flags=re.S)
+    if headings:
+        items = ''.join(f'<li><a href="#{escape(anchor, quote=True)}">{label}</a></li>' for anchor, label in headings)
+        toc = f'<aside class="toc toc-inline" aria-label="On this page"><p class="t">On this page</p><ol>{items}</ol></aside>\n'
+        first_heading = body_html.index('<h2')
+        body_html = body_html[:first_heading] + toc + body_html[first_heading:]
+    return body_html
+
+
 def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, published=DATE, faq=None, app="Premiere Pro"):
-    page_css = CSS + (WORKFLOW_CSS if slug in WORKFLOW_GUIDES else "")
-    if slug in WORKFLOW_GUIDES and 'class="toc toc-inline"' not in body_html:
-        headings = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', body_html)
-        if headings:
-            items = ''.join(f'<li><a href="#{escape(anchor, quote=True)}">{label}</a></li>' for anchor, label in headings)
-            toc = f'<aside class="toc toc-inline" aria-label="On this page"><p class="t">On this page</p><ol>{items}</ol></aside>\n'
-            first_heading = body_html.index('<h2 ')
-            body_html = body_html[:first_heading] + toc + body_html[first_heading:]
+    page_css = CSS + WORKFLOW_CSS
+    if faq:
+        body_html += "\n<h2>Questions people ask</h2>\n" + "\n".join(f"<h3>{q}</h3>\n<p>{a}</p>" for q, a in faq)
+    body_html = prepare_article(body_html)
+    first_image = re.search(r'<img\b[^>]*\bsrc="([^"]+)"[^>]*>', body_html)
+    if image is None and first_image:
+        image = first_image.group(1)
     closing = CLOSING.replace("__FREE__", FREE)
     if app == "After Effects":
         app_guide = '<p class="app-guide"><strong>After Effects guide.</strong> Working in Premiere Pro? <a href="animated-captions-premiere-pro.html">Choose a Premiere caption workflow</a>.</p>'
@@ -207,6 +239,7 @@ def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, p
     rel = "\n".join(f'<li><a href="{r["slug"]}.html">{r["t"]}</a></li>' for r in related)
     article = {
         "@context": "https://schema.org", "@type": "Article", "headline": h1,
+        "description": desc, "inLanguage": "en", "articleSection": app,
         "datePublished": published, "dateModified": modified,
         "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"},
         "publisher": {"@type": "Organization", "name": "Captions Gen", "url": SITE,
@@ -230,13 +263,24 @@ def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, p
         toc_rail = f'<div class="toc-rail">{side}</div>\n<script>{TOC_JS}</script>'
     schemas = [article, breadcrumb]
     if faq:
-        # Optional (question, answer_html) pairs: shown at the end of the guide and as FAQPage data.
-        body_html += "\n<h2>Questions people ask</h2>\n" + "\n".join(f"<h3>{q}</h3>\n<p>{a}</p>" for q, a in faq)
+        # The same visible question/answer pairs were included before building the TOC.
         schemas.append({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub(r"<[^>]+>", "", a)}} for q, a in faq]})
     schema = json.dumps(schemas, ensure_ascii=False)
-    image_meta = f'<meta property="og:image" content="{SITE}{image}">' if image else ''
+    # Search can discover the SVG body illustration. Social previews generally
+    # need a bitmap, so keep an existing representative caption sample when one
+    # appears in the article, rather than offering an unsupported SVG card.
+    social_image = image if image and not image.lower().endswith('.svg') else None
+    if social_image is None:
+        raster = re.search(r'<img\b[^>]*\bsrc="([^\"]+\.(?:png|jpe?g|webp))"', body_html, flags=re.I)
+        if raster:
+            social_image = raster.group(1)
+    image_meta = f'<meta property="og:image" content="{SITE}{social_image}">' if social_image else ''
     display_date = date.fromisoformat(modified).strftime("%d %B %Y").lstrip('0')
+    published_date = date.fromisoformat(published).strftime("%d %B %Y").lstrip('0')
+    dates = f'Published <time datetime="{published}">{published_date}</time>'
+    if modified != published:
+        dates += f' · Updated <time datetime="{modified}">{display_date}</time>'
     title, desc, h1 = escape(title), escape(desc), escape(h1)
     return f"""<!doctype html>
 <html lang="en">
@@ -253,11 +297,12 @@ def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, p
 <meta property="og:url" content="{SITE}/blog/{slug}.html">
 <meta property="og:type" content="article">
 {image_meta}
-<meta name="twitter:card" content="{'summary_large_image' if image else 'summary'}">
+<meta name="twitter:card" content="{'summary_large_image' if social_image else 'summary'}">
 <script type="application/ld+json">{schema}</script>
 <style>{page_css}</style>
 </head>
 <body>
+<a class="skip-link" href="#guide-content">Skip to guide</a>
 <nav><div class="wrap">
   <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
   <div class="links">
@@ -271,16 +316,16 @@ def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, p
     <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
   </div>
 </div></nav>
-<article><div class="col{' has-toc' if toc_rail else ''}">
+<main id="guide-content" tabindex="-1"><article><div class="col{' has-toc' if toc_rail else ''}">
 {toc_rail}
 <p class="breadcrumbs"><a href="{SITE}/">Home</a> / <a href="{SITE}/blog/">Caption guides</a> / {h1}</p>
 <h1>{h1}</h1>
-<div class="meta">Updated <time datetime="{modified}">{display_date}</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">{dates} · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 {app_guide}
 {body_html}
 {closing}
 <div class="box"><p class="t">Related guides</p><ul>{rel}</ul></div>
-</div></article>
+</div></article></main>
 <footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/product.html">Product facts &amp; compatibility</a> · <a href="{SITE}/#faq">FAQ</a> · <a href="{SITE}/blog/">Guides</a> · <a href="{SITE}/news/">News</a> · {PRIVACY_FOOTER}</div></footer>
 </body>
 </html>
@@ -293,19 +338,11 @@ from bodies2 import P
 from bodies3 import P3
 from aftereffects import AE_POSTS
 from genproduct import generate as generate_product
-REL0 = {
-  "how-to-add-captions-in-premiere-pro": ["auto-captions-premiere-pro","premiere-pro-captions-not-showing","burn-in-captions-premiere-pro","free-caption-plugin-premiere-pro"],
-  "auto-captions-premiere-pro": ["how-to-add-captions-in-premiere-pro","premiere-pro-captions-not-showing","animated-captions-premiere-pro"],
-  "animated-captions-premiere-pro": ["word-by-word-captions-premiere-pro","highlight-words-in-captions-premiere-pro","best-caption-plugin-premiere-pro","free-caption-plugin-premiere-pro"],
-  "premiere-pro-captions-not-showing": ["how-to-add-captions-in-premiere-pro","premiere-pro-captions-not-exporting","premiere-pro-speech-to-text-not-working"],
-}
-for k, v in REL0.items(): POSTS[k]["rel"] = v
 POSTS.update(P)
 POSTS.update(P3)
 POSTS.update(AE_POSTS)
 for post in POSTS.values():
     post["modified"] = max(post.get("modified", DATE), SHARED_REQUIREMENTS_UPDATED)
-POSTS["animated-captions-premiere-pro"]["image"] = "/img/styles/Bold-Impact.png"
 
 ORDER = list(POSTS.keys())
 
@@ -323,9 +360,33 @@ NAV_HTML = """<nav><div class="wrap">
     <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
   </div>
 </div></nav>"""
-def guide_cards(app):
+def guide_cards(app, slugs=None):
     return "".join(f'<a class="post" href="{k}.html"><div class="pt">{v["h1"]}</div><div class="pd">{v["desc"]}</div></a>'
-                   for k, v in POSTS.items() if v.get("app", "Premiere Pro") == app)
+                   for k, v in POSTS.items() if v.get("app", "Premiere Pro") == app and (slugs is None or k in slugs))
+
+
+GUIDE_GROUPS = [
+    ("Create and import captions", "Transcribe speech, bring in an existing subtitle file, or install the animated caption panel.", [
+        "how-to-add-captions-in-premiere-pro", "auto-captions-premiere-pro", "how-to-add-subtitles-in-premiere-pro", "import-srt-premiere-pro", "free-caption-plugin-premiere-pro"]),
+    ("Design and animate", "Choose readable fonts, reusable designs, word highlights and graphics workflows.", [
+        "animated-captions-premiere-pro", "change-caption-font-premiere-pro", "premiere-pro-caption-presets", "premiere-pro-captions-to-graphics", "highlight-words-in-captions-premiere-pro", "word-by-word-captions-premiere-pro", "how-to-add-text-in-premiere-pro", "captions-for-tiktok-reels-shorts-premiere-pro", "best-fonts-for-captions", "hormozi-style-captions-premiere-pro", "mrbeast-style-captions-premiere-pro", "free-caption-templates-premiere-pro"]),
+    ("Fix timing, preview and export", "Locate the stage that failed and check the delivered file.", [
+        "premiere-pro-captions-not-showing", "premiere-pro-captions-not-exporting", "premiere-pro-speech-to-text-not-working", "fix-caption-timing-premiere-pro", "burn-in-captions-premiere-pro"]),
+    ("Compare tools and delivery formats", "Check the output, platform and costs before choosing a caption workflow.", [
+        "subtitles-vs-captions-premiere-pro", "closed-captions-premiere-pro", "premiere-pro-captions-language", "best-caption-plugin-premiere-pro", "capcut-vs-premiere-pro-captions", "autocut-alternative-captions", "submagic-alternative-premiere-pro"]),
+]
+
+
+def grouped_premiere_guides():
+    sections = []
+    covered = set()
+    for title, intro, slugs in GUIDE_GROUPS:
+        covered.update(slugs)
+        sections.append(f'<h3>{title}</h3><p>{intro}</p>{guide_cards("Premiere Pro", slugs)}')
+    remaining = [k for k, v in POSTS.items() if v.get("app", "Premiere Pro") == "Premiere Pro" and k not in covered]
+    if remaining:
+        sections.append('<h3>More Premiere Pro guides</h3>' + guide_cards("Premiere Pro", remaining))
+    return ''.join(sections)
 idx = f"""<!doctype html>
 <html lang="en"><head>
 {ANALYTICS_HEAD}
@@ -339,13 +400,15 @@ idx = f"""<!doctype html>
 <article><div class="col idx"><h1>Caption guides for Premiere Pro and After Effects</h1><p class="sub">Choose the Adobe application you use. These guides cover Captions Gen's animated graphics and Premiere Pro's native subtitle tools. Written by Kris, maker of Captions Gen.</p>
 <div class="box quick-answer"><p class="t">Start with your task</p><ul>
 <li><a href="how-to-add-captions-in-after-effects.html">After Effects: install the panel and generate your first captions</a></li>
+<li><a href="edit-captions-in-after-effects.html">After Effects: correct caption text and update timing</a></li>
+<li><a href="after-effects-captions-not-showing.html">After Effects: fix a missing panel or invisible captions</a></li>
 <li><a href="how-to-add-captions-in-premiere-pro.html">Add captions: transcription, styling, and export</a></li>
 <li><a href="auto-captions-premiere-pro.html">Generate auto captions with Speech to Text</a></li>
 <li><a href="premiere-pro-captions-not-showing.html">Fix captions missing from the preview or export</a></li>
 <li><a href="animated-captions-premiere-pro.html">Choose an animated or word-by-word workflow</a></li>
 <li><a href="free-caption-plugin-premiere-pro.html">Check the free plugin, compatibility and setup</a></li>
 </ul></div><h2 id="after-effects">After Effects</h2><p>Use the Windows panel to create editable animated caption layers in a composition.</p>{guide_cards('After Effects')}
-<h2 id="premiere-pro">Premiere Pro</h2><p>Choose native caption tracks for subtitle delivery, or editable graphics for animated caption designs.</p>{guide_cards('Premiere Pro')}</div></article>
+<h2 id="premiere-pro">Premiere Pro</h2><p>Choose native caption tracks for subtitle delivery, or editable graphics for animated caption designs.</p>{grouped_premiere_guides()}</div></article>
 <footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/product.html">Product facts &amp; compatibility</a> · <a href="{SITE}/#faq">FAQ</a> · <a href="{SITE}/news/">News</a> · {PRIVACY_FOOTER}</div></footer>
 </body></html>
 """

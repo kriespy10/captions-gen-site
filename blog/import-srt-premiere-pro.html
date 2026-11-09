@@ -7,15 +7,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
 <title>Import and Export SRT Subtitle Files in Premiere Pro</title>
-<meta name="description" content="How to import an .srt into Premiere Pro as a caption track, fix timing offsets, style it, and export an .srt sidecar from your captions.">
+<meta name="description" content="Import SRT into Premiere, fix offsets and encoding, then export a matching subtitle file. Learn what transfers and why fonts or animation may not.">
 <link rel="canonical" href="https://captionsgen.com/blog/import-srt-premiere-pro.html">
 <meta property="og:title" content="Import and Export SRT Subtitle Files in Premiere Pro">
-<meta property="og:description" content="How to import an .srt into Premiere Pro as a caption track, fix timing offsets, style it, and export an .srt sidecar from your captions.">
+<meta property="og:description" content="Import SRT into Premiere, fix offsets and encoding, then export a matching subtitle file. Learn what transfers and why fonts or animation may not.">
 <meta property="og:url" content="https://captionsgen.com/blog/import-srt-premiere-pro.html">
 <meta property="og:type" content="article">
 
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Import and export SRT files in Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-08", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/import-srt-premiere-pro.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Import and export SRT files in Premiere Pro", "item": "https://captionsgen.com/blog/import-srt-premiere-pro.html"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Import and export SRT files in Premiere Pro", "description": "Import SRT into Premiere, fix offsets and encoding, then export a matching subtitle file. Learn what transfers and why fonts or animation may not.", "inLanguage": "en", "articleSection": "Premiere Pro", "datePublished": "2026-08-26", "dateModified": "2026-11-09", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/import-srt-premiere-pro.html", "image": "https://captionsgen.com/img/guides/native-srt-roundtrip.svg"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Import and export SRT files in Premiere Pro", "item": "https://captionsgen.com/blog/import-srt-premiere-pro.html"}]}]</script>
 <style>
   :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
     --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
@@ -146,9 +146,35 @@
   .spec tr:last-child td { border-bottom:0; }
   .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; border:1px solid rgba(255,255,255,.35); }
   .ptable-legend { display:flex; flex-wrap:wrap; gap:6px 18px; color:var(--muted); font-size:12.5px; margin:10px 2px 0; }
+
+  .caption-example { margin:30px 0; }
+  .caption-example img { border:1px solid var(--hair2); background:#101013; }
+  .caption-example figcaption { line-height:1.5; color:var(--muted2); padding:0 2px; }
+  .caption-example figcaption a { white-space:nowrap; }
+  .ptable-wrap { left:0; transform:none; width:100%; }
+  .ptable { min-width:620px; }
+  .ptable:has(th:nth-child(6)) { min-width:1000px; }
+  .ptable th { white-space:normal; }
+  .ptable td:first-child { width:27%; }
+  .spec { table-layout:fixed; }
+  .spec th, .spec td { overflow-wrap:anywhere; }
+  .spec td:first-child { white-space:normal; }
+  article ol > li { padding-left:4px; margin-bottom:12px; }
+  article .tip, article .note { line-height:1.6; }
+  article a:focus-visible { outline:2px solid var(--yellow); outline-offset:4px; border-radius:2px; }
+  .toc-side { max-height:calc(100vh - 108px); overflow-y:auto; scrollbar-width:thin; }
+  .skip-link { position:absolute; z-index:40; top:8px; left:16px; transform:translateY(-180%); padding:8px 14px; background:var(--yellow); color:#111; border-radius:8px; }
+  .skip-link:focus { transform:none; }
+  #guide-content { scroll-margin-top:70px; }
+  @media (max-width:600px) {
+    h1 { font-size:30px; }
+    .spec th, .spec td { padding:10px 9px; font-size:14px; }
+    .caption-example { margin:24px 0; }
+  }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#guide-content">Skip to guide</a>
 <nav><div class="wrap">
   <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
   <div class="links">
@@ -162,29 +188,47 @@
     <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
   </div>
 </div></nav>
-<article><div class="col">
-
+<main id="guide-content" tabindex="-1"><article><div class="col has-toc">
+<div class="toc-rail"><aside class="toc toc-side" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#srt-contains">Know what the SRT contains</a></li><li><a href="#import-srt">Import and inspect the track</a></li><li><a href="#srt-timing">Diagnose constant offset versus drift</a></li><li><a href="#srt-text">Fix text and encoding problems</a></li><li><a href="#srt-style">Style the imported subtitles</a></li><li><a href="#export-srt">Export and test the sidecar</a></li><li><a href="#srt-plugin-limit">SRT and Captions Gen</a></li></ol></aside></div>
+<script>(function(){function f(){var l=[].slice.call(document.querySelectorAll('.toc-side a')),i=0;
+l.forEach(function(a,k){var e=document.getElementById(a.hash.slice(1));if(e&&e.getBoundingClientRect().top<140)i=k});
+l.forEach(function(a,k){a.classList.toggle('on',k===i)})}
+addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',f)})();</script>
 <p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Import and export SRT files in Premiere Pro</p>
 <h1>Import and export SRT files in Premiere Pro</h1>
-<div class="meta">Updated <time datetime="2026-11-08">8 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<div class="meta">Published <time datetime="2026-08-26">26 August 2026</time> · Updated <time datetime="2026-11-09">9 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
 <p class="app-guide"><strong>Premiere Pro guide.</strong> Using After Effects? <a href="how-to-add-captions-in-after-effects.html">Install its panel and create your first captions</a>.</p>
 
-<p>Import: <kbd>File &gt; Import</kbd> the .srt, then drag it from the Project panel onto the timeline; Premiere builds a caption track from it. Export: in the export dialog's Captions tab, choose Create Sidecar File and pick SRT.</p>
-
-<h2>Importing</h2>
-<p>Adobe lists SRT, SCC, MCC, XML, STL and DFXP/TTML among its supported caption formats. Do not assume a WebVTT file can be imported directly; convert to a supported format when necessary. After import the file sits in the Project panel like a clip. Drop it on the timeline above your video and it becomes a caption track using the Subtitle format.</p>
-
-<h2>Fixing an offset</h2>
-<p>If the imported captions are early or late by a constant amount, select all captions on the track and drag them together. SRT stores timecodes, not an intrinsic video frame rate. Growing drift can come from a different cut, a speed change or a timecode conversion. Compare against the exact source edit before re-exporting the subtitles or re-transcribing.</p>
-
-<h2>Styling an imported .srt</h2>
-<p>Same as any caption track: style one caption in Properties and save it as a Track Style.</p>
-
-<h2>Exporting an .srt</h2>
-<p>Open the export dialog, go to Captions, choose Create Sidecar File, and set the format to SRT. The file lands next to the video. Upload it to YouTube under Subtitles, or hand it to a translator.</p>
-
-<h2>SRT and animated captions</h2>
-<p>SRT stores caption text and time ranges, including single-word entries when authored that way. It does not store graphic animation. Keep a native caption track as well when you need both animated graphics and a separate caption file.</p>
+<p><strong>Import an SRT with File &gt; Import, then drag the imported item from the Project panel into your sequence.</strong> Premiere creates a native caption track. To deliver SRT, choose the supported sidecar option in Export &gt; Captions and check the intended track and output path.</p>
+<aside class="toc toc-inline" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#srt-contains">Know what the SRT contains</a></li><li><a href="#import-srt">Import and inspect the track</a></li><li><a href="#srt-timing">Diagnose constant offset versus drift</a></li><li><a href="#srt-text">Fix text and encoding problems</a></li><li><a href="#srt-style">Style the imported subtitles</a></li><li><a href="#export-srt">Export and test the sidecar</a></li><li><a href="#srt-plugin-limit">SRT and Captions Gen</a></li></ol></aside>
+<h2 id="srt-contains">Know what the SRT contains</h2>
+<p>SRT carries numbered subtitle entries with start/end timestamps and text. It is useful for translation handoffs and selectable subtitles. It does not transfer a complete Motion Graphics design, moving pill, bounce animation or a plugin preset.</p>
+<p>Basic SRT uses time values rather than an intrinsic video frame-rate setting. A different edit, a source speed change or an incorrect time conversion can still make its timings wrong. Keep the reference video used to create the file.</p>
+<figure class="caption-example"><a class="diagram-link" href="/img/guides/native-srt-roundtrip.svg"><img src="/img/guides/native-srt-roundtrip.svg" width="960" height="1000" loading="lazy" alt="SRT text and timestamps become a native Premiere caption track, then a reviewed sidecar for the matching video"/></a><figcaption>File-workflow illustration. The subtitle file and final edit must match. <a href="/img/guides/native-srt-roundtrip.svg">Open full-size diagram</a>.</figcaption></figure>
+<h2 id="import-srt">Import and inspect the track</h2>
+<ol>
+<li>Save the project and open the intended final sequence.</li>
+<li>Import the .srt. If it came from email or a downloaded archive, first confirm that you have the actual subtitle file rather than a shortcut or document preview.</li>
+<li>Drag the subtitle item from the Project panel into the sequence to create the caption track.</li>
+<li>Enable the intended caption track and inspect its first entry against the source audio.</li>
+<li>Check a middle passage and the ending before making a global timing correction.</li>
+</ol>
+<p>Adobe also supports several other caption formats. Use its current list for a specific file type; do not assume that WebVTT, a plain transcript or a word-processing file imports as SRT. Renaming the extension does not convert the content.</p>
+<h2 id="srt-timing">Diagnose constant offset versus drift</h2>
+<p>If the same words are two seconds late at the beginning, middle and end, a constant shift is a useful candidate. Move the affected captions together and check all three points again.</p>
+<p>If the opening matches but the ending becomes progressively late, a global move will not solve the file. Compare the reference cut, start timecode and any speed changes. If the error appears only after a removed shot, repair that section or obtain subtitles for the current edit. The <a href="fix-caption-timing-premiere-pro.html">timing guide</a> covers those patterns.</p>
+<h2 id="srt-text">Fix text and encoding problems</h2>
+<p>For YouTube, use plain UTF-8 SRT. Check accented characters, punctuation, speaker labels and non-Latin text after import and after upload. A file that looks right in one editor may have been saved with a different encoding.</p>
+<p>Inspect suspicious entries in a plain-text editor or subtitle editor: timestamps should be valid, each end should follow its start, and entries need the expected separators. Save a copy before editing a supplied translation. For a short original example, see <a href="how-to-add-subtitles-in-premiere-pro.html">preparing subtitle text manually</a>.</p>
+<h2 id="srt-style">Style the imported subtitles</h2>
+<p>Select a native caption, open Properties and create or apply a <a href="premiere-pro-caption-presets.html">Track Style</a>. Review wrapping after a font change. Styling in Premiere can help a burned-in picture version, but a receiving SRT player can use its own appearance.</p>
+<p>For example, YouTube's documented basic SRT support does not recognize style markup. Do not promise that sending an SRT will reproduce a client's precise font or animation.</p>
+<h2 id="export-srt">Export and test the sidecar</h2>
+<p>In Export, expand Captions, choose Create Sidecar File and select SRT where supported. Confirm the caption track, destination and filename. If several languages exist, export and label the correct one for each delivery rather than relying on a default selection.</p>
+<p>Open the actual resulting file with the matching video or upload it through the destination's subtitle controls. Check several cue points, then retain both video and subtitle versions together. If the MP4 itself must display the words, make a separate <a href="burn-in-captions-premiere-pro.html">burned-in version</a>.</p>
+<h2 id="srt-plugin-limit">SRT and Captions Gen</h2>
+<p>The current Captions Gen release creates animated graphics from speech; it does not import an SRT or convert native subtitle tracks. Its Premiere graphics and After Effects caption layers render into the picture. Keep a separate native track when the job also needs an editable subtitle sidecar.</p>
+<p class="sources">Checked 9 November 2026: Adobe's <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/import-caption-file-from-third-party-service.html">SRT import steps</a>, <a href="https://helpx.adobe.com/premiere/desktop/add-text-images/insert-captions/supported-file-formats-for-captions.html">supported formats</a>, <a href="https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-caption-tracks.html">sidecar export</a>, and <a href="https://support.google.com/youtube/answer/2734698?hl=en">YouTube's UTF-8/basic SRT requirements</a>.</p>
 
 
 <div class="box">
@@ -199,7 +243,7 @@
 <div class="box"><p class="t">Related guides</p><ul><li><a href="how-to-add-subtitles-in-premiere-pro.html">How to add subtitles in Premiere Pro</a></li>
 <li><a href="fix-caption-timing-premiere-pro.html">Fix caption timing in Premiere Pro</a></li>
 <li><a href="premiere-pro-captions-not-exporting.html">Premiere Pro captions not exporting</a></li></ul></div>
-</div></article>
+</div></article></main>
 <footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/product.html">Product facts &amp; compatibility</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="https://captionsgen.com/news/">News</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>
 </body>
 </html>

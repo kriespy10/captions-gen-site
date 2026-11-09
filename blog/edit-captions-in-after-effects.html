@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/analytics.css">
+<script defer src="/analytics.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
+<title>Edit Captions in After Effects | Captions Gen</title>
+<meta name="description" content="Correct caption text, use whole-word find and replace, and repair highlights after manual Source Text edits in the Captions Gen After Effects panel.">
+<link rel="canonical" href="https://captionsgen.com/blog/edit-captions-in-after-effects.html">
+<meta property="og:title" content="Edit Captions in After Effects | Captions Gen">
+<meta property="og:description" content="Correct caption text, use whole-word find and replace, and repair highlights after manual Source Text edits in the Captions Gen After Effects panel.">
+<meta property="og:url" content="https://captionsgen.com/blog/edit-captions-in-after-effects.html">
+<meta property="og:type" content="article">
+
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Edit caption text and update timing in After Effects", "description": "Correct caption text, use whole-word find and replace, and repair highlights after manual Source Text edits in the Captions Gen After Effects panel.", "inLanguage": "en", "articleSection": "After Effects", "datePublished": "2026-11-09", "dateModified": "2026-11-09", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/edit-captions-in-after-effects.html", "image": "https://captionsgen.com/img/guides/ae-caption-editing-routes.svg"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Edit caption text and update timing in After Effects", "item": "https://captionsgen.com/blog/edit-captions-in-after-effects.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does Save caption update the animation automatically?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The Captions Gen editor saves the text and updates animation together. You do not need a second Update animation step after a successful save. Review newly added words because audio alignment can be unavailable and fallback timing can be estimated."}}, {"@type": "Question", "name": "When should I use Update animation?", "acceptedAnswer": {"@type": "Answer", "text": "Use it when offered after manually changing Source Text inside a supported generated caption. Return to the parent composition and select that caption. This is different from saving through the panel's caption editor."}}, {"@type": "Question", "name": "Can I replace a repeated word across a composition?", "acceptedAnswer": {"@type": "Answer", "text": "The AE Captions tab has whole-word, case-insensitive find and replace, with previews before Replace all. It works on the generated captions listed for the current composition. The public 1.1.9 panel marks this feature free during early access."}}, {"@type": "Question", "name": "Does Apply style change the caption wording?", "acceptedAnswer": {"@type": "Answer", "text": "Use Apply style for the current batch's look. Use the caption editor or find/replace for text corrections. Grouping changes can regenerate captions, so check the result and keep a saved project before wider changes."}}]}]</script>
+<style>
+  :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
+    --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
+    --green:#30d158; --amber:#ff9f0a; --red:#ff6b6b; --cyan:#64d2ff; --card2:#1b1b1e; --pick:#0d1a2b;
+    --body:"Instrument Sans",-apple-system,"Segoe UI",system-ui,sans-serif; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:var(--body); background:var(--bg); color:var(--text); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 24px; }
+  .col { max-width:720px; margin:0 auto; padding:0 20px; }
+  nav { position:sticky; top:0; z-index:20; backdrop-filter:saturate(160%) blur(18px); -webkit-backdrop-filter:saturate(160%) blur(18px); background:rgba(7,7,8,.66); border-bottom:1px solid var(--hair); }
+  nav .wrap { display:flex; align-items:center; justify-content:space-between; height:54px; }
+  nav a { text-decoration:none; }
+  .brand { display:flex; align-items:center; gap:10px; color:var(--text); font-weight:600; font-size:15px; letter-spacing:-.01em; }
+  .brand svg { width:26px; height:26px; display:block; }
+  nav .links { display:flex; gap:24px; font-size:13.5px; align-items:center; }
+  nav .links a { color:var(--muted2); }
+  nav .links a:hover { color:var(--text); }
+  nav .links a.on { color:var(--text); }
+  nav .links a.buy { color:#fff; background:var(--blue); padding:7px 15px; border-radius:999px; font-weight:600; }
+  nav .links a.buy:hover { background:var(--blue2); }
+  @media (max-width:800px) { nav .links a:not(.buy):not(.on) { display:none; } }
+  .idx h1 { margin-bottom:6px; } .idx .sub { color:var(--muted); margin-bottom:26px; }
+  .post { display:block; background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px; margin-bottom:12px; text-decoration:none; }
+  .post:hover { border-color:var(--hair2); }
+  .post .pt { color:var(--text); font-weight:700; font-size:18px; margin-bottom:4px; }
+  .post .pd { color:var(--muted2); font-size:14px; }
+  article { padding:40px 0 20px; }
+  h1 { font-size:34px; line-height:1.2; letter-spacing:-.02em; margin:0 0 10px; }
+  .meta { color:var(--muted); font-size:13px; margin-bottom:28px; }
+  .app-guide { padding:12px 16px; margin:0 0 24px; border:1px solid var(--hair2); border-radius:10px; font-size:14px; }
+  .breadcrumbs { font-size:13px; color:var(--muted); margin:0 0 16px; }
+  .breadcrumbs a { color:var(--muted2); }
+  .sources { font-size:13px; margin-top:28px; }
+  .caption-example { margin:24px 0; }
+  .caption-example img { display:block; width:100%; height:auto; border-radius:12px; }
+  .caption-example figcaption { color:var(--muted); font-size:13px; margin-top:8px; }
+  .quick-answer { margin-top:20px; }
+  .quick-answer ul { margin-bottom:0; }
+  h2 { font-size:22px; margin:36px 0 10px; letter-spacing:-.01em; }
+  h2[id] { scroll-margin-top:78px; }
+  h3 { font-size:17px; margin:24px 0 8px; }
+  p, li { color:var(--muted2); font-size:16px; }
+  li { margin-bottom:6px; }
+  strong { color:var(--text); }
+  a { color:var(--blue); }
+  a:hover { color:var(--blue2); }
+  ol li::marker { color:var(--yellow); font-weight:700; }
+  .box { background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px; margin:32px 0; }
+  .box p { margin:6px 0; }
+  .box .t { color:var(--text); font-weight:700; }
+  kbd { background:var(--card); border:1px solid var(--hair2); border-radius:5px; padding:1px 6px; font-size:13px; color:var(--text); }
+  footer { border-top:1px solid var(--hair); margin-top:48px; padding:24px 0 48px; color:var(--muted); font-size:13px; }
+  footer a { color:var(--muted); }
+  .cta-line { background:rgba(10,132,255,.08); border-left:3px solid var(--blue); padding:10px 14px; border-radius:0 10px 10px 0; margin:18px 0 6px; font-size:15px; }
+  .btn { display:inline-block; background:var(--yellow); color:#111; font-weight:700; text-decoration:none; padding:11px 18px; border-radius:10px; margin:10px 10px 0 0; }
+  .btn:hover { color:#111; background:#fff176; }
+  .btn.ghost { background:transparent; color:var(--text); border:1px solid var(--hair2); }
+  .btn.ghost:hover { color:var(--text); background:rgba(255,255,255,.06); }
+  .ptable-wrap { position:relative; left:50%; transform:translateX(-50%); width:min(1100px, calc(100vw - 40px)); margin:18px 0 6px; border:1px solid var(--hair2); border-radius:16px; overflow-x:auto; background:var(--card); -webkit-overflow-scrolling:touch; }
+  .ptable { width:100%; min-width:1040px; border-collapse:separate; border-spacing:0; font-size:14px; font-variant-numeric:tabular-nums; }
+  .ptable th { background:var(--card2); color:var(--muted); font-size:11.5px; font-weight:600; text-transform:uppercase; letter-spacing:.07em; text-align:left; padding:12px 11px; border-bottom:1px solid var(--hair2); white-space:nowrap; }
+  .ptable td { padding:14px 11px; border-bottom:1px solid var(--hair); color:var(--muted2); vertical-align:middle; line-height:1.4; }
+  .ptable tr:last-child td { border-bottom:0; }
+  .ptable tbody tr:hover td { background:var(--card2); }
+  .ptable td:first-child, .ptable th:first-child { position:sticky; left:0; z-index:1; background:var(--card); border-right:1px solid var(--hair); }
+  .ptable th:first-child { background:var(--card2); }
+  .ptable tbody tr:hover td:first-child { background:var(--card2); }
+  .ptable .tool { color:var(--text); font-weight:700; font-size:15px; white-space:nowrap; }
+  .ptable .sub { color:var(--muted); font-size:12.5px; margin-top:2px; }
+  .ptable .price { color:var(--text); font-weight:600; white-space:nowrap; }
+  .ptable td:nth-child(2) .sub { white-space:nowrap; }
+  .ptable tr.pick td, .ptable tr.pick:hover td { background:var(--pick); }
+  .ptable tr.pick td:first-child { box-shadow:inset 3px 0 0 var(--yellow); }
+  .ptable .tag { display:inline-block; margin-left:6px; padding:2px 8px; border-radius:999px; border:1px solid var(--yellow); color:var(--yellow); font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; vertical-align:2px; }
+  .pill { display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:999px; font-size:12.5px; font-weight:600; white-space:nowrap; border:1px solid currentColor; }
+  .pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+  .pill.ok { color:var(--green); } .pill.sub { color:var(--amber); } .pill.mix { color:var(--cyan); } .pill.neutral { color:var(--muted2); }
+  .mark { display:inline-flex; align-items:center; gap:7px; white-space:nowrap; }
+  .mark i { font-style:normal; display:inline-grid; place-items:center; width:20px; height:20px; border-radius:50%; font-size:12px; font-weight:800; border:1px solid currentColor; }
+  .mark.yes { color:var(--green); } .mark.no { color:var(--red); } .mark.na { color:var(--muted); }
+  .yr { min-width:150px; }
+  .yr .amt { color:var(--text); font-weight:600; white-space:nowrap; }
+  .yr .bar { position:relative; height:6px; margin-top:7px; border-radius:3px; background:var(--hair); overflow:hidden; }
+  .yr .bar span { position:absolute; left:0; top:0; bottom:0; border-radius:3px; background:var(--amber); }
+  .yr .bar span.lo { background:var(--green); }
+  .yr .bar span.range { opacity:.35; }
+  @media (max-width:600px) {
+    .ptable-wrap { left:0; transform:none; width:auto; }
+    .ptable .tool + .sub { display:none; }
+    .ptable td:first-child { max-width:132px; }
+    .ptable .tool { white-space:normal; font-size:14px; }
+    .ptable .tag { display:block; width:max-content; margin:5px 0 0; }
+  }
+  .ver { display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.06em; color:var(--blue); background:rgba(10,132,255,.14); border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .post .pm { color:var(--muted); font-size:13px; margin-bottom:6px; }
+  .tldr { background:var(--card); border:1px solid var(--hair); border-left:3px solid var(--yellow); border-radius:0 14px 14px 0; padding:14px 20px 6px; margin:22px 0 26px; }
+  .tldr .t, .toc .t { color:var(--text); font-weight:700; margin:0 0 6px; font-size:15px; }
+  .tldr ul { margin:0; padding-left:20px; }
+  .toc { border:1px solid var(--hair); border-radius:14px; padding:14px 20px; margin:0 0 30px; }
+  .toc ol { margin:0; padding-left:22px; columns:2; column-gap:28px; }
+  .toc li { font-size:14.5px; margin-bottom:4px; break-inside:avoid; }
+  .toc a { color:var(--muted2); text-decoration:none; }
+  .toc a:hover { color:var(--text); }
+  @media (max-width:600px) { .toc ol { columns:1; } }
+  article .col { position:relative; }
+  .toc-rail { display:none; }
+  @media (min-width:1040px) {
+    article .col.has-toc { margin-left:max(0px, calc(50% - 480px)); }
+    .has-toc .ptable-wrap { left:0; transform:none; width:auto; }
+    .has-toc .ptable { min-width:0; }
+    .toc-inline { display:none; }
+    .toc-rail { display:block; position:absolute; top:0; bottom:0; left:calc(100% + 28px); width:212px; }
+    .toc-side { position:sticky; top:84px; margin:0; border:0; border-left:1px solid var(--hair2); border-radius:0; padding:2px 0 2px 18px; }
+    .toc-side ol { columns:1; list-style:none; padding:0; }
+    .toc-side li { font-size:14px; line-height:1.45; margin-bottom:9px; }
+    .toc-side a.on { color:var(--text); }
+    .toc-side a.on::before { content:""; position:absolute; left:-1px; width:2px; height:1.4em; background:var(--yellow); }
+  }
+  .tip, .note { border-radius:0 12px 12px 0; padding:10px 16px; margin:18px 0; font-size:15px; color:var(--muted2); }
+  .tip { background:rgba(48,209,88,.07); border-left:3px solid var(--green); }
+  .note { background:rgba(255,159,10,.07); border-left:3px solid var(--amber); }
+  .tip b, .note b { color:var(--text); }
+  .spec { width:100%; border-collapse:collapse; margin:14px 0 8px; font-size:15px; border:1px solid var(--hair); border-radius:12px; overflow:hidden; }
+  .spec th, .spec td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--hair); vertical-align:top; }
+  .spec th { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.06em; background:var(--card2); }
+  .spec td { color:var(--muted2); }
+  .spec td:first-child { color:var(--text); font-weight:600; white-space:nowrap; }
+  .spec tr:last-child td { border-bottom:0; }
+  .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; border:1px solid rgba(255,255,255,.35); }
+  .ptable-legend { display:flex; flex-wrap:wrap; gap:6px 18px; color:var(--muted); font-size:12.5px; margin:10px 2px 0; }
+
+  .caption-example { margin:30px 0; }
+  .caption-example img { border:1px solid var(--hair2); background:#101013; }
+  .caption-example figcaption { line-height:1.5; color:var(--muted2); padding:0 2px; }
+  .caption-example figcaption a { white-space:nowrap; }
+  .ptable-wrap { left:0; transform:none; width:100%; }
+  .ptable { min-width:620px; }
+  .ptable:has(th:nth-child(6)) { min-width:1000px; }
+  .ptable th { white-space:normal; }
+  .ptable td:first-child { width:27%; }
+  .spec { table-layout:fixed; }
+  .spec th, .spec td { overflow-wrap:anywhere; }
+  .spec td:first-child { white-space:normal; }
+  article ol > li { padding-left:4px; margin-bottom:12px; }
+  article .tip, article .note { line-height:1.6; }
+  article a:focus-visible { outline:2px solid var(--yellow); outline-offset:4px; border-radius:2px; }
+  .toc-side { max-height:calc(100vh - 108px); overflow-y:auto; scrollbar-width:thin; }
+  .skip-link { position:absolute; z-index:40; top:8px; left:16px; transform:translateY(-180%); padding:8px 14px; background:var(--yellow); color:#111; border-radius:8px; }
+  .skip-link:focus { transform:none; }
+  #guide-content { scroll-margin-top:70px; }
+  @media (max-width:600px) {
+    h1 { font-size:30px; }
+    .spec th, .spec td { padding:10px 9px; font-size:14px; }
+    .caption-example { margin:24px 0; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#guide-content">Skip to guide</a>
+<nav><div class="wrap">
+  <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
+  <div class="links">
+    <a href="https://captionsgen.com/#styles">Styles</a>
+    <a href="https://captionsgen.com/#custom">Build your own</a>
+    <a href="https://captionsgen.com/#how">How it works</a>
+    <a href="https://captionsgen.com/#install">Install</a>
+    <a href="https://captionsgen.com/#faq">FAQ</a>
+    <a class="on" href="https://captionsgen.com/blog/">Guides</a>
+    <a href="https://captionsgen.com/news/">News</a>
+    <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
+  </div>
+</div></nav>
+<main id="guide-content" tabindex="-1"><article><div class="col has-toc">
+<div class="toc-rail"><aside class="toc toc-side" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#panel-edit">Correct a caption in the panel</a></li><li><a href="#replace">Find and replace a repeated mistake</a></li><li><a href="#manual">Recover animation after a manual Source Text edit</a></li><li><a href="#timing">Check timing at the speech, not just the cut</a></li><li><a href="#style">Change the look after the wording is correct</a></li><li><a href="#questions-people-ask">Questions people ask</a></li></ol></aside></div>
+<script>(function(){function f(){var l=[].slice.call(document.querySelectorAll('.toc-side a')),i=0;
+l.forEach(function(a,k){var e=document.getElementById(a.hash.slice(1));if(e&&e.getBoundingClientRect().top<140)i=k});
+l.forEach(function(a,k){a.classList.toggle('on',k===i)})}
+addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',f)})();</script>
+<p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Edit caption text and update timing in After Effects</p>
+<h1>Edit caption text and update timing in After Effects</h1>
+<div class="meta">Published <time datetime="2026-11-09">9 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+<p class="app-guide"><strong>After Effects guide.</strong> Working in Premiere Pro? <a href="animated-captions-premiere-pro.html">Choose a Premiere caption workflow</a>.</p>
+
+<p><strong>To correct a Captions Gen caption in After Effects, open the panel's Captions tab, choose the caption, change its text and press Save caption.</strong> The save updates text and animation together. Use the separate Update animation action after a manual Source Text edit, when the panel offers it.</p>
+<p>This guide covers the public <a href="/news/captions-gen-1-1-9.html">1.1.9 Windows panel</a>. It assumes you already have generated captions. For installation and your first batch, start with <a href="how-to-add-captions-in-after-effects.html">adding captions in After Effects</a>.</p>
+<figure class="caption-example"><a class="diagram-link" href="/img/guides/ae-caption-editing-routes.svg"><img src="/img/guides/ae-caption-editing-routes.svg" alt="Two illustrated correction routes: the Captions tab's Save caption writes text and animation together; manual Source Text editing requires returning to the parent composition and using Update animation when offered." width="960" height="900" loading="lazy"></a><figcaption>Editing illustration. A normal panel save and a manual Source Text change follow different timing paths. <a href="/img/guides/ae-caption-editing-routes.svg">Open full size</a>.</figcaption></figure>
+
+<aside class="toc toc-inline" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#panel-edit">Correct a caption in the panel</a></li><li><a href="#replace">Find and replace a repeated mistake</a></li><li><a href="#manual">Recover animation after a manual Source Text edit</a></li><li><a href="#timing">Check timing at the speech, not just the cut</a></li><li><a href="#style">Change the look after the wording is correct</a></li><li><a href="#questions-people-ask">Questions people ask</a></li></ol></aside>
+<h2 id="panel-edit">Correct a caption in the panel</h2>
+<ol>
+<li>Open the composition containing the generated caption layers.</li>
+<li>Open <strong>Captions</strong> in the Captions Gen panel.</li>
+<li>Use <strong>Search captions</strong> to find the phrase. Check its text and start/end time so you edit the intended occurrence.</li>
+<li>Choose the caption's edit action, correct its words and press <strong>Save caption</strong>.</li>
+<li>Preview that phrase with the original audio and check the changed words.</li>
+</ol>
+<p>The list belongs to the current composition. If the composition changes while an edit is open, choose the caption again in the current list rather than treating an old selection as current. An empty list can also mean the open composition has no compatible generated captions.</p>
+<p>For example, changing <em>we make caption</em> to <em>we make captions</em> is a text correction. Adding <em>clear animated</em> creates new words that need timing. The editor can try local alignment when the original source binding is valid; it reports estimated timing when that route is unavailable. Neither outcome removes the need to listen.</p>
+
+<h2 id="replace">Find and replace a repeated mistake</h2>
+<p>In <strong>Captions</strong>, open <strong>Find &amp; replace</strong>. Enter the word or phrase under <strong>Find whole words</strong>, enter the replacement, review the affected captions and their preview text, then use <strong>Replace all</strong>. This feature is marked free during early access in the public panel.</p>
+<p>Matching ignores letter case and uses whole words. Finding <em>cat</em> matches <em>Cat</em>, but does not replace part of <em>category</em>. Replacement text is literal. Leave the replacement empty to inspect matches; do not use that as a bulk-delete method.</p>
+<p>Replace all updates text and timing for the changed captions. Use AE's Edit &gt; Undo if the replacement was wrong, then check the restored wording and animation. A narrow replacement is easier to review than changing a short common word across a long composition.</p>
+
+<h2 id="manual">Recover animation after a manual Source Text edit</h2>
+<p>Generated phrases are precompositions with editable text inside. Adobe documents <a href="https://helpx.adobe.com/after-effects/desktop/add-text/create-and-edit-text-layers/creating-editing-text-layers.html">Source Text as the text layer's content and formatting property</a>. Changing that property directly can leave the generated word animation referring to its earlier text.</p>
+<ol>
+<li>Save the project, then open the generated caption precomposition and change the intended text.</li>
+<li>Return to the parent composition containing the generated caption layer.</li>
+<li>Select the changed caption layer.</li>
+<li>Use <strong>Update animation</strong> when the panel shows <strong>Caption text changed</strong>.</li>
+<li>Preview the full phrase, including the words before and after the edit.</li>
+</ol>
+<p>If the action is absent, confirm you selected a compatible generated caption in the parent composition rather than an arbitrary text layer or an unrelated precomposition. Don't rebuild text animators or remove the generated rig to force the button to appear.</p>
+
+<h2 id="timing">Check timing at the speech, not just the cut</h2>
+<p>The whole phrase can sit in the correct place while a newly inserted word highlights too early. Listen for the first changed word and check where its highlight begins. Also inspect the next unchanged word, because a phrase can sound right at the start and drift near its end.</p>
+<p>Available timing anchors help preserve unchanged words. Added words may align to valid original audio or use estimated timing. A moved or retimed source, missing media or an unavailable binding can prevent audio alignment. If the speech has changed substantially, generate from the current supported source rather than expanding an old caption into unrelated dialogue.</p>
+<p>Do not stretch or time-remap generated caption layers as a shortcut for repairing text. Return to a supported source workflow and check the result against speech. The <a href="word-by-word-captions-after-effects.html">word-by-word styling guide</a> explains the difference between phrase grouping and timed highlights.</p>
+
+<h2 id="style">Change the look after the wording is correct</h2>
+<p>Use Presets or Customize, then <strong>Apply style</strong> for the current batch in the active composition. Font, color and design changes are different from transcript corrections. Grouping changes can regenerate captions from saved source history, so don't assume every Apply style operation is only a cosmetic change to one selected layer.</p>
+<p>Save a version before a wide restyle. Keep a separate subtitle delivery workflow if the job also needs SRT or selectable captions; these editable AE layers still render into the picture. If the text is correct but the layer disappears, use <a href="after-effects-captions-not-showing.html">the visibility troubleshooting checklist</a>.</p>
+
+<h2 id="questions-people-ask">Questions people ask</h2>
+<h3>Does Save caption update the animation automatically?</h3>
+<p>Yes. The Captions Gen editor saves the text and updates animation together. You do not need a second Update animation step after a successful save. Review newly added words because audio alignment can be unavailable and fallback timing can be estimated.</p>
+<h3>When should I use Update animation?</h3>
+<p>Use it when offered after manually changing Source Text inside a supported generated caption. Return to the parent composition and select that caption. This is different from saving through the panel's caption editor.</p>
+<h3>Can I replace a repeated word across a composition?</h3>
+<p>The AE Captions tab has whole-word, case-insensitive find and replace, with previews before Replace all. It works on the generated captions listed for the current composition. The public 1.1.9 panel marks this feature free during early access.</p>
+<h3>Does Apply style change the caption wording?</h3>
+<p>Use Apply style for the current batch's look. Use the caption editor or find/replace for text corrections. Grouping changes can regenerate captions, so check the result and keep a saved project before wider changes.</p>
+
+<div class="box">
+<p class="t">Try animated captions on your own edit</p>
+<p>Captions Gen is a currently free animated captions plugin for Adobe Premiere Pro and After Effects on Windows. It transcribes audio locally on the CPU with Faster Whisper, then places editable Motion Graphics clips in Premiere or native caption layers in After Effects.</p>
+<p>Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications.</p>
+<p>Current release: <a href="https://captionsgen.com/news/captions-gen-1-1-9.html">1.1.9</a>. Check <a href="https://captionsgen.com/product.html">supported Adobe versions, installation requirements and limitations</a>. Use Premiere Pro's native caption tracks when you need SRT, selectable subtitles or broadcast closed captions.</p>
+<a class="btn" target="_blank" rel="noopener" href="https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece">Download free</a>
+<a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
+</div>
+
+<div class="box"><p class="t">Related guides</p><ul><li><a href="how-to-add-captions-in-after-effects.html">How to add animated captions in After Effects</a></li>
+<li><a href="word-by-word-captions-after-effects.html">Word-by-word captions in After Effects: layout or highlight?</a></li>
+<li><a href="after-effects-captions-not-showing.html">After Effects captions not showing: find the failed step</a></li></ul></div>
+</div></article></main>
+<footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/product.html">Product facts &amp; compatibility</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="https://captionsgen.com/news/">News</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>
+</body>
+</html>

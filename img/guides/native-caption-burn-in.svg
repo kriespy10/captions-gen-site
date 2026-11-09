@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1000" viewBox="0 0 960 1000" role="img" aria-labelledby="title description"><title id="title">Keep clean and captioned copies</title><desc id="description">Keep a version without visible captions Useful for later correction or another language. Retain native caption text and timing. Burn in the intended native track Export &gt; Captions &gt; Burn Captions Into Video. Graphics instead render through video tracks. Supply caption files when required Sidecar/embedded captions are separate outputs. Check the final file, not only the preview.</desc><rect width="960" height="1000" rx="24" fill="#101013"/><g font-family="Arial, sans-serif"><text x="48" y="52" font-size="20" font-weight="700" letter-spacing="2" fill="#ffeb3b">CAPTIONS GEN GUIDES</text>
+<text x="48" y="106" font-size="42" font-weight="700" fill="#f5f5f7">Keep clean and captioned copies</text>
+<text x="48" y="182" font-size="24" fill="#b7b7c0">Burned-in words become part of the video picture.</text>
+<rect x="40" y="236" width="880" height="205" rx="17" fill="#19191e" stroke="#37373f"/><rect x="40" y="254" width="5" height="169" rx="2" fill="#ffeb3b"/><text x="70" y="273" font-size="19" font-weight="700" letter-spacing="1" fill="#ffeb3b">CLEAN SOURCE</text><text x="70" y="316" font-size="30" font-weight="700" fill="#f5f5f7">Keep a version without visible captions</text>
+<text x="72" y="362" font-size="25" fill="#b7b7c0">Useful for later correction or another language.</text>
+<text x="72" y="397" font-size="25" fill="#b7b7c0">Retain native caption text and timing.</text>
+<path d="M825 336h35l17 17v55H825z M860 336v17h17 M836 367h29 M836 379h29 M836 391h18" stroke="#ffeb3b" fill="none" stroke-width="3"/>
+<path d="M480 447v10m-7-5 7 7 7-7" stroke="#696974" stroke-width="3" fill="none"/>
+<rect x="40" y="464" width="880" height="205" rx="17" fill="#19191e" stroke="#37373f"/><rect x="40" y="482" width="5" height="169" rx="2" fill="#63b9ff"/><text x="70" y="501" font-size="19" font-weight="700" letter-spacing="1" fill="#63b9ff">PICTURE DELIVERY</text><text x="70" y="544" font-size="30" font-weight="700" fill="#f5f5f7">Burn in the intended native track</text>
+<text x="72" y="590" font-size="25" fill="#b7b7c0">Export &gt; Captions &gt; Burn Captions Into Video.</text>
+<text x="72" y="625" font-size="25" fill="#b7b7c0">Graphics instead render through video tracks.</text>
+<rect x="818" y="571" width="67" height="58" rx="7" stroke="#63b9ff" fill="none" stroke-width="3"/><path d="M830 592h43 M830 608h32" stroke="#63b9ff" stroke-width="4"/>
+<path d="M480 675v10m-7-5 7 7 7-7" stroke="#696974" stroke-width="3" fill="none"/>
+<rect x="40" y="692" width="880" height="205" rx="17" fill="#19191e" stroke="#37373f"/><rect x="40" y="710" width="5" height="169" rx="2" fill="#b9adff"/><text x="70" y="729" font-size="19" font-weight="700" letter-spacing="1" fill="#b9adff">OTHER DELIVERY</text><text x="70" y="772" font-size="30" font-weight="700" fill="#f5f5f7">Supply caption files when required</text>
+<text x="72" y="818" font-size="25" fill="#b7b7c0">Sidecar/embedded captions are separate outputs.</text>
+<text x="72" y="853" font-size="25" fill="#b7b7c0">Check the final file, not only the preview.</text>
+<circle cx="849" cy="829" r="30" fill="none" stroke="#b9adff" stroke-width="3"/><path d="M832 829l12 12 23-27" stroke="#b9adff" fill="none" stroke-width="5"/>
+<text x="48" y="962" font-size="22" fill="#b7b7c0">Workflow illustration · Captions Gen guides</text></g></svg>

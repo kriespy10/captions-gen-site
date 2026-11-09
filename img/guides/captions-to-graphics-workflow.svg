@@ -20,8 +20,8 @@
 
     <path d="M480 383v17m-8-8 8 8 8-8" fill="none" stroke="#7f7f8b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     <rect x="93" y="416" width="774" height="76" rx="13" fill="#0d253d" stroke="#2867a1"/>
-    <text x="480" y="445" text-anchor="middle" fill="#97cfff" font-size="23">IN THE COPY YOU WANT TO ANIMATE</text>
-    <text x="480" y="477" text-anchor="middle" fill="#f4f4f5" font-size="29" font-weight="650">Graphics and Titles › Upgrade Caption to Graphic</text>
+    <text x="480" y="441" text-anchor="middle" fill="#97cfff" font-size="23">IN THE COPY YOU WANT TO ANIMATE</text>
+    <text x="480" y="479" text-anchor="middle" fill="#f4f4f5" font-size="29" font-weight="650">Graphics and Titles › Upgrade Caption to Graphic</text>
     <path d="M480 503v17m-8-8 8 8 8-8" fill="none" stroke="#7f7f8b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 
     <rect x="40" y="537" width="880" height="263" rx="16" fill="#19191d" stroke="#37373e"/>
