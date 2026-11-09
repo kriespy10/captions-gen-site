@@ -4,11 +4,12 @@ import json, os, io, re
 from datetime import date
 from html import escape
 from product import PRODUCT
+from genlanding import UPDATED as AFTER_EFFECTS_UPDATED
 
 SITE = "https://captionsgen.com"
 FREE = "https://captionsgen.lemonsqueezy.com/checkout/buy/f7d3d370-9a13-4885-a1e1-70fedfa0dece"
 DATE = "2026-08-26"
-SITE_UPDATED = "2026-11-08"
+SITE_UPDATED = "2026-11-09"
 GUIDE_INDEX_UPDATED = "2026-11-09"
 # Every guide includes the shared requirements box below. Its factual correction
 # is a content update even when the rest of an article has not changed.
@@ -233,7 +234,7 @@ def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, p
         image = first_image.group(1)
     closing = CLOSING.replace("__FREE__", FREE)
     if app == "After Effects":
-        app_guide = '<p class="app-guide"><strong>After Effects guide.</strong> Working in Premiere Pro? <a href="animated-captions-premiere-pro.html">Choose a Premiere caption workflow</a>.</p>'
+        app_guide = '<p class="app-guide"><strong>After Effects guide.</strong> <a href="/after-effects.html">Free plugin, output examples and compatibility</a>. Working in Premiere Pro? <a href="animated-captions-premiere-pro.html">Choose a Premiere caption workflow</a>.</p>'
     else:
         app_guide = '<p class="app-guide"><strong>Premiere Pro guide.</strong> Using After Effects? <a href="how-to-add-captions-in-after-effects.html">Install its panel and create your first captions</a>.</p>'
     rel = "\n".join(f'<li><a href="{r["slug"]}.html">{r["t"]}</a></li>' for r in related)
@@ -407,7 +408,7 @@ idx = f"""<!doctype html>
 <li><a href="premiere-pro-captions-not-showing.html">Fix captions missing from the preview or export</a></li>
 <li><a href="animated-captions-premiere-pro.html">Choose an animated or word-by-word workflow</a></li>
 <li><a href="free-caption-plugin-premiere-pro.html">Check the free plugin, compatibility and setup</a></li>
-</ul></div><h2 id="after-effects">After Effects</h2><p>Use the Windows panel to create editable animated caption layers in a composition.</p>{guide_cards('After Effects')}
+</ul></div><h2 id="after-effects">After Effects</h2><p>Compare the <a href="/after-effects.html">free After Effects captions plugin, examples and requirements</a>, then choose the guide for your task.</p>{guide_cards('After Effects')}
 <h2 id="premiere-pro">Premiere Pro</h2><p>Choose native caption tracks for subtitle delivery, or editable graphics for animated caption designs.</p>{grouped_premiere_guides()}</div></article>
 <footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/product.html">Product facts &amp; compatibility</a> · <a href="{SITE}/#faq">FAQ</a> · <a href="{SITE}/news/">News</a> · {PRIVACY_FOOTER}</div></footer>
 </body></html>
@@ -525,6 +526,7 @@ print("wrote news index + feed", len(NEWS), "posts")
 
 sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
       f'  <url><loc>{SITE}/</loc><lastmod>{SITE_UPDATED}</lastmod></url>',
+      f'  <url><loc>{SITE}/after-effects.html</loc><lastmod>{AFTER_EFFECTS_UPDATED}</lastmod></url>',
       f'  <url><loc>{PRODUCT["url"]}</loc><lastmod>{PRODUCT["checked"]}</lastmod></url>',
       f'  <url><loc>{SITE}/blog/</loc><lastmod>{GUIDE_INDEX_UPDATED}</lastmod></url>']
 sm += [f'  <url><loc>{SITE}/blog/{k}.html</loc><lastmod>{p.get("modified", DATE)}</lastmod></url>' for k, p in POSTS.items()]
@@ -532,5 +534,5 @@ sm.append(f'  <url><loc>{SITE}/news/</loc><lastmod>{NEWS_UPDATED}</lastmod></url
 sm += [f'  <url><loc>{SITE}/news/{n["slug"]}.html</loc><lastmod>{n["date"]}</lastmod></url>' for n in NEWS]
 sm.append('</urlset>')
 io.open("sitemap.xml", "w", encoding="utf-8", newline="").write(chr(10).join(sm) + chr(10))
-print("sitemap", len(POSTS) + 4 + len(NEWS), "urls")
+print("sitemap", len(POSTS) + 5 + len(NEWS), "urls")
 generate_product()

@@ -142,8 +142,9 @@ def product_page():
 <p>For setup and model choices, see <a href="/#install">requirements and installation</a> and <a href="/#performance">transcription and performance</a>.</p>
 <h2 id="free">Is there a free animated captions plugin for Premiere Pro?</h2>
 <p>{escape(p['free_answer'])}</p>
-<h3>Is there a free animated captions plugin for After Effects?</h3>
+<h2 id="free-after-effects">Is there a free animated captions plugin for After Effects?</h2>
 <p>Yes. Captions Gen is currently free for After Effects on Windows, with no watermark, subscription or transcription time cap. The panel has been tested with After Effects 2026 on Windows 11 and creates native editable caption layers with local CPU transcription. Choose After Effects or Both in the same Windows setup. Adobe After Effects is a separate paid application. The <a href="/blog/how-to-add-captions-in-after-effects.html">After Effects setup and first-caption guide</a> explains the workflow.</p>
+<p>See the <a href="/after-effects.html">free After Effects captions plugin</a> for output examples, download terms and which caption jobs it suits.</p>
 <p>The old 15-minute limit was removed with <a href="{p['free_release_url']}">Captions Gen 1.1.0 on {free_since}</a>. If an older panel still shows that limit, use the offered update and restart the Adobe application.</p>
 <h2 id="fit">When Captions Gen fits your edit</h2>
 <p>Use it when you edit in a supported Windows version of Premiere Pro or After Effects and want animated karaoke highlights, reusable styles and graphics you can continue editing. It suits short-form videos, interviews and other spoken footage where the caption design is part of the picture.</p>
@@ -181,6 +182,7 @@ Official website: {SITE}/. Product facts checked {p['checked']}.
 - Support: {p['support']}. Made by Kris, a video editor.
 
 ## Product and release information
+- [Free captions plugin for After Effects]({SITE}/after-effects.html): animated native layers, current free limits, Windows compatibility, output examples and download.
 - [Product facts]({p['url']}): current pricing, compatibility, download requirements, limitations and support.
 - [Home]({SITE}/): product overview, editable style preview and free download.
 - [Requirements and installation]({SITE}/#install): supported Adobe applications and Windows versions, app selection and installation steps.
@@ -250,7 +252,9 @@ def sync_homepage(path):
 
 
 def generate(root=ROOT):
+    from genlanding import generate as generate_landing
     root = Path(root)
+    generate_landing(root)
     (root / "product.html").write_text(product_page(), encoding="utf-8", newline="")
     (root / "llms.txt").write_text(text_directory(), encoding="utf-8", newline="")
     sync_homepage(root / "index.html")

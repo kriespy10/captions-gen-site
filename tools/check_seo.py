@@ -74,6 +74,7 @@ def check():
     urls = [node.text for node in sitemap.findall("s:url/s:loc", ns)]
     expect(len(urls) == len(set(urls)), "Sitemap has duplicate URLs")
     expect(f"{SITE}/product.html" in urls, "Product facts missing from sitemap")
+    expect(f"{SITE}/after-effects.html" in urls, "After Effects product page missing from sitemap")
     robots = RobotFileParser()
     robots.parse((ROOT / "robots.txt").read_text(encoding="utf-8").splitlines())
     bots = ("OAI-SearchBot", "ChatGPT-User", "Claude-SearchBot", "Claude-User",
@@ -125,7 +126,7 @@ def check():
                        f"Broken internal anchor from {url}: {href}")
 
     product_schemas = []
-    for url in (SITE + "/", SITE + "/product.html"):
+    for url in (SITE + "/", SITE + "/product.html", SITE + "/after-effects.html"):
         if url not in pages:
             errors.append(f"Missing essential page: {url}")
             continue
@@ -135,8 +136,8 @@ def check():
             product_schemas.append(product[0])
             expect(product[0].get("@id") == SITE + "/#software", f"Unstable product ID: {url}")
             expect(str(product[0].get("offers", {}).get("price")) == "0", f"Wrong free offer: {url}")
-    expect(len(product_schemas) == 2 and product_schemas[0] == product_schemas[1],
-           "Homepage and product facts schema disagree")
+    expect(len(product_schemas) == 3 and all(schema == product_schemas[0] for schema in product_schemas),
+           "Product pages disagree about the same released software")
     expect(all(schema == software_schema() for schema in product_schemas),
            "Published software schema differs from the maintained product source")
     manifest = json.loads((ROOT / "update/version.json").read_text(encoding="utf-8"))
@@ -144,10 +145,25 @@ def check():
            "Product facts version differs from the public update manifest")
     llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
     expect(SITE + "/product.html" in llms, "llms.txt missing product reference")
+    expect(SITE + "/after-effects.html" in llms, "Text directory missing After Effects product page")
     homepage = pages.get(SITE + "/")
     expect(homepage is not None and any(urljoin(SITE + "/", href) == SITE + "/product.html"
                                        for href in homepage.links),
            "Product reference must be reachable from homepage")
+    ae_page = pages.get(SITE + "/after-effects.html")
+    ae_guides = ("how-to-add-captions-in-after-effects", "edit-captions-in-after-effects",
+                 "after-effects-captions-not-showing", "word-by-word-captions-after-effects")
+    for path in ("/after-effects.html", *(f"/blog/{slug}.html" for slug in ae_guides)):
+        expect(homepage is not None and any(urlsplit(urljoin(SITE + "/", href)).path == path
+                                           for href in homepage.links),
+               f"After Effects page must be one link from homepage: {path}")
+    if ae_page:
+        for slug in ae_guides:
+            expect(any(urlsplit(urljoin(SITE + "/after-effects.html", href)).path == f"/blog/{slug}.html"
+                       for href in ae_page.links), f"After Effects product page missing task guide: {slug}")
+        text = " ".join(" ".join(ae_page.text).split())
+        expect(PRODUCT["after_effects_compatibility"] in text,
+               "After Effects landing must state the reviewed, limited test configuration")
     if errors:
         raise SystemExit("SEO checks failed:\n- " + "\n- ".join(errors))
     print(f"SEO checks passed: {len(pages)} canonical pages; {len(bots)} crawler policies; "

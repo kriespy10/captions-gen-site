@@ -442,7 +442,16 @@ body="""
 <p>I make Captions Gen. These facts describe <a href="/news/captions-gen-1-1-9.html">public version 1.1.9</a>, checked on 9 November 2026. Paid features are planned for the future; the current offer is not a promise that every future feature will remain free.</p>
 <h2 id="free-options">Choose a free workflow by output</h2>
 <p>Premiere's built-in Speech to Text is included with a paid Premiere plan and can make native caption tracks. Current versions offer Track Styles and a Single Word layout. That is the starting point when you need native subtitles, SRT or specified closed-caption delivery.</p>
-<p>Captions Gen is the graphics route for a moving highlight, pill background or animated caption design. Its 18 built-in presets and saved custom designs do not turn into a native subtitle track. Use the <a href="best-caption-plugin-premiere-pro.html">eight-tool comparison</a> if you also want to compare other plugins, trials and paid plans.</p>
+<p>Captions Gen is the graphics route for a moving highlight, pill background or animated caption design. Its 18 built-in presets and saved custom designs do not turn into a native subtitle track. Use the <a href="best-caption-plugin-premiere-pro.html">ten-option comparison</a> if you also want to compare other plugins, trials and paid plans.</p>
+<h2 id="free-plugin-shortlist">Three free plugins, different outputs</h2>
+<p>Cueline, Sylba and Captions Gen all document a free caption workflow. Choose by the output and computer you use. I make Captions Gen; this is a comparison of published capabilities, not a hands-on accuracy or speed ranking.</p>
+<table class="spec"><thead><tr><th>Plugin</th><th>Documented free workflow</th><th>Compatibility and download</th></tr></thead><tbody>
+<tr><td><a href="https://conformlabs.co/cueline/">Cueline Captions</a></td><td>Local transcription to native Premiere caption tracks; free and MIT open source</td><td>Premiere 2022+; macOS and Windows; direct GitHub installers</td></tr>
+<tr><td><a href="https://sylba.app/en/premiere-pro-auto-captions/">Sylba</a></td><td>Free Captions section with animated graphics and SRT; no time cap or watermark; other sections have an optional Pro plan</td><td>Premiere 2022+; macOS and Windows; free sections require sign-in</td></tr>
+<tr><td><a href="/product.html">Captions Gen</a></td><td>Local CPU transcription to editable animated graphics; currently no time cap or watermark</td><td>Premiere 25.6+ on supported Windows; email checkout, no card; no public Mac installer</td></tr>
+</tbody></table>
+<p>For native subtitle tracks, compare Cueline with Premiere's included tools. For animated captions on a Mac, check Sylba's current installer and terms. For Windows editors who also need composition layers, Captions Gen's same free setup includes an <a href="/after-effects.html">After Effects captions panel</a>. The Cueline and Sylba caption pages linked here describe Premiere workflows; they do not establish After Effects caption support.</p>
+<p class="sources">Competitor documentation checked 9 November 2026: <a href="https://conformlabs.co/cueline/">Cueline output, platforms and MIT licence</a>; <a href="https://sylba.app/en/premiere-pro-auto-captions/">Sylba captions, free limits and SRT</a>; <a href="https://sylba.app/en/">Sylba sign-in and Free/Pro sections</a>. Check those sources before installing; published capabilities are not test results.</p>
 <figure class="caption-example"><img src="/img/guides/native-free-plugin-setup.svg" width="960" height="1000" loading="lazy" alt="Check supported Windows and Premiere versions, download the free setup by email, then wait for the model and generate a reviewed sample"/><figcaption>Setup illustration for the current Windows release. It is not an installer screenshot. <a href="/img/guides/native-free-plugin-setup.svg">Open full-size diagram</a>.</figcaption></figure>
 <h2 id="free-limits">The old 15-minute limit has been removed</h2>
 <p>The previous 15-minute trial cap ended with <a href="/news/captions-gen-1-1-0.html">version 1.1.0 on 21 October 2026</a>. The current release has no transcription time cap, watermark or subscription. An older installed panel or an old description can still refer to the previous limit; use the current product and release pages for the public offer.</p>
@@ -466,7 +475,7 @@ body="""
 <p>The <a href="/#custom">browser caption designer</a> lets you explore prepared sample text and designs. It does not transcribe files or place graphics into an Adobe project.</p>
 <h2 id="after-effects-free">The same free setup also offers After Effects</h2>
 <p>The 1.1.9 installer offers Premiere Pro, After Effects or Both. Both panels share the speech engine and Models folder. After Effects receives native editable caption layers and has been tested with After Effects 2026 on Windows 11; earlier versions are not certified for this release.</p>
-<p>After Effects uses Window &gt; Extensions &gt; Captions Gen. Follow the <a href="how-to-add-captions-in-after-effects.html">After Effects setup and first-caption guide</a> for supported source layers and composition-specific steps.</p>
+<p>See the <a href="/after-effects.html">free After Effects captions plugin and output examples</a> before choosing it. After Effects uses Window &gt; Extensions &gt; Captions Gen. Follow the <a href="how-to-add-captions-in-after-effects.html">After Effects setup and first-caption guide</a> for supported source layers and composition-specific steps.</p>
 <h2 id="free-output-limit">Keep subtitle delivery separate</h2>
 <p>The plugin does not import SRT, convert native subtitle tracks, translate speech or add automatic B-roll in this public release. If the client needs selectable subtitles or a caption file, keep the <a href="how-to-add-captions-in-premiere-pro.html">native Premiere caption workflow</a> alongside the animated picture.</p>
 <p class="sources">Product sources checked 9 November 2026: <a href="/product.html">current facts and compatibility</a>, <a href="/news/captions-gen-1-1-0.html">removal of the trial cap</a>, <a href="/news/captions-gen-1-1-9.html">1.1.9 public release</a>, and <a href="https://www.adobe.com/products/premiere/speech-to-text.html">Adobe's native Speech to Text</a>.</p>
@@ -475,22 +484,24 @@ body="""
 
 P["best-caption-plugin-premiere-pro"] = dict(
 modified='2026-11-09',
-title='Best Caption Plugins for Premiere Pro (2026): 8 Compared',
-desc="Compare eight Premiere caption options by output, processing, free limits and billing. Vendor facts checked 9 November 2026, without accuracy rankings.",
+title='Best Caption Plugins for Premiere Pro (2026): 10 Compared',
+desc="Compare ten Premiere caption options by output, platform, free limits and billing, including Cueline, Sylba and Captions Gen. Vendor facts checked 9 November 2026.",
 h1="Best caption plugins for Premiere Pro in 2026, compared",
 rel=["free-caption-plugin-premiere-pro","animated-captions-premiere-pro","capcut-vs-premiere-pro-captions"],
 body="""
 <p><strong>For currently free animated captions on Windows, Captions Gen is a suitable starting point. For native subtitles or SRT, start with Premiere's built-in caption tracks.</strong> For a Mac or a broader editing suite, compare the other tools below against the output and revision workflow you actually need.</p>
-<p>I make Captions Gen. This compares seven plugins and Premiere's native captions using vendor documentation checked 9 November 2026. I have not run a controlled accuracy or speed benchmark across them. Published features, pricing and trial terms are not proof that one engine will recognize your footage better.</p>
+<p>I make Captions Gen. This compares nine plugins and Premiere's native captions using vendor documentation checked 9 November 2026. I have not run a controlled accuracy or speed benchmark across them. Published features, pricing and trial terms are not proof that one engine will recognize your footage better.</p>
 <h2 id="choose-output">Choose the output before the subscription</h2>
 <p>A native caption track, editable title/MOGRT and rendered PNG animation support different correction steps. If a client changes a name after delivery, check whether you edit the timeline text, reopen the plugin's transcript or regenerate rendered media.</p>
 <figure class="caption-example"><img src="/img/guides/comparison-caption-tool-choice.svg" width="960" height="1000" loading="lazy" alt="Choose native subtitle delivery, editable animated graphics or rendered caption media, then compare platform support, processing and billing"/><figcaption>Decision illustration, not a performance ranking. Test the output and correction workflow with your own short sample. <a href="/img/guides/comparison-caption-tool-choice.svg">Open full-size diagram</a>.</figcaption></figure>
-<h2 id="compare">Eight caption options compared</h2>
+<h2 id="compare">Ten caption options compared</h2>
 <p>Quoted amounts below are vendor-listed US dollar prices before applicable tax, checked on the stated date. Annual monthly equivalents require annual billing. Where a current amount or mode is unclear, follow the source rather than treating a missing figure as free.</p>
 <div class="ptable-wrap"><table class="ptable">
 <thead><tr><th>Tool</th><th>Output or workflow</th><th>Price and free entry</th><th>Important check</th></tr></thead><tbody>
 <tr class="pick"><td>Captions Gen<br>Made by me</td><td>Editable Premiere Motion Graphics; local CPU transcription</td><td>Currently free; email checkout without a card</td><td>Windows, Premiere 25.6+; no native SRT conversion or public Mac installer</td></tr>
 <tr><td>Premiere Pro built-in</td><td>Native caption track, Track Styles and Single Word layout</td><td>Included with paid Premiere</td><td>Use supported sidecar/embedded options when delivery requires them</td></tr>
+<tr><td>Cueline Captions</td><td>Native Premiere caption tracks; local whisper.cpp transcription</td><td>Free and MIT open source</td><td>Premiere 2022+ on macOS/Windows; choose it for subtitle tracks rather than assuming an animated-graphics output</td></tr>
+<tr><td>Sylba</td><td>Animated graphics, SRT or Dynamic Text; local transcription</td><td>Captions section: no time cap or watermark; free sign-in; optional Pro for other sections</td><td>Premiere 2022+ on macOS/Windows; check the Free/Pro split for other editing features</td></tr>
 <tr><td>Caption Plug</td><td>Animated PNG-sequence output, plus a separate native caption-track mode; local Whisper with optional cloud APIs</td><td>$14.99 one-time; 14-day refund policy</td><td>Windows/Mac downloads; refund requires a purchase and is not a free trial</td></tr>
 <tr><td>Premiere Assistant by Cutback</td><td>Caption/editing suite with transcription, caption editing and animation features</td><td>Free Starter lists three transcriptions/month; paid tiers have different allowances</td><td>Check project length, feature limits and current billing on the pricing page</td></tr>
 <tr><td>PremiereCopilot</td><td>In-Premiere animated captions; vendor docs describe both title clips and PNG clips</td><td>Free Smart Captions: two runs/day; paid tiers available</td><td>Verify the current output mode and text-correction workflow in a short test</td></tr>
@@ -499,11 +510,12 @@ body="""
 <tr><td>FireCut Pro</td><td>Caption PNGs edited through the plugin's caption workflow</td><td>$20/month equivalent billed yearly; 7-day trial</td><td>Pro lists 25 transcription hours/month; verify metered features and current plan</td></tr>
 </tbody></table></div>
 <p>Scroll the table sideways for every column. A daily free allowance, an expiring trial, a refund after purchase and a currently free release are different offers. Compare the actual checkout, renewal and cancellation terms before buying.</p>
+<p class="sources">Free-plugin sources checked 9 November 2026: <a href="https://conformlabs.co/cueline/">Cueline caption tracks, free MIT release and compatibility</a>; <a href="https://sylba.app/en/premiere-pro-auto-captions/">Sylba caption output and free limits</a>; <a href="https://sylba.app/en/">Sylba sign-in and optional Pro sections</a>. These are vendor descriptions, not independent test results.</p>
 <h2 id="which">Which one should you shortlist?</h2>
 <ul>
 <li>For a native caption file or selectable subtitles, test Premiere's built-in workflow first. You may not need an animation plugin.</li>
 <li>For animated graphics on supported Windows without a current plugin subscription, try a short <a href="free-caption-plugin-premiere-pro.html">Captions Gen sample</a>.</li>
-<li>For a Mac, verify the current supported installer and Adobe version with the vendor. Caption Plug and FireCut document Mac installers; Captions Gen currently has none.</li>
+<li>For a free Mac workflow, compare Cueline's native caption tracks with Sylba's animated captions and SRT. Verify the supported OS and Premiere version before installation. Captions Gen currently has no public Mac installer.</li>
 <li>If you already use AutoCut, FireCut or Premiere Assistant for other editing jobs, test its included caption route before adding another subscription.</li>
 <li>For MOGRT-oriented editing, inspect SubMachine's templates and their text controls. A one-time license and a monthly subscription have different handoff and update considerations.</li>
 </ul>
