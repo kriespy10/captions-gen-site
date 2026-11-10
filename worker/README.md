@@ -30,7 +30,7 @@ New reports can take up to a minute to show in that list (KV is eventually consi
 totals: first engine boot, engine running that day). No IP addresses are stored; every key expires after ~13 months.
 
 Open https://api.captionsgen.com/funnel and paste the admin token once (it stays in that browser)
-to see installs, opted-in installs per step, and who placed captions without buying.
+to see the new-user growth chart and daily/monthly active users. Download counts and email CSV export stay below; anonymous boot signals and the old sales funnel are in **Detailed plugin stats**.
 The same numbers as JSON: `curl -H "Authorization: Bearer <ADMIN_TOKEN>" https://api.captionsgen.com/api/funnel`.
 
 ## Direct installer download counts
@@ -63,3 +63,30 @@ so mail scanners that open links can't unsubscribe anyone. Changing `ADMIN_TOKEN
 so set `SUBSCRIBE_SECRET` first if you ever rotate it.
 
 Tests: `node --test worker/worker.test.mjs`.
+
+## Audience growth and activity history
+
+The main dashboard chart uses retained opted-in device records, never anonymous boot pings.
+**New users** bins each record's `firstSeen` once by UTC date and compares the last 7 or 30 days
+with the immediately preceding period. These are measured devices that allowed stats, not
+verified people or all users. Normal reinstalls retain the saved ID; clearing app data, using
+a different Windows account, or opting out and back in can create a new ID. Opting out deletes
+that ID's record and its history.
+
+Qualified `panel_open`, `transcribe` and `captions_placed` events now record a set of UTC
+`activityDays` on the same `u:` record, deduplicating multiple events that day. The first
+qualified event stores `meta:activity-history-since` as an ISO timestamp. Its first partial day
+cannot establish full-period coverage. Known first qualified-event dates can supply positive
+observations, but no other historical activity is invented. Days before collection appear as
+gaps in the activity chart, and previous-period comparisons say **Building activity history**
+until a complete prior window exists.
+
+Until a full current window is covered, active-user totals include the existing `lastSeen`
+proxy and explicitly say **Estimated from last activity**. Once covered, the totals use only
+qualified daily activity. Daily active users count each saved ID once today; monthly active
+users count each ID once over the last 30 UTC dates, including partial today. A zero prior
+baseline shows **First recorded activity**, without an infinite or invented percentage.
+The chart includes a daily-data table for text and keyboard access.
+
+Run `node --test worker/growth-chart.test.mjs worker/worker.test.mjs` for date-boundary,
+coverage, activity deduplication, privacy, rendering and existing backend checks.
