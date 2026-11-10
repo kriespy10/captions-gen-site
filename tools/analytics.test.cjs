@@ -251,3 +251,28 @@ test('direct installer clicks respect consent and exact asset identity without a
   page.link(installer, { type: 'auxclick', button: 1 });
   assert.equal(page.commands().filter(args => args[0] === 'event').length, 1);
 });
+
+
+test('tracked download endpoint keeps native navigation and reports no query data', () => {
+  const endpoint = 'https://api.captionsgen.com/api/download/windows';
+  for (const choice of [undefined, 'denied', 'granted']) {
+    const page = browser({ choice });
+    const url = endpoint + '?email=private@example.com&token=secret';
+    const click = page.link(url);
+    assert.equal(click.prevented, false);
+    assert.equal(click.target.href, url);
+    const events = page.commands().filter(args => args[0] === 'event');
+    assert.equal(events.length, choice === 'granted' ? 1 : 0);
+    if (choice === 'granted') {
+      assert.equal(events[0][1], 'download_click');
+      assert.equal(events[0][2].file_name, 'CaptionsGen-Setup.exe');
+      assert.equal(events[0][2].version, undefined, 'unversioned endpoint does not invent a file version');
+      assert.doesNotMatch(JSON.stringify(events), /private|secret|token|email/);
+    }
+  }
+  const page = browser({ choice: 'granted' });
+  for (const url of [endpoint.replace('api.captionsgen.com', 'api.captionsgen.com.evil.test'), endpoint.replace('https:', 'http:'), endpoint + '/extra', endpoint.replace('.com/', '.com:8443/')]) page.link(url);
+  assert.equal(page.commands().filter(args => args[0] === 'event').length, 0);
+  page.link(endpoint, { type: 'auxclick', button: 1 });
+  assert.equal(page.commands().filter(args => args[0] === 'event').length, 1);
+});

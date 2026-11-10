@@ -6,7 +6,8 @@
 //   GET    /funnel          the funnel page itself (asks for the admin token, keeps it in the browser),
 //                           plus the email sign-up count and a CSV export (subscribe.js)
 // No IP address, file name, transcript or project data is stored. Every key expires after ~13 months.
-import { audienceSummary, growthSeries, growthMarkup, GROWTH_STYLES } from "./growth-chart.mjs";
+import { audienceSummary, growthSeries, growthMarkup, measurementSeries, measurementCards, GROWTH_STYLES } from "./growth-chart.mjs";
+import { usageRevoked, revokedUsageIds, beginUsageWrite, endUsageWrite } from "./measurements.mjs";
 
 const TTL = 400 * 86400;
 const ACTIVITY_EVENTS = ["panel_open", "transcribe", "captions_placed"];
@@ -25,8 +26,10 @@ const json = (body, status = 200) =>
 export async function usage(request, env, url) {
   const del = url.pathname.match(/^\/api\/usage\/([0-9a-f-]{36})$/);
   if (del && request.method === "DELETE") {
-    await env.REPORTS.delete(`u:${del[1]}`);
-    return json({ ok: true });
+    try {
+      await env.REPORTS.delete(`u:${del[1]}`);
+      return json({ ok: true });
+    } catch { return json({ ok:false,error:"Could not remove usage history. Retry deletion." },503); }
   }
   if (url.pathname === "/api/usage" && request.method === "POST") return record(request, env);
   if (url.pathname === "/api/ping" && request.method === "POST") return ping(request, env);
@@ -44,8 +47,15 @@ async function body(request) {
 
 async function record(request, env) {
   const r = await body(request);
-  if (!r || !ID.test(r.id) || !EVENTS.includes(r.event)) return json({ ok: false, error: "invalid" }, 400);
+  if (!r || typeof r.id !== "string" || !ID.test(r.id) || !EVENTS.includes(r.event)) return json({ ok: false, error: "invalid" }, 400);
+  let writeLease;
+  try {
   const key = `u:${r.id}`;
+  writeLease=await beginUsageWrite(env,r.id);
+  if (writeLease.revoked) {
+    await env.REPORTS.delete(key);
+    return json({ ok:false,error:"usage consent was revoked" },403);
+  }
   const now = new Date().toISOString();
   const u = JSON.parse((await env.REPORTS.get(key)) || "null") || { firstSeen: now, first: {}, days: {} };
   // The panel sends each event at most once a day, so `days` reads as "days it happened".
@@ -73,7 +83,19 @@ async function record(request, env) {
   u.os = short(r.os, 16);
   u.licensed = !!r.licensed || !!u.first.licensed;
   await env.REPORTS.put(key, JSON.stringify(u), { expirationTtl: TTL });
+  // A DELETE can commit while this request is waiting for KV. Re-check D1's
+  // primary after the put and remove any late KV write before acknowledging it.
+  if (await usageRevoked(env,r.id)) {
+    await env.REPORTS.delete(key);
+    return json({ ok:false,error:"usage consent was revoked" },403);
+  }
   return json({ ok: true });
+  } catch { return json({ ok:false,error:"usage storage unavailable" },503); }
+  finally {
+    // A crashed writer's coordination record expires after fifteen minutes;
+    // an active writer releases it only after its final revocation/cleanup check.
+    try { await endUsageWrite(env,writeLease); } catch { /* Deletion remains retryable until the lease expires. */ }
+  }
 }
 
 async function ping(request, env) {
@@ -103,7 +125,10 @@ export async function summarize(env, today = new Date()) {
     (daily[day] ||= {})[event] = Number((await env.REPORTS.get(name)) || 0);
   }
   const users = [];
-  for (const name of await listAll(env, "u:")) {
+  const names = await listAll(env,"u:");
+  const revoked = await revokedUsageIds(env,names.map(name => name.slice(2)),today);
+  for (const name of names) {
+    if (revoked.has(name.slice(2))) continue;
     const u = JSON.parse((await env.REPORTS.get(name)) || "null");
     if (u) users.push(u);
   }
@@ -142,29 +167,44 @@ main{max-width:760px;margin:auto;padding:24px 16px}h1{font-size:24px;margin:0 0 
 h2{font-size:16px;margin:28px 0 8px}.lbl{color:#d4d4d8}input,button{font:inherit;padding:8px 10px;border-radius:6px;border:1px solid #3f3f46;background:#18181b;color:inherit}
 button{background:#3b82f6;border:0;cursor:pointer}#err{color:#f87171}small{color:#71717a}
 ${GROWTH_STYLES}
-</style><main><h1>Captions Gen audience</h1><p>Recorded installs, with optional usage stats shown separately.</p>
+</style><main><h1>Captions Gen audience</h1><p>Downloads, install registrations and opt-in activity.</p>
 <form id="f" hidden><input id="t" type="password" placeholder="Admin token" size="30"> <button>Show</button></form>
 <div id="err"></div>
 <section id="growth" class="growth-card" aria-labelledby="growth-title" hidden>
-  <div class="growth-top"><div><p class="growth-eyebrow">CAPTIONS GEN / GROWTH</p><h2 id="growth-title">Your work is reaching editors.</h2></div><span class="growth-live"><i aria-hidden="true"></i>Updated on refresh</span></div>
-  <div class="growth-controls"><label><span class="growth-sr">Metric</span><select id="growth-metric"><option value="installs">New installs</option><option value="active">Active users (stats)</option></select></label><label class="growth-period"><span class="growth-sr">Period</span><select id="growth-period"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option></select></label></div>
+  <div class="growth-top"><div><p class="growth-eyebrow">CAPTIONS GEN / GROWTH</p><h2 id="growth-title">From downloads to active use.</h2></div><span class="growth-live"><i aria-hidden="true"></i>Updated on refresh</span></div>
+  <div class="growth-controls"><label><span class="growth-sr">Metric</span><select id="growth-metric"><option value="downloadRequests">Download requests</option><option value="uniqueInstalls">Install registrations</option><option value="sessionCount">Sessions (opt-in)</option></select></label><label class="growth-period"><span class="growth-sr">Period</span><select id="growth-period"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option></select></label></div>
   <div id="growth-body"></div>
-  <p class="growth-coverage">Recorded first app starts; normal reinstalls keep the count flag. Clearing app data or retries can count again; disabling stats can miss starts. Active users show only the stats sample, not your total audience. Dates UTC.</p>
+  <p class="growth-coverage">Downloads are requests; browser figures are estimates. New installations are counted once while saved app data remains. Sessions and active users are opt-in stats. Earlier measurements are not reconstructed. Dates UTC.</p>
 </section>
-<div id="active-users" class="growth-active" hidden></div>
-<section id="downloads" aria-live="polite"></section><div id="out"></div><div id="subs"></div></main>
+<div id="measurement-cards" class="measurement-cards" aria-live="polite"></div>
+<p id="measurement-method" class="measurement-method" hidden>Calendar-month totals are counted separately, not summed from daily unique counts. Today and this month are partial. A download request, an install registration and an active user measure different steps.</p>
+<details id="legacy-measurements" class="legacy-measurements" hidden><summary>Legacy measurements</summary>
+<section class="growth-card" aria-labelledby="legacy-title"><div class="growth-top"><div><p class="growth-eyebrow">HISTORICAL SIGNALS</p><h2 id="legacy-title">Legacy first-start signals</h2></div></div><div class="growth-controls"><label class="growth-period"><span class="growth-sr">Legacy period</span><select id="legacy-period"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option></select></label></div><div id="legacy-growth-body"></div></section>
+<div id="active-users" class="growth-active" hidden></div><section id="downloads" aria-live="polite"></section><div id="out"></div></details>
+<div id="subs"></div></main>
 <script>
 // Wrangler preserves function names with this helper inside serialized functions.
 // The browser only needs the function value, not the Worker debugging metadata.
 function __name(target){return target;}
 ${growthSeries.toString()}
 ${growthMarkup.toString()}
+${measurementSeries.toString()}
+${measurementCards.toString()}
 let audience=null;
+let measurements=null;
 function renderGrowth(){
-  if(!audience)return;
+  if(!measurements)return;
   const metric=document.getElementById("growth-metric").value;
   const period=Number(document.getElementById("growth-period").value);
-  document.getElementById("growth-body").innerHTML=growthMarkup(growthSeries(audience,metric,period));
+  document.getElementById("growth-body").innerHTML=growthMarkup(measurementSeries(measurements,metric,period));
+}
+function renderLegacyGrowth(){
+  if(!audience)return;
+  const model=growthSeries(audience,"installs",Number(document.getElementById("legacy-period").value));
+  model.name="legacy first-start signals";model.unit="Signals";model.measureLabel="Historical anonymous engine signals";
+  model.title="Legacy first-start signals by day";model.chartId="legacy-chart";
+  model.coverageMessage="Historical first-start signals can repeat after app data is reset or acknowledgements fail. These are not unique install registrations.";
+  document.getElementById("legacy-growth-body").innerHTML=growthMarkup(model);
 }
 const L={consent:"Said yes to stats",panel_open:"Opened the panel",transcribe:"Transcribed",captions_placed:"Placed captions",buy_click:"Clicked Buy",licensed:"Licensed"};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -175,10 +215,9 @@ async function load(tok){
   try{localStorage.setItem("tok",tok)}catch{}
   f.hidden=true;const d=await r.json();
   audience=d.audience;
-  document.getElementById("growth").hidden=false;
-  renderGrowth();
-  document.getElementById("growth-metric").onchange=renderGrowth;
-  document.getElementById("growth-period").onchange=renderGrowth;
+  document.getElementById("legacy-measurements").hidden=false;
+  renderLegacyGrowth();
+  document.getElementById("legacy-period").onchange=renderLegacyGrowth;
   const activeBox=document.getElementById("active-users");
   activeBox.hidden=false;
   function comparison(current,previous,period){
@@ -187,8 +226,8 @@ async function load(tok){
     const percent=Math.round((current-previous)/previous*100);
     return (percent>0?"+":"")+percent+"% "+period;
   }
-  activeBox.innerHTML='<section class="growth-stat"><h3>Active today (stats sample)</h3><strong>'+audience.activeToday.toLocaleString("en-US")+'</strong><p>'+(audience.activeTodayEstimated?'Estimated from last activity. ':'')+'Today is partial · UTC</p><p class="growth-stat-change">'+esc(comparison(audience.activeToday,audience.activeYesterday,"vs. yesterday"))+'</p></section>'+
-    '<section class="growth-stat"><h3>Monthly active (stats sample)</h3><strong>'+audience.active30.toLocaleString("en-US")+'</strong><p>Last 30 days'+(audience.active30Complete?'':' · estimated from last activity')+'</p><p class="growth-stat-change">'+esc(comparison(audience.active30,audience.previousActive30,"vs. previous 30 days"))+'</p></section>';
+  activeBox.innerHTML='<section class="growth-stat"><h3>Legacy active-today estimate</h3><strong>'+audience.activeToday.toLocaleString("en-US")+'</strong><p>'+(audience.activeTodayEstimated?'Estimated from last activity. ':'')+'Today is partial · UTC</p><p class="growth-stat-change">'+esc(comparison(audience.activeToday,audience.activeYesterday,"vs. yesterday"))+'</p></section>'+
+    '<section class="growth-stat"><h3>Legacy monthly estimate</h3><strong>'+audience.active30.toLocaleString("en-US")+'</strong><p>Last 30 days'+(audience.active30Complete?'':' · estimated from last activity')+'</p><p class="growth-stat-change">'+esc(comparison(audience.active30,audience.previousActive30,"vs. previous 30 days"))+'</p></section>';
   const p=d.pings;let h="<details><summary>Detailed plugin stats</summary><h2>Anonymous boot signals</h2><p>These signals are not unique users and can repeat after app data is reset.</p>"+bars([["First engine boots",p.install],["Engine running (install-days)",p.engine_start]],Math.max(p.install,p.engine_start,1));
   h+="<h2>Opted-in installs ("+d.optedIn+")</h2>"+bars(d.steps.map(s=>[L[s.event]||s.event,s.installs]),d.optedIn);
   h+="<h2>Engagement</h2>"+bars([["Used on 2+ days",d.returning],["Active last 7 days",d.active7],["Active last 30 days",d.active30],["Placed captions, not bought",d.usedNotBought]],d.optedIn||1);
@@ -197,22 +236,42 @@ async function load(tok){
   h+="<h2>Last 14 days</h2>"+days.map(k=>'<div><small>'+k+'</small> first engine boots '+(p.daily[k].install||0)+', engines running '+(p.daily[k].engine_start||0)+'</div>').join("");
   h+="</details>";
   document.getElementById("out").innerHTML=h;
+  loadMeasurements(tok);
   loadDownloads(tok);
   loadSubs(tok);
 }
+async function loadMeasurements(tok){
+  const box=document.getElementById("measurement-cards");
+  box.innerHTML='<p class="measurement-method">Loading measurements…</p>';
+  try{
+    const response=await fetch("/api/measurements",{headers:{authorization:"Bearer "+tok}});
+    if(!response.ok)throw new Error("unavailable");
+    const payload=await response.json();
+    if(!payload.ok||!payload.coverage||!Array.isArray(payload.daily)||!Array.isArray(payload.monthly))throw new Error("unavailable");
+    measurements=payload;
+    box.innerHTML=measurementCards(payload);
+    document.getElementById("growth").hidden=false;
+    document.getElementById("measurement-method").hidden=false;
+    renderGrowth();
+    document.getElementById("growth-metric").onchange=renderGrowth;
+    document.getElementById("growth-period").onchange=renderGrowth;
+  }catch{
+    box.innerHTML='<p class="measurement-error">Measurements are temporarily unavailable. No zero counts have been substituted. Try refreshing later.</p>';
+  }
+}
 async function loadDownloads(tok){
   const box=document.getElementById("downloads");
-  box.innerHTML="<h2>Installer downloads</h2><p>Loading download counts…</p>";
+  box.innerHTML="<h2>GitHub asset requests</h2><p>Loading download counts…</p>";
   try{
     const r=await fetch("/api/downloads",{headers:{authorization:"Bearer "+tok}});
     if(!r.ok)throw new Error("unavailable");
     const d=await r.json();
     if(!d.ok)throw new Error("unavailable");
-    box.innerHTML="<h2>Installer downloads ("+d.total+")</h2>"+
+    box.innerHTML="<h2>GitHub asset requests ("+d.total+")</h2>"+
       bars(d.files.map(file=>["Windows setup "+file.version,file.downloads]),Math.max(d.total,1))+
       '<p>GitHub release download requests, including repeats. These are not unique people, completed transfers or installs. Earlier Lemon Squeezy downloads are not included. Counts may take a few minutes to refresh. <a href="https://github.com/kriespy10/captions-gen-site/releases" target="_blank" rel="noopener">View releases</a>.</p>';
   }catch{
-    box.innerHTML="<h2>Installer downloads</h2><p>Download counts are temporarily unavailable. Try refreshing later.</p>";
+    box.innerHTML="<h2>GitHub asset requests</h2><p>Download counts are temporarily unavailable. Try refreshing later.</p>";
   }
 }
 async function loadSubs(tok){

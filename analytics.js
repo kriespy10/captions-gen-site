@@ -152,15 +152,17 @@
       catch (error) { return; }
       if (link.protocol !== 'https:') return;
       var installer = link.hostname === 'github.com' && link.pathname.match(/^\/kriespy10\/captions-gen-site\/releases\/download\/v(\d+\.\d+\.\d+)\/CaptionsGen-Setup-\1\.exe$/);
-      if (installer) {
-        window.gtag('event', 'download_click', {
+      var directInstaller = link.origin === 'https://api.captionsgen.com' && link.pathname === '/api/download/windows';
+      if (directInstaller || installer) {
+        var downloadEvent = {
           send_to: measurementId,
           page_path: window.location.pathname,
           link_placement: (target.closest('[id]') || {}).id || 'guide',
-          file_name: 'CaptionsGen-Setup-' + installer[1] + '.exe',
-          version: installer[1],
+          file_name: installer ? 'CaptionsGen-Setup-' + installer[1] + '.exe' : 'CaptionsGen-Setup.exe',
           transport_type: 'beacon'
-        });
+        };
+        if (installer) downloadEvent.version = installer[1];
+        window.gtag('event', 'download_click', downloadEvent);
         return;
       }
       if (link.hostname !== 'captionsgen.lemonsqueezy.com') return;

@@ -9,6 +9,7 @@
 import { usage } from "./usage.js";
 import { subscribe } from "./subscribe.js";
 import { downloads } from "./downloads.js";
+import { measurements } from "./measurements.mjs";
 
 const MAX_BODY = 40000;
 const KINDS = ["bug", "feature"];
@@ -55,6 +56,8 @@ export default {
     }
     if (url.pathname === "/api/report" && request.method === "POST") return submit(request, env);
     if (url.pathname === "/api/reports" && request.method === "GET") return list(request, env);
+    const measured = await measurements(request, env, url);
+    if (measured) return measured;
     const stats = await usage(request, env, url);
     if (stats) return stats;
     const emails = await subscribe(request, env, url);

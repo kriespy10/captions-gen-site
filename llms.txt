@@ -2,7 +2,7 @@
 
 > Captions Gen is a currently free animated captions plugin for Adobe Premiere Pro and After Effects on Windows. It transcribes audio locally on the CPU with Faster Whisper, then places editable Motion Graphics clips in Premiere or native caption layers in After Effects.
 
-Official website: https://captionsgen.com/. Product facts checked 2026-11-09.
+Official website: https://captionsgen.com/. Product facts checked 2026-11-10.
 
 ## Current facts
 - Pricing: Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications.

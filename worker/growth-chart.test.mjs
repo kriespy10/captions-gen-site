@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { audienceSummary, growthSeries, growthMarkup } from './growth-chart.mjs';
+import { audienceSummary, growthSeries, growthMarkup, measurementSeries, measurementCards } from './growth-chart.mjs';
 import worker from './report-worker.js';
 
 const now = new Date('2026-11-10T16:30:00Z');
@@ -182,13 +182,91 @@ test('the rendered dashboard script parses and keeps detailed telemetry secondar
   const response = await worker.fetch(new Request('https://api.captionsgen.com/funnel'), {});
   const html = await response.text();
   assert.doesNotThrow(() => new Function(html.split('<script>')[1].split('</script>')[0]));
-  assert.match(html, /<option value="installs">New installs/);
-  assert.match(html, /Monthly active \(stats sample\)/);
+  assert.match(html, /<option value="downloadRequests">Download requests/);
+  assert.match(html, /Legacy monthly estimate/);
   assert.match(html, /<details><summary>Detailed plugin stats/);
   assert.match(html, /These signals are not unique users/);
-  assert.match(html, /Active today \(stats sample\)/);
-  assert.match(html, /Active users \(stats\)/);
-  assert.match(html, /Active users show only the stats sample, not your total audience/);
-  assert.match(html, /disabling stats can miss starts/);
+  assert.match(html, /Legacy active-today estimate/);
+  assert.match(html, /Sessions \(opt-in\)/);
+  assert.match(html, /Sessions and active users are opt-in stats/);
+  assert.match(html, /Legacy first-start signals/);
   assert.match(html, /function __name\(target\)/, 'preserve the bundled-function name helper');
+});
+
+
+const measurements = (coverage = {}) => ({
+  ok: true, asOf: '2026-11-10T16:30:00Z',
+  coverage: { downloadsSince: '2026-09-01T00:00:00Z', browserDownloadsSince: '2026-09-01T00:00:00Z', installsSince: '2026-09-01T00:00:00Z', sessionsSince: '2026-09-01T00:00:00Z', browserCountingEnabled: true, clientUpdateRequired: false, ...coverage },
+  daily: [
+    { date: '2026-11-09', downloadRequests: 7, uniqueDownloadBrowsers: 3, uniqueInstalls: 2, sessionCount: 4, activeDevices: 2 },
+    { date: '2026-11-10', downloadRequests: 5, uniqueDownloadBrowsers: 3, uniqueInstalls: 1, sessionCount: 6, activeDevices: 2 }
+  ],
+  monthly: [{ month: '2026-11', downloadRequests: 12, uniqueDownloadBrowsers: 4, uniqueInstalls: 3, sessionCount: 10, activeDevices: 3 }]
+});
+
+test('download requests, install receipts and opt-in sessions remain three separate series', () => {
+  const payload = measurements();
+  assert.equal(measurementSeries(payload).total, 12);
+  assert.equal(measurementSeries(payload, 'uniqueInstalls').total, 3);
+  assert.equal(measurementSeries(payload, 'sessionCount').total, 10);
+  assert.throws(() => measurementSeries(payload, 'uniqueDownloadBrowsers'), /Unknown/, 'a monthly browser distinct must never be inferred by summing daily distincts');
+  assert.throws(() => measurementSeries(payload, 'downloadRequests', 31), /7 or 30/);
+});
+
+test('calendar-month browser estimates and active users use monthly distincts, not daily sums', () => {
+  const html = measurementCards(measurements());
+  assert.match(html, /Browser estimate today<\/dt><dd>3<\/dd>/);
+  assert.match(html, /Browser estimate in November<\/dt><dd>4<\/dd>/);
+  assert.doesNotMatch(html, /Browser estimate in November<\/dt><dd>6<\/dd>/);
+  assert.match(html, /Active today<\/dt><dd>2<\/dd>/);
+  assert.match(html, /measurement-number">3<\/strong><p class="measurement-number-label">active users in November/);
+  assert.match(html, /Sessions today<\/dt><dd>6<\/dd>/);
+  assert.match(html, /Sessions in November<\/dt><dd>10<\/dd>/);
+});
+
+test('unreleased client measurements show awaiting update, not developer-event counts or zero', () => {
+  const payload = measurements({ clientUpdateRequired: true });
+  for (const metric of ['uniqueInstalls', 'sessionCount']) {
+    const model = measurementSeries(payload, metric);
+    assert.equal(model.total, null);
+    assert.equal(model.priorTotal, null);
+    assert.equal(model.current.every(point => point.value === null), true);
+    const html = growthMarkup(model);
+    assert.match(html, /Awaiting plugin update/);
+    assert.match(html, /growth-value">—</);
+    assert.doesNotMatch(html, /NaN|Infinity/);
+  }
+  const html = measurementCards(payload);
+  assert.equal((html.match(/Awaiting plugin update/g) || []).length, 2);
+  assert.match(html, /measurement-number">12<\/strong>/, 'download counting remains independent of a plugin update');
+  assert.match(html, /measurement-number">—<\/strong><p class="measurement-number-label">active users/);
+});
+
+test('new measurement history preserves unknown dates and a past partial starting day', () => {
+  const payload = measurements({ downloadsSince: '2026-11-09T12:00:00Z' });
+  const model = measurementSeries(payload, 'downloadRequests', 7);
+  assert.equal(model.current.find(point => point.day === '2026-11-09').value, null);
+  assert.equal(model.current.find(point => point.day === '2026-11-10').value, 5);
+  assert.equal(model.total, 12, 'observed request totals include recorded partial-day requests without inventing earlier events');
+  assert.equal(model.priorTotal, null);
+  assert.equal(model.percent, null);
+  assert.match(growthMarkup(model), /Recorded since 9 Nov 2026/);
+  const absent = measurementSeries(measurements({ downloadsSince: null }));
+  assert.equal(absent.total, null);
+  assert.equal(absent.current.every(point => point.value === null), true);
+  const browsersOff = measurementCards(measurements({ browserCountingEnabled: false }));
+  assert.match(browsersOff, /Browser estimate today<\/dt><dd>—<\/dd>/);
+  assert.match(browsersOff, /browser estimates not enabled/);
+});
+
+
+test('accepted offline records count as observed totals without fabricating full earlier coverage', () => {
+  const payload = measurements({ installsSince: '2026-11-10T12:00:00Z' });
+  const model = measurementSeries(payload, 'uniqueInstalls', 7);
+  assert.equal(model.total, 3, 'both received install registrations remain in the recorded total');
+  const yesterday = model.current.find(point => point.day === '2026-11-09');
+  assert.equal(yesterday.value, null, 'a backdated receipt cannot establish full prior-day coverage');
+  assert.equal(yesterday.observed, 2);
+  assert.equal(model.priorTotal, null);
+  assert.match(growthMarkup(model), /Incomplete \(2 recorded\)/);
 });

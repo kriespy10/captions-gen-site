@@ -1,5 +1,64 @@
 # Report backend (Cloudflare Worker)
 
+## Distribution counts and opted-in sessions
+
+`measurements.mjs` uses the separate EU D1 database **captions-gen-metrics** (`METRICS`).
+The existing `REPORTS` KV binding, reports, subscriber records and routes are retained.
+Apply schema changes with the pinned Wrangler version and `d1 migrations apply METRICS --remote`.
+No production fixtures are needed. Tests use the actual migration and SQL against local SQLite:
+`node --test worker/measurements.test.mjs` (Node 22.18 or newer with `node:sqlite`).
+
+- `GET /api/download/windows` redirects to the released 1.1.9 full Windows Setup. It counts
+  download **requests**, including repeats, without storing IPs, email, query strings or a browser ID.
+  HEAD and speculative prefetch/prerender requests are excluded. Counter/database failure never
+  blocks the redirect. A redirect request does not prove a completed transfer or installation.
+- With `DOWNLOAD_BROWSER_COUNTS="true"`, a first-party, Secure, HttpOnly, SameSite=Lax cookie,
+  `cg_download_counts=YYYY-MM-DD.YYYY-MM`, marks whether that browser already downloaded on the
+  current UTC day and calendar month. It contains only those dates and lasts 35 days. Daily and
+  calendar-month browser estimates are incremented independently; monthly uniques are never a sum
+  of daily uniques. Cleared/blocked cookies, different browsers and concurrent first requests can
+  inflate estimates. These are approximate browsers, not unique people or computers.
+- `GET /api/download-counting` shows the current browser-count preference. Its POST form accepts
+  only `choice=on` or `choice=off`, sets the separate `cg_download_counting` preference for 35 days,
+  and returns to the fixed website privacy section. Off clears the date marker and stops browser
+  estimates while preserving aggregate request counts. This is separate from Google Analytics and
+  the plugin's usage-statistics consent. The feature flag stays **false** until the reviewed
+  privacy text and opt-out control are published.
+- `POST /api/install-registration` accepts only a one-off random `receiptId` UUID and `occurredAt`
+  UTC timestamp for a successful first-install registration. A receipt insert plus SQL trigger
+  increments daily/monthly registration totals atomically once, including retries. It is never
+  joined to a usage ID. Reinstalls are deduplicated by the client's retained local receipt; deleting
+  app data or another Windows account can register again. This measures observed registrations,
+  not every installer execution or unique people.
+- `POST /api/session` accepts `{id,sessionId,startedAt,v,os}` from the new client only after explicit
+  usage opt-in. An existing `u:<id>` record is required. D1 stores only session UUID, opted-in ID,
+  UTC start/date/month and expiry; version and OS are not stored here. Session retries deduplicate
+  atomically. A month counts each opted-in ID once, separately from session totals and DAU.
+- Existing `DELETE /api/usage/<id>` atomically records a SHA-256 hash of the random opted-in ID
+  and deletes its D1 sessions, then removes the KV usage record. The hash suppresses delayed
+  posts for 90 days and is not used for counts or identification. Session inserts check it in
+  the same SQL transaction; legacy KV writes check it both before and after writing and remove
+  a late write. Transient hashed write-coordination records stop deletion being acknowledged
+  while an earlier KV write is still in flight; they are removed when that request finishes,
+  with a fifteen-minute expiry for interrupted requests. Audience summaries exclude revoked records even if KV temporarily returns a
+  stale copy. D1/KV cleanup failure returns 503 so the client retries deletion rather than claim
+  success. Turning off usage does not link or remove independent one-off installation receipts.
+- `GET /api/measurements` requires the existing admin bearer token. It returns `coverage` timestamps,
+  observed `daily` and `monthly` rows, independent request/browser/registration/session/active-ID
+  metrics, and no receipt IDs or opted-in IDs. Unavailable data returns 503, never fabricated zeros.
+
+Receipts expire after 90 days. Events older than 90 days or over five minutes in the future are
+rejected. Daily/session history and aggregate month rows expire no later than 400 days after the
+relevant period begins; the oldest month can therefore disappear before its last daily rows.
+Expired records are pruned on measurement requests. Historical downloads, anonymous boot pings
+and old daily activity events are not backfilled into these metrics.
+
+`MEASUREMENT_CLIENT_RELEASED="false"` intentionally tells the dashboard to show install/session
+metrics as awaiting a plugin update. Set it to true only after the matching client release ships;
+deploying the backend alone does not make existing plugins send the new events. Successful event
+responses are `{ok:true,duplicate:boolean}`; invalid bodies return 400, missing session consent
+403, and unavailable storage 503. No new public client secret or hardware fingerprint is used.
+
 Receives bug reports and feature requests sent from the Captions Gen panel
 (Settings > Report a bug / Request a feature) at `https://api.captionsgen.com/api/report`.
 Deployed 2026-10-18 as the Worker `captions-gen-reports` with a KV namespace `REPORTS`.
@@ -30,7 +89,7 @@ New reports can take up to a minute to show in that list (KV is eventually consi
 totals: first engine boot, engine running that day). No IP addresses are stored; every key expires after ~13 months.
 
 Open https://api.captionsgen.com/funnel and paste the admin token once (it stays in that browser)
-to see the new-install growth chart and daily/monthly active users in the stats sample. Download counts and email CSV export stay below; anonymous boot signals and the old sales funnel are in **Detailed plugin stats**.
+to see separate download, installation-registration and opt-in session measurements. Daily and calendar-month browser estimates and opted-in active users have separate totals. Old boot signals, GitHub asset totals and the earlier funnel are under **Legacy measurements**. Email CSV export remains available below.
 The same numbers as JSON: `curl -H "Authorization: Bearer <ADMIN_TOKEN>" https://api.captionsgen.com/api/funnel`.
 
 ## Direct installer download counts
@@ -64,37 +123,28 @@ so set `SUBSCRIBE_SECRET` first if you ever rotate it.
 
 Tests: `node --test worker/worker.test.mjs`.
 
-## Audience growth and activity history
+## Dashboard coverage and legacy history
 
-The main dashboard chart shows **New installs** from the existing anonymous daily
-`c:DATE:install` first-engine-boot signals. It compares the last 7 or 30 UTC dates with
-the immediately preceding period. This is first app starts, not downloads, Lemon Squeezy
-orders, or the number of users who opted into stats. The client saves `installPinged` in
-its existing local app-data file, so normal reinstalls retain the count flag. Clearing app
-data, a different Windows account, acknowledgement retries or opt-out behavior can affect
-these approximate counts. No new identifier or tracking flow was added.
+The primary chart offers **Download requests**, **Install registrations** and **Sessions (opt-in)**,
+with 7- or 30-day comparisons. Each measurement starts at its own coverage timestamp. Dates before
+coverage and an incomplete first collection day remain chart gaps. Prior-period percentages stay
+unavailable until a complete comparison period exists. Missing APIs show unavailable, not zero.
+The daily table exposes the same observations, including positive but incomplete offline history.
 
-**Active today (stats sample)**, **Monthly active (stats sample)** and the optional
-**Active users (stats)** chart include only retained opted-in device IDs. They are a sample,
-not total audience DAU/MAU or verified people. Normal reinstalls retain the saved ID; clearing
-app data or opting out and back in can create a new ID. Opting out deletes that ID and its
-history. The old `firstSeen` daily bins remain in the aggregate API for diagnostic use only;
-they are not the main new-installs metric.
+Calendar-month browser estimates and active users come directly from monthly aggregates; they
+are never calculated by adding daily unique counts. Today's and this month's totals are partial.
+The unreleased-client flag suppresses install/session totals until the matching plugin ships.
 
-Qualified `panel_open`, `transcribe` and `captions_placed` events now record a set of UTC
-`activityDays` on the same `u:` record, deduplicating multiple events that day. The first
-qualified event stores `meta:activity-history-since` as an ISO timestamp. Its first partial day
-cannot establish full-period coverage. Known first qualified-event dates can supply positive
-observations, but no other historical activity is invented. Days before collection appear as
-gaps in the activity chart, and previous-period comparisons say **Building activity history**
-until a complete prior window exists.
+**Legacy measurements** preserves the earlier `c:DATE:install` first-engine-start signals and
+the opted-in usage funnel. Those signals can be sent before the old usage prompt is answered,
+but choosing No beforehand prevents them. They are approximate and incomplete; the 24 signals
+on 9 November UTC are not evidence of 24 completed installer runs or 24 opted-in users.
 
-Until a full current window is covered, active-user totals include the existing `lastSeen`
-proxy and explicitly say **Estimated from last activity**. Once covered, the totals use only
-qualified daily activity. Daily active users count each saved ID once today; monthly active
-users count each ID once over the last 30 UTC dates, including partial today. A zero prior
-baseline shows **First recorded activity**, without an infinite or invented percentage.
-The chart includes a daily-data table for text and keyboard access.
+Legacy active-user estimates use retained opted-in IDs and qualified activity dates, falling
+back to last activity where historical coverage is incomplete. They cover an opted-in sample,
+not total audience MAU. No historical checkouts, asset requests or boot signals are backfilled
+into the new measurements.
 
-Run `node --test worker/growth-chart.test.mjs worker/worker.test.mjs` for date-boundary,
-coverage, activity deduplication, privacy, rendering and existing backend checks.
+Run `node --test worker/growth-chart.test.mjs worker/worker.test.mjs worker/measurements.test.mjs worker/dashboard-browser.test.mjs`.
+Also execute `assertDashboardRenders()` against HTML generated from the actual Wrangler bundle;
+source-only checks cannot catch missing runtime helpers in serialized client functions.

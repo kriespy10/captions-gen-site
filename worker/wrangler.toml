@@ -9,6 +9,18 @@ routes = [
   { pattern = "api.captionsgen.com", custom_domain = true }
 ]
 
+[vars]
+# Enable browser-marker estimates only with the reviewed privacy/opt-out rollout.
+DOWNLOAD_BROWSER_COUNTS = "false"
+# Install/session figures remain awaiting update until the client release ships.
+MEASUREMENT_CLIENT_RELEASED = "false"
+
 [[kv_namespaces]]
 binding = "REPORTS"
 id = "0270f98b25ef4498b99d48949edaaabf"
+
+[[d1_databases]]
+binding = "METRICS"
+database_name = "captions-gen-metrics"
+database_id = "a7d5a45a-3f93-4ec5-a830-607e0dc973d0"
+migrations_dir = "migrations"

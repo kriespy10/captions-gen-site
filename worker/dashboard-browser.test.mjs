@@ -11,7 +11,7 @@ export async function assertDashboardRenders(html) {
   assert.ok(script,'Dashboard contains its client script');
   const elements=new Map();
   const element=id=>{
-    if(!elements.has(id))elements.set(id,{id,hidden:true,innerHTML:'',textContent:'',value:id==='growth-period'?'30':id==='growth-metric'?'installs':'',appendChild(){}});
+    if(!elements.has(id))elements.set(id,{id,hidden:true,innerHTML:'',textContent:'',value:id==='growth-period'||id==='legacy-period'?'30':id==='growth-metric'?'downloadRequests':'',appendChild(){}});
     return elements.get(id);
   };
   const daily={'2026-11-09':{install:3},'2026-11-10':{install:1}};
@@ -27,6 +27,12 @@ export async function assertDashboardRenders(html) {
     fetch:async url=>{
       calls.push(url);
       if(url==='/api/funnel')return {ok:true,json:async()=>payload};
+      if(url==='/api/measurements')return {ok:true,json:async()=>({
+        ok:true,asOf:'2026-11-10T12:00:00Z',
+        coverage:{downloadsSince:'2026-09-01T00:00:00Z',browserDownloadsSince:'2026-09-01T00:00:00Z',installsSince:'2026-09-01T00:00:00Z',sessionsSince:'2026-09-01T00:00:00Z',browserCountingEnabled:true,clientUpdateRequired:false},
+        daily:[{date:'2026-11-09',downloadRequests:3,uniqueDownloadBrowsers:2,uniqueInstalls:2,sessionCount:5,activeDevices:2},{date:'2026-11-10',downloadRequests:1,uniqueDownloadBrowsers:1,uniqueInstalls:1,sessionCount:2,activeDevices:1}],
+        monthly:[{month:'2026-11',downloadRequests:4,uniqueDownloadBrowsers:2,uniqueInstalls:3,sessionCount:7,activeDevices:2}]
+      })};
       if(url==='/api/downloads')return {ok:true,json:async()=>({ok:true,total:12,files:[{version:'1.1.9',downloads:12}]})};
       if(url==='/api/subscribers')return {ok:true,json:async()=>({subscribers:Array.from({length:579},()=>({}))})};
       throw new Error('Unexpected dashboard request');
@@ -35,19 +41,25 @@ export async function assertDashboardRenders(html) {
   vm.runInNewContext(script,context);
   await new Promise(resolve=>setImmediate(resolve));
   assert.match(element('growth-body').innerHTML,/<svg/,'Install graph renders after the API response');
-  assert.match(element('growth-body').innerHTML,/growth-value">4</,'Four recorded installs remain separate from one opted-in device');
-  assert.match(element('active-users').innerHTML,/Monthly active \(stats sample\)/);
-  assert.match(element('downloads').innerHTML,/Installer downloads \(12\)/);
+  assert.match(element('growth-body').innerHTML,/growth-value">4</,'Four download requests remain separate from install registrations and the activity sample');
+  assert.match(element('measurement-cards').innerHTML,/active users in November/);
+  assert.match(element('measurement-cards').innerHTML,/Browser estimate in November<\/dt><dd>2<\/dd>/);
+  assert.match(element('legacy-growth-body').innerHTML,/Legacy first-start signals/);
+  assert.match(element('downloads').innerHTML,/GitHub asset requests \(12\)/);
   assert.match(element('subs').innerHTML,/Email sign-ups \(579\)/);
-  assert.deepEqual(calls,['/api/funnel','/api/downloads','/api/subscribers']);
-  element('growth-metric').value='active';
+  assert.deepEqual(calls,['/api/funnel','/api/measurements','/api/downloads','/api/subscribers']);
+  element('growth-metric').value='uniqueInstalls';
   element('growth-metric').onchange();
-  assert.match(element('growth-body').innerHTML,/active users/);
+  assert.match(element('growth-body').innerHTML,/growth-value">3</);
+  assert.match(element('growth-body').innerHTML,/install registrations/);
+  element('growth-metric').value='sessionCount';
+  element('growth-metric').onchange();
+  assert.match(element('growth-body').innerHTML,/growth-value">7</);
   element('growth-period').value='7';
   element('growth-period').onchange();
   assert.match(element('growth-body').innerHTML,/previous 7-day periods/);
   assert.doesNotMatch(element('growth-body').innerHTML,/NaN|Infinity/);
-  return {chartRendered:true,metricSwitch:true,periodSwitch:true,subscribersRendered:579};
+  return {chartRendered:true,threeMetricSwitch:true,calendarMonthDistinct:true,periodSwitch:true,subscribersRendered:579};
 }
 
 test('generated dashboard runs after authentication and both graph controls work',async()=>{
