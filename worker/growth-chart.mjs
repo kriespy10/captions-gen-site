@@ -125,12 +125,14 @@ export function growthMarkup(model) {
   const chartId = model.chartId || 'measurement-chart';
   const measureLabel = model.measureLabel || (model.metric === 'installs' ? 'Recorded first app starts' : 'Users who allowed stats');
   const previousText = model.previousLabel || (model.priorTotal === null ? 'Previous period unavailable' : 'vs. ' + number(model.priorTotal) + ' last period');
+  const autoTodayPartial = !model.snapshot && !model.completedDays && model.periodUnit !== 'month';
   let badge;
   if (model.waiting) badge = '<span class="growth-change growth-building">Awaiting plugin update</span>';
+  else if (model.comparisonLabel) badge = '<span class="growth-change growth-building">' + esc(model.comparisonLabel) + '</span>';
   else if (model.priorTotal === null) badge = '<span class="growth-change growth-building">' + esc(model.historyLabel || 'Building activity history') + '</span>';
   else if (model.snapshot && !model.currentComplete && model.percent === null) badge = '<span class="growth-change growth-building">Partial snapshot · no growth rate</span>';
   else if (model.priorTotal === 0) badge = '<span class="growth-change growth-neutral">' + (model.total > 0 ? model.snapshot ? 'First recorded orders' : 'First recorded activity' : 'No change yet') + '</span>';
-  else if (model.percent === null) badge = '<span class="growth-change growth-building">Partial snapshot · no growth rate</span>';
+  else if (model.percent === null) badge = '<span class="growth-change growth-building">' + (model.snapshot ? 'Partial snapshot' : 'Incomplete estimate') + ' · no growth rate</span>';
   else {
     const positive = model.percent > 0;
     const negative = model.percent < 0;
@@ -158,10 +160,13 @@ export function growthMarkup(model) {
   const hasPrevious = model.previous.some((point) => point.value !== null);
   const line = (path, className) => path ? '<path d="' + path + '" class="' + className + '"/>' : '';
   const lastPoint = model.current.reduce((last, point, index) => point.value === null ? last : index, -1);
-  const dots = model.current.map((point, index) => point.value === null ? '' : '<circle class="growth-dot' + (index === lastPoint ? ' growth-dot-endpoint' : '') + '" cx="' + x(index).toFixed(2) + '" cy="' + y(point.value).toFixed(2) + '" r="3"><title>' + esc(label(point.day) + ': ' + number(point.value) + ' ' + name + (point.partial ? ' (partial snapshot)' : !model.snapshot && index === model.period - 1 ? ' (today, partial)' : '')) + '</title></circle>').join('');
+  const dots = model.current.map((point, index) => point.value === null ? '' : '<circle class="growth-dot' + (index === lastPoint ? ' growth-dot-endpoint' : '') + '" cx="' + x(index).toFixed(2) + '" cy="' + y(point.value).toFixed(2) + '" r="3"><title>' + esc(label(point.day) + ': ' + number(point.value) + ' ' + name + (point.partial ? ' (' + (model.partialPointLabel || (model.snapshot ? 'partial snapshot' : 'partial')) + ')' : autoTodayPartial && index === model.period - 1 ? ' (today, partial)' : '')) + '</title></circle>').join('');
+  const sourceSwitch = model.sourceSwitch;
+  const switchMarker = sourceSwitch && Number.isInteger(sourceSwitch.index) && sourceSwitch.index >= 0 && sourceSwitch.index < model.current.length
+    ? '<g class="growth-source-switch"><line x1="' + x(sourceSwitch.index).toFixed(2) + '" x2="' + x(sourceSwitch.index).toFixed(2) + '" y1="24" y2="194"/><text x="' + (x(sourceSwitch.index)+(sourceSwitch.index > (model.period-1)/2 ? -6 : 6)).toFixed(2) + '" y="17" text-anchor="' + (sourceSwitch.index > (model.period-1)/2 ? 'end' : 'start') + '">' + esc(sourceSwitch.label) + '</text></g>' : '';
   const range = label(model.current[0].day) + ' – ' + label(model.current[model.period - 1].day);
   const previousRange = label(model.previous[0].day) + ' – ' + label(model.previous[model.period - 1].day);
-  const summary = number(model.total) + ' ' + name + ' from ' + range + '. ' + previousText + '. ' + (model.summarySuffix || 'Today is partial. Dates are UTC.');
+  const summary = number(model.total) + ' ' + name + ' from ' + range + '. ' + previousText + '. ' + (model.summarySuffix || (model.completedDays ? 'Completed UTC days. Dates are UTC.' : model.periodUnit === 'month' ? 'This month is partial. Dates are UTC.' : 'Today is partial. Dates are UTC.'));
   let message = '';
   if (model.coverageMessage) message = model.coverageMessage;
   else if (model.empty) message = model.metric === 'installs' ? 'Your first recorded app starts will appear here.' : 'Activity from users who allowed stats will appear here.';
@@ -171,13 +176,13 @@ export function growthMarkup(model) {
   const tableValue = (point) => point.value === null
     ? point.observed > 0 ? 'Incomplete (' + number(point.observed) + ' recorded)' : 'Not recorded'
     : number(point.value);
-  const rows = model.current.map((point, index) => '<tr><td>' + esc(label(point.day)) + (point.partial || (!model.snapshot && index === model.period - 1) ? ' (partial)' : '') + '</td><td>' + tableValue(point) + '</td>' + (model.previousHidden ? '' : '<td>' + esc(label(model.previous[index].day)) + '</td><td>' + tableValue(model.previous[index]) + '</td>') + '</tr>').join('');
+  const rows = model.current.map((point, index) => '<tr><td>' + esc(label(point.day)) + (point.partial || (autoTodayPartial && index === model.period - 1) ? ' (partial)' : '') + '</td><td>' + tableValue(point) + '</td>' + (model.previousHidden ? '' : '<td>' + esc(label(model.previous[index].day)) + '</td><td>' + tableValue(model.previous[index]) + '</td>') + '</tr>').join('');
   return '<div class="growth-numbers" aria-live="polite"><div><div class="growth-value">' + number(model.total) +
     (model.currentComplete || model.total === null ? '' : '<span class="growth-partial">' + esc(model.partialLabel || 'estimated') + '</span>') + '</div><p class="growth-measure">' + measureLabel + '</p><p class="growth-versus">' + esc(previousText) + '</p></div>' + badge + '</div>' +
     '<div class="growth-chart"><svg viewBox="0 0 640 214" role="img" aria-labelledby="' + esc(chartId) + '-title ' + esc(chartId) + '-description">' +
     '<title id="' + esc(chartId) + '-title">' + esc(model.title || (model.metric === 'installs' ? 'New installs by day' : 'Observed active users by day (stats sample)')) + '</title><desc id="' + esc(chartId) + '-description">' + esc(summary) + '</desc>' +
     [0, 0.5, 1].map((fraction) => '<line class="growth-grid" x1="12" x2="628" y1="' + y(ceiling * fraction) + '" y2="' + y(ceiling * fraction) + '"/><text class="growth-axis-number" x="628" y="' + (y(ceiling * fraction) - 7) + '" text-anchor="end">' + number(ceiling * fraction) + '</text>').join('') +
-    line(previousPath, 'growth-line growth-line-previous') + line(currentPath, 'growth-line growth-line-current') + dots +
+    line(previousPath, 'growth-line growth-line-previous') + line(currentPath, 'growth-line growth-line-current') + dots + switchMarker +
     '</svg></div><div class="growth-dates"><span>' + esc(label(model.current[0].day)) + '</span><span>' + esc(model.endLabel || 'Today · partial · UTC') + '</span></div>' +
     '<div class="growth-legend"><span><i class="growth-key growth-key-current"></i>' + esc(range) + '</span>' + (model.previousHidden ? '' : '<span><i class="growth-key growth-key-previous"></i>' + esc(previousRange) + (hasPrevious ? '' : ' · not recorded') + '</span>') + '</div>' +
     (message ? '<p class="growth-message">' + esc(message) + '</p>' : '') +
@@ -316,7 +321,7 @@ export function measurementSeries(payload, metric = 'downloadRequests', period =
 
 // Daily and calendar-month distincts come straight from separate API aggregates.
 // In particular, monthly browser estimates and MAU must never sum daily uniques.
-export function measurementCards(payload, period = 30) {
+export function measurementCards(payload, period = 30, {includeOrders = true} = {}) {
   const esc = (value) => String(value).replace(/[&<>"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char]));
   const coverage = payload.coverage || {};
   const now = new Date(payload.asOf);
@@ -402,8 +407,8 @@ export function measurementCards(payload, period = 30) {
     card('03', 'Active use · stats sample', count(currentMonth, 'activeDevices', sessionsKnown), 'active users in ' + esc(monthName), sessionRows,
       'Sessions and active users include only people who allowed stats. Calendar-month active users are deduplicated across the month.',
       history('sessionsSince', sessionsKnown, true)) +
-    card('04', 'Lemon Squeezy orders', orderNumber(orders.totalOrders,ordersKnown), 'orders in imported lifetime history',orderRows,
-      'Distinct checkouts, not installations, downloads or unique people. Historical snapshot only; no continuous sync. The snapshot day/month is partial.',orderState) +
+    (includeOrders ? card('04', 'Lemon Squeezy orders', orderNumber(orders.totalOrders,ordersKnown), 'orders in imported lifetime history',orderRows,
+      'Distinct checkouts, not installations, downloads or unique people. Historical snapshot only; no continuous sync. The snapshot day/month is partial.',orderState) : '') +
     '<p class="measurement-method" style="grid-column:1/-1">This month is partial; previous month is a full calendar month. Today is partial; yesterday is a full UTC day.</p>';
 }
 
@@ -414,6 +419,7 @@ export const GROWTH_STYLES = `
 .growth-numbers{display:flex;align-items:start;justify-content:space-between;gap:15px;min-height:90px}.growth-value{font-size:44px;line-height:1.05;font-weight:500;letter-spacing:-.045em;font-variant-numeric:tabular-nums;color:#fcfaff}.growth-partial{font-size:11px;margin-left:10px;letter-spacing:0;color:#b6aabd;font-weight:400}.growth-versus{margin:9px 0 0;font-size:13px;color:#a69aaa}.growth-change{margin-top:4px;display:inline-block;font-size:12px;padding:5px 9px;border-radius:6px;font-variant-numeric:tabular-nums;white-space:nowrap}.growth-up{color:#83d9ae;background:#12372b}.growth-down{color:#efb0c6;background:#3b2130}.growth-neutral,.growth-building{color:#c2b4d3;background:#282032}.growth-building{font-size:11px;white-space:normal;text-align:right}
 .growth-measure{margin:7px 0 0;font-size:11px;color:#a89bb3}
 .growth-chart{margin:14px -2px 0}.growth-chart svg{display:block;width:100%;height:auto;overflow:visible}.growth-grid{stroke:#302936;stroke-width:1;stroke-dasharray:3 5}.growth-axis-number{fill:#817689;font-size:10px}.growth-line{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}.growth-line-current{stroke:#b18aff}.growth-line-previous{stroke:#dc8ab9;stroke-width:1.8;opacity:.68}.growth-dot{fill:#b18aff;stroke:#131116;stroke-width:1.5;opacity:0;transition:opacity .12s}.growth-dot-endpoint,.growth-chart:hover .growth-dot{opacity:1}.growth-dates{display:flex;justify-content:space-between;gap:12px;color:#a396ad;font-size:11px;margin-top:-2px}.growth-legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:18px;color:#b7a9c0;font-size:11px}.growth-legend span{display:inline-flex;gap:7px;align-items:center}.growth-key{display:block;width:15px;height:2px;border-radius:2px}.growth-key-current{background:#b18aff}.growth-key-previous{background:#dc8ab9;opacity:.68}.growth-message{margin:16px 0 0;color:#b9adbf;font-size:12px;line-height:1.6}
+.growth-source-switch line{stroke:#d9bc81;stroke-width:1;stroke-dasharray:4 4}.growth-source-switch text{fill:#d9bc81;font-size:10px}
 .growth-coverage{margin:16px 0 0;color:#91849a;font-size:11px;line-height:1.65}.growth-data{margin-top:18px;font-size:11px;color:#a89cb2}.growth-data summary{cursor:pointer;width:fit-content}.growth-table-wrap{overflow-x:auto}.growth-data table{border-collapse:collapse;width:100%;margin-top:12px;text-align:left;white-space:nowrap;font-variant-numeric:tabular-nums}.growth-data caption{text-align:left;padding-bottom:10px;font-size:11px}.growth-data th,.growth-data td{padding:7px;border-bottom:1px solid #2c2433}.growth-data th{color:#c5b8d0;font-weight:500}
 .growth-active{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 30px}.growth-stat{padding:18px 20px;background:#101012;border:1px solid #2b2930;border-radius:12px}.growth-stat h3{margin:0 0 10px;font-size:12px;color:#a89eaf;font-weight:500}.growth-stat strong{display:block;color:#eee8f3;font-size:28px;font-weight:500;line-height:1.2;font-variant-numeric:tabular-nums;letter-spacing:-.03em}.growth-stat p{font-size:11px;line-height:1.6;margin:8px 0 0;color:#928698}.growth-stat .growth-stat-change{color:#b8a9c5}.growth-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .growth-card select:focus-visible,.growth-data summary:focus-visible{outline:2px solid #c7a7ff;outline-offset:4px}.growth-card[hidden],.growth-active[hidden]{display:none}

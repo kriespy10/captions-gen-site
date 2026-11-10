@@ -1,5 +1,29 @@
 # Report backend (Cloudflare Worker)
 
+## Continuing acquisition estimate
+
+The main dashboard combines the former checkout history with direct-download
+browser estimates using `acquisitions.mjs`. Each UTC date uses exactly one source:
+imported orders before **2026-11-10**, and daily downloading-browser estimates
+from that date onward. Later Lemon orders are excluded from this combined view;
+the unchanged order snapshot remains accessible in a separate archive.
+
+The chart and its calendar-month history sum the same daily estimates. A browser
+can count again on another day: these are acquisition signals, not distinct people,
+confirmed downloads or installation registrations. The independent calendar-month
+distinct-browser estimate remains in the Downloads card. No identities are joined,
+no historical install/session counts are fabricated, and no new events are stored.
+
+Seven/30-day comparisons use completed UTC days. Unknown dates remain gaps; the
+first browser day, which began at 03:29 UTC, stays permanently partial while its
+observed count contributes to recorded totals. Percentages are withheld for gaps,
+partial periods and comparisons that mix source methods. Monthly history includes
+the current partial day and continues from live browser counts without further
+Lemon imports. Direct-download daily rows retain their existing 400-day expiry;
+expired dates are unknown, so the label is recorded history, not lifetime users.
+
+Checks: `node --test worker/acquisitions.test.mjs worker/dashboard-browser.test.mjs`.
+
 ## Imported Lemon Squeezy order history
 
 `lemon-orders.mjs` adds separate authenticated `GET /api/lemon-orders` and

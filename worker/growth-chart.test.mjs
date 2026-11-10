@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { audienceSummary, growthSeries, growthMarkup, measurementSeries, measurementCards } from './growth-chart.mjs';
 import worker from './report-worker.js';
+import { acquisitionSeries } from './acquisitions.mjs';
 
 const now = new Date('2026-11-10T16:30:00Z');
 const user = (firstSeen, extra = {}) => ({ firstSeen, first: {}, lastSeen: firstSeen, ...extra });
@@ -183,6 +184,10 @@ test('the rendered dashboard script parses and keeps detailed telemetry secondar
   const html = await response.text();
   assert.doesNotThrow(() => new Function(html.split('<script>')[1].split('</script>')[0]));
   assert.match(html, /<option value="downloadRequests">Download requests/);
+  assert.match(html, /<option value="acquisitions" selected>Acquisition estimate/);
+  assert.match(html, /value="history" selected>All history · by month/);
+  assert.doesNotMatch(html, /<option value="lemonOrders"/);
+  assert.match(html, /<details id="order-archive" class="legacy-measurements" hidden><summary>Historical Lemon Squeezy orders/);
   assert.match(html, /Legacy monthly estimate/);
   assert.match(html, /<details><summary>Detailed plugin stats/);
   assert.match(html, /These signals are not unique users/);
@@ -433,4 +438,42 @@ test('missing, unavailable and malformed imports never become fake zero orders; 
   assert.equal(measurementSeries(payload,'lemonOrders',7).total,0);
   assert.match(measurementCards(payload),/measurement-number">0<\/strong><p class="measurement-number-label">orders in imported lifetime history/);
   assert.match(measurementCards(payload),/Orders · previous calendar month \(October 2026\)<\/dt><dd>0<\/dd>/);
+});
+
+test('the continuing acquisition card can replace the order card while preserving all three live cards',()=>{
+  const payload={...measurements(),lemonOrders:ordersSnapshot()};
+  assert.equal((measurementCards(payload).match(/class="measurement-card"/g)||[]).length,4,'standalone callers retain the prior default');
+  const html=measurementCards(payload,30,{includeOrders:false});
+  assert.equal((html.match(/class="measurement-card"/g)||[]).length,3);
+  assert.match(html,/Downloads/);assert.match(html,/Install registrations/);assert.match(html,/Active use/);
+  assert.doesNotMatch(html,/Lemon Squeezy orders|orders in imported lifetime history/);
+  assert.doesNotThrow(()=>new Function('return ('+measurementCards.toString()+')')()(payload,30,{includeOrders:false}));
+});
+
+test('acquisition markup marks the source switch and keeps partial estimates distinct from snapshots',()=>{
+  const payload={...measurements({browserDownloadsSince:'2026-11-10T03:29:00Z'}),lemonOrders:ordersSnapshot()};
+  const model=acquisitionSeries(payload,'history');
+  const html=growthMarkup(model);
+  assert.match(html,/<g class="growth-source-switch"><line x1="[\d.]+" x2="[\d.]+" y1="24" y2="194"\/>/);
+  assert.match(html,/Direct downloads · 10 Nov/);
+  assert.match(html,/partial coverage/);
+  assert.doesNotMatch(html,/partial snapshot|today, partial/);
+  assert.match(html,/recorded estimate/);
+  assert.doesNotThrow(()=>new Function('return ('+growthMarkup.toString()+')')()(model),'serialized renderer needs no module-only helpers');
+  const hostile={...model,sourceSwitch:{index:0,label:'<script>bad</script>'}};
+  assert.match(growthMarkup(hostile),/&lt;script&gt;bad&lt;\/script&gt;/);
+  assert.doesNotMatch(growthMarkup(hostile),/<script>/);
+  assert.doesNotMatch(growthMarkup({...model,sourceSwitch:{index:999,label:'invalid'}}),/growth-source-switch/);
+});
+
+test('completed acquisition days do not label yesterday as today or override a method-change comparison',()=>{
+  const payload={...measurements({browserDownloadsSince:'2026-11-10T03:29:00Z'}),asOf:'2026-11-13T12:00:00Z',lemonOrders:ordersSnapshot()};
+  payload.daily.push({date:'2026-11-11',uniqueDownloadBrowsers:3},{date:'2026-11-12',uniqueDownloadBrowsers:4});
+  const model=acquisitionSeries(payload,7);
+  assert.equal(model.current.at(-1).day,'2026-11-12');assert.equal(model.completedDays,true);
+  const html=growthMarkup(model);
+  assert.match(html,/Counting method changed/);
+  assert.match(html,/Completed UTC days through 2026-11-12/);
+  assert.match(html,/<td>12 Nov<\/td>/);
+  assert.doesNotMatch(html,/12 Nov \(partial\)|today, partial|Today is partial|Partial snapshot|%<span/);
 });

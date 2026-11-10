@@ -7,6 +7,7 @@
 //                           plus the email sign-up count and a CSV export (subscribe.js)
 // No IP address, file name, transcript or project data is stored. Every key expires after ~13 months.
 import { audienceSummary, growthSeries, growthMarkup, measurementSeries, measurementCards, GROWTH_STYLES } from "./growth-chart.mjs";
+import { acquisitionSeries, acquisitionCard } from "./acquisitions.mjs";
 import { usageRevoked, revokedUsageIds, beginUsageWrite, endUsageWrite } from "./measurements.mjs";
 
 const TTL = 400 * 86400;
@@ -167,17 +168,18 @@ main{max-width:760px;margin:auto;padding:24px 16px}h1{font-size:24px;margin:0 0 
 h2{font-size:16px;margin:28px 0 8px}.lbl{color:#d4d4d8}input,button{font:inherit;padding:8px 10px;border-radius:6px;border:1px solid #3f3f46;background:#18181b;color:inherit}
 button{background:#3b82f6;border:0;cursor:pointer}#err{color:#f87171}small{color:#71717a}
 ${GROWTH_STYLES}
-</style><main><h1>Captions Gen audience</h1><p>Downloads, install registrations, opt-in activity and historical orders.</p>
+</style><main><h1>Captions Gen audience</h1><p>Acquisition estimates, install registrations and opt-in activity.</p>
 <form id="f" hidden><input id="t" type="password" placeholder="Admin token" size="30"> <button>Show</button></form>
 <div id="err"></div>
 <section id="growth" class="growth-card" aria-labelledby="growth-title" hidden>
-  <div class="growth-top"><div><p class="growth-eyebrow">CAPTIONS GEN / GROWTH</p><h2 id="growth-title">Activity and order history.</h2></div><span class="growth-live"><i aria-hidden="true"></i>Updated on refresh · orders are a snapshot</span></div>
-  <div class="growth-controls"><label><span class="growth-sr">Metric</span><select id="growth-metric"><option value="downloadRequests">Download requests</option><option value="uniqueInstalls">Install registrations</option><option value="sessionCount">Sessions (opt-in)</option><option value="lemonOrders">Lemon Squeezy orders</option></select></label><label class="growth-period"><span class="growth-sr">Period</span><select id="growth-period"><option id="growth-period-7" value="7">Last 7 days</option><option id="growth-period-30" value="30" selected>Last 30 days</option><option id="growth-history-option" value="history" hidden disabled>Imported monthly history</option></select></label></div>
+  <div class="growth-top"><div><p class="growth-eyebrow">CAPTIONS GEN / GROWTH</p><h2 id="growth-title">Downloads, installs and active use.</h2></div><span class="growth-live"><i aria-hidden="true"></i>Updated on refresh</span></div>
+  <div class="growth-controls"><label><span class="growth-sr">Metric</span><select id="growth-metric"><option value="acquisitions" selected>Acquisition estimate</option><option value="uniqueInstalls">Install registrations</option><option value="sessionCount">Sessions (opt-in)</option><option value="downloadRequests">Download requests</option></select></label><label class="growth-period"><span class="growth-sr">Period</span><select id="growth-period"><option id="growth-period-7" value="7">Last 7 completed UTC days</option><option id="growth-period-30" value="30">Last 30 completed UTC days</option><option id="growth-history-option" value="history" selected>All history · by month</option></select></label></div>
   <div id="growth-body"></div>
-  <p class="growth-coverage">Downloads are requests; browser figures are estimates. New installations are counted once while saved app data remains. Sessions and active users are opt-in stats. Live measurement history is not backfilled; Lemon Squeezy orders are a separate historical import. Dates UTC.</p>
+  <p class="growth-coverage">Acquisition estimates use historical Lemon Squeezy orders before 10 November 2026 and daily browser download estimates from 10 November. The source changes at that boundary; these are different signals, not verified unique people or installations. New installations are counted once while saved app data remains. Sessions and active users are opt-in stats. Dates UTC.</p>
 </section>
 <div id="measurement-cards" class="measurement-cards" aria-live="polite"></div>
-<p id="measurement-method" class="measurement-method" hidden>Calendar-month totals are counted separately, not summed from daily unique counts. Today and this month are partial. A download request, an install registration and an active user measure different steps.</p>
+<p id="measurement-method" class="measurement-method" hidden>Acquisition totals sum daily estimates. Calendar-month distinct browsers in Downloads and monthly active users are counted separately, not summed from daily unique counts. Today and current-month card totals are partial. Acquisition signals, download requests, install registrations and active users measure different things.</p>
+<details id="order-archive" class="legacy-measurements" hidden><summary>Historical Lemon Squeezy orders</summary><section class="growth-card" aria-labelledby="order-archive-title"><div class="growth-top"><div><p class="growth-eyebrow">HISTORICAL SNAPSHOT</p><h2 id="order-archive-title">Lemon Squeezy order archive</h2></div></div><div class="growth-controls"><label><span class="growth-sr">Order archive period</span><select id="order-archive-period"><option value="7">Last 7 completed UTC days</option><option value="30">Last 30 completed UTC days</option><option value="history" selected>Imported monthly history</option></select></label></div><div id="order-archive-body"></div></section></details>
 <details id="legacy-measurements" class="legacy-measurements" hidden><summary>Legacy measurements</summary>
 <section class="growth-card" aria-labelledby="legacy-title"><div class="growth-top"><div><p class="growth-eyebrow">HISTORICAL SIGNALS</p><h2 id="legacy-title">Legacy first-start signals</h2></div></div><div class="growth-controls"><label class="growth-period"><span class="growth-sr">Legacy period</span><select id="legacy-period"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option></select></label></div><div id="legacy-growth-body"></div></section>
 <div id="active-users" class="growth-active" hidden></div><section id="downloads" aria-live="polite"></section><div id="out"></div></details>
@@ -190,6 +192,8 @@ ${growthSeries.toString()}
 ${growthMarkup.toString()}
 ${measurementSeries.toString()}
 ${measurementCards.toString()}
+${acquisitionSeries.toString()}
+${acquisitionCard.toString()}
 let audience=null;
 let measurements=null;
 function renderGrowth(){
@@ -197,13 +201,20 @@ function renderGrowth(){
   const metric=document.getElementById("growth-metric").value;
   const select=document.getElementById("growth-period");
   const history=document.getElementById("growth-history-option");
-  history.hidden=metric!=="lemonOrders";history.disabled=history.hidden;
+  history.hidden=metric!=="acquisitions";history.disabled=history.hidden;
   document.getElementById("growth-period-7").textContent=history.hidden?"Last 7 days":"Last 7 completed UTC days";
   document.getElementById("growth-period-30").textContent=history.hidden?"Last 30 days":"Last 30 completed UTC days";
   if(history.hidden&&select.value==="history")select.value="30";
   const period=select.value==="history"?"history":Number(select.value);
-  document.getElementById("measurement-cards").innerHTML=(measurements.measurementsUnavailable?'<p class="measurement-error">Live measurements are temporarily unavailable. Historical order counts remain separate.</p>':'')+measurementCards(measurements,period);
-  document.getElementById("growth-body").innerHTML=growthMarkup(measurementSeries(measurements,metric,period));
+  document.getElementById("measurement-cards").innerHTML=(measurements.measurementsUnavailable?'<p class="measurement-error">Live measurements are temporarily unavailable. Historical estimates remain separate.</p>':'')+acquisitionCard(acquisitionSeries(measurements,"history"))+measurementCards(measurements,period,{includeOrders:false});
+  document.getElementById("growth-body").innerHTML=growthMarkup(metric==="acquisitions"?acquisitionSeries(measurements,period):measurementSeries(measurements,metric,period));
+}
+function renderOrderArchive(){
+  if(!measurements)return;
+  const value=document.getElementById("order-archive-period").value;
+  const model=measurementSeries(measurements,"lemonOrders",value==="history"?"history":Number(value));
+  model.chartId="order-archive-chart";
+  document.getElementById("order-archive-body").innerHTML=growthMarkup(model);
 }
 function renderLegacyGrowth(){
   if(!audience)return;
@@ -264,8 +275,11 @@ async function loadMeasurements(tok){
     document.getElementById("growth").hidden=false;
     document.getElementById("measurement-method").hidden=false;
     renderGrowth();
+    document.getElementById("order-archive").hidden=false;
+    renderOrderArchive();
     document.getElementById("growth-metric").onchange=renderGrowth;
     document.getElementById("growth-period").onchange=renderGrowth;
+    document.getElementById("order-archive-period").onchange=renderOrderArchive;
   }catch{
     box.innerHTML='<p class="measurement-error">Measurements are temporarily unavailable. No zero counts have been substituted. Try refreshing later.</p>';
   }

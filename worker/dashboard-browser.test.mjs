@@ -11,7 +11,7 @@ export async function assertDashboardRenders(html, {ordersUnavailable=false,live
   assert.ok(script,'Dashboard contains its client script');
   const elements=new Map();
   const element=id=>{
-    if(!elements.has(id))elements.set(id,{id,hidden:true,innerHTML:'',textContent:'',value:id==='growth-period'||id==='legacy-period'?'30':id==='growth-metric'?'downloadRequests':'',appendChild(){}});
+    if(!elements.has(id))elements.set(id,{id,hidden:true,innerHTML:'',textContent:'',value:id==='growth-period'||id==='order-archive-period'?'history':id==='legacy-period'?'30':id==='growth-metric'?'acquisitions':'',appendChild(){}});
     return elements.get(id);
   };
   const daily={'2026-11-09':{install:3},'2026-11-10':{install:1}};
@@ -52,8 +52,14 @@ export async function assertDashboardRenders(html, {ordersUnavailable=false,live
   vm.runInNewContext(script,context);
   await new Promise(resolve=>setImmediate(resolve));
   assert.match(element('growth-body').innerHTML,/<svg/,'Install graph renders after the API response');
-  if(liveUnavailable)assert.match(element('growth-body').innerHTML,/growth-value">—</);
-  else assert.match(element('growth-body').innerHTML,/growth-value">4</,'Four download requests remain separate from orders, install registrations and the activity sample');
+  assert.match(element('growth-body').innerHTML,new RegExp('growth-value">'+(liveUnavailable?'8':ordersUnavailable||noImport?'1':'9')+'<'),'default history continues old order days with direct browser estimates');
+  assert.equal(element('growth-period').value,'history');
+  assert.match(element('growth-body').innerHTML,/Acquisition estimate by month/);
+  assert.match(element('growth-body').innerHTML,/growth-source-switch/);
+  assert.match(element('growth-body').innerHTML,/Direct downloads · 10 Nov/);
+  assert.doesNotMatch(element('growth-body').innerHTML,/partial snapshot/);
+  assert.match(element('measurement-cards').innerHTML,/Acquisition estimate/);
+  assert.doesNotMatch(element('measurement-cards').innerHTML,/orders in imported lifetime history/,'original order card is archived, not a second acquisition total');
   assert.match(element('measurement-cards').innerHTML,/active users in November/);
   if(!liveUnavailable)assert.match(element('measurement-cards').innerHTML,/Browser estimate in November<\/dt><dd>2<\/dd>/);
   assert.match(element('legacy-growth-body').innerHTML,/Legacy first-start signals/);
@@ -62,6 +68,7 @@ export async function assertDashboardRenders(html, {ordersUnavailable=false,live
   assert.deepEqual(calls,['/api/funnel','/api/measurements','/api/lemon-orders','/api/downloads','/api/subscribers']);
   element('growth-metric').value='uniqueInstalls';
   element('growth-metric').onchange();
+  assert.equal(element('growth-period').value,'30','live metrics cannot inherit acquisition-only monthly history');
   if(!liveUnavailable)assert.match(element('growth-body').innerHTML,/growth-value">3</);
   assert.match(element('growth-body').innerHTML,/install registrations/);
   element('growth-metric').value='sessionCount';
@@ -71,28 +78,37 @@ export async function assertDashboardRenders(html, {ordersUnavailable=false,live
   element('growth-period').onchange();
   assert.match(element('growth-body').innerHTML,/previous 7-day periods/);
   assert.doesNotMatch(element('growth-body').innerHTML,/NaN|Infinity/);
-  element('growth-metric').value='lemonOrders';element('growth-metric').onchange();
+  element('growth-metric').value='acquisitions';element('growth-metric').onchange();
   assert.equal(element('growth-history-option').hidden,false);
-  assert.match(element('growth-body').innerHTML,/Distinct checkouts/);
-  if(ordersUnavailable||noImport){
-    assert.match(element('growth-body').innerHTML,/growth-value">—</);
-    assert.match(element('measurement-cards').innerHTML,noImport?/No order import yet/:/Order history temporarily unavailable/);
-  }else{
-    assert.match(element('growth-body').innerHTML,/growth-value">2</);
-    assert.match(element('measurement-cards').innerHTML,/measurement-number">9<\/strong><p class="measurement-number-label">orders in imported lifetime history/);
-    assert.match(element('growth-body').innerHTML,/snapshot 2026-11-10 10:00:00 UTC/);
-    assert.match(element('growth-body').innerHTML,/Completed UTC days through 2026-11-09/);
-    assert.equal(element('growth-period-7').textContent,'Last 7 completed UTC days');
-  }
+  assert.equal(element('growth-period-7').textContent,'Last 7 completed UTC days');
   element('growth-period').value='history';element('growth-period').onchange();
   assert.match(element('growth-body').innerHTML,/View monthly numbers/);
-  assert.doesNotMatch(element('growth-body').innerHTML,/Today · partial/,'historical monthly snapshots do not look like live daily tracking');
+  assert.doesNotMatch(element('growth-body').innerHTML,/Today · partial|Partial snapshot/);
+  const mainBeforeArchive=element('growth-body').innerHTML;
+  assert.equal(element('order-archive').hidden,false);
+  assert.match(element('order-archive-body').innerHTML,/View monthly numbers/);
+  assert.match(element('order-archive-body').innerHTML,/order-archive-chart-title/,'archive has a separate accessible chart identity');
+  element('order-archive-period').value='7';element('order-archive-period').onchange();
+  assert.match(element('order-archive-body').innerHTML,/Distinct checkouts/);
+  if(ordersUnavailable||noImport){
+    assert.match(element('order-archive-body').innerHTML,/growth-value">—</);
+    assert.match(element('order-archive-body').innerHTML,noImport?/No Lemon Squeezy order snapshot/:/order history is temporarily unavailable/);
+  }else{
+    assert.match(element('order-archive-body').innerHTML,/growth-value">2</);
+    assert.match(element('order-archive-body').innerHTML,/snapshot 2026-11-10 10:00:00 UTC/);
+    assert.match(element('order-archive-body').innerHTML,/Completed UTC days through 2026-11-09/);
+  }
+  assert.equal(element('growth-body').innerHTML,mainBeforeArchive,'archive period changes cannot mutate the continuing acquisition graph');
+  assert.equal(element('growth-period').value,'history');
+  element('order-archive-period').value='history';element('order-archive-period').onchange();
+  if(!ordersUnavailable&&!noImport)assert.match(element('order-archive-body').innerHTML,/growth-value">9</,'archive retains the complete unjoined snapshot');
   assert.doesNotMatch(element('growth-body').innerHTML,/NaN|Infinity|local-fixture-token/);
   element('growth-metric').value='downloadRequests';element('growth-metric').onchange();
-  assert.equal(element('growth-period').value,'30','an order-only history period cannot leak into live metrics');
+  assert.equal(element('growth-period').value,'30','acquisition-only history cannot leak into live metrics');
+  if(!liveUnavailable)assert.match(element('growth-body').innerHTML,/growth-value">4</,'raw request counts keep their original separate series');
   assert.equal(element('growth-history-option').hidden,true);
   assert.equal(element('growth-period-7').textContent,'Last 7 days');
-  return {chartRendered:true,threeMetricSwitch:true,ordersMetricSwitch:true,monthlyOrderHistory:true,calendarMonthDistinct:true,periodSwitch:true,subscribersRendered:579};
+  return {chartRendered:true,threeMetricSwitch:true,acquisitionDefault:true,sourceSwitchMarker:true,historicalOrdersArchive:true,monthlyOrderHistory:true,calendarMonthDistinct:true,periodSwitch:true,subscribersRendered:579};
 }
 
 test('generated dashboard runs after authentication and both graph controls work',async()=>{
