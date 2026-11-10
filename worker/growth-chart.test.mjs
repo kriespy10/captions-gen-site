@@ -270,3 +270,38 @@ test('accepted offline records count as observed totals without fabricating full
   assert.equal(model.priorTotal, null);
   assert.match(growthMarkup(model), /Incomplete \(2 recorded\)/);
 });
+
+test('daily and previous calendar-month comparisons use direct aggregates across the year boundary', () => {
+  const payload=measurements({downloadsSince:'2026-12-01T00:00:00Z',browserDownloadsSince:'2026-12-01T00:00:00Z',installsSince:'2026-12-01T00:00:00Z',sessionsSince:'2026-12-01T00:00:00Z'});
+  payload.asOf='2027-01-02T12:00:00Z';
+  payload.daily=[
+    {date:'2026-12-31',uniqueDownloadBrowsers:999,uniqueInstalls:999,activeDevices:999},
+    {date:'2027-01-01',activeDevices:3},
+    {date:'2027-01-02',activeDevices:2},
+  ];
+  payload.monthly=[
+    {month:'2026-12',downloadRequests:20,uniqueDownloadBrowsers:9,uniqueInstalls:8,sessionCount:12,activeDevices:5},
+    {month:'2027-01',downloadRequests:7,uniqueDownloadBrowsers:4,uniqueInstalls:2,sessionCount:8,activeDevices:4},
+  ];
+  const html=measurementCards(payload);
+  assert.match(html,/Active today<\/dt><dd>2<\/dd>/);
+  assert.match(html,/Active yesterday<\/dt><dd>3<\/dd>/);
+  assert.match(html,/Browser estimate · previous calendar month \(December 2026\)<\/dt><dd>9<\/dd>/);
+  assert.match(html,/Registrations · previous calendar month \(December 2026\)<\/dt><dd>8<\/dd>/);
+  assert.match(html,/Active users · previous calendar month \(December 2026\)<\/dt><dd>5<\/dd>/);
+  assert.doesNotMatch(html,/999/,'monthly distincts must come from monthly rows');
+  assert.match(html,/This month is partial; previous month is a full calendar month/);
+  assert.doesNotMatch(html,/%/,'partial current-month totals are not growth percentages against a full month');
+  assert.doesNotThrow(()=>new Function('return ('+measurementCards.toString()+')')()(payload),'the embedded function remains self-contained');
+});
+
+test('previous day and month remain unavailable when their complete coverage is missing', () => {
+  const payload=measurements({browserDownloadsSince:'2026-10-01T00:00:00.001Z',installsSince:'2026-10-02T00:00:00Z',sessionsSince:'2026-11-09T12:00:00Z'});
+  payload.monthly.unshift({month:'2026-10',uniqueDownloadBrowsers:9,uniqueInstalls:8,activeDevices:7});
+  const html=measurementCards(payload);
+  assert.match(html,/Active yesterday<\/dt><dd>—<\/dd>/);
+  assert.match(html,/Browser estimate · previous calendar month \(October 2026\)<\/dt><dd>—<\/dd>/);
+  assert.match(html,/Registrations · previous calendar month \(October 2026\)<\/dt><dd>—<\/dd>/);
+  assert.match(html,/Active users · previous calendar month \(October 2026\)<\/dt><dd>—<\/dd>/);
+  assert.match(html,/Browser estimate in November<\/dt><dd>4<\/dd>/,'known current observations remain available');
+});

@@ -250,6 +250,13 @@ export function measurementCards(payload) {
   const currentDay = (payload.daily || []).find(row => row.date === today) || {};
   const currentMonth = (payload.monthly || []).find(row => row.month === month) || {};
   const monthName = now.toLocaleDateString('en-GB', { month: 'long', timeZone: 'UTC' });
+  const yesterdayStart = Date.parse(today + 'T00:00:00Z') - 86400000;
+  const yesterday = new Date(yesterdayStart).toISOString().slice(0,10);
+  const previousDay = (payload.daily || []).find(row => row.date === yesterday) || {};
+  const previousMonthStart = Date.UTC(now.getUTCFullYear(),now.getUTCMonth()-1,1);
+  const previousMonthDate = new Date(previousMonthStart);
+  const previousMonth = (payload.monthly || []).find(row => row.month === previousMonthDate.toISOString().slice(0,7)) || {};
+  const previousMonthName = previousMonthDate.toLocaleDateString('en-GB', { month:'long',year:'numeric',timeZone:'UTC' });
   const valid = (value) => Number.isSafeInteger(value) && value >= 0;
   const hasCoverage = (key) => typeof coverage[key] === 'string' && Number.isFinite(Date.parse(coverage[key])) && Date.parse(coverage[key]) <= now.getTime();
   const count = (row, field, known) => !known || row[field] === null ? '—' : (valid(row[field]) ? row[field] : 0).toLocaleString('en-US');
@@ -258,6 +265,7 @@ export function measurementCards(payload) {
   const waiting = coverage.clientUpdateRequired === true;
   const installsKnown = !waiting && hasCoverage('installsSince');
   const sessionsKnown = !waiting && hasCoverage('sessionsSince');
+  const priorKnown = (key,known,start) => known && Date.parse(coverage[key]) <= start;
   const history = (key, known, isClient) => {
     if (isClient && waiting) return 'Awaiting plugin update';
     if (!known) return 'Not recorded yet';
@@ -267,11 +275,18 @@ export function measurementCards(payload) {
   const card = (step, title, value, label, rows, note, state) => '<section class="measurement-card" aria-labelledby="measurement-title-' + step + '"><div class="measurement-card-heading"><span>' + step + '</span><h3 id="measurement-title-' + step + '">' + title + '</h3></div><strong class="measurement-number">' + value + '</strong><p class="measurement-number-label">' + label + '</p><dl>' + rows + '</dl><p class="measurement-state">' + esc(state) + '</p><p class="measurement-note">' + note + '</p></section>';
   const downloadRows = pair('Requests today', count(currentDay, 'downloadRequests', downloadsKnown)) +
     pair('Browser estimate today', count(currentDay, 'uniqueDownloadBrowsers', browsersKnown)) +
-    pair('Browser estimate in ' + monthName, count(currentMonth, 'uniqueDownloadBrowsers', browsersKnown));
-  const installRows = pair('Registrations today', count(currentDay, 'uniqueInstalls', installsKnown));
+    pair('Browser estimate in ' + monthName, count(currentMonth, 'uniqueDownloadBrowsers', browsersKnown)) +
+    pair('Browser estimate · previous calendar month (' + previousMonthName + ')',
+      count(previousMonth,'uniqueDownloadBrowsers',priorKnown('browserDownloadsSince',browsersKnown,previousMonthStart)));
+  const installRows = pair('Registrations today', count(currentDay, 'uniqueInstalls', installsKnown)) +
+    pair('Registrations · previous calendar month (' + previousMonthName + ')',
+      count(previousMonth,'uniqueInstalls',priorKnown('installsSince',installsKnown,previousMonthStart)));
   const sessionRows = pair('Active today', count(currentDay, 'activeDevices', sessionsKnown)) +
+    pair('Active yesterday',count(previousDay,'activeDevices',priorKnown('sessionsSince',sessionsKnown,yesterdayStart))) +
     pair('Sessions today', count(currentDay, 'sessionCount', sessionsKnown)) +
-    pair('Sessions in ' + monthName, count(currentMonth, 'sessionCount', sessionsKnown));
+    pair('Sessions in ' + monthName, count(currentMonth, 'sessionCount', sessionsKnown)) +
+    pair('Active users · previous calendar month (' + previousMonthName + ')',
+      count(previousMonth,'activeDevices',priorKnown('sessionsSince',sessionsKnown,previousMonthStart)));
   return card('01', 'Downloads', count(currentMonth, 'downloadRequests', downloadsKnown), 'requests in ' + esc(monthName), downloadRows,
       'Browser estimates use date flags, not identities. Calendar-month estimates are counted separately from daily estimates.',
       history('downloadsSince', downloadsKnown, false) + (browsersKnown ? '' : ' · browser estimates ' + (coverage.browserCountingEnabled ? 'not recorded yet' : 'not enabled'))) +
@@ -280,7 +295,8 @@ export function measurementCards(payload) {
       history('installsSince', installsKnown, true)) +
     card('03', 'Active use · stats sample', count(currentMonth, 'activeDevices', sessionsKnown), 'active users in ' + esc(monthName), sessionRows,
       'Sessions and active users include only people who allowed stats. Calendar-month active users are deduplicated across the month.',
-      history('sessionsSince', sessionsKnown, true));
+      history('sessionsSince', sessionsKnown, true)) +
+    '<p class="measurement-method" style="grid-column:1/-1">This month is partial; previous month is a full calendar month. Today is partial; yesterday is a full UTC day.</p>';
 }
 
 export const GROWTH_STYLES = `
