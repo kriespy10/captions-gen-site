@@ -11,14 +11,15 @@ export async function assertDashboardRenders(html) {
   assert.ok(script,'Dashboard contains its client script');
   const elements=new Map();
   const element=id=>{
-    if(!elements.has(id))elements.set(id,{id,hidden:true,innerHTML:'',textContent:'',value:id==='growth-period'?'30':id==='growth-metric'?'new':'',appendChild(){}});
+    if(!elements.has(id))elements.set(id,{id,hidden:true,innerHTML:'',textContent:'',value:id==='growth-period'?'30':id==='growth-metric'?'installs':'',appendChild(){}});
     return elements.get(id);
   };
+  const daily={'2026-11-09':{install:3},'2026-11-10':{install:1}};
   const audience=audienceSummary([{
     firstSeen:'2026-11-01T10:00:00Z',lastSeen:'2026-11-10T10:00:00Z',
     first:{panel_open:'2026-11-01T10:00:00Z'},activityDays:{'2026-11-10':true}
-  }],new Date('2026-11-10T12:00:00Z'),'2026-09-01T00:00:00Z');
-  const payload={ok:true,audience,pings:{install:1,engine_start:2,daily:{}},optedIn:1,steps:[],returning:0,active7:1,active30:1,usedNotBought:0,versions:{'1.1.9':1},os:{Windows:1}};
+  }],new Date('2026-11-10T12:00:00Z'),'2026-09-01T00:00:00Z',daily);
+  const payload={ok:true,audience,pings:{install:4,engine_start:2,daily},optedIn:1,steps:[],returning:0,active7:1,active30:1,usedNotBought:0,versions:{'1.1.9':1},os:{Windows:1}};
   const calls=[];
   const context={
     document:{getElementById:element,createElement:tag=>({tag,appendChild(){}})},
@@ -33,8 +34,9 @@ export async function assertDashboardRenders(html) {
   };
   vm.runInNewContext(script,context);
   await new Promise(resolve=>setImmediate(resolve));
-  assert.match(element('growth-body').innerHTML,/<svg/,'New-user graph renders after the API response');
-  assert.match(element('active-users').innerHTML,/Monthly active users/);
+  assert.match(element('growth-body').innerHTML,/<svg/,'Install graph renders after the API response');
+  assert.match(element('growth-body').innerHTML,/growth-value">4</,'Four recorded installs remain separate from one opted-in device');
+  assert.match(element('active-users').innerHTML,/Monthly active \(stats sample\)/);
   assert.match(element('downloads').innerHTML,/Installer downloads \(12\)/);
   assert.match(element('subs').innerHTML,/Email sign-ups \(579\)/);
   assert.deepEqual(calls,['/api/funnel','/api/downloads','/api/subscribers']);

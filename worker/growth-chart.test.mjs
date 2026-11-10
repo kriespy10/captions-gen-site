@@ -6,32 +6,58 @@ import worker from './report-worker.js';
 const now = new Date('2026-11-10T16:30:00Z');
 const user = (firstSeen, extra = {}) => ({ firstSeen, first: {}, lastSeen: firstSeen, ...extra });
 
-test('new users use retained opted-in records, UTC dates and disjoint period boundaries', () => {
+test('new installs use first-engine-boot signals, UTC dates and disjoint period boundaries', () => {
   const audience = audienceSummary([
     user('2026-10-12T00:00:00Z'),
     user('2026-10-11T23:59:59Z'),
     user('2026-11-11T01:00:00+02:00'), // Still November 10 UTC.
     user('2026-11-11T00:00:00Z'), // A future record cannot increase this period.
     user('2026-09-11T23:59:59Z'),
-  ], now);
-  const chart = growthSeries(audience, 'new', 30);
-  assert.deepEqual(chart.current[0], { day: '2026-10-12', value: 1 });
+  ], now, null, {
+    '2026-10-12': { install: 2 }, '2026-10-11': { install: 1 },
+    '2026-11-10': { install: 3 }, '2026-11-11': { install: 99 },
+    '2026-11-09': { install: -1 }, 'bad-date': { install: 99 }
+  });
+  assert.equal(audience.newDaily['2026-11-10'], 1, 'firstSeen bins remain separate diagnostics');
+  const chart = growthSeries(audience, 'installs', 30);
+  assert.deepEqual(chart.current[0], { day: '2026-10-12', value: 2 });
   assert.deepEqual(chart.previous.at(-1), { day: '2026-10-11', value: 1 });
-  assert.equal(chart.total, 2);
+  assert.equal(chart.total, 5);
   assert.equal(chart.priorTotal, 1);
-  assert.equal(chart.percent, 100);
-  assert.equal(chart.current.at(-1).value, 1);
+  assert.equal(chart.percent, 400);
+  assert.equal(chart.current.at(-1).value, 3);
+});
+
+
+test('52 first app starts stay distinct from a 68-device opted-in active sample', () => {
+  const users = Array.from({ length: 68 }, () => user('2026-11-10T08:00:00Z'));
+  const audience = audienceSummary(users, now, null, {
+    '2026-11-09': { install: 52 }, '2026-10-01': { install: 12 }
+  });
+  assert.equal(audience.active30, 68);
+  assert.equal(audience.newDaily['2026-11-10'], 68);
+  const primary = growthSeries(audience);
+  assert.equal(primary.metric, 'installs');
+  assert.equal(primary.total, 52, 'main total must not use opt-in firstSeen or MAU');
+  assert.equal(primary.priorTotal, 12);
+  const html = growthMarkup(primary);
+  assert.match(html, /New installs by day/);
+  assert.match(html, /Recorded first app starts/);
+  assert.match(html, /<th scope="col">Installs<\/th>/);
+  assert.doesNotMatch(html, /new users|68/);
+  const activity = growthMarkup(growthSeries(audience, 'active', 30));
+  assert.match(activity, /stats sample/);
 });
 
 test('seven-day periods cross leap days and years without local-time drift', () => {
-  const leap = growthSeries(audienceSummary([], new Date('2024-03-02T10:00:00Z')), 'new', 7);
+  const leap = growthSeries(audienceSummary([], new Date('2024-03-02T10:00:00Z')), 'installs', 7);
   assert.equal(leap.current[0].day, '2024-02-25');
   assert.equal(leap.current[4].day, '2024-02-29');
   assert.equal(leap.previous.at(-1).day, '2024-02-24');
-  const year = growthSeries(audienceSummary([], new Date('2027-01-02T10:00:00Z')), 'new', 7);
+  const year = growthSeries(audienceSummary([], new Date('2027-01-02T10:00:00Z')), 'installs', 7);
   assert.equal(year.current[0].day, '2026-12-27');
   assert.equal(year.previous[0].day, '2026-12-20');
-  assert.throws(() => growthSeries({}, 'new', 31), /7 or 30/);
+  assert.throws(() => growthSeries({}, 'installs', 31), /7 or 30/);
   assert.throws(() => growthSeries({}, 'downloads', 7), /Unknown/);
 });
 
@@ -107,14 +133,14 @@ test('a partial collection day stays a chart gap after it becomes a past day', (
 });
 
 test('zero baselines never produce invented growth percentages and the chart has a text fallback', () => {
-  const first = growthMarkup(growthSeries(audienceSummary([user('2026-11-10T08:00:00Z')], now), 'new', 30));
+  const first = growthMarkup(growthSeries(audienceSummary([], now, null, { '2026-11-10': { install: 1 } }), 'installs', 30));
   assert.match(first, /First recorded activity/);
   assert.doesNotMatch(first, /Infinity|NaN|100%/);
   assert.match(first, /role="img"/);
   assert.match(first, /<caption>Current and previous 30-day periods/);
   assert.match(first, /Today · partial · UTC/);
-  const empty = growthMarkup(growthSeries(audienceSummary([], now), 'new', 7));
-  assert.match(empty, /Your first recorded users will appear here/);
+  const empty = growthMarkup(growthSeries(audienceSummary([], now), 'installs', 7));
+  assert.match(empty, /Your first recorded app starts will appear here/);
   assert.match(empty, /No change yet/);
 });
 
@@ -156,8 +182,13 @@ test('the rendered dashboard script parses and keeps detailed telemetry secondar
   const response = await worker.fetch(new Request('https://api.captionsgen.com/funnel'), {});
   const html = await response.text();
   assert.doesNotThrow(() => new Function(html.split('<script>')[1].split('</script>')[0]));
-  assert.match(html, /<option value="new">New users/);
-  assert.match(html, /Monthly active users/);
+  assert.match(html, /<option value="installs">New installs/);
+  assert.match(html, /Monthly active \(stats sample\)/);
   assert.match(html, /<details><summary>Detailed plugin stats/);
   assert.match(html, /These signals are not unique users/);
+  assert.match(html, /Active today \(stats sample\)/);
+  assert.match(html, /Active users \(stats\)/);
+  assert.match(html, /Active users show only the stats sample, not your total audience/);
+  assert.match(html, /disabling stats can miss starts/);
+  assert.match(html, /function __name\(target\)/, 'preserve the bundled-function name helper');
 });

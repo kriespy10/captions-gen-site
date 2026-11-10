@@ -30,7 +30,7 @@ New reports can take up to a minute to show in that list (KV is eventually consi
 totals: first engine boot, engine running that day). No IP addresses are stored; every key expires after ~13 months.
 
 Open https://api.captionsgen.com/funnel and paste the admin token once (it stays in that browser)
-to see the new-user growth chart and daily/monthly active users. Download counts and email CSV export stay below; anonymous boot signals and the old sales funnel are in **Detailed plugin stats**.
+to see the new-install growth chart and daily/monthly active users in the stats sample. Download counts and email CSV export stay below; anonymous boot signals and the old sales funnel are in **Detailed plugin stats**.
 The same numbers as JSON: `curl -H "Authorization: Bearer <ADMIN_TOKEN>" https://api.captionsgen.com/api/funnel`.
 
 ## Direct installer download counts
@@ -66,12 +66,20 @@ Tests: `node --test worker/worker.test.mjs`.
 
 ## Audience growth and activity history
 
-The main dashboard chart uses retained opted-in device records, never anonymous boot pings.
-**New users** bins each record's `firstSeen` once by UTC date and compares the last 7 or 30 days
-with the immediately preceding period. These are measured devices that allowed stats, not
-verified people or all users. Normal reinstalls retain the saved ID; clearing app data, using
-a different Windows account, or opting out and back in can create a new ID. Opting out deletes
-that ID's record and its history.
+The main dashboard chart shows **New installs** from the existing anonymous daily
+`c:DATE:install` first-engine-boot signals. It compares the last 7 or 30 UTC dates with
+the immediately preceding period. This is first app starts, not downloads, Lemon Squeezy
+orders, or the number of users who opted into stats. The client saves `installPinged` in
+its existing local app-data file, so normal reinstalls retain the count flag. Clearing app
+data, a different Windows account, acknowledgement retries or opt-out behavior can affect
+these approximate counts. No new identifier or tracking flow was added.
+
+**Active today (stats sample)**, **Monthly active (stats sample)** and the optional
+**Active users (stats)** chart include only retained opted-in device IDs. They are a sample,
+not total audience DAU/MAU or verified people. Normal reinstalls retain the saved ID; clearing
+app data or opting out and back in can create a new ID. Opting out deletes that ID and its
+history. The old `firstSeen` daily bins remain in the aggregate API for diagnostic use only;
+they are not the main new-installs metric.
 
 Qualified `panel_open`, `transcribe` and `captions_placed` events now record a set of UTC
 `activityDays` on the same `u:` record, deduplicating multiple events that day. The first

@@ -112,7 +112,7 @@ export async function summarize(env, today = new Date()) {
   const tally = (f) => users.reduce((m, u) => ((m[f(u)] = (m[f(u)] || 0) + 1), m), {});
   const totals = (event) => Object.values(daily).reduce((n, d) => n + (d[event] || 0), 0);
   return {
-    audience: audienceSummary(users, today, await env.REPORTS.get(ACTIVITY_SINCE_KEY)),
+    audience: audienceSummary(users, today, await env.REPORTS.get(ACTIVITY_SINCE_KEY), daily),
     pings: { install: totals("install"), engine_start: totals("engine_start"), daily },
     optedIn: users.length,
     steps,
@@ -142,14 +142,14 @@ main{max-width:760px;margin:auto;padding:24px 16px}h1{font-size:24px;margin:0 0 
 h2{font-size:16px;margin:28px 0 8px}.lbl{color:#d4d4d8}input,button{font:inherit;padding:8px 10px;border-radius:6px;border:1px solid #3f3f46;background:#18181b;color:inherit}
 button{background:#3b82f6;border:0;cursor:pointer}#err{color:#f87171}small{color:#71717a}
 ${GROWTH_STYLES}
-</style><main><h1>Captions Gen audience</h1><p>Your new and active users, day by day.</p>
+</style><main><h1>Captions Gen audience</h1><p>Recorded installs, with optional usage stats shown separately.</p>
 <form id="f" hidden><input id="t" type="password" placeholder="Admin token" size="30"> <button>Show</button></form>
 <div id="err"></div>
 <section id="growth" class="growth-card" aria-labelledby="growth-title" hidden>
   <div class="growth-top"><div><p class="growth-eyebrow">CAPTIONS GEN / GROWTH</p><h2 id="growth-title">Your work is reaching editors.</h2></div><span class="growth-live"><i aria-hidden="true"></i>Updated on refresh</span></div>
-  <div class="growth-controls"><label><span class="growth-sr">Metric</span><select id="growth-metric"><option value="new">New users</option><option value="active">Active users</option></select></label><label class="growth-period"><span class="growth-sr">Period</span><select id="growth-period"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option></select></label></div>
+  <div class="growth-controls"><label><span class="growth-sr">Metric</span><select id="growth-metric"><option value="installs">New installs</option><option value="active">Active users (stats)</option></select></label><label class="growth-period"><span class="growth-sr">Period</span><select id="growth-period"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option></select></label></div>
   <div id="growth-body"></div>
-  <p class="growth-coverage">Users who allowed stats; new means first seen with stats enabled. A saved device ID normally survives reinstalling; clearing app data or opting out and back in can count again. All dates UTC.</p>
+  <p class="growth-coverage">Recorded first app starts; normal reinstalls keep the count flag. Clearing app data or retries can count again; disabling stats can miss starts. Active users show only the stats sample, not your total audience. Dates UTC.</p>
 </section>
 <div id="active-users" class="growth-active" hidden></div>
 <section id="downloads" aria-live="polite"></section><div id="out"></div><div id="subs"></div></main>
@@ -187,8 +187,8 @@ async function load(tok){
     const percent=Math.round((current-previous)/previous*100);
     return (percent>0?"+":"")+percent+"% "+period;
   }
-  activeBox.innerHTML='<section class="growth-stat"><h3>Active today</h3><strong>'+audience.activeToday.toLocaleString("en-US")+'</strong><p>'+(audience.activeTodayEstimated?'Estimated from last activity. ':'')+'Today is partial · UTC</p><p class="growth-stat-change">'+esc(comparison(audience.activeToday,audience.activeYesterday,"vs. yesterday"))+'</p></section>'+
-    '<section class="growth-stat"><h3>Monthly active users</h3><strong>'+audience.active30.toLocaleString("en-US")+'</strong><p>Last 30 days'+(audience.active30Complete?'':' · estimated from last activity')+'</p><p class="growth-stat-change">'+esc(comparison(audience.active30,audience.previousActive30,"vs. previous 30 days"))+'</p></section>';
+  activeBox.innerHTML='<section class="growth-stat"><h3>Active today (stats sample)</h3><strong>'+audience.activeToday.toLocaleString("en-US")+'</strong><p>'+(audience.activeTodayEstimated?'Estimated from last activity. ':'')+'Today is partial · UTC</p><p class="growth-stat-change">'+esc(comparison(audience.activeToday,audience.activeYesterday,"vs. yesterday"))+'</p></section>'+
+    '<section class="growth-stat"><h3>Monthly active (stats sample)</h3><strong>'+audience.active30.toLocaleString("en-US")+'</strong><p>Last 30 days'+(audience.active30Complete?'':' · estimated from last activity')+'</p><p class="growth-stat-change">'+esc(comparison(audience.active30,audience.previousActive30,"vs. previous 30 days"))+'</p></section>';
   const p=d.pings;let h="<details><summary>Detailed plugin stats</summary><h2>Anonymous boot signals</h2><p>These signals are not unique users and can repeat after app data is reset.</p>"+bars([["First engine boots",p.install],["Engine running (install-days)",p.engine_start]],Math.max(p.install,p.engine_start,1));
   h+="<h2>Opted-in installs ("+d.optedIn+")</h2>"+bars(d.steps.map(s=>[L[s.event]||s.event,s.installs]),d.optedIn);
   h+="<h2>Engagement</h2>"+bars([["Used on 2+ days",d.returning],["Active last 7 days",d.active7],["Active last 30 days",d.active30],["Placed captions, not bought",d.usedNotBought]],d.optedIn||1);
