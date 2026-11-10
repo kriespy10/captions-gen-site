@@ -120,7 +120,7 @@ export async function notify(env, r, fetchImpl = fetch) {
     `From: ${r.email || "(no email given)"}`,
     `Captions Gen ${reportValue(app.panel)} / engine ${reportValue(app.engine)} / ${host} / ${reportValue(app.os)} / ${app.licensed ? "licensed" : "free"}`,
   ];
-  if (bug && r.log) lines.push("", "--- engine log (last lines) ---", r.log.slice(-6000));
+  if (bug && r.log) lines.push("", "--- stored report log excerpt (up to 20,000 characters) ---", r.log);
   try {
     const res = await fetchImpl("https://api.resend.com/emails", {
       method: "POST",

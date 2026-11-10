@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import worker, { notify } from "./report-worker.js";
 import { downloads } from "./downloads.js";
 
-function setup() {
+function setup(overrides = {}) {
   const store = new Map();
   const kv = {
     get: async (k) => store.get(k) ?? null,
@@ -12,7 +12,7 @@ function setup() {
     delete: async (k) => void store.delete(k),
     list: async ({ prefix }) => ({ keys: [...store.keys()].filter((k) => k.startsWith(prefix)).map((name) => ({ name })), list_complete: true }),
   };
-  const env = { REPORTS: kv, ADMIN_TOKEN: "admin" };
+  const env = { REPORTS: kv, ADMIN_TOKEN: "admin", ...overrides };
   let ip = 0;
   const call = (method, path, body, headers = {}) =>
     worker.fetch(
@@ -252,7 +252,7 @@ test("report notification identifies After Effects and preserves the bug report 
   });
   assert.equal(mail.subject, "[Captions Gen bug] Caption layers are missing");
   assert.equal(mail.reply_to, "editor@example.com");
-  assert.equal(mail.text, "Caption layers are missing\n\nFrom: editor@example.com\nCaptions Gen 1.1.9 / engine 1.1.9 / After Effects 26.0.0 / win32 10.0 x64 / free\n\n--- engine log (last lines) ---\ndiagnostic log");
+  assert.equal(mail.text, "Caption layers are missing\n\nFrom: editor@example.com\nCaptions Gen 1.1.9 / engine 1.1.9 / After Effects 26.0.0 / win32 10.0 x64 / free\n\n--- stored report log excerpt (up to 20,000 characters) ---\ndiagnostic log");
   assert.doesNotMatch(mail.text, /Premiere/);
 });
 
@@ -284,4 +284,65 @@ test("report notification bounds untrusted metadata and keeps it to one plain-te
   assert.equal(lines.length, 4, "metadata cannot add new message lines");
   assert.equal(lines[3], `Captions Gen ? / engine ? / After Effects ${"x".repeat(120)} / win32 Injected value x64 / free`);
   assert.doesNotMatch(lines[3], /[\u0000-\u001f\u007f-\u009f\u2028]/);
+});
+
+const LOG_HEADING = "--- stored report log excerpt (up to 20,000 characters) ---\n";
+function retainedDiagnosticFixture() {
+  const diagnostics = ["beginning", "middle", "end"].map((phase, index) => ({
+    kind: "synthetic-model-diagnostic", phase, model: "fixture-model", details: String(index).repeat(6100),
+  }));
+  const lines = diagnostics.map(value => "CAPTIONS_DIAG " + JSON.stringify(value));
+  assert.ok(lines.every(line => line.length > 6000), "every JSON diagnostic itself exceeds the old email limit");
+  const filler = ".".repeat(20000 - lines.reduce((n, line) => n + line.length, 0) - 3);
+  const log = [lines[0], lines[1], filler, lines[2]].join("\n");
+  assert.equal(log.length, 20000);
+  return { log, diagnostics };
+}
+function emailedExcerpt(mail) {
+  const offset = mail.text.indexOf(LOG_HEADING);
+  assert.ok(offset >= 0, "email identifies this as the bounded stored report excerpt");
+  return mail.text.slice(offset + LOG_HEADING.length);
+}
+function diagnosticObjects(log) {
+  return log.split("\n").filter(line => line.startsWith("CAPTIONS_DIAG ")).map(line => JSON.parse(line.slice("CAPTIONS_DIAG ".length)));
+}
+
+test("notify emails the entire retained 20,000-character excerpt with every long JSON diagnostic intact", async () => {
+  const fixture = retainedDiagnosticFixture();
+  const mail = await notification({ kind: "bug", message: "Synthetic report used only by the test", log: fixture.log });
+  const excerpt = emailedExcerpt(mail);
+  assert.equal(excerpt.length, 20000);
+  assert.equal(excerpt, fixture.log, "beginning, middle and end must all survive email formatting");
+  assert.deepEqual(diagnosticObjects(excerpt), fixture.diagnostics);
+});
+
+test("report submission emails exactly its bounded stored excerpt through an injected Resend transport", async t => {
+  const fixture = retainedDiagnosticFixture();
+  const mails = [];
+  t.mock.method(globalThis, "fetch", async (url, options) => {
+    assert.equal(url, "https://api.resend.com/emails");
+    assert.equal(options.method, "POST");
+    mails.push(JSON.parse(options.body));
+    return new Response("{}", { status: 200 });
+  });
+  const { store, call } = setup({
+    RESEND_API_KEY: "synthetic-resend-key-not-a-credential",
+    MAIL_FROM: "test-reports@example.invalid", MAIL_TO: "test-recipient@example.invalid",
+  });
+  const response = await call("POST", "/api/report", {
+    kind: "bug", message: "Synthetic report: keep all model diagnostics",
+    log: "discarded prefix\n".repeat(100) + fixture.log,
+    app: { hostApp: "after-effects", afterEffects: "26.0.0", engine: "1.1.10", panel: "1.1.10" },
+  });
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), { ok: true });
+  const reports = [...store.entries()].filter(([key]) => key.startsWith("report:"));
+  assert.equal(reports.length, 1);
+  const stored = JSON.parse(reports[0][1]);
+  assert.equal(stored.log.length, 20000, "the existing storage bound remains enforced");
+  assert.equal(stored.log, fixture.log, "only the earlier input prefix is discarded");
+  assert.equal(mails.length, 1);
+  assert.deepEqual(mails[0].to, ["test-recipient@example.invalid"]);
+  assert.equal(emailedExcerpt(mails[0]), stored.log, "email and retained report must have identical log contents");
+  assert.deepEqual(diagnosticObjects(emailedExcerpt(mails[0])), fixture.diagnostics);
 });

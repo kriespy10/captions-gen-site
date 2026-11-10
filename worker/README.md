@@ -72,6 +72,14 @@ curl -H "Authorization: Bearer <ADMIN_TOKEN>" https://api.captionsgen.com/api/re
 
 New reports can take up to a minute to show in that list (KV is eventually consistent).
 
+Bug-report emails include the exact engine-log excerpt retained with the report, up to 20,000
+characters. The email does not apply a second, shorter cutoff, so diagnostic JSON near the
+beginning or middle of the retained excerpt remains intact. This is a recent stored excerpt,
+not the complete service log. The existing 40,000-character request limit, 20,000-character
+storage limit, sender-side redaction and report rate limits remain unchanged. Feature requests
+do not include an engine log. Tests inject the Resend transport and use synthetic diagnostics;
+they send no real email and use no customer report data.
+
 ## Redeploy / set up again
 
 1. `cd worker && npx wrangler login`
