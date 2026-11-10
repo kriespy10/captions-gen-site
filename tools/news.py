@@ -4,6 +4,14 @@
 
 NEWS = [
   {
+    "slug": "captions-gen-1-1-11",
+    "date": "2026-11-10",
+    "version": "1.1.11",
+    "title": "Captions Gen 1.1.11: Windows speech-model recovery and clearer diagnostics",
+    "desc": "Recover built-in models when Windows blocks cached model links, with clearer diagnostics and support emails that retain the stored log excerpt.",
+    "body": "<p>Captions Gen 1.1.11 improves speech-model loading on Windows and adds clearer diagnostics for model-access failures. The plugin remains free for Premiere Pro and After Effects on Windows.</p>\n<h2>Recovery when Windows blocks cached model links</h2>\n<p>When Windows reports error 448 while opening the linked files of a built-in speech model, Captions Gen can download an ordinary-file copy of that same model revision and use it instead. A completed copy is reused on later starts and can be used offline.</p>\n<p>The first recovery needs an internet connection and additional free disk space. It leaves the original model cache in place. This recovery applies to the built-in models; it does not automatically replace custom-model folders.</p>\n<h2>More useful model diagnostics</h2>\n<p>Model-access failures now include limited technical details about model files and runtime versions. If a problem continues, use <strong>Settings &gt; Report a bug</strong> and include the model name and exact error.</p>\n<p>A bug report includes a recent engine-log excerpt of up to 20,000 characters. The support email now keeps that same stored excerpt without a second, shorter cutoff, so diagnostic details near its beginning or middle are retained. It does not include the complete service log. Review your report and avoid including sensitive project information.</p>\n<h2>Download or update</h2>\n<p><a href=\"https://api.captionsgen.com/api/download/windows\">Download the free Windows installer</a> directly. No email address or payment card is required; newsletter signup is optional. Choose Premiere Pro, After Effects, or Both during setup.</p>\n<p>For an existing installation, open <strong>Settings &gt; Check for updates</strong> in your Adobe panel. Save your work, close Premiere Pro and After Effects when the installer asks, then reopen them. The full setup is available when adding another panel.</p>\n<p>Existing usage-statistics choices are preserved. Active sessions still require your explicit opt-in; the separate installation registration does not become a usage profile. Transcription continues to run locally. See the <a href=\"/privacy.html#plugin-stats\">plugin privacy details</a> and <a href=\"/product.html\">current requirements and release limits</a>.</p>"
+  },
+  {
     "slug": "captions-gen-1-1-10",
     "date": "2026-11-10",
     "version": "1.1.10",

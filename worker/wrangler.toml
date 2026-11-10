@@ -12,7 +12,7 @@ routes = [
 [vars]
 # Privacy details and the browser-estimate opt-out are published on the site.
 DOWNLOAD_BROWSER_COUNTS = "true"
-# Deploy this prepared flag only after the regular 1.1.10 client has shipped.
+# The regular 1.1.10 client shipped; preserve coverage through later releases.
 MEASUREMENT_CLIENT_RELEASED = "true"
 
 [[kv_namespaces]]

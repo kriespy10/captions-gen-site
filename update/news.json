@@ -1,11 +1,11 @@
 {
   "whatsNew": {
-    "version": "1.1.10",
-    "title": "Your usage stats choice stays yours.",
-    "text": "Installation counting is now separate from optional usage statistics. A fresh installation registers once while its saved app data remains; reopening or a normal reinstall does not add another installation. Existing installations are not counted as fresh.\n\nActive sessions are reported only after you choose to allow usage stats. Choosing No stops new optional activity reports and requests deletion of that history. Earlier opt-outs are preserved.\n\nThe video shows existing caption styling and editing features. This update changes installation and usage reporting.",
+    "version": "1.1.11",
+    "title": "More reliable speech-model loading on Windows.",
+    "text": "When Windows blocks the linked files of a built-in speech model with error 448, Captions Gen can download an ordinary-file copy of that same model revision. The completed copy is reused, including offline. First-time recovery needs internet and additional free disk space.\n\nModel failures include clearer diagnostics. Bug-report emails keep the same recent log excerpt stored with the report, up to 20,000 characters, without an additional shorter cutoff.\n\nYour existing usage-statistics choice is preserved. The video shows existing caption styling and editing features; this update changes model recovery and diagnostics.",
     "video": "https://captionsgen.com/update/media/1.1.8/whats-new.mp4",
     "media": "https://captionsgen.com/update/media/1.1.8/poster.jpg",
-    "url": "https://captionsgen.com/news/captions-gen-1-1-10.html",
+    "url": "https://captionsgen.com/news/captions-gen-1-1-11.html",
     "frames": [
       "https://captionsgen.com/update/media/1.1.8/01.jpg",
       "https://captionsgen.com/update/media/1.1.8/02.jpg",
@@ -72,7 +72,7 @@
   },
   "promos": [],
   "panels": {
-    "premiere": "1.1.10",
-    "aftereffects": "1.1.10"
+    "premiere": "1.1.11",
+    "aftereffects": "1.1.11"
   }
 }

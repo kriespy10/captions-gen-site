@@ -8,7 +8,7 @@ Apply schema changes with the pinned Wrangler version and `d1 migrations apply M
 No production fixtures are needed. Tests use the actual migration and SQL against local SQLite:
 `node --test worker/measurements.test.mjs` (Node 22.18 or newer with `node:sqlite`).
 
-- `GET /api/download/windows` redirects to the released 1.1.10 full Windows Setup. It counts
+- `GET /api/download/windows` redirects to the released 1.1.11 full Windows Setup. It counts
   download **requests**, including repeats, without storing IPs, email, query strings or a browser ID.
   HEAD and speculative prefetch/prerender requests are excluded. Counter/database failure never
   blocks the redirect. A redirect request does not prove a completed transfer or installation.
@@ -53,8 +53,8 @@ relevant period begins; the oldest month can therefore disappear before its last
 Expired records are pruned on measurement requests. Historical downloads, anonymous boot pings
 and old daily activity events are not backfilled into these metrics.
 
-The prepared 1.1.10 rollout sets `MEASUREMENT_CLIENT_RELEASED="true"`. Deploy that configuration
-only after the regular client release ships. The false value shows install/session metrics as
+The regular 1.1.10 release enabled `MEASUREMENT_CLIENT_RELEASED="true"`; keep that flag enabled
+for 1.1.11. The false value shows install/session metrics as
 awaiting a plugin update; deploying the backend alone does not make older plugins send new events. Successful event
 responses are `{ok:true,duplicate:boolean}`; invalid bodies return 400, missing session consent
 403, and unavailable storage 503. No new public client secret or hardware fingerprint is used.

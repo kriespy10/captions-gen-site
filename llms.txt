@@ -13,7 +13,7 @@ Official website: https://captionsgen.com/. Product facts checked 2026-11-10.
 - Storage: Allow at least 3 GB free for the built-in speech models, in addition to the plugin, Adobe applications and project files. Both panels use the same engine and Models folder. Model sizes can change, and custom models need additional space.
 - Output: Premiere receives editable Motion Graphics clips; After Effects receives native editable caption layers in your composition. Word highlights, pill backgrounds and animations render into the video image. Use Premiere's native caption tracks when you need SRT sidecar files, selectable subtitles or broadcast closed captions.
 - Features: 18 built-in caption presets, customizable fonts, colors, highlights and animations, a live style preview, saved presets, Apply style for placed captions, searchable spoken languages, compatible custom speech models and animation updates after caption edits.
-- Public version: 1.1.10 (2026-11-10).
+- Public version: 1.1.11 (2026-11-10).
 - Support: business@captionsgen.com. Made by Kris, a video editor.
 
 ## Product and release information
@@ -22,7 +22,7 @@ Official website: https://captionsgen.com/. Product facts checked 2026-11-10.
 - [Home](https://captionsgen.com/): product overview, editable style preview and free download.
 - [Requirements and installation](https://captionsgen.com/#install): supported Adobe applications and Windows versions, app selection and installation steps.
 - [Transcription and performance](https://captionsgen.com/#performance): CPU transcription, Base/Small/Turbo models, downloads and timeline performance.
-- [Current public release](https://captionsgen.com/news/captions-gen-1-1-10.html): version 1.1.10, released 2026-11-10.
+- [Current public release](https://captionsgen.com/news/captions-gen-1-1-11.html): version 1.1.11, released 2026-11-10.
 - [Free release announcement](https://captionsgen.com/news/captions-gen-1-1-0.html): the 15-minute limit was removed on 2026-10-21.
 - [News and release notes](https://captionsgen.com/news/): published updates.
 - [Website privacy](https://captionsgen.com/privacy.html): optional analytics, direct downloads and email updates.

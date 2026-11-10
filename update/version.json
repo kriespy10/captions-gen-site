@@ -1,13 +1,13 @@
 {
-  "version": "1.1.10",
+  "version": "1.1.11",
   "panels": {
-    "premiere": "1.1.10",
-    "aftereffects": "1.1.10"
+    "premiere": "1.1.11",
+    "aftereffects": "1.1.11"
   },
-  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.10.exe",
-  "sha256": "a130c955a68e00faa62bdeedf97993916749db9e18f87d521c8a8b593eb3fa96",
-  "size": 34906968,
-  "notes": "Separate installation counting from optional usage statistics. Existing opt-outs are kept; sessions are reported only after you allow usage stats.",
-  "full": "https://github.com/kriespy10/captions-gen-site/releases/download/v1.1.10/CaptionsGen-Setup-1.1.10.exe",
+  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.11.exe",
+  "sha256": "3cb1db1b21ae33359cc0292feb234cc4269f24965263aee8698448faecde7ea7",
+  "size": 34911019,
+  "notes": "Recover built-in speech models when Windows blocks cached model links with error 448. Better model diagnostics; bug-report emails retain the complete stored log excerpt, up to 20,000 characters.",
+  "full": "https://github.com/kriespy10/captions-gen-site/releases/download/v1.1.11/CaptionsGen-Setup-1.1.11.exe",
   "date": "2026-11-10"
 }
