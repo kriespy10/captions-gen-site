@@ -305,3 +305,132 @@ test('previous day and month remain unavailable when their complete coverage is 
   assert.match(html,/Active users · previous calendar month \(October 2026\)<\/dt><dd>—<\/dd>/);
   assert.match(html,/Browser estimate in November<\/dt><dd>4<\/dd>/,'known current observations remain available');
 });
+
+const ordersSnapshot = (changes = {}) => ({
+  ok:true,schema:1,source:'Lemon Squeezy orders',available:true,snapshotAt:'2026-11-10T10:00:00Z',
+  coverage:{from:'2026-09-01',through:'2026-11-10',completeThrough:'2026-11-09',complete:true,timezone:'UTC'},
+  totalOrders:9,daily:[{date:'2026-10-31',orders:6},{date:'2026-11-09',orders:2},{date:'2026-11-10',orders:1}],
+  monthly:[{month:'2026-10',orders:6},{month:'2026-11',orders:3}],...changes
+});
+
+test('historical daily orders use completed UTC days while lifetime and monthly totals retain the partial snapshot day',()=>{
+  const payload={...measurements(),lemonOrders:ordersSnapshot()};
+  const model=measurementSeries(payload,'lemonOrders',7);
+  assert.equal(model.total,2);
+  assert.equal(model.priorTotal,6);
+  assert.equal(model.percent,(2-6)/6*100);
+  assert.equal(model.current.at(-1).day,'2026-11-09');
+  assert.equal(model.current.at(-1).partial,false);
+  assert.equal(model.current.some(row=>row.day==='2026-11-10'),false);
+  assert.equal(measurementSeries(payload,'downloadRequests',7).total,12);
+  assert.equal(measurementSeries(payload,'uniqueInstalls',7).total,3);
+  const html=growthMarkup(model);
+  assert.match(html,/vs\. 6 last period/);
+  assert.match(html,/Completed UTC days through 2026-11-09/);
+  assert.match(html,/66\.7%/);
+  assert.match(html,/snapshot 2026-11-10 10:00:00 UTC/);
+  assert.match(html,/not installations, downloads or unique people/);
+  assert.match(html,/not a continuous sync/);
+  assert.doesNotMatch(html,/today, partial|NaN|Infinity/);
+  const cards=measurementCards(payload,7);
+  assert.match(cards,/Orders · last 7 completed UTC days<\/dt><dd>2<\/dd>/);
+  assert.match(cards,/Orders in November \(snapshot\)<\/dt><dd>3<\/dd>/);
+  assert.match(cards,/measurement-number">9<\/strong><p class="measurement-number-label">orders in imported lifetime history/);
+});
+
+test('snapshot bounds distinguish recorded zeros from unknown dates before and after the import',()=>{
+  const payload={...measurements(),asOf:'2026-11-12T12:00:00Z',lemonOrders:ordersSnapshot({
+    coverage:{from:'2026-11-06',through:'2026-11-10',completeThrough:'2026-11-09',complete:true,timezone:'UTC'}
+  })};
+  const model=measurementSeries(payload,'lemonOrders',7);
+  assert.equal(model.current.find(row=>row.day==='2026-11-06').value,0);
+  assert.equal(model.current.find(row=>row.day==='2026-11-05').value,null);
+  assert.equal(model.current.at(-1).day,'2026-11-09');
+  assert.equal(model.current.at(-1).value,2);
+  assert.equal(model.current.some(row=>row.day>'2026-11-09'),false,'partial export and post-snapshot dates are excluded, not zero');
+  assert.equal(model.previous.every(row=>row.value===null),true);
+  assert.equal(model.total,2);
+  assert.equal(model.priorTotal,null);
+  assert.match(measurementCards(payload,7),/Orders · last 7 completed UTC days \(partial coverage\)<\/dt><dd>2<\/dd>/);
+  assert.match(growthMarkup(model),/Completed UTC days through 2026-11-09/);
+  payload.asOf='2026-12-12T12:00:00Z';
+  assert.equal(measurementSeries(payload,'lemonOrders',7).total,2,'the historical completed-day window stays anchored to the snapshot, not the live date');
+});
+
+test('completed thirty-day order windows compare only when both windows fall inside complete export coverage',()=>{
+  const payload={...measurements(),lemonOrders:ordersSnapshot({totalOrders:14,
+    daily:[{date:'2026-09-30',orders:2},{date:'2026-10-10',orders:3},{date:'2026-10-31',orders:6},{date:'2026-11-09',orders:2},{date:'2026-11-10',orders:1}],
+    monthly:[{month:'2026-09',orders:2},{month:'2026-10',orders:9},{month:'2026-11',orders:3}]
+  })};
+  const model=measurementSeries(payload,'lemonOrders',30);
+  assert.equal(model.current[0].day,'2026-10-11');assert.equal(model.current.at(-1).day,'2026-11-09');
+  assert.equal(model.previous[0].day,'2026-09-11');assert.equal(model.previous.at(-1).day,'2026-10-10');
+  assert.equal(model.total,8);assert.equal(model.priorTotal,5);assert.equal(model.percent,60);
+  assert.match(growthMarkup(model),/60%/);
+  payload.lemonOrders.coverage.from='2026-09-12';
+  const incomplete=measurementSeries(payload,'lemonOrders',30);
+  assert.equal(incomplete.priorTotal,null);assert.equal(incomplete.percent,null);
+  assert.equal(incomplete.previous[0].value,null);
+  assert.doesNotMatch(growthMarkup(incomplete),/60%/);
+});
+
+test('fully covered order windows with a zero baseline are not mislabeled as partial snapshots',()=>{
+  const payload={...measurements(),lemonOrders:ordersSnapshot({totalOrders:2,daily:[{date:'2026-11-09',orders:2}],monthly:[{month:'2026-11',orders:2}]})};
+  const model=measurementSeries(payload,'lemonOrders',7);
+  assert.equal(model.currentComplete,true);assert.equal(model.priorTotal,0);assert.equal(model.percent,null);
+  const html=growthMarkup(model);
+  assert.match(html,/First recorded orders/);
+  assert.doesNotMatch(html,/Partial snapshot · no growth rate|NaN|Infinity|100%/);
+  payload.lemonOrders=ordersSnapshot({totalOrders:0,daily:[],monthly:[]});
+  assert.match(growthMarkup(measurementSeries(payload,'lemonOrders',7)),/No change yet/);
+});
+
+test('imported monthly history reads monthly source rows and has no invented previous-period comparison',()=>{
+  const payload={...measurements(),lemonOrders:ordersSnapshot()};
+  const model=measurementSeries(payload,'lemonOrders','history');
+  assert.equal(model.total,9);
+  assert.equal(model.periodUnit,'month');
+  assert.equal(model.current.find(row=>row.day==='2026-10-01').value,6);
+  assert.equal(model.current.at(-1).value,3);
+  assert.equal(model.current.at(-1).partial,true);
+  assert.equal(model.priorTotal,null);
+  assert.equal(model.previousHidden,true);
+  const html=growthMarkup(model);
+  assert.match(html,/View monthly numbers/);
+  assert.match(html,/Nov 2026 \(partial\)/);
+  assert.doesNotMatch(html,/Today · partial|Previous date|previous period<|NaN|Infinity/);
+  payload.lemonOrders.daily=[{date:'2026-10-31',orders:999}];
+  assert.equal(measurementSeries(payload,'lemonOrders','history').current.find(row=>row.day==='2026-10-01').value,6,'monthly history must read monthly rows directly');
+  assert.throws(()=>measurementSeries(payload,'downloadRequests','history'),/7 or 30/);
+});
+
+test('order cards use imported lifetime and direct calendar-month rows, with complete previous-month coverage across a year boundary',()=>{
+  const payload={...measurements(),asOf:'2027-01-02T12:00:00Z',lemonOrders:ordersSnapshot({
+    snapshotAt:'2027-01-02T10:00:00Z',coverage:{from:'2026-12-01',through:'2027-01-02',completeThrough:'2027-01-01',complete:true,timezone:'UTC'},
+    totalOrders:15,daily:[{date:'2026-12-31',orders:999},{date:'2027-01-02',orders:3}],monthly:[{month:'2026-12',orders:12},{month:'2027-01',orders:3}]
+  })};
+  const html=measurementCards(payload,7);
+  assert.match(html,/measurement-number">15<\/strong><p class="measurement-number-label">orders in imported lifetime history/);
+  assert.match(html,/Orders in January \(snapshot\)<\/dt><dd>3<\/dd>/);
+  assert.match(html,/Orders · previous calendar month \(December 2026\)<\/dt><dd>12<\/dd>/);
+  assert.doesNotMatch(html,/%/);
+  payload.lemonOrders.coverage.from='2026-12-02';
+  assert.match(measurementCards(payload),/Orders · previous calendar month \(December 2026\)<\/dt><dd>—<\/dd>/);
+  payload.lemonOrders.coverage.from='2026-12-01';payload.lemonOrders.coverage.completeThrough='2026-12-30';
+  assert.match(measurementCards(payload),/Orders · previous calendar month \(December 2026\)<\/dt><dd>—<\/dd>/);
+  assert.doesNotThrow(()=>new Function('return ('+measurementCards.toString()+')')()(payload));
+  assert.doesNotThrow(()=>new Function('return ('+measurementSeries.toString()+')')()(payload,'lemonOrders','history'));
+});
+
+test('missing, unavailable and malformed imports never become fake zero orders; a covered empty export is a real zero',()=>{
+  for(const snapshot of [undefined,{ok:false},{ok:true,schema:1,available:false},ordersSnapshot({totalOrders:-1}),ordersSnapshot({daily:[{date:'2026-11-10',orders:-1}]})]){
+    const payload={...measurements(),lemonOrders:snapshot};
+    assert.equal(measurementSeries(payload,'lemonOrders',7).total,null);
+    assert.equal(measurementSeries(payload,'lemonOrders','history').total,null);
+    assert.match(measurementCards(payload),/measurement-number">—<\/strong><p class="measurement-number-label">orders in imported lifetime history/);
+  }
+  const payload={...measurements(),lemonOrders:ordersSnapshot({totalOrders:0,daily:[],monthly:[]})};
+  assert.equal(measurementSeries(payload,'lemonOrders',7).total,0);
+  assert.match(measurementCards(payload),/measurement-number">0<\/strong><p class="measurement-number-label">orders in imported lifetime history/);
+  assert.match(measurementCards(payload),/Orders · previous calendar month \(October 2026\)<\/dt><dd>0<\/dd>/);
+});

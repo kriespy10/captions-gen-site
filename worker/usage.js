@@ -167,14 +167,14 @@ main{max-width:760px;margin:auto;padding:24px 16px}h1{font-size:24px;margin:0 0 
 h2{font-size:16px;margin:28px 0 8px}.lbl{color:#d4d4d8}input,button{font:inherit;padding:8px 10px;border-radius:6px;border:1px solid #3f3f46;background:#18181b;color:inherit}
 button{background:#3b82f6;border:0;cursor:pointer}#err{color:#f87171}small{color:#71717a}
 ${GROWTH_STYLES}
-</style><main><h1>Captions Gen audience</h1><p>Downloads, install registrations and opt-in activity.</p>
+</style><main><h1>Captions Gen audience</h1><p>Downloads, install registrations, opt-in activity and historical orders.</p>
 <form id="f" hidden><input id="t" type="password" placeholder="Admin token" size="30"> <button>Show</button></form>
 <div id="err"></div>
 <section id="growth" class="growth-card" aria-labelledby="growth-title" hidden>
-  <div class="growth-top"><div><p class="growth-eyebrow">CAPTIONS GEN / GROWTH</p><h2 id="growth-title">From downloads to active use.</h2></div><span class="growth-live"><i aria-hidden="true"></i>Updated on refresh</span></div>
-  <div class="growth-controls"><label><span class="growth-sr">Metric</span><select id="growth-metric"><option value="downloadRequests">Download requests</option><option value="uniqueInstalls">Install registrations</option><option value="sessionCount">Sessions (opt-in)</option></select></label><label class="growth-period"><span class="growth-sr">Period</span><select id="growth-period"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option></select></label></div>
+  <div class="growth-top"><div><p class="growth-eyebrow">CAPTIONS GEN / GROWTH</p><h2 id="growth-title">Activity and order history.</h2></div><span class="growth-live"><i aria-hidden="true"></i>Updated on refresh · orders are a snapshot</span></div>
+  <div class="growth-controls"><label><span class="growth-sr">Metric</span><select id="growth-metric"><option value="downloadRequests">Download requests</option><option value="uniqueInstalls">Install registrations</option><option value="sessionCount">Sessions (opt-in)</option><option value="lemonOrders">Lemon Squeezy orders</option></select></label><label class="growth-period"><span class="growth-sr">Period</span><select id="growth-period"><option id="growth-period-7" value="7">Last 7 days</option><option id="growth-period-30" value="30" selected>Last 30 days</option><option id="growth-history-option" value="history" hidden disabled>Imported monthly history</option></select></label></div>
   <div id="growth-body"></div>
-  <p class="growth-coverage">Downloads are requests; browser figures are estimates. New installations are counted once while saved app data remains. Sessions and active users are opt-in stats. Earlier measurements are not reconstructed. Dates UTC.</p>
+  <p class="growth-coverage">Downloads are requests; browser figures are estimates. New installations are counted once while saved app data remains. Sessions and active users are opt-in stats. Live measurement history is not backfilled; Lemon Squeezy orders are a separate historical import. Dates UTC.</p>
 </section>
 <div id="measurement-cards" class="measurement-cards" aria-live="polite"></div>
 <p id="measurement-method" class="measurement-method" hidden>Calendar-month totals are counted separately, not summed from daily unique counts. Today and this month are partial. A download request, an install registration and an active user measure different steps.</p>
@@ -195,7 +195,14 @@ let measurements=null;
 function renderGrowth(){
   if(!measurements)return;
   const metric=document.getElementById("growth-metric").value;
-  const period=Number(document.getElementById("growth-period").value);
+  const select=document.getElementById("growth-period");
+  const history=document.getElementById("growth-history-option");
+  history.hidden=metric!=="lemonOrders";history.disabled=history.hidden;
+  document.getElementById("growth-period-7").textContent=history.hidden?"Last 7 days":"Last 7 completed UTC days";
+  document.getElementById("growth-period-30").textContent=history.hidden?"Last 30 days":"Last 30 completed UTC days";
+  if(history.hidden&&select.value==="history")select.value="30";
+  const period=select.value==="history"?"history":Number(select.value);
+  document.getElementById("measurement-cards").innerHTML=(measurements.measurementsUnavailable?'<p class="measurement-error">Live measurements are temporarily unavailable. Historical order counts remain separate.</p>':'')+measurementCards(measurements,period);
   document.getElementById("growth-body").innerHTML=growthMarkup(measurementSeries(measurements,metric,period));
 }
 function renderLegacyGrowth(){
@@ -244,12 +251,16 @@ async function loadMeasurements(tok){
   const box=document.getElementById("measurement-cards");
   box.innerHTML='<p class="measurement-method">Loading measurements…</p>';
   try{
-    const response=await fetch("/api/measurements",{headers:{authorization:"Bearer "+tok}});
-    if(!response.ok)throw new Error("unavailable");
-    const payload=await response.json();
-    if(!payload.ok||!payload.coverage||!Array.isArray(payload.daily)||!Array.isArray(payload.monthly))throw new Error("unavailable");
+    async function read(path){const response=await fetch(path,{headers:{authorization:"Bearer "+tok}});if(!response.ok)throw new Error("unavailable");return response.json()}
+    const results=await Promise.allSettled([read("/api/measurements"),read("/api/lemon-orders")]);
+    const live=results[0].status==="fulfilled"?results[0].value:null;
+    const orders=results[1].status==="fulfilled"?results[1].value:null;
+    const liveOK=live&&live.ok&&live.coverage&&Array.isArray(live.daily)&&Array.isArray(live.monthly);
+    const ordersOK=orders&&orders.ok&&orders.schema===1&&typeof orders.available==="boolean";
+    if(!liveOK&&!ordersOK)throw new Error("unavailable");
+    const payload=liveOK?live:{asOf:new Date().toISOString(),coverage:{},daily:[],monthly:[],measurementsUnavailable:true};
+    payload.lemonOrders=ordersOK?orders:{ok:false,available:false};
     measurements=payload;
-    box.innerHTML=measurementCards(payload);
     document.getElementById("growth").hidden=false;
     document.getElementById("measurement-method").hidden=false;
     renderGrowth();

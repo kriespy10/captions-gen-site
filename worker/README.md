@@ -1,5 +1,46 @@
 # Report backend (Cloudflare Worker)
 
+## Imported Lemon Squeezy order history
+
+`lemon-orders.mjs` adds separate authenticated `GET /api/lemon-orders` and
+`POST /api/lemon-orders/import` routes using the existing `ADMIN_TOKEN`. The private
+export normalizer deduplicates order identifiers and verifies the Live/all-time
+export and UI-attested scope of the two known products. Only aggregate daily counts enter
+the Worker; orders are not downloads, installs, opted-in users or conversion cohorts.
+
+The import accepts exactly `{schema:1,exportAsOf,sourceSha256,productIds,coverage,daily}`.
+`exportAsOf` is a UTC ISO timestamp ending in Z, attested from the export operation
+and canonicalized by the server;
+`productIds` is exactly `[1317758,1317759]`; `coverage` is `{from,through,complete:true}`
+with inclusive UTC dates and `through` equal to the export date; `daily` contains
+unique `{date,orders}` rows with nonnegative integer counts. Extra/PII/status/money
+fields, unsafe totals, invalid dates and over-256-KiB bodies are rejected. History
+is limited to 3,660 calendar days per snapshot. The CSV's `date_utc` defines dates;
+no absent paid/refund/test-mode columns are inferred.
+
+One awaited write replaces `REPORTS["lemon:orders:snapshot:v1"]` with the complete
+validated snapshot and its server import timestamp/canonical SHA-256. Identical
+canonical imports are no-ops; conflicting data for the same source-export SHA or
+an older cutoff returns 409. Other KV keys and all D1 measurements are untouched.
+Back up this key before replacement. This is a manually refreshed historical
+snapshot, without Lemon API keys, webhooks or automatic synchronization. KV can
+serve the previous whole snapshot during propagation; verify the returned hash
+after propagation and serialize administrative imports.
+
+An administrative tool using existing Cloudflare authority can call exported
+`normalizeLemonOrders(payload, now)` and `await createLemonOrderSnapshot(payload, now)`
+offline to build the exact same stored envelope without reading an admin token.
+After verifying source SHA, scope and total against the private normalization
+review, write only the dedicated key and verify exact readback after propagation.
+
+The read response supplies `available`, source/snapshot/import timestamps,
+coverage, `totalOrders`, sorted daily rows and derived monthly sums. The current
+export day is partial: `completeThrough` is its previous UTC day, or null if the
+range starts today. Missing dates inside complete coverage are zeros; dates
+outside coverage are unknown. Missing import returns `available:false` and a
+null total; storage/corrupt-data errors return 503. No existing metric is backfilled.
+Local checks: `node --test worker/lemon-orders.test.mjs`.
+
 ## Distribution counts and opted-in sessions
 
 `measurements.mjs` uses the separate EU D1 database **captions-gen-metrics** (`METRICS`).
