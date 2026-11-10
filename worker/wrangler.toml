@@ -12,8 +12,8 @@ routes = [
 [vars]
 # Privacy details and the browser-estimate opt-out are published on the site.
 DOWNLOAD_BROWSER_COUNTS = "true"
-# Install/session figures remain awaiting update until the client release ships.
-MEASUREMENT_CLIENT_RELEASED = "false"
+# Deploy this prepared flag only after the regular 1.1.10 client has shipped.
+MEASUREMENT_CLIENT_RELEASED = "true"
 
 [[kv_namespaces]]
 binding = "REPORTS"

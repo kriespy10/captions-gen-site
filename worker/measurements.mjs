@@ -1,6 +1,6 @@
 // Separate aggregate distribution counts from explicitly opted-in session history.
 // Never store IPs, cookies, email, hardware IDs, filenames or project contents here.
-export const INSTALLER_URL = 'https://github.com/kriespy10/captions-gen-site/releases/download/v1.1.9/CaptionsGen-Setup-1.1.9.exe';
+export const INSTALLER_URL = 'https://github.com/kriespy10/captions-gen-site/releases/download/v1.1.10/CaptionsGen-Setup-1.1.10.exe';
 const DAY = 86400000;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const UTC = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/;

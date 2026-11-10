@@ -4,6 +4,14 @@
 
 NEWS = [
   {
+    "slug": "captions-gen-1-1-10",
+    "date": "2026-11-10",
+    "version": "1.1.10",
+    "title": "Captions Gen 1.1.10: separate installation counts and optional usage stats",
+    "desc": "Installation registration is separate from optional usage statistics. Existing opt-outs are preserved, with active sessions only after you allow stats.",
+    "body": "<p>Captions Gen 1.1.10 separates basic installation counting from optional usage statistics. The plugin remains free for Premiere Pro and After Effects on Windows.</p>\n<h2>One registration for a fresh installation</h2>\n<p>A new installation registers when its local engine first starts successfully. Reopening Captions Gen, updating it or reinstalling normally does not add another registration while its saved app data remains. Existing installations are not counted as new.</p>\n<p>This registration uses a one-off random receipt, separate from the optional usage ID. It does not include an email address, hardware identifier, project name, audio or video. Clearing the app's saved data or using another Windows account can register again, so installation counts are not verified people.</p>\n<h2>Usage statistics stay optional</h2>\n<p>Active sessions are reported only after you explicitly allow usage stats. Choosing <strong>No</strong> keeps optional usage reporting off and does not limit caption generation. Earlier opt-out choices are preserved when you update.</p>\n<p>If you turn usage stats off after allowing them, Captions Gen stops new optional activity reports and requests deletion of that usage history. If the connection is unavailable, it keeps the deletion request to retry. The separate installation registration does not become a usage profile.</p>\n<p>Read the <a href=\"/privacy.html#plugin-stats\">plugin privacy details</a> for the information involved, retention and deletion behavior.</p>\n<h2>Download or update</h2>\n<p><a href=\"https://api.captionsgen.com/api/download/windows\">Download the free Windows installer</a> directly. No email address or payment card is required; newsletter signup is optional. Choose Premiere Pro, After Effects, or Both during setup.</p>\n<p>If Captions Gen is already installed, open <strong>Settings &gt; Check for updates</strong> in your Adobe panel. Save your work and close the Adobe apps when the installer asks, then reopen them. The full setup is available when adding another panel.</p>\n<p>The <a href=\"/product.html\">current product facts</a> describe supported Adobe versions, Windows requirements and release limits. This release does not add a Mac installer or change the caption design workflow.</p>"
+  },
+  {
     "slug": "captions-gen-1-1-9",
     "date": "2026-11-08",
     "version": "1.1.9",

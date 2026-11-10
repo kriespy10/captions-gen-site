@@ -1,13 +1,13 @@
 {
-  "version": "1.1.9",
+  "version": "1.1.10",
   "panels": {
-    "premiere": "1.1.9",
-    "aftereffects": "1.1.9"
+    "premiere": "1.1.10",
+    "aftereffects": "1.1.10"
   },
-  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.9.exe",
-  "sha256": "24651c6509eefd89a9cb1af81fa67bbb3570ed29122505505040feed2e02fe0a",
-  "size": 34902390,
-  "notes": "Now in After Effects. One Windows setup for Premiere Pro, After Effects, or both, with a shared speech engine and Models folder.",
-  "full": "https://github.com/kriespy10/captions-gen-site/releases/download/v1.1.9/CaptionsGen-Setup-1.1.9.exe",
-  "date": "2026-11-08"
+  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.10.exe",
+  "sha256": "a130c955a68e00faa62bdeedf97993916749db9e18f87d521c8a8b593eb3fa96",
+  "size": 34906968,
+  "notes": "Separate installation counting from optional usage statistics. Existing opt-outs are kept; sessions are reported only after you allow usage stats.",
+  "full": "https://github.com/kriespy10/captions-gen-site/releases/download/v1.1.10/CaptionsGen-Setup-1.1.10.exe",
+  "date": "2026-11-10"
 }
