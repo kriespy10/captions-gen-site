@@ -30,7 +30,7 @@
           body: JSON.stringify({
             email: email.value.trim(),
             source: 'website',
-            v: '1.1.11',
+            v: '1.1.13',
             consent: 'website-2026-11'
           })
         });

@@ -73,7 +73,7 @@ Apply schema changes with the pinned Wrangler version and `d1 migrations apply M
 No production fixtures are needed. Tests use the actual migration and SQL against local SQLite:
 `node --test worker/measurements.test.mjs` (Node 22.18 or newer with `node:sqlite`).
 
-- `GET /api/download/windows` redirects to the released 1.1.11 full Windows Setup. It counts
+- `GET /api/download/windows` redirects to the released 1.1.13 full Windows Setup. It counts
   download **requests**, including repeats, without storing IPs, email, query strings or a browser ID.
   HEAD and speculative prefetch/prerender requests are excluded. Counter/database failure never
   blocks the redirect. A redirect request does not prove a completed transfer or installation.

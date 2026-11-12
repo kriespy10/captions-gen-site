@@ -58,7 +58,7 @@ test('newsletter only sends after an explicit valid submission and records its w
   assert.equal(call.options.method, 'POST');
   assert.equal(call.options.credentials, 'omit');
   assert.deepEqual(JSON.parse(call.options.body), {
-    email: 'Editor@Example.com', source: 'website', v: '1.1.11', consent: 'website-2026-11'
+    email: 'Editor@Example.com', source: 'website', v: '1.1.13', consent: 'website-2026-11'
   });
   assert.equal(page.attrs['data-state'], 'success');
   assert.equal(page.attrs['aria-busy'], undefined);

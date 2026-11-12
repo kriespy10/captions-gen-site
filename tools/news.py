@@ -4,6 +4,14 @@
 
 NEWS = [
   {
+    "slug": "captions-gen-1-1-13",
+    "date": "2026-11-12",
+    "version": "1.1.13",
+    "title": "Captions Gen 1.1.13: edit captions in the Premiere panel",
+    "desc": "Edit caption text in Premiere without leaving Captions Gen. Changes that keep the same word count preserve the existing highlight timing.",
+    "body": "<p>Captions Gen 1.1.13 adds an editor for generated captions in Premiere Pro. The Windows plugin is still free and the setup includes both Premiere Pro and After Effects.</p>\n<h2>Edit a caption in the panel</h2>\n<p>Select a Captions Gen graphic in the Premiere timeline. Edit the words in the Captions Gen panel and click <strong>Apply caption</strong>. The editor stays in place as you move between captions. It is hidden while you are in Settings.</p>\n<p>If the word count stays the same, the edit keeps the existing highlight timestamps. If you add or remove a word, Captions Gen updates the timing and uses source audio when needed and available. Play the caption back to check the result.</p>\n<p>Older graphics may still need Premiere’s Properties panel. Generate fresh captions with 1.1.13 to try the in-panel editor.</p>\n<h2>Switch tabs with the keyboard</h2>\n<p>Press <strong>Tab</strong> to reach Presets, Customize, or Settings, then press <strong>Enter</strong> to open it. The panel also blocks more accidental text and image drags.</p>\n<h2>Download or update</h2>\n<p><a href=\"https://api.captionsgen.com/api/download/windows\">Download the free Windows setup</a> or open <strong>Settings &gt; Check for updates</strong> in Captions Gen. Save your work and close the Adobe apps when the installer asks. You can choose Premiere Pro, After Effects, or Both during setup.</p>"
+  },
+  {
     "slug": "captions-gen-1-1-11",
     "date": "2026-11-10",
     "version": "1.1.11",

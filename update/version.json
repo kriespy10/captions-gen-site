@@ -1,13 +1,13 @@
 {
-  "version": "1.1.11",
+  "version": "1.1.13",
   "panels": {
-    "premiere": "1.1.11",
+    "premiere": "1.1.13",
     "aftereffects": "1.1.11"
   },
-  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.11.exe",
-  "sha256": "3cb1db1b21ae33359cc0292feb234cc4269f24965263aee8698448faecde7ea7",
-  "size": 34911019,
-  "notes": "Recover built-in speech models when Windows blocks cached model links with error 448. Better model diagnostics; bug-report emails retain the complete stored log excerpt, up to 20,000 characters.",
-  "full": "https://github.com/kriespy10/captions-gen-site/releases/download/v1.1.11/CaptionsGen-Setup-1.1.11.exe",
-  "date": "2026-11-10"
+  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.13.exe",
+  "sha256": "6c6575ed57ac979b1d115e6d89de4b580047488d3ae5db9274fe7e6b8f5619a7",
+  "size": 34995855,
+  "notes": "Edit caption text in Premiere without leaving Captions Gen. Changes that keep the same word count preserve the existing highlight timing. Adding or removing words updates the animation timing. Tab and Enter now switch panel tabs.",
+  "full": "https://github.com/kriespy10/captions-gen-site/releases/download/v1.1.13/CaptionsGen-Setup-1.1.13.exe",
+  "date": "2026-11-12"
 }
