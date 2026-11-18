@@ -1,13 +1,13 @@
 {
-  "version": "1.1.13",
+  "version": "1.1.14",
   "panels": {
-    "premiere": "1.1.13",
-    "aftereffects": "1.1.11"
+    "premiere": "1.1.14",
+    "aftereffects": "1.1.14"
   },
-  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.13.exe",
-  "sha256": "6c6575ed57ac979b1d115e6d89de4b580047488d3ae5db9274fe7e6b8f5619a7",
-  "size": 34995855,
-  "notes": "Edit caption text in Premiere without leaving Captions Gen. Changes that keep the same word count preserve the existing highlight timing. Adding or removing words updates the animation timing. Tab and Enter now switch panel tabs.",
-  "full": "https://github.com/kriespy10/captions-gen-site/releases/download/v1.1.13/CaptionsGen-Setup-1.1.13.exe",
-  "date": "2026-11-12"
+  "url": "https://captionsgen.com/update/CaptionsGen-Update-1.1.14.exe",
+  "sha256": "d143789978972abe95cf82f175ed036391a199f975cee3f945dc68fbdea7f195",
+  "size": 35002568,
+  "notes": "Transcription ran over 50% faster across Base, Small and Turbo in our four-clip Windows test. Reusing the speech model used about 25% to 45% less CPU time, depending on the model. Switch from Plain to Karaoke Pill and keep your edited words. One Undo restores the previous style for every caption you switched.",
+  "full": "https://github.com/kriespy10/captions-gen-site/releases/download/v1.1.14/CaptionsGen-Setup-1.1.14.exe",
+  "date": "2026-11-18"
 }

@@ -4,6 +4,14 @@
 
 NEWS = [
   {
+    "slug": "captions-gen-1-1-14",
+    "date": "2026-11-18",
+    "version": "1.1.14",
+    "title": "Captions Gen 1.1.14 brings faster multi-clip captions to Premiere Pro and After Effects",
+    "desc": "Transcription ran over 50% faster across Base, Small and Turbo in our four-clip Windows test. Reusing the speech model used about 25% to 45% less CPU time, depending on the model. Switch from Plain to Karaoke Pill and keep your edited words. One Undo restores the previous style for every caption you switched.",
+    "body": "<h2>Keep your edits when switching styles</h2>\n<p>Switch from Plain to Karaoke Pill, try another style, then press Undo twice. Each press restores one style across the whole batch. Your edited words stay in place in Premiere Pro and After Effects. Plain captions fit smaller frames, and new Premiere graphics have fewer controls.</p>\n<h2>How much faster is transcription?</h2>\n<p>We timed four uncached clips with about 20 seconds of selected audio on one Windows PC. Reusing the speech model made transcription over 50% faster with each model we tested. Turbo took 16.98 seconds, down from 27.18. Small took 5.85 seconds, down from 11.88. Base took 3.54 seconds, down from 8.35.</p>\n<p>The engine used about 25% to 45% less CPU time, depending on the model (25.1% for Turbo, 36.5% for Small and 46.3% for Base). Results are medians of three runs before and after model reuse, from audio extraction through caption grouping. Timeline placement and playback are outside those timings.</p>\n<p>In a separate preview test, the engine and its helpers held 58 MiB less committed memory after 65 seconds idle. The next uncached preview took about a third of a second longer to open. Cached previews still opened in about 6 milliseconds.</p>\n<h2>Get the Windows update</h2><p>Open <strong>Settings &gt; Check for updates</strong> in Captions Gen. For a first install, <a href=\"https://api.captionsgen.com/api/download/windows\">download the Windows setup</a> and choose Premiere Pro, After Effects, or both.</p>"
+  },
+  {
     "slug": "captions-gen-1-1-13",
     "date": "2026-11-12",
     "version": "1.1.13",

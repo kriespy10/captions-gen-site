@@ -1,13 +1,13 @@
 {
   "whatsNew": {
-    "version": "1.1.13",
-    "title": "Edit captions in the Premiere panel",
-    "text": "Edit caption text in Premiere without leaving Captions Gen. Changes that keep the same word count preserve the existing highlight timing. Adding or removing words updates the animation timing. Tab and Enter now switch panel tabs.",
-    "url": "https://captionsgen.com/news/captions-gen-1-1-13.html"
+    "version": "1.1.14",
+    "title": "Faster multi-clip captions, one Undo per style switch",
+    "text": "Transcription ran over 50% faster across Base, Small and Turbo in our four-clip Windows test. Reusing the speech model used about 25% to 45% less CPU time, depending on the model. Switch from Plain to Karaoke Pill and keep your edited words. One Undo restores the previous style for every caption you switched.",
+    "url": "https://captionsgen.com/news/captions-gen-1-1-14.html"
   },
   "promos": [],
   "panels": {
-    "premiere": "1.1.13",
-    "aftereffects": "1.1.11"
+    "premiere": "1.1.14",
+    "aftereffects": "1.1.14"
   }
 }
