@@ -1,5 +1,16 @@
 # Report backend (Cloudflare Worker)
 
+## Admin access recovery
+
+Set the `ADMIN_ACCESS_TOKEN` Worker secret to replace the dashboard login token.
+All administrative routes use it when configured. Without it, they use the
+existing `ADMIN_TOKEN`. An empty `ADMIN_ACCESS_TOKEN` rejects administrative access.
+
+Keep `ADMIN_TOKEN` in place. Existing subscriber links are signed with that key,
+or with `SUBSCRIBE_SECRET` when configured. The request handler preserves that
+signing key before selecting the replacement login token. Future login resets
+should replace `ADMIN_ACCESS_TOKEN` only.
+
 ## Continuing acquisition estimate
 
 The main dashboard combines the former checkout history with direct-download

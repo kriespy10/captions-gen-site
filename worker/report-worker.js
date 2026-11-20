@@ -43,6 +43,15 @@ function subscribePreflight(request) {
 
 export default {
   async fetch(request, env) {
+    if (env.ADMIN_ACCESS_TOKEN !== undefined) {
+      // Keep existing subscriber signatures tied to their original key while
+      // all administrative routes use the separately replaceable login token.
+      env = {
+        ...env,
+        SUBSCRIBE_SECRET: env.SUBSCRIBE_SECRET || env.ADMIN_TOKEN,
+        ADMIN_TOKEN: env.ADMIN_ACCESS_TOKEN,
+      };
+    }
     const url = new URL(request.url);
     if (url.pathname === "/api/subscribe") {
       if (request.method === "OPTIONS") return subscribePreflight(request);
