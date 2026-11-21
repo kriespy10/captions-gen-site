@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/analytics.css">
+<script defer src="/analytics.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000'/%3E%3Crect x='11' y='27' width='13' height='10' rx='3' fill='%23fff'/%3E%3Crect x='27' y='25' width='14' height='14' rx='4' fill='%23ffeb3b'/%3E%3Crect x='44' y='27' width='9' height='10' rx='3' fill='%23fff'/%3E%3C/svg%3E">
+<title>Faster captions on slower PCs | Captions Gen 1.1.14</title>
+<meta name="description" content="See how much CPU time Captions Gen saved on four clips, which Windows PC we tested, and which speech model to try first on a slower machine.">
+<link rel="canonical" href="https://captionsgen.com/blog/faster-captions-slower-pcs.html">
+<meta property="og:title" content="Faster captions on slower PCs | Captions Gen 1.1.14">
+<meta property="og:description" content="See how much CPU time Captions Gen saved on four clips, which Windows PC we tested, and which speech model to try first on a slower machine.">
+<meta property="og:url" content="https://captionsgen.com/blog/faster-captions-slower-pcs.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://captionsgen.com/img/guides/four-clip-cpu-time.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Captioning on a slower PC? What changed in Captions Gen 1.1.14", "description": "See how much CPU time Captions Gen saved on four clips, which Windows PC we tested, and which speech model to try first on a slower machine.", "inLanguage": "en", "articleSection": "Premiere Pro and After Effects", "datePublished": "2026-11-21", "dateModified": "2026-11-21", "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"}, "publisher": {"@type": "Organization", "name": "Captions Gen", "url": "https://captionsgen.com", "logo": {"@type": "ImageObject", "url": "https://captionsgen.com/img/captions-gen-logo.svg"}}, "mainEntityOfPage": "https://captionsgen.com/blog/faster-captions-slower-pcs.html", "image": "https://captionsgen.com/img/guides/four-clip-cpu-time.png"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://captionsgen.com/"}, {"@type": "ListItem", "position": 2, "name": "Caption guides", "item": "https://captionsgen.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Captioning on a slower PC? What changed in Captions Gen 1.1.14", "item": "https://captionsgen.com/blog/faster-captions-slower-pcs.html"}]}]</script>
+<style>
+  :root { --bg:#070708; --card:#151517; --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.14);
+    --text:#f4f4f5; --muted:#8e8e93; --muted2:#b5b5ba; --blue:#0a84ff; --blue2:#3395ff; --yellow:#ffeb3b;
+    --green:#30d158; --amber:#ff9f0a; --red:#ff6b6b; --cyan:#64d2ff; --card2:#1b1b1e; --pick:#0d1a2b;
+    --body:"Instrument Sans",-apple-system,"Segoe UI",system-ui,sans-serif; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:var(--body); background:var(--bg); color:var(--text); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 24px; }
+  .col { max-width:720px; margin:0 auto; padding:0 20px; }
+  nav { position:sticky; top:0; z-index:20; backdrop-filter:saturate(160%) blur(18px); -webkit-backdrop-filter:saturate(160%) blur(18px); background:rgba(7,7,8,.66); border-bottom:1px solid var(--hair); }
+  nav .wrap { display:flex; align-items:center; justify-content:space-between; height:54px; }
+  nav a { text-decoration:none; }
+  .brand { display:flex; align-items:center; gap:10px; color:var(--text); font-weight:600; font-size:15px; letter-spacing:-.01em; }
+  .brand svg { width:26px; height:26px; display:block; }
+  nav .links { display:flex; gap:24px; font-size:13.5px; align-items:center; }
+  nav .links a { color:var(--muted2); }
+  nav .links a:hover { color:var(--text); }
+  nav .links a.on { color:var(--text); }
+  nav .links a.buy { color:#fff; background:var(--blue); padding:7px 15px; border-radius:999px; font-weight:600; }
+  nav .links a.buy:hover { background:var(--blue2); }
+  @media (max-width:800px) { nav .links a:not(.buy):not(.on) { display:none; } }
+  .idx h1 { margin-bottom:6px; } .idx .sub { color:var(--muted); margin-bottom:26px; }
+  .post { display:block; background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px; margin-bottom:12px; text-decoration:none; }
+  .post:hover { border-color:var(--hair2); }
+  .post .pt { color:var(--text); font-weight:700; font-size:18px; margin-bottom:4px; }
+  .post .pd { color:var(--muted2); font-size:14px; }
+  article { padding:40px 0 20px; }
+  h1 { font-size:34px; line-height:1.2; letter-spacing:-.02em; margin:0 0 10px; }
+  .meta { color:var(--muted); font-size:13px; margin-bottom:28px; }
+  .app-guide { padding:12px 16px; margin:0 0 24px; border:1px solid var(--hair2); border-radius:10px; font-size:14px; }
+  .breadcrumbs { font-size:13px; color:var(--muted); margin:0 0 16px; }
+  .breadcrumbs a { color:var(--muted2); }
+  .sources { font-size:13px; margin-top:28px; }
+  .caption-example { margin:24px 0; }
+  .caption-example img { display:block; width:100%; height:auto; border-radius:12px; }
+  .caption-example figcaption { color:var(--muted); font-size:13px; margin-top:8px; }
+  .quick-answer { margin-top:20px; }
+  .quick-answer ul { margin-bottom:0; }
+  h2 { font-size:22px; margin:36px 0 10px; letter-spacing:-.01em; }
+  h2[id] { scroll-margin-top:78px; }
+  h3 { font-size:17px; margin:24px 0 8px; }
+  p, li { color:var(--muted2); font-size:16px; }
+  li { margin-bottom:6px; }
+  strong { color:var(--text); }
+  a { color:var(--blue); }
+  a:hover { color:var(--blue2); }
+  ol li::marker { color:var(--yellow); font-weight:700; }
+  .box { background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px; margin:32px 0; }
+  .box p { margin:6px 0; }
+  .box .t { color:var(--text); font-weight:700; }
+  kbd { background:var(--card); border:1px solid var(--hair2); border-radius:5px; padding:1px 6px; font-size:13px; color:var(--text); }
+  footer { border-top:1px solid var(--hair); margin-top:48px; padding:24px 0 48px; color:var(--muted); font-size:13px; }
+  footer a { color:var(--muted); }
+  .cta-line { background:rgba(10,132,255,.08); border-left:3px solid var(--blue); padding:10px 14px; border-radius:0 10px 10px 0; margin:18px 0 6px; font-size:15px; }
+  .btn { display:inline-block; background:var(--yellow); color:#111; font-weight:700; text-decoration:none; padding:11px 18px; border-radius:10px; margin:10px 10px 0 0; }
+  .btn:hover { color:#111; background:#fff176; }
+  .btn.ghost { background:transparent; color:var(--text); border:1px solid var(--hair2); }
+  .btn.ghost:hover { color:var(--text); background:rgba(255,255,255,.06); }
+  .ptable-wrap { position:relative; left:50%; transform:translateX(-50%); width:min(1100px, calc(100vw - 40px)); margin:18px 0 6px; border:1px solid var(--hair2); border-radius:16px; overflow-x:auto; background:var(--card); -webkit-overflow-scrolling:touch; }
+  .ptable { width:100%; min-width:1040px; border-collapse:separate; border-spacing:0; font-size:14px; font-variant-numeric:tabular-nums; }
+  .ptable th { background:var(--card2); color:var(--muted); font-size:11.5px; font-weight:600; text-transform:uppercase; letter-spacing:.07em; text-align:left; padding:12px 11px; border-bottom:1px solid var(--hair2); white-space:nowrap; }
+  .ptable td { padding:14px 11px; border-bottom:1px solid var(--hair); color:var(--muted2); vertical-align:middle; line-height:1.4; }
+  .ptable tr:last-child td { border-bottom:0; }
+  .ptable tbody tr:hover td { background:var(--card2); }
+  .ptable td:first-child, .ptable th:first-child { position:sticky; left:0; z-index:1; background:var(--card); border-right:1px solid var(--hair); }
+  .ptable th:first-child { background:var(--card2); }
+  .ptable tbody tr:hover td:first-child { background:var(--card2); }
+  .ptable .tool { color:var(--text); font-weight:700; font-size:15px; white-space:nowrap; }
+  .ptable .sub { color:var(--muted); font-size:12.5px; margin-top:2px; }
+  .ptable .price { color:var(--text); font-weight:600; white-space:nowrap; }
+  .ptable td:nth-child(2) .sub { white-space:nowrap; }
+  .ptable tr.pick td, .ptable tr.pick:hover td { background:var(--pick); }
+  .ptable tr.pick td:first-child { box-shadow:inset 3px 0 0 var(--yellow); }
+  .ptable .tag { display:inline-block; margin-left:6px; padding:2px 8px; border-radius:999px; border:1px solid var(--yellow); color:var(--yellow); font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; vertical-align:2px; }
+  .pill { display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:999px; font-size:12.5px; font-weight:600; white-space:nowrap; border:1px solid currentColor; }
+  .pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+  .pill.ok { color:var(--green); } .pill.sub { color:var(--amber); } .pill.mix { color:var(--cyan); } .pill.neutral { color:var(--muted2); }
+  .mark { display:inline-flex; align-items:center; gap:7px; white-space:nowrap; }
+  .mark i { font-style:normal; display:inline-grid; place-items:center; width:20px; height:20px; border-radius:50%; font-size:12px; font-weight:800; border:1px solid currentColor; }
+  .mark.yes { color:var(--green); } .mark.no { color:var(--red); } .mark.na { color:var(--muted); }
+  .yr { min-width:150px; }
+  .yr .amt { color:var(--text); font-weight:600; white-space:nowrap; }
+  .yr .bar { position:relative; height:6px; margin-top:7px; border-radius:3px; background:var(--hair); overflow:hidden; }
+  .yr .bar span { position:absolute; left:0; top:0; bottom:0; border-radius:3px; background:var(--amber); }
+  .yr .bar span.lo { background:var(--green); }
+  .yr .bar span.range { opacity:.35; }
+  @media (max-width:600px) {
+    .ptable-wrap { left:0; transform:none; width:auto; }
+    .ptable .tool + .sub { display:none; }
+    .ptable td:first-child { max-width:132px; }
+    .ptable .tool { white-space:normal; font-size:14px; }
+    .ptable .tag { display:block; width:max-content; margin:5px 0 0; }
+  }
+  .ver { display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.06em; color:var(--blue); background:rgba(10,132,255,.14); border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .post .pm { color:var(--muted); font-size:13px; margin-bottom:6px; }
+  .tldr { background:var(--card); border:1px solid var(--hair); border-left:3px solid var(--yellow); border-radius:0 14px 14px 0; padding:14px 20px 6px; margin:22px 0 26px; }
+  .tldr .t, .toc .t { color:var(--text); font-weight:700; margin:0 0 6px; font-size:15px; }
+  .tldr ul { margin:0; padding-left:20px; }
+  .toc { border:1px solid var(--hair); border-radius:14px; padding:14px 20px; margin:0 0 30px; }
+  .toc ol { margin:0; padding-left:22px; columns:2; column-gap:28px; }
+  .toc li { font-size:14.5px; margin-bottom:4px; break-inside:avoid; }
+  .toc a { color:var(--muted2); text-decoration:none; }
+  .toc a:hover { color:var(--text); }
+  @media (max-width:600px) { .toc ol { columns:1; } }
+  article .col { position:relative; }
+  .toc-rail { display:none; }
+  @media (min-width:1040px) {
+    article .col.has-toc { margin-left:max(0px, calc(50% - 480px)); }
+    .has-toc .ptable-wrap { left:0; transform:none; width:auto; }
+    .has-toc .ptable { min-width:0; }
+    .toc-inline { display:none; }
+    .toc-rail { display:block; position:absolute; top:0; bottom:0; left:calc(100% + 28px); width:212px; }
+    .toc-side { position:sticky; top:84px; margin:0; border:0; border-left:1px solid var(--hair2); border-radius:0; padding:2px 0 2px 18px; }
+    .toc-side ol { columns:1; list-style:none; padding:0; }
+    .toc-side li { font-size:14px; line-height:1.45; margin-bottom:9px; }
+    .toc-side a.on { color:var(--text); }
+    .toc-side a.on::before { content:""; position:absolute; left:-1px; width:2px; height:1.4em; background:var(--yellow); }
+  }
+  .tip, .note { border-radius:0 12px 12px 0; padding:10px 16px; margin:18px 0; font-size:15px; color:var(--muted2); }
+  .tip { background:rgba(48,209,88,.07); border-left:3px solid var(--green); }
+  .note { background:rgba(255,159,10,.07); border-left:3px solid var(--amber); }
+  .tip b, .note b { color:var(--text); }
+  .spec { width:100%; border-collapse:collapse; margin:14px 0 8px; font-size:15px; border:1px solid var(--hair); border-radius:12px; overflow:hidden; }
+  .spec th, .spec td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--hair); vertical-align:top; }
+  .spec th { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.06em; background:var(--card2); }
+  .spec td { color:var(--muted2); }
+  .spec td:first-child { color:var(--text); font-weight:600; white-space:nowrap; }
+  .spec tr:last-child td { border-bottom:0; }
+  .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; border:1px solid rgba(255,255,255,.35); }
+  .ptable-legend { display:flex; flex-wrap:wrap; gap:6px 18px; color:var(--muted); font-size:12.5px; margin:10px 2px 0; }
+
+  .caption-example { margin:30px 0; }
+  .caption-example img { border:1px solid var(--hair2); background:#101013; }
+  .caption-example figcaption { line-height:1.5; color:var(--muted2); padding:0 2px; }
+  .caption-example figcaption a { white-space:nowrap; }
+  .ptable-wrap { left:0; transform:none; width:100%; }
+  .ptable { min-width:620px; }
+  .ptable:has(th:nth-child(6)) { min-width:1000px; }
+  .ptable th { white-space:normal; }
+  .ptable td:first-child { width:27%; }
+  .spec { table-layout:fixed; }
+  .spec th, .spec td { overflow-wrap:anywhere; }
+  .spec td:first-child { white-space:normal; }
+  article ol > li { padding-left:4px; margin-bottom:12px; }
+  article .tip, article .note { line-height:1.6; }
+  article a:focus-visible { outline:2px solid var(--yellow); outline-offset:4px; border-radius:2px; }
+  .toc-side { max-height:calc(100vh - 108px); overflow-y:auto; scrollbar-width:thin; }
+  .skip-link { position:absolute; z-index:40; top:8px; left:16px; transform:translateY(-180%); padding:8px 14px; background:var(--yellow); color:#111; border-radius:8px; }
+  .skip-link:focus { transform:none; }
+  #guide-content { scroll-margin-top:70px; }
+  @media (max-width:600px) {
+    h1 { font-size:30px; }
+    .spec th, .spec td { padding:10px 9px; font-size:14px; }
+    .caption-example { margin:24px 0; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#guide-content">Skip to guide</a>
+<nav><div class="wrap">
+  <a class="brand" href="https://captionsgen.com/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#000"/><rect x="11" y="27" width="13" height="10" rx="3" fill="#fff"/><rect x="27" y="25" width="14" height="14" rx="4" fill="#ffeb3b"/><rect x="44" y="27" width="9" height="10" rx="3" fill="#fff"/></svg>Captions Gen</a>
+  <div class="links">
+    <a href="https://captionsgen.com/#styles">Styles</a>
+    <a href="https://captionsgen.com/#custom">Build your own</a>
+    <a href="https://captionsgen.com/#how">How it works</a>
+    <a href="https://captionsgen.com/#install">Install</a>
+    <a href="https://captionsgen.com/#faq">FAQ</a>
+    <a class="on" href="https://captionsgen.com/blog/">Guides</a>
+    <a href="https://captionsgen.com/news/">News</a>
+    <a class="buy" href="https://captionsgen.com/#buy">Get it free</a>
+  </div>
+</div></nav>
+<main id="guide-content" tabindex="-1"><article><div class="col has-toc">
+<div class="toc-rail"><aside class="toc toc-side" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#where-a-slower-pc-can-save-time">Where a slower PC can save time</a></li><li><a href="#what-we-timed-and-which-pc-we-used">What we timed and which PC we used</a></li><li><a href="#which-model-should-you-try-first">Which model should you try first?</a></li></ol></aside></div>
+<script>(function(){function f(){var l=[].slice.call(document.querySelectorAll('.toc-side a')),i=0;
+l.forEach(function(a,k){var e=document.getElementById(a.hash.slice(1));if(e&&e.getBoundingClientRect().top<140)i=k});
+l.forEach(function(a,k){a.classList.toggle('on',k===i)})}
+addEventListener('scroll',f,{passive:true});addEventListener('DOMContentLoaded',f)})();</script>
+<p class="breadcrumbs"><a href="https://captionsgen.com/">Home</a> / <a href="https://captionsgen.com/blog/">Caption guides</a> / Captioning on a slower PC? What changed in Captions Gen 1.1.14</p>
+<h1>Captioning on a slower PC? What changed in Captions Gen 1.1.14</h1>
+<div class="meta">Published <time datetime="2026-11-21">21 November 2026</time> · by <a href="https://github.com/Kriespy10">Kris</a>, maker of Captions Gen</div>
+
+
+<p>If you have four clips to caption, your PC used to load the same speech model four times. Captions Gen 1.1.14 loads it once and works through the clips in order. On our Windows test PC, the Base model finished the batch in <strong>3.54 seconds, down from 8.35</strong>. The caption text and word timings matched.</p>
+<p>That repeated loading is work a slower processor can skip, too. We measured the savings on a Ryzen 7 desktop. We haven't timed the update on an older laptop or a PC with less RAM.</p>
+
+<aside class="toc toc-inline" aria-label="On this page"><p class="t">On this page</p><ol><li><a href="#where-a-slower-pc-can-save-time">Where a slower PC can save time</a></li><li><a href="#what-we-timed-and-which-pc-we-used">What we timed and which PC we used</a></li><li><a href="#which-model-should-you-try-first">Which model should you try first?</a></li></ol></aside>
+<h2 id="where-a-slower-pc-can-save-time">Where a slower PC can save time</h2>
+<p>Say you've cut an interview into a few short clips in Premiere Pro. Select the clips you want to caption and run <strong>Generate Captions</strong> once. In After Effects, select the audio or video layers with the speech you want. Both panels use the same local CPU engine.</p>
+<p>The saving comes when several clips need fresh transcripts in the same batch. If you generate one clip at a time, each new job still has to load its model. If the plugin already has a transcript for every clip, it can skip the speech model altogether.</p>
+
+<h2 id="what-we-timed-and-which-pc-we-used">What we timed and which PC we used</h2>
+<p>We ran the test on <strong>Windows 11 Home with an AMD Ryzen 7 9800X3D, 8 cores, 16 threads and 61.6 GiB of usable RAM</strong>. Transcription ran on the CPU. We selected four segments of synthetic English speech totaling 19.93 seconds. The models were already downloaded. Each run needed fresh transcripts.</p>
+<p>We compared two builds, one that reloaded the model for each clip and one that reused it. Each time below is the median of three runs. The clock started with audio extraction and stopped after the engine grouped the words and closed its worker. Timeline placement, playback and export fall outside those timings.</p>
+<table>
+<caption>Time to transcribe and group the same four clips</caption>
+<thead><tr><th scope="col">Speech model</th><th scope="col">Load per clip</th><th scope="col">Load once</th><th scope="col">Engine CPU time saved</th></tr></thead>
+<tbody>
+<tr><th scope="row">Base</th><td>8.35 s</td><td>3.54 s</td><td>46.3%</td></tr>
+<tr><th scope="row">Small</th><td>11.88 s</td><td>5.85 s</td><td>36.5%</td></tr>
+<tr><th scope="row">Turbo</th><td>27.18 s</td><td>16.98 s</td><td>25.1%</td></tr>
+</tbody></table>
+<p>The last column counts the processor time spent by the caption engine and its workers across all cores. Your processor can still look busy in Task Manager while the job runs. With Base, the engine did 46.3% less CPU work to finish those same four clips.</p>
+<figure class="caption-example"><img src="/img/guides/four-clip-cpu-time.png" width="1200" height="675" loading="lazy" alt="Engine CPU-seconds before and after model reuse. Base fell from 17.77 to 9.55, Small from 29.88 to 18.97, and Turbo from 77.95 to 58.39."><figcaption>Several cores can work during the same second. Their combined CPU time can exceed the time you spend waiting.</figcaption></figure>
+
+<h2 id="which-model-should-you-try-first">Which model should you try first?</h2>
+<p>On a slower PC, open <strong>Settings</strong> and choose <strong>Base</strong>. It's the lightest built-in speech model. Try a few short clips from your own edit in one batch. Listen back to a line with a name or a fast phrase and check the words and their timing. If you spend too long fixing the transcript, try Small on those clips and compare.</p>
+<p>If memory is tight, model choice still matters. Peak memory for the speech worker barely changed when we reused the model. Base had the smallest footprint in our test. Your PC still needs enough memory to run your Adobe app alongside it. Check the <a href="/#install">Windows and Adobe requirements</a>.</p>
+<p>To get the update, open <strong>Settings</strong> in Captions Gen and choose <strong>Check for updates</strong>. The <a href="/news/captions-gen-1-1-14.html">1.1.14 release notes</a> also cover idle preview memory and switching styles after you've edited the words.</p>
+
+
+<div class="box">
+<p class="t">Try animated captions on your own edit</p>
+<p>Captions Gen is a currently free animated captions plugin for Adobe Premiere Pro and After Effects on Windows. It transcribes audio locally on the CPU with Faster Whisper, then places editable Motion Graphics clips in Premiere or native caption layers in After Effects.</p>
+<p>Currently free, with no watermark, no time limit and no subscription. Paid features are planned for the future. Adobe Premiere Pro and After Effects are separate paid applications.</p>
+<p>Current release: <a href="https://captionsgen.com/news/captions-gen-1-1-14.html">1.1.14</a>. Check <a href="https://captionsgen.com/product.html">supported Adobe versions, installation requirements and limitations</a>. Use Premiere Pro's native caption tracks when you need SRT, selectable subtitles or broadcast closed captions.</p>
+<a class="btn" href="https://api.captionsgen.com/api/download/windows">Download free</a>
+<a class="btn ghost" href="https://captionsgen.com/#styles">See the caption styles</a>
+</div>
+
+<div class="box"><p class="t">Related guides</p><ul><li><a href="free-caption-plugin-premiere-pro.html">Free caption plugins for Premiere Pro</a></li>
+<li><a href="how-to-add-captions-in-after-effects.html">How to add animated captions in After Effects</a></li></ul></div>
+</div></article></main>
+<footer><div class="col">© 2026 Captions Gen · <a href="https://captionsgen.com/">Home</a> · <a href="https://captionsgen.com/product.html">Product facts &amp; compatibility</a> · <a href="https://captionsgen.com/#faq">FAQ</a> · <a href="https://captionsgen.com/blog/">Guides</a> · <a href="https://captionsgen.com/news/">News</a> · <a href="/privacy.html">Website privacy</a> · <button class="analytics-preferences" type="button" data-analytics-preferences>Analytics preferences</button></div></footer>
+</body>
+</html>

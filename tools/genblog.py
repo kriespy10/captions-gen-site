@@ -10,7 +10,7 @@ SITE = "https://captionsgen.com"
 FREE = PRODUCT["download_url"]
 DATE = "2026-08-26"
 SITE_UPDATED = "2026-11-13"
-GUIDE_INDEX_UPDATED = "2026-11-09"
+GUIDE_INDEX_UPDATED = "2026-11-21"
 # Every guide includes the shared requirements box below. Its factual correction
 # is a content update even when the rest of an article has not changed.
 SHARED_REQUIREMENTS_UPDATED = "2026-11-09"
@@ -233,7 +233,9 @@ def page(slug, title, desc, h1, body_html, related, modified=DATE, image=None, p
     if image is None and first_image:
         image = first_image.group(1)
     closing = CLOSING.replace("__FREE__", FREE)
-    if app == "After Effects":
+    if app == "Premiere Pro and After Effects":
+        app_guide = ""
+    elif app == "After Effects":
         app_guide = '<p class="app-guide"><strong>After Effects guide.</strong> <a href="/after-effects.html">Free plugin, output examples and compatibility</a>. Working in Premiere Pro? <a href="animated-captions-premiere-pro.html">Choose a Premiere caption workflow</a>.</p>'
     else:
         app_guide = '<p class="app-guide"><strong>Premiere Pro guide.</strong> Using After Effects? <a href="how-to-add-captions-in-after-effects.html">Install its panel and create your first captions</a>.</p>'
@@ -408,7 +410,8 @@ idx = f"""<!doctype html>
 <li><a href="premiere-pro-captions-not-showing.html">Fix captions missing from the preview or export</a></li>
 <li><a href="animated-captions-premiere-pro.html">Choose an animated or word-by-word workflow</a></li>
 <li><a href="free-caption-plugin-premiere-pro.html">Check the free plugin, compatibility and setup</a></li>
-</ul></div><h2 id="after-effects">After Effects</h2><p>Compare the <a href="/after-effects.html">free After Effects captions plugin, examples and requirements</a>, then choose the guide for your task.</p>{guide_cards('After Effects')}
+</ul></div><h2 id="both-apps">Premiere Pro and After Effects</h2>{guide_cards('Premiere Pro and After Effects')}
+<h2 id="after-effects">After Effects</h2><p>Compare the <a href="/after-effects.html">free After Effects captions plugin, examples and requirements</a>, then choose the guide for your task.</p>{guide_cards('After Effects')}
 <h2 id="premiere-pro">Premiere Pro</h2><p>Choose native caption tracks for subtitle delivery, or editable graphics for animated caption designs.</p>{grouped_premiere_guides()}</div></article>
 <footer><div class="col">© 2026 Captions Gen · <a href="{SITE}/">Home</a> · <a href="{SITE}/product.html">Product facts &amp; compatibility</a> · <a href="{SITE}/#faq">FAQ</a> · <a href="{SITE}/news/">News</a> · {PRIVACY_FOOTER}</div></footer>
 </body></html>

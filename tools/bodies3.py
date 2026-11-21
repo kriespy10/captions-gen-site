@@ -672,3 +672,40 @@ body="""
 """ + tip("Correct text in the caption editor or Premiere's Properties, then use Update animation when offered. Review the new highlights against the voice; a corrected or added word can receive estimated timing.") + """
 <p>The <a href="/news/captions-gen-1-1-9.html">1.1.9 setup</a> also offers an After Effects panel, tested with After Effects 2026 on Windows 11. It creates native editable caption layers; use <a href="edit-captions-in-after-effects.html">the After Effects editing guide</a> for its controls. There is no public Mac installer or translation feature.</p>
 """)
+
+P3["faster-captions-slower-pcs"] = {
+    "title": "Faster captions on slower PCs | Captions Gen 1.1.14",
+    "h1": "Captioning on a slower PC? What changed in Captions Gen 1.1.14",
+    "desc": "See how much CPU time Captions Gen saved on four clips, which Windows PC we tested, and which speech model to try first on a slower machine.",
+    "published": "2026-11-21",
+    "modified": "2026-11-21",
+    "app": "Premiere Pro and After Effects",
+    "rel": ["free-caption-plugin-premiere-pro", "how-to-add-captions-in-after-effects"],
+    "body": """
+<p>If you have four clips to caption, your PC used to load the same speech model four times. Captions Gen 1.1.14 loads it once and works through the clips in order. On our Windows test PC, the Base model finished the batch in <strong>3.54 seconds, down from 8.35</strong>. The caption text and word timings matched.</p>
+<p>That repeated loading is work a slower processor can skip, too. We measured the savings on a Ryzen 7 desktop. We haven't timed the update on an older laptop or a PC with less RAM.</p>
+
+<h2>Where a slower PC can save time</h2>
+<p>Say you've cut an interview into a few short clips in Premiere Pro. Select the clips you want to caption and run <strong>Generate Captions</strong> once. In After Effects, select the audio or video layers with the speech you want. Both panels use the same local CPU engine.</p>
+<p>The saving comes when several clips need fresh transcripts in the same batch. If you generate one clip at a time, each new job still has to load its model. If the plugin already has a transcript for every clip, it can skip the speech model altogether.</p>
+
+<h2>What we timed and which PC we used</h2>
+<p>We ran the test on <strong>Windows 11 Home with an AMD Ryzen 7 9800X3D, 8 cores, 16 threads and 61.6 GiB of usable RAM</strong>. Transcription ran on the CPU. We selected four segments of synthetic English speech totaling 19.93 seconds. The models were already downloaded. Each run needed fresh transcripts.</p>
+<p>We compared two builds, one that reloaded the model for each clip and one that reused it. Each time below is the median of three runs. The clock started with audio extraction and stopped after the engine grouped the words and closed its worker. Timeline placement, playback and export fall outside those timings.</p>
+<table>
+<caption>Time to transcribe and group the same four clips</caption>
+<thead><tr><th scope="col">Speech model</th><th scope="col">Load per clip</th><th scope="col">Load once</th><th scope="col">Engine CPU time saved</th></tr></thead>
+<tbody>
+<tr><th scope="row">Base</th><td>8.35 s</td><td>3.54 s</td><td>46.3%</td></tr>
+<tr><th scope="row">Small</th><td>11.88 s</td><td>5.85 s</td><td>36.5%</td></tr>
+<tr><th scope="row">Turbo</th><td>27.18 s</td><td>16.98 s</td><td>25.1%</td></tr>
+</tbody></table>
+<p>The last column counts the processor time spent by the caption engine and its workers across all cores. Your processor can still look busy in Task Manager while the job runs. With Base, the engine did 46.3% less CPU work to finish those same four clips.</p>
+<figure class="caption-example"><img src="/img/guides/four-clip-cpu-time.png" width="1200" height="675" loading="lazy" alt="Engine CPU-seconds before and after model reuse. Base fell from 17.77 to 9.55, Small from 29.88 to 18.97, and Turbo from 77.95 to 58.39."><figcaption>Several cores can work during the same second. Their combined CPU time can exceed the time you spend waiting.</figcaption></figure>
+
+<h2>Which model should you try first?</h2>
+<p>On a slower PC, open <strong>Settings</strong> and choose <strong>Base</strong>. It's the lightest built-in speech model. Try a few short clips from your own edit in one batch. Listen back to a line with a name or a fast phrase and check the words and their timing. If you spend too long fixing the transcript, try Small on those clips and compare.</p>
+<p>If memory is tight, model choice still matters. Peak memory for the speech worker barely changed when we reused the model. Base had the smallest footprint in our test. Your PC still needs enough memory to run your Adobe app alongside it. Check the <a href="/#install">Windows and Adobe requirements</a>.</p>
+<p>To get the update, open <strong>Settings</strong> in Captions Gen and choose <strong>Check for updates</strong>. The <a href="/news/captions-gen-1-1-14.html">1.1.14 release notes</a> also cover idle preview memory and switching styles after you've edited the words.</p>
+""",
+}
