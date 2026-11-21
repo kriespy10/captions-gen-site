@@ -142,6 +142,8 @@
     animation: rise .7s .45s both;
   }
   .hero p.sub b { color: var(--text); font-weight: 600; }
+  .hero .speed-update { max-width: 58ch; margin: 22px auto 0; color: var(--muted2); line-height: 1.5; }
+  .speed-update a { text-decoration: underline; text-underline-offset: .15em; }
   .hero .maker-byline { display: inline-block; color: var(--yellow); font-weight: 600; font-size: 16px; margin: 0 0 16px; }
   .hero .maker-byline:hover { color: var(--text); }
   .cta { display: inline-flex; flex-direction: column; align-items: center; gap: 12px; animation: rise .7s .55s both; }
@@ -379,6 +381,7 @@
       <div class="note"><b>Currently free</b> · no watermark · no transcription time cap<br>One Windows setup: Premiere Pro, After Effects, or Both<br>Direct download · no email required · <a href="#install">check app requirements</a></div>
       <a class="demo-jump" href="#custom">Try the caption designer ↓</a>
     </div>
+    <p class="speed-update"><strong>Editing on a slower PC?</strong> Caption several clips together in 1.1.14 and the speech model loads just once. <a href="/blog/faster-captions-slower-pcs.html">See how much time and CPU work that saved in our test.</a></p>
     <div class="strip-wrap">
       <div class="strip" aria-label="Animated caption preview">
         <span class="tag"><i></i> Caption style preview</span>
@@ -1024,7 +1027,7 @@
 <section id="performance">
   <div class="wrap">
     <h2>Transcription <span class="y">&amp; performance.</span></h2>
-    <p class="lead">Premiere Pro and After Effects use the same local CPU engine. Transcription time depends on your processor, model and audio length; preview and export also depend on the Adobe project.</p>
+    <p class="lead">Premiere Pro and After Effects use the same local speech engine. In our four-clip test, Base finished in 3.54 seconds, down from 8.35, and used 46.3% less engine CPU time. We tested on a Windows 11 desktop with a Ryzen 7 9800X3D and 61.6 GiB of usable RAM. We haven't measured the speedup on older PCs. <a href="/blog/faster-captions-slower-pcs.html">See the results for Base, Small and Turbo.</a></p>
     <div class="two">
       <div class="card">
         <h3>Choose a speech model</h3>
