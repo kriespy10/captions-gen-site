@@ -79,6 +79,27 @@ test('a fresh calendar month increments monthly estimate despite a retained olde
   assert.equal(data.monthly[0].uniqueDownloadBrowsers,1);
 });
 
+test('live counts follow installer requests and reset at UTC day and month boundaries', async () => {
+  const {call} = setup();
+  const read = async now => {
+    const response = await call('GET', '/api/live-downloads', undefined, admin, new Date(now));
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get('cache-control'), 'private, no-store');
+    return response.json();
+  };
+  const request = now => call('GET', '/api/download/windows', undefined, {}, new Date(now));
+  await request('2026-11-29T17:00:00Z');
+  const before = await read('2026-11-30T23:59:55Z');
+  assert.deepEqual([before.today, before.monthToDate], [0, 1]);
+  await request('2026-11-30T23:59:56Z');
+  assert.deepEqual(await read('2026-11-30T23:59:57Z'), {
+    ok: true, date: '2026-11-30', month: '2026-11', asOf: '2026-11-30T23:59:57.000Z',
+    today: 1, monthToDate: 2,
+  });
+  const midnight = await read('2026-12-01T00:00:00Z');
+  assert.deepEqual([midnight.today, midnight.monthToDate], [0, 0]);
+});
+
 test('HEAD/prefetch are ignored; opt-out and disabled browser estimates still count raw requests',async () => {
   const {call,summary,env} = setup();
   for (const [method,headers] of [['HEAD',{}],['GET',{purpose:'prefetch'}],['GET',{'sec-purpose':'prefetch;prerender'}]]) {

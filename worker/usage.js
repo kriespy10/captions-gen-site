@@ -9,6 +9,7 @@
 import { audienceSummary, growthSeries, growthMarkup, measurementSeries, measurementCards, GROWTH_STYLES } from "./growth-chart.mjs";
 import { acquisitionSeries, acquisitionCard } from "./acquisitions.mjs";
 import { usageRevoked, revokedUsageIds, beginUsageWrite, endUsageWrite } from "./measurements.mjs";
+import { LIVE_DOWNLOADS_MARKUP, LIVE_DOWNLOADS_STYLES, startLiveDownloads } from "./live-downloads.mjs";
 
 const TTL = 400 * 86400;
 const ACTIVITY_EVENTS = ["panel_open", "transcribe", "captions_placed"];
@@ -168,9 +169,11 @@ main{max-width:760px;margin:auto;padding:24px 16px}h1{font-size:24px;margin:0 0 
 h2{font-size:16px;margin:28px 0 8px}.lbl{color:#d4d4d8}input,button{font:inherit;padding:8px 10px;border-radius:6px;border:1px solid #3f3f46;background:#18181b;color:inherit}
 button{background:#3b82f6;border:0;cursor:pointer}#err{color:#f87171}small{color:#71717a}
 ${GROWTH_STYLES}
+${LIVE_DOWNLOADS_STYLES}
 </style><main><h1>Captions Gen audience</h1><p>Acquisition estimates, install registrations and opt-in activity.</p>
 <form id="f" hidden><input id="t" type="password" placeholder="Admin token" size="30"> <button>Show</button></form>
 <div id="err"></div>
+${LIVE_DOWNLOADS_MARKUP}
 <section id="growth" class="growth-card" aria-labelledby="growth-title" hidden>
   <div class="growth-top"><div><p class="growth-eyebrow">CAPTIONS GEN / GROWTH</p><h2 id="growth-title">Downloads, installs and active use.</h2></div><span class="growth-live"><i aria-hidden="true"></i>Updated on refresh</span></div>
   <div class="growth-controls"><label><span class="growth-sr">Metric</span><select id="growth-metric"><option value="acquisitions" selected>Acquisition estimate</option><option value="uniqueInstalls">Install registrations</option><option value="sessionCount">Sessions (opt-in)</option><option value="downloadRequests">Download requests</option></select></label><label class="growth-period"><span class="growth-sr">Period</span><select id="growth-period"><option id="growth-period-7" value="7">Last 7 completed UTC days</option><option id="growth-period-30" value="30">Last 30 completed UTC days</option><option id="growth-history-option" value="history" selected>All history · by month</option></select></label></div>
@@ -194,6 +197,7 @@ ${measurementSeries.toString()}
 ${measurementCards.toString()}
 ${acquisitionSeries.toString()}
 ${acquisitionCard.toString()}
+${startLiveDownloads.toString()}
 let audience=null;
 let measurements=null;
 function renderGrowth(){
@@ -232,6 +236,7 @@ async function load(tok){
   if(!r.ok){document.getElementById("err").textContent="Wrong token.";try{localStorage.removeItem("tok")}catch{};f.hidden=false;return}
   try{localStorage.setItem("tok",tok)}catch{}
   f.hidden=true;const d=await r.json();
+  startLiveDownloads(tok);
   audience=d.audience;
   document.getElementById("legacy-measurements").hidden=false;
   renderLegacyGrowth();

@@ -11,7 +11,7 @@ export async function assertDashboardRenders(html, {ordersUnavailable=false,live
   assert.ok(script,'Dashboard contains its client script');
   const elements=new Map();
   const element=id=>{
-    if(!elements.has(id))elements.set(id,{id,hidden:true,innerHTML:'',textContent:'',value:id==='growth-period'||id==='order-archive-period'?'history':id==='legacy-period'?'30':id==='growth-metric'?'acquisitions':'',appendChild(){}});
+    if(!elements.has(id))elements.set(id,{id,hidden:true,dataset:{},innerHTML:'',textContent:'',value:id==='growth-period'||id==='order-archive-period'?'history':id==='legacy-period'?'30':id==='growth-metric'?'acquisitions':'',appendChild(){}});
     return elements.get(id);
   };
   const daily={'2026-11-09':{install:3},'2026-11-10':{install:1}};
@@ -21,13 +21,36 @@ export async function assertDashboardRenders(html, {ordersUnavailable=false,live
   }],new Date('2026-11-10T12:00:00Z'),'2026-09-01T00:00:00Z',daily);
   const payload={ok:true,audience,pings:{install:4,engine_start:2,daily},optedIn:1,steps:[],returning:0,active7:1,active30:1,usedNotBought:0,versions:{'1.1.9':1},os:{Windows:1}};
   const calls=[];
+  const timers = new Map();
+  let nextTimer = 0;
+  let downloadCount = 1;
+  let downloadStatus = 200;
+  const listeners = {};
+  const settle = () => new Promise(resolve => setImmediate(resolve));
+  const tick = async () => {
+    assert.equal(timers.size, 1, 'only one counter check is queued');
+    const [id, callback] = timers.entries().next().value;
+    timers.delete(id);
+    await callback();
+  };
   const context={
-    document:{getElementById:element,createElement:tag=>({tag,appendChild(){}})},
+    document:{getElementById:element,createElement:tag=>({tag,appendChild(){}}),
+      hidden:false,addEventListener:(event,callback)=>{listeners[event]=callback;}},
+    AbortSignal,
+    setTimeout: (callback, interval) => {
+      assert.equal(interval, 10000);
+      timers.set(++nextTimer, callback);
+      return nextTimer;
+    },
+    clearTimeout: id => timers.delete(id),
     localStorage:{getItem:()=> 'local-fixture-token',setItem(){},removeItem(){}},
     fetch:async (url,options)=>{
       calls.push(url);
       assert.equal(options.headers.authorization,'Bearer local-fixture-token','each private endpoint uses the existing admin header');
       if(url==='/api/funnel')return {ok:true,json:async()=>payload};
+      if(url==='/api/live-downloads')return {ok:downloadStatus===200,status:downloadStatus,json:async()=>({
+        ok:true,asOf:'2026-11-10T12:00:00Z',date:'2026-11-10',month:'2026-11',today:downloadCount,monthToDate:downloadCount+3,
+      })};
       if(url==='/api/lemon-orders') {
         if(ordersUnavailable)return {ok:false};
         return {ok:true,json:async()=>noImport?{ok:true,schema:1,available:false,coverage:null,totalOrders:null,daily:[],monthly:[]}:{
@@ -50,7 +73,7 @@ export async function assertDashboardRenders(html, {ordersUnavailable=false,live
     },URL,Blob,Date:class extends Date{constructor(...args){super(...(args.length?args:['2026-11-10T12:00:00Z']))}}
   };
   vm.runInNewContext(script,context);
-  await new Promise(resolve=>setImmediate(resolve));
+  await settle();
   assert.match(element('growth-body').innerHTML,/<svg/,'Install graph renders after the API response');
   assert.match(element('growth-body').innerHTML,new RegExp('growth-value">'+(liveUnavailable?'8':ordersUnavailable||noImport?'1':'9')+'<'),'default history continues old order days with direct browser estimates');
   assert.equal(element('growth-period').value,'history');
@@ -65,7 +88,41 @@ export async function assertDashboardRenders(html, {ordersUnavailable=false,live
   assert.match(element('legacy-growth-body').innerHTML,/Legacy first-start signals/);
   assert.match(element('downloads').innerHTML,/GitHub asset requests \(12\)/);
   assert.match(element('subs').innerHTML,/Email sign-ups \(579\)/);
-  assert.deepEqual(calls,['/api/funnel','/api/measurements','/api/lemon-orders','/api/downloads','/api/subscribers']);
+  assert.deepEqual(calls,['/api/funnel','/api/live-downloads','/api/measurements','/api/lemon-orders','/api/downloads','/api/subscribers']);
+  assert.equal(element('live-downloads').hidden,false);
+  assert.equal(element('live-download-today').textContent,'1');
+  downloadCount = 2;
+  await tick();
+  assert.equal(element('live-download-today').textContent,'2');
+  assert.equal(element('live-download-month').textContent,'5');
+  assert.equal(element('live-download-change').textContent,'+1 since last check');
+
+  element('live-download-toggle').onclick();
+  assert.equal(timers.size,0);
+  assert.equal(element('live-download-status').textContent,'Updates paused');
+  downloadCount = 3;
+  element('live-download-toggle').onclick();
+  await settle();
+  assert.equal(element('live-download-today').textContent,'3');
+
+  context.document.hidden = true;
+  listeners.visibilitychange();
+  assert.equal(timers.size,0);
+  context.document.hidden = false;
+  downloadStatus = 503;
+  listeners.visibilitychange();
+  await settle();
+  assert.equal(element('live-download-status').textContent,'Reconnecting…');
+  assert.equal(element('live-download-today').textContent,'3','an outage keeps the last known count');
+  downloadStatus = 200;
+  downloadCount = 4;
+  await tick();
+  assert.equal(element('live-download-today').textContent,'4');
+  assert.equal(element('live-download-status').textContent,'Updates every 10 seconds');
+  downloadStatus = 401;
+  await tick();
+  assert.equal(timers.size,0);
+  assert.equal(element('live-download-status').textContent,'Reload to sign in');
   element('growth-metric').value='uniqueInstalls';
   element('growth-metric').onchange();
   assert.equal(element('growth-period').value,'30','live metrics cannot inherit acquisition-only monthly history');

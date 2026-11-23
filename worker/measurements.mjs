@@ -174,8 +174,31 @@ async function registerSession(request, env, now) {
   } catch { return json({ ok: false, error: 'measurements unavailable' }, 503); }
 }
 
+function adminAuthorized(request, env) {
+  return env.ADMIN_TOKEN && request.headers.get('authorization') === 'Bearer ' + env.ADMIN_TOKEN;
+}
+
+async function liveDownloads(request, env, now) {
+  if (!adminAuthorized(request, env)) return json({ ok: false, error: 'unauthorized' }, 401);
+  if (!env.METRICS) return json({ ok: false, error: 'measurements unavailable' }, 503);
+  const asOf = now.toISOString();
+  const date = asOf.slice(0, 10);
+  const month = date.slice(0, 7);
+  try {
+    const db = env.METRICS;
+    const [daily, monthly] = await db.batch([
+      statement(db, 'SELECT download_requests FROM measurement_daily WHERE date = ?', date),
+      statement(db, 'SELECT download_requests FROM measurement_monthly WHERE month = ?', month),
+    ]);
+    return json({ ok: true, asOf, date, month,
+      today: daily.results[0]?.download_requests ?? 0,
+      monthToDate: monthly.results[0]?.download_requests ?? 0,
+    });
+  } catch { return json({ ok: false, error: 'measurements unavailable' }, 503); }
+}
+
 async function summary(request, env, now) {
-  if (!env.ADMIN_TOKEN || request.headers.get('authorization') !== 'Bearer ' + env.ADMIN_TOKEN)
+  if (!adminAuthorized(request, env))
     return json({ ok: false, error: 'unauthorized' }, 401);
   if (!env.METRICS) return json({ ok: false, error: 'measurements unavailable' }, 503);
   try {
@@ -216,6 +239,7 @@ export async function measurements(request, env, url, now = new Date()) {
   if (url.pathname === '/api/download-counting') return countingPreference(request);
   if (url.pathname === '/api/install-registration' && request.method === 'POST') return registerInstall(request,env,now);
   if (url.pathname === '/api/session' && request.method === 'POST') return registerSession(request,env,now);
+  if (url.pathname === '/api/live-downloads' && request.method === 'GET') return liveDownloads(request,env,now);
   if (url.pathname === '/api/measurements' && request.method === 'GET') return summary(request,env,now);
   const deletion = /^\/api\/usage\/([0-9a-f-]{36})$/.exec(url.pathname);
   if (deletion && request.method === 'DELETE' && env.METRICS) {

@@ -36,7 +36,7 @@ function setup(extra = {}) {
 
 const routes = [
   '/api/reports', '/api/funnel', '/api/subscribers', '/api/downloads',
-  '/api/measurements', '/api/lemon-orders', '/api/lemon-orders/import',
+  '/api/measurements', '/api/live-downloads', '/api/lemon-orders', '/api/lemon-orders/import',
 ];
 
 test('every administrative route rejects the original signing key after login recovery', async () => {
@@ -67,7 +67,7 @@ test('the recovered token reaches all administrative route handlers', async t =>
   }
   assert.deepEqual(authorizedResults, [
     ['/api/reports', 200], ['/api/funnel', 200], ['/api/subscribers', 200],
-    ['/api/downloads', 200], ['/api/measurements', 503], ['/api/lemon-orders', 200],
+    ['/api/downloads', 200], ['/api/measurements', 503], ['/api/live-downloads', 503], ['/api/lemon-orders', 200],
     ['/api/lemon-orders/import', 415],
   ]);
   assert.equal(env.ADMIN_TOKEN, 'original-signing-key', 'Request mapping leaves the binding object intact');
