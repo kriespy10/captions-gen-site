@@ -11,7 +11,7 @@ export async function assertDashboardRenders(html, {ordersUnavailable=false,live
   assert.ok(script,'Dashboard contains its client script');
   const elements=new Map();
   const element=id=>{
-    if(!elements.has(id))elements.set(id,{id,hidden:true,dataset:{},innerHTML:'',textContent:'',value:id==='growth-period'||id==='order-archive-period'?'history':id==='legacy-period'?'30':id==='growth-metric'?'acquisitions':'',appendChild(){}});
+    if(!elements.has(id))elements.set(id,{id,hidden:true,dataset:{},innerHTML:'',textContent:'',value:id==='growth-period'||id==='order-archive-period'?'history':id==='legacy-period'?'30':id==='growth-metric'?'acquisitions':'',appendChild(){},replaceChildren(...children){this.children=children;}});
     return elements.get(id);
   };
   const daily={'2026-11-09':{install:3},'2026-11-10':{install:1}};
@@ -34,7 +34,7 @@ export async function assertDashboardRenders(html, {ordersUnavailable=false,live
     await callback();
   };
   const context={
-    document:{getElementById:element,createElement:tag=>({tag,appendChild(){}}),
+    document:{getElementById:element,createElement:tag=>({tag,appendChild(){},append(...children){(this.children??=[]).push(...children);}}),
       hidden:false,addEventListener:(event,callback)=>{listeners[event]=callback;}},
     AbortSignal,
     setTimeout: (callback, interval) => {
@@ -96,6 +96,12 @@ export async function assertDashboardRenders(html, {ordersUnavailable=false,live
   assert.equal(element('live-download-today').textContent,'2');
   assert.equal(element('live-download-month').textContent,'5');
   assert.equal(element('live-download-change').textContent,'+1 since last check');
+  const rolledDigit=element('live-download-today-digits').children[0];
+  assert.deepEqual(Array.from(rolledDigit.children,digit=>[digit.className,digit.textContent]),[
+    ['live-digit-in','2'],['live-digit-out','1'],
+  ]);
+  await tick();
+  assert.equal(element('live-download-today-digits').children[0],rolledDigit,'steady polls do not restart the roll');
 
   element('live-download-toggle').onclick();
   assert.equal(timers.size,0);
