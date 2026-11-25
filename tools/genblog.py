@@ -11,6 +11,7 @@ FREE = PRODUCT["download_url"]
 DATE = "2026-08-26"
 SITE_UPDATED = "2026-11-25"
 GUIDE_INDEX_UPDATED = "2026-11-25"
+PRODUCT_PAGE_UPDATED = "2026-11-25"
 # Every guide includes the shared requirements box below. Its factual correction
 # is a content update even when the rest of an article has not changed.
 SHARED_REQUIREMENTS_UPDATED = "2026-11-09"
@@ -530,7 +531,7 @@ print("wrote news index + feed", len(NEWS), "posts")
 sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
       f'  <url><loc>{SITE}/</loc><lastmod>{SITE_UPDATED}</lastmod></url>',
       f'  <url><loc>{SITE}/after-effects.html</loc><lastmod>{AFTER_EFFECTS_UPDATED}</lastmod></url>',
-      f'  <url><loc>{PRODUCT["url"]}</loc><lastmod>{PRODUCT["checked"]}</lastmod></url>',
+      f'  <url><loc>{PRODUCT["url"]}</loc><lastmod>{max(PRODUCT["checked"], PRODUCT_PAGE_UPDATED)}</lastmod></url>',
       f'  <url><loc>{SITE}/blog/</loc><lastmod>{GUIDE_INDEX_UPDATED}</lastmod></url>']
 sm += [f'  <url><loc>{SITE}/blog/{k}.html</loc><lastmod>{p.get("modified", DATE)}</lastmod></url>' for k, p in POSTS.items()]
 sm.append(f'  <url><loc>{SITE}/news/</loc><lastmod>{NEWS_UPDATED}</lastmod></url>')
