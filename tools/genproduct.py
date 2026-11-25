@@ -135,8 +135,9 @@ def product_page():
 <p class="meta">Official product information · checked <time datetime="{p['checked']}">{checked}</time></p>
 <h1>Captions Gen: pricing, compatibility and product facts</h1>
 <p class="intro">{escape(p['description'])}</p>
-<p>Made by <a href="/#about-kris">Kris, a video editor</a>. This page describes the public Windows release for Premiere Pro and After Effects. See the <a href="/news/">release notes</a> for published changes.</p>
+<p>Made by <a href="/#about-kris">Kris, a video editor</a>. The current Premiere Pro and After Effects panels are Windows-only. Both can highlight each spoken word and leave the captions editable. See the <a href="/news/">release notes</a> for published changes.</p>
 <a class="btn" href="{p['download_url']}">Download free</a>
+<p>Try the same six-second speech clip in either app. <a href="/blog/free-caption-plugin-premiere-pro.html#first-captions">Generate editable Premiere graphics</a> or <a href="/blog/word-by-word-captions-after-effects.html#native-example">watch the After Effects render and try the layer workflow</a>.</p>
 <h2 id="facts">Current product facts</h2>
 <dl>{facts}</dl>
 <p>For setup and model choices, see <a href="/#install">requirements and installation</a> and <a href="/#performance">transcription and performance</a>.</p>

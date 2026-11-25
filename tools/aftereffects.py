@@ -212,7 +212,7 @@ AE_POSTS = {
     "word-by-word-captions-after-effects": dict(
         app="After Effects",
         published="2026-11-09",
-        modified="2026-11-09",
+        modified="2026-11-25",
         title="Word-by-Word Captions in After Effects | Captions Gen",
         desc="Choose one word at a time or a phrase with moving highlights in After Effects. Set caption grouping, karaoke color or pills, then check speech timing.",
         h1="Word-by-word captions in After Effects: layout or highlight?",
@@ -230,7 +230,11 @@ AE_POSTS = {
         ],
         body="""
 <p><strong>For one word on screen at a time, set Captions Gen's Min words and Max words to 1. For a phrase that stays visible while the spoken word changes color or gains a pill, keep several words per caption and enable Highlight words as spoken.</strong> Both can look like word-by-word captions, but grouping and highlighting solve different problems.</p>
-<p>This guide covers the public <a href="/news/captions-gen-1-1-9.html">1.1.9 After Effects panel for Windows</a>. Install it and create a first batch with the <a href="how-to-add-captions-in-after-effects.html">AE setup guide</a>.</p>
+<p>Captions Gen is a free, Windows-only plugin for Premiere Pro and After Effects. In After Effects it creates editable caption precompositions. To install the panel and select your footage, follow the <a href="how-to-add-captions-in-after-effects.html">After Effects setup guide</a>.</p>
+<h2 id="native-example">Watch the highlight move in After Effects</h2>
+<figure class="caption-example"><video controls playsinline preload="none" width="1280" height="720" style="display:block;max-width:100%;height:auto" poster="/img/guides/after-effects-word-highlights.png" aria-label="After Effects render of a spoken sentence with a yellow word highlight"><source src="/samples/after-effects-word-highlights.mp4" type="video/mp4"><track kind="captions" srclang="en" label="English" src="/samples/after-effects-word-highlights.vtt"></video><figcaption>Rendered in After Effects 26.5 on Windows with Captions Gen 1.1.14. The Base speech model supplied the word timings. The project contains five caption precompositions with editable text. <a href="/samples/after-effects-word-highlights.mp4">Open the finished video</a>.</figcaption></figure>
+<p>The voice says, “Watch the yellow highlight follow each word. Now play that line again.” In the first phrase, the highlight moves from “Watch” to “the” to “yellow” while all three words stay on screen.</p>
+<p><a href="/samples/spoken-highlight.mp4" download>Download the original clip without captions</a>. Add it to a composition and select the footage layer. Choose a phrase preset, open <strong>Customize → Karaoke</strong>, enable <strong>Highlight words as spoken</strong> and choose a yellow color swap. Generate captions and preview the result. Expand a generated precomposition to inspect its text. In Premiere Pro, the <a href="/blog/free-caption-plugin-premiere-pro.html#first-captions">same exercise creates editable Motion Graphics clips</a>.</p>
 <figure class="caption-example"><img src="/img/guides/ae-one-word-vs-highlight.svg" alt="Three illustrated frames compare one-word captions reading Make, it, clear with a persistent Make it clear phrase whose yellow highlight moves from word to word." width="960" height="880" loading="lazy"><figcaption>Layout illustration. The same phrase can use separate one-word groups or one phrase with a moving highlight. Frame spacing is illustrative; check timing against your audio. <a href="/img/guides/ae-one-word-vs-highlight.svg">Open full size</a>.</figcaption></figure>
 
 <h2 id="choose">Choose the reading pattern first</h2>
