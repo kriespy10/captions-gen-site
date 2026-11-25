@@ -1,4 +1,12 @@
-Captions Gen website — https://captionsgen.com/
+# Captions Gen for Premiere Pro and After Effects
+
+Captions Gen turns speech into editable, word-by-word animated captions on Windows. Premiere Pro receives Motion Graphics clips. After Effects receives caption layers you can edit in your composition. The current release is free, with no watermark, transcription time cap or plugin account. Speech recognition runs on your PC.
+
+- [Download Captions Gen and check compatibility](https://captionsgen.com/product.html). Premiere Pro requires version 25.6 or newer. The After Effects panel has been tested with After Effects 2026 on Windows 11.
+- [Try word highlights in Premiere Pro](https://captionsgen.com/blog/free-caption-plugin-premiere-pro.html#first-captions) or [try the same clip in After Effects](https://captionsgen.com/after-effects.html#workflow-heading). Each guide includes the same six-second speech clip and shows what to look for on the timeline.
+- [See Windows installers and release notes](https://github.com/kriespy10/captions-gen-site/releases).
+
+## Maintaining the website
 
 Static website hosted on GitHub Pages from the main branch. Edit index.html; images are in img/.
 
