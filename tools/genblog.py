@@ -454,7 +454,7 @@ for i, n in enumerate(NEWS):
     url = f"{SITE}/news/{n['slug']}.html"
     schema = json.dumps([{
         "@context": "https://schema.org", "@type": "BlogPosting", "headline": n["title"], "description": n["desc"],
-        "datePublished": n["date"], "dateModified": n["date"],
+        "datePublished": n["date"], "dateModified": n.get("modified", n["date"]),
         "author": {"@type": "Person", "name": "Kris", "url": "https://github.com/Kriespy10"},
         "publisher": {"@type": "Organization", "name": "Captions Gen", "url": SITE,
                       "logo": {"@type": "ImageObject", "url": f"{SITE}/img/captions-gen-logo.svg"}},
@@ -535,7 +535,7 @@ sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitem
       f'  <url><loc>{SITE}/blog/</loc><lastmod>{GUIDE_INDEX_UPDATED}</lastmod></url>']
 sm += [f'  <url><loc>{SITE}/blog/{k}.html</loc><lastmod>{p.get("modified", DATE)}</lastmod></url>' for k, p in POSTS.items()]
 sm.append(f'  <url><loc>{SITE}/news/</loc><lastmod>{NEWS_UPDATED}</lastmod></url>')
-sm += [f'  <url><loc>{SITE}/news/{n["slug"]}.html</loc><lastmod>{n["date"]}</lastmod></url>' for n in NEWS]
+sm += [f'  <url><loc>{SITE}/news/{n["slug"]}.html</loc><lastmod>{n.get("modified", n["date"])}</lastmod></url>' for n in NEWS]
 sm.append('</urlset>')
 io.open("sitemap.xml", "w", encoding="utf-8", newline="").write(chr(10).join(sm) + chr(10))
 print("sitemap", len(POSTS) + 5 + len(NEWS), "urls")
