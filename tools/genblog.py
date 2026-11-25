@@ -9,8 +9,8 @@ from genlanding import UPDATED as AFTER_EFFECTS_UPDATED
 SITE = "https://captionsgen.com"
 FREE = PRODUCT["download_url"]
 DATE = "2026-08-26"
-SITE_UPDATED = "2026-11-21"
-GUIDE_INDEX_UPDATED = "2026-11-21"
+SITE_UPDATED = "2026-11-25"
+GUIDE_INDEX_UPDATED = "2026-11-25"
 # Every guide includes the shared requirements box below. Its factual correction
 # is a content update even when the rest of an article has not changed.
 SHARED_REQUIREMENTS_UPDATED = "2026-11-09"
